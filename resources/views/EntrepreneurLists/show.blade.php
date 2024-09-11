@@ -6,7 +6,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>entrepreneurs</th>
+                <th>investors</th>
             </tr>
         </thead>
         <tbody>
