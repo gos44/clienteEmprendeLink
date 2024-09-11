@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntrepreneurListController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+ Route::get('/prueba', function () {
+        return 'prueba 1234';
+    });
+
+
+
+Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurList.index');
+Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->name('EntrepreneurLists.show');
