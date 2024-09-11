@@ -23,3 +23,6 @@ use App\Http\Controllers\EntrepreneurListController;
 
 Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurList.index');
 Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->name('EntrepreneurLists.show');
+
+Route::get('publicare', [EntrepreneurListController::class, 'index'])->name('publish_Entrepreneurships.index');
+Route::get('publicare/{id}',[EntrepreneurListController::class,'show'])->name('publish_Entrepreneurships.show');
