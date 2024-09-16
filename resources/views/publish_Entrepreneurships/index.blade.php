@@ -23,7 +23,7 @@
                         <td>{{ $publishEntrepreneurships['entrepreneurs_id'] }}</td>
                         {{-- <td>{{ $entrepreneurList['investors_id'] }}</td> --}}
 
-                        <td><a href="{{ route('publish_Entrepreneurships.show', $publishEntrepreneurships['id']) }}"><button>Ver más</button></a></td>
+                        <td><a href="{{ route('Publish_Entrepreneurships.show', $publishEntrepreneurships['id']) }}"><button>Ver más</button></a></td>
                         <td>
                             {{-- <form action="{{ route('apprentices.destroy', $apprentice['id']) }}" method="POST">
                     @csrf

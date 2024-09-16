@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\MyentrepreneurshipController;
+use App\Http\Controllers\PublishEntrepreneurshipsController;
+
 
 
 /*
@@ -23,8 +25,13 @@ use App\Http\Controllers\MyentrepreneurshipController;
 
 
 
-Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurList.index');
+Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurLists.index');
 Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->name('EntrepreneurLists.show');
+
+Route::get('Publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
+Route::get('Publicare/{id}',[PublishEntrepreneurshipsController::class,'show'])->name('Publish_Entrepreneurships.show');
+
+
 
 Route::get('entrepreneurships', [EntrepreneurshipController::class, 'index'])->name('entrepreneurships.index');
 

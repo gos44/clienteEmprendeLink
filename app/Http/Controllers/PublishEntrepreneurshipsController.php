@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\publish_Entrepreneurships;
-use App\Models\PublishEntrepreneurships;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
 //use Illuminate\Routing\Controller as RoutingController;
 
@@ -23,19 +20,19 @@ class PublishEntrepreneurshipsController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/entrepreneurLists?included=post');
+        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publicare?included=posts');
  
        
 
-        return view('publish_Entrepreneurships.index', compact('publishEntrepreneurships'));
+        return view('publish_Entrepreneurships.index', compact('publicare'));
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
 
-        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publishEntrepreneurships/' . $id);
+        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publicare/' . $id);
 
-        return view('publish_Entrepreneurships.show', compact('publishEntrepreneurships'));
+        return view('publish_Entrepreneurships.show', compact('publicare'));
     }
 }
