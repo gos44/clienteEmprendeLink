@@ -5,6 +5,9 @@ use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
 use App\Http\Controllers\MyentrepreneurshipController;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ConnectionController;
+
 
 
 
@@ -45,3 +48,17 @@ Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index']
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
 Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
+
+
+
+// rita para obetener la lista de los "REviews"
+Route::get('Reviews', [ReviewController::class, 'index'])->name('Reviews.index');
+Route::get('Reviews/{id}', [ReviewController::class, 'show'])->name('Reviews.show');
+
+
+
+// rita para obetener la lista de "Connections"
+Route::get('Connections', [ConnectionController::class, 'index'])->name('Connection.index');
+Route::get('Connections/{id}', [ConnectionController::class, 'show'])->name('Connection.show');
+
+
