@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Detalle de la reseña</h1>
+    <h1>Detalles de la Reseña</h1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Qualification</th>
-                <th>Comment</th>
-                <th>PublishEntrepreneurships_id</th>
+                <th>Calificación</th>
+                <th>Comentario</th>
+                <th>Emprendimiento</th>
             </tr>
         </thead>
         <tbody>

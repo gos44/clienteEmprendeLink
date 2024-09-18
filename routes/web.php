@@ -51,7 +51,7 @@ Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'sh
 
 
 
-// rita para obetener la lista de los "REviews"
+// Ruta para la lista de reseñas
 Route::get('Reviews', [ReviewController::class, 'index'])->name('Reviews.index');
 Route::get('Reviews/{id}', [ReviewController::class, 'show'])->name('Reviews.show');
 
