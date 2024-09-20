@@ -18,7 +18,7 @@
                     <td>{{ $myentrepreneurship['id']  }}</td>
                     <td>{{ $myentrepreneurship['entrepreneur']['name']}}</td>
                     <td>{{ $myentrepreneurship['investor']['name']  }}</td>
-                    <td>{{ $myentrepreneurship['publishEntrepreneurships'] }}</td>
+                    <td>{{ $myentrepreneurship['publish_Entrepreneurships'] }}</td>
                 </tr>
             </tbody>
         </table>
