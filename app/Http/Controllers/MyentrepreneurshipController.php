@@ -25,7 +25,7 @@ class MyentrepreneurshipController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $myentrepreneurships = $this->fetchDataFromApi($url . '/myentrepreneurships?included=entrepreneur,publish_Entrepreneurships,investor');
+        $myentrepreneurships = $this->fetchDataFromApi($url . '/myentrepreneurships?included=entrepreneur,Entrepreneurships,investor','publish_Entrepreneurships');
 
         return view('Myentrepreneurships.index', compact('myentrepreneurships'));
     }
@@ -34,7 +34,7 @@ class MyentrepreneurshipController extends Controller
     {
         $url = env('URL_SERVER_API');
 
-        $myentrepreneurship = $this->fetchDataFromApi($url . '/myentrepreneurships/' . $id . '?included=entrepreneur,publish_Entrepreneurships,investor');
+        $myentrepreneurship = $this->fetchDataFromApi($url . '/myentrepreneurships/' . $id . '?included=entrepreneur,Entrepreneurships,investor');
 
         return view('Myentrepreneurships.show', compact('myentrepreneurship'));
     }
