@@ -22,7 +22,7 @@ class PublishEntrepreneurshipsController extends Controller
         $url = env('URL_SERVER_API');
 
         $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publicare?included=entrepreneurs');
- 
+
        
 
         return view('publish_Entrepreneurships.index', compact('publishEntrepreneurships'));
