@@ -18,8 +18,10 @@
                 <td>{{ $entrepreneurList['investors_id'] }}</td>
 
 
+
             </tr>
 
         </tbody>
     </table>
 @endsection
+

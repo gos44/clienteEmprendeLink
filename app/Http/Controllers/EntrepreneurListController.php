@@ -24,7 +24,7 @@ class EntrepreneurListController extends Controller
     
             $entrepreneurLists = $this->fetchDataFromApi($url . '/entrepreneurLists?included=entrepreneurs,investors');
      
-            return $entrepreneurLists;
+           // return $entrepreneurLists;
 
     
             return view('EntrepreneurLists.index', compact('entrepreneurLists'));
@@ -34,7 +34,7 @@ class EntrepreneurListController extends Controller
         {
             $url = env('URL_SERVER_API');
     
-            $entrepreneurList = $this->fetchDataFromApi($url . './entrepreneurLists/' . $id);
+            $entrepreneurList = $this->fetchDataFromApi($url . '/entrepreneurLists/' . $id.'?included=entrepreneurs,investors');
     
             return view('EntrepreneurLists.show', compact('entrepreneurList'));
         }
