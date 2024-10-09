@@ -20,19 +20,19 @@ class ConnectionController extends Controller
 
         $url = env('URL_SERVER_API');
 
-        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publicare?included=posts');
+        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/connections?included=posts');
  
        
 
-        return view('connections.index', compact('publicare'));
+        return view('connections.index', compact('connections'));
     }
 
     public function show($id)
     {
         $url = env('URL_SERVER_API');
 
-        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/publicare/' . $id);
+        $publishEntrepreneurships = $this->fetchDataFromApi($url . '/connections/' . $id);
 
-        return view('connections.show', compact('publicare'));
+        return view('connections.show', compact('connections'));
     }
 }

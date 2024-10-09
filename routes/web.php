@@ -7,6 +7,7 @@ use App\Http\Controllers\MyentrepreneurshipController;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\InvestorController;
 
 
 
@@ -61,4 +62,7 @@ Route::get('Reviews/{id}', [ReviewController::class, 'show'])->name('Reviews.sho
 Route::get('Connections', [ConnectionController::class, 'index'])->name('Connection.index');
 Route::get('Connections/{id}', [ConnectionController::class, 'show'])->name('Connection.show');
 
+//inversor
+Route::get('inversors', [InvestorController::class, 'index'])->name('inversors.index'); // Lista todos los inversores
+Route::get('inversors/{id}', [InvestorController::class, 'show'])->name('inversors.show');
 
