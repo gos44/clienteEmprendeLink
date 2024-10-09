@@ -29,7 +29,7 @@ class ReviewController extends Controller
         $url = env('URL_SERVER_API');
         
         // Obteniendo los datos de la API
-        $reviews = $this->fetchDataFromApi($url . '/Reviews?included=post');
+        $reviews = $this->fetchDataFromApi($url . '/review?included=entrepreneurship');
 
         return view('Reviews.index', compact('reviews')); // 'reviews' en minúscula
     }
@@ -40,7 +40,7 @@ class ReviewController extends Controller
         $url = env('URL_SERVER_API');
         
         // Obteniendo un solo dato de la API por ID
-        $review = $this->fetchDataFromApi($url . '/Reviews/' . $id);
+        $review = $this->fetchDataFromApi($url . '/review/' . $id);
 
         // Pasando los datos a la vista 'Reviews.show'
         return view('Reviews.show', compact('review')); // 'review' para un solo registro
