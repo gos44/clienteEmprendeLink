@@ -12,8 +12,6 @@
                     <th>entrepreneurs</th>
                     <th>investors</th>
                     <th>DETALLE</th>
-                    <th>ELIMINAR</th>
-                    <th>Actualizar datos</th>
                 </tr>
             </thead>
             <tbody>
