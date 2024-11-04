@@ -9,7 +9,10 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\InvestorController;    
 use App\Http\Controllers\entrepreneursController;
-
+use App\Http\Controllers\PerfilInverController;
+use App\Http\Controllers\PerfilIverEditarController;
+use App\Http\Controllers\ListEntrepreneurController
+;
 
 
 
@@ -24,15 +27,24 @@ use App\Http\Controllers\entrepreneursController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
  Route::get('/prueba', function () {
         return 'prueba 1234';
     });
 
+Route::get('perfilInver', [PerfilInverController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
+Route::get('listaUsuarios', [ListEntrepreneurController::class, 'index'])->name('listaUsuarios.index');
 
+
+
+
+
+// Ruta para obtener lista de usurios
 
 Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurLists.index');
 Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->name('EntrepreneurLists.show');
+
+// Ruta para obtener "Publish_Entrepreneurships"
 
 Route::get('Publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
 Route::get('Publicare/{id}',[PublishEntrepreneurshipsController::class,'show'])->name('Publish_Entrepreneurships.show');
