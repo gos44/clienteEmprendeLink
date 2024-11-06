@@ -1,8 +1,10 @@
-<html lang="en">
+document.addEventListener("DOMContentLoaded", function() {
+    const Footer = `
+    <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer Inversor</title>
+    <title>Document</title>
 
     <style>
         /* Footer usuarioo */
@@ -11,6 +13,8 @@ footer {
     background-color: #000000;
     color: #fff;
     width: 100%;
+  
+ 
 }
 
 .footer-content {
@@ -179,6 +183,10 @@ footer {
     margin-top: 7%;
 }
 
+
+
+
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .footer-content {
@@ -191,6 +199,7 @@ footer {
         margin: 20px 0;
     }
 }
+
     </style>
 </head>
 <body>
@@ -201,13 +210,17 @@ footer {
                 <div class="logoda">
                     <img class="logo-dark" src="LINK/LOGO-FONDO NEGRO.png" alt="Emprende Link">
                 </div>
+                
+                <!-- <p>Emprende Link busca facilitar la colaboración, el crecimiento empresarial al conectar de manera </p>
+                <p>  eficiente a emprendedores con grandes inversores, creando oportunidades para el desarrollo conjunto</p>
+                <p>de soluciones innovadoras.</p> -->
             </div>
             <div class="footer-section links">
                 <h3>Legales</h3>
                 <ul>
-                    <li><a href="sobreEmpredelinkInversor.html">Sobre Emprende Link</a></li>
-                    <li><a href="politicayprivacidadInversor.html">Política de privacidad</a></li>
-                    <li><a href="acuerdosyterminosInversor.html">Acuerdos y términos</a></li>
+                    <li><a href="sobreEmpredelink.html">Sobre Emprende Link</a></li>
+                    <li><a href="politicayprivacidad.html">Política de privacidad</a></li>
+                    <li><a href="acuerdosyterminos.html">Acuerdos y términos</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">
@@ -262,3 +275,7 @@ footer {
     </footer>
 </body>
 </html>
+    `;
+    
+    document.getElementById("Footer").innerHTML = Footer;
+});

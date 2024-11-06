@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-class PerfilInverEditarController extends Controller
+class PerfilUserEditarController extends Controller
 {
     public function index()
     {
@@ -16,7 +16,7 @@ class PerfilInverEditarController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('EditarPerfilInversionista', compact('connections'));
+        return view('EditarPerfilUsuario', compact('connections'));
     // }}
 
     // // Configura el directorio de carga de archivos

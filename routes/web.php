@@ -11,10 +11,14 @@ use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\entrepreneursController;
 use App\Http\Controllers\PerfilInverController;
 use App\Http\Controllers\PerfilIverEditarController;
-use App\Http\Controllers\ListEntrepreneurController
-;
+use App\Http\Controllers\PerfilUserEditarController;
+use App\Http\Controllers\ListEntrepreneur_InverController;
+use App\Http\Controllers\ListEntrepreneur_UserController;
+
+use App\Http\Controllers\PerfilUsuarioController;
 
 
+use App\Http\Controllers\usaurioPerfil_inversionistaController;
 
 
 /*
@@ -31,11 +35,17 @@ use App\Http\Controllers\ListEntrepreneurController
         return 'prueba 1234';
     });
 
-Route::get('perfilInver', [PerfilInverController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
+
+Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
 Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
-Route::get('listaUsuarios', [ListEntrepreneurController::class, 'index'])->name('listaUsuarios.index');
 
+Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
+Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
 
+Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 
 
 

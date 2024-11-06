@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-class ListEntrepreneurController extends Controller
+class PerfilUsuarioController extends Controller
 {
     public function index()
     {
@@ -16,6 +16,6 @@ class ListEntrepreneurController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('listaUsuarios', compact('connections'));
+        return view('PerfilUsuario', compact('connections'));
     }
 }
