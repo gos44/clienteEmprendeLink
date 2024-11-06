@@ -41,4 +41,8 @@ class PublishEntrepreneurshipsController extends Controller
 
         return view('publish_Entrepreneurships.show', compact('publishEntrepreneurship'));
     }
+
+    public function Publicar_emprendimiento (){
+        return view('PublicarEmprendimiento.Publicaremprendimiento');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
 }

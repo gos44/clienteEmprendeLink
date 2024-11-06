@@ -45,3 +45,5 @@ Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index']
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
 Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
+
+Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas

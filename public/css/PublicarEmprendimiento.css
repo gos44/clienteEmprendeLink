@@ -1,0 +1,523 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url(img/fondo.png);
+    background-size: 100% 100%;
+}
+html, body {
+    overflow-x: hidden;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.barra {
+    height: 35px; 
+    margin-right: 10px;
+    margin-left: 8px;
+    z-index: 3;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.header-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.header-right  {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+    z-index: 4;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+
+
+ul {
+    list-style: none;
+  }
+/* Linea 1 2 3 4 */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width:300px;
+    margin: 20px auto;
+}
+.page {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #b9b3b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.page.active {
+    background-color: #000;
+    color: white;
+}
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #000;
+    max-width: 50px;
+}
+
+/* fin Linea 1 2 3 4 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+h1, h2 {
+    text-align: center;
+    color: #000000;
+}
+.form-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.form-section {
+    flex: 1 1 100%;
+}
+.form-group {
+    margin-bottom: 1.5em;
+}
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #202020;
+}
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+.btn-publicar {
+    display: block;
+    width: 200px;
+    margin: 2em auto 0;
+    padding: 1em;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.btn-publicar:hover {
+    background-color: #333;
+}
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+.page {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+.page.active {
+    background-color: #000;
+    color: #fff;
+}
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #ddd;
+    max-width: 50px;
+}
+/* parte 2  */
+
+/* fotter asta el final */
+
+    
+    .burger {
+    display: none; /* Escondido por defecto */
+    }
+    
+    .logo-dark {
+        height: 100px;
+    }
+/* esto es js */
+/* Estilo del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1; /* En frente de todo */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Añadir barra de desplazamiento si es necesario */
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrado vertical y horizontal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+}
+
+/* El botón de cerrar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Botones del modal */
+.modal-content button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50; /* Color verde para el botón */
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #45a049; /* Color más oscuro cuando se pasa el ratón */
+}
+/* fin de js */
+ul {
+    list-style: none;
+  }
+  
+  /* Base styles */
+
+
+/* Social icons styles */
+.imagenes {
+    margin-top: 15px;
+}
+
+
+
+/* Logo responsiveness */
+.logoda img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+    }
+
+    .example-2 {
+        justify-content: center;
+        translate: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .example-2 .icon-content {
+        margin: 0 5px;
+    }
+
+    .example-2 .icon-content a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .example-2 .icon-content a svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+/* Base styles */
+footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a,
+.footer-content a {
+    text-decoration: none;
+    color: #bbb;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover,
+.footer-content a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+}
+
+/* Social icons styles */
+.imagenes {
+    margin-top: 15px;
+}
+
+.example-2 {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    translate: 65px -20px;
+    list-style: none;
+    padding: 0;
+}
+
+.example-2 .icon-content {
+    margin: 0 10px;
+    position: relative;
+}
+
+.example-2 .icon-content .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.example-2 .icon-content:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -50px;
+}
+
+.example-2 .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #4d4d4d;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.example-2 .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+    color: white;
+}
+
+.example-2 .icon-content a svg {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+}
+/* arreglos k */
+.accordion-button {
+    background-color: white !important; /* Esto fuerza el color blanco */
+    color: black; /* Opcional para cambiar el color del texto */
+  }
+  
+  .accordion-button:not(.collapsed) {
+    background-color: white !important; /* Asegura que también esté blanco al estar abierto */
+  }
+  .accordion-button .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease; /* Animación suave para la rotación */
+    transform: rotate(0deg); /* Flecha apuntando hacia abajo */
+  }
+  
+  /* Cuando el acordeón está abierto (sin la clase 'collapsed') */
+  .accordion-button:not(.collapsed) .arrow {
+    transform: rotate(180deg); /* Flecha apuntando hacia arriba */
+  }
+
+  /* kkkk */
+
+.example-2 .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.example-2 .icon-content a:hover .filled {
+    height: 100%;
+}
+
+/* Specific social media colors */
+.example-2 .icon-content a[data-social="linkedin"] .filled,
+.example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+    background-color: #0274b3;
+}
+
+.example-2 .icon-content a[data-social="twitter"] .filled,
+.example-2 .icon-content a[data-social="twitter"] ~ .tooltip {
+    background-color: #24262a;
+}
+
+.example-2 .icon-content a[data-social="instagram"] .filled,
+.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+    background: linear-gradient(
+        45deg,
+        #405de6,
+        #5b51db,
+        #b33ab4,
+        #c135b4,
+        #e1306c,
+        #fd1f1f
+    );
+}
+
+.example-2 .icon-content a[data-social="youtube"] .filled,
+.example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+    background-color: #ff0000;
+}
+
+/* Logo responsiveness */
+.logoda img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+    }
+
+    .example-2 {
+        justify-content: center;
+        translate: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .example-2 .icon-content {
+        margin: 0 5px;
+    }
+
+    .example-2 .icon-content a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .example-2 .icon-content a svg {
+        width: 20px;
+        height: 20px;
+    }
+}
