@@ -191,7 +191,7 @@
 
                     <!-- Opciones de comunicación en móvil -->
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="CHAT-EMPRENDEDOR.HTML">
+                        <a class="dropdown-item" href="{{ route('Chat_Usuario.index') }}">
                             <i class="fas fa-comment-dots fa-lg me-1"></i> Chat
                         </a>
                     </li>
