@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
  
     @yield('estilos')
+    
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
 
 </head>
