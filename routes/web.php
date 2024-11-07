@@ -60,6 +60,7 @@ Route::get('Reviews/{id}', [ReviewController::class, 'show'])->name('Reviews.sho
 
 
 
+
 // rita para obetener la lista de "Connections"
 Route::get('Connections', [ConnectionController::class, 'index'])->name('Connection.index');
 Route::get('Connections/{id}', [ConnectionController::class, 'show'])->name('Connection.show');
