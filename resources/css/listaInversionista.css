@@ -1,0 +1,272 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.search-bar {
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 25px;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+}
+
+
+.search-bar button {
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  margin-right: 25px;
+}
+
+
+.send-message {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+ margin-right: 25px;
+  margin-top: 15px;
+}
+
+.send-message:hover {
+  background-color: gray;
+}
+
+
+/* Estilo para los contenedores con borde */
+.bordered {
+  border: 1px solid #040404;
+  border-radius: 25px;
+}
+
+
+.bordered a {
+  color: #040404;
+  font-weight: bold;
+  text-decoration: none;
+  
+  
+}
+
+.nav-item:active {
+
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al hacer clic */
+  transition: background-color 0.1s ease, box-shadow 0.1s ease; /* Suaviza la transición */
+}
+
+.no-border img {
+  margin-right: 10px;
+}
+
+/* Para asegurarse de que todos los items estén en la misma fila */
+
+.Inversor{
+  color: #666666;
+  font-weight: bold;
+  text-decoration: none; 
+}
+
+.menu-toggle img {
+  font-size: 24px;
+  cursor: pointer;
+  
+}
+
+.logo {
+  height: 100px;
+}
+
+
+.fond {
+  position: relative;
+  width: 100%;
+}
+
+.fondo {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.logo-dark {
+  height: 100px;
+}
+
+.container {
+padding: 20px;
+margin-left: 250px;
+background-color: white;
+z-index: 1;
+}
+
+.profile-img {
+position: relative;
+width: 150px;
+height: 150px;
+margin-bottom: 20px;
+}
+
+.profile-img img {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+}
+
+.edit-image-icon {
+position: absolute;
+bottom: 10px;
+right: 10px;
+font-size: 20px;
+color: #666;
+cursor: pointer;
+}
+
+.profile-info {
+display: flex;
+flex-direction: column;
+}
+
+.input-container {
+position: relative;
+margin-bottom: 15px;
+}
+
+.input-container label {
+display: block;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+.input-container input {
+width: 80%;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.edit-icon, .delete-icon {
+position: absolute;
+top: 35px;
+right: 30px;
+cursor: pointer;
+color: #666;
+translate: -180px 0px;
+}
+
+.delete-icon {
+right: 5px;
+}
+
+.buttons {
+display: flex;
+gap: 10px;
+margin-top: 20px;
+}
+
+button {
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+background-color: #444;
+color: white;
+font-size: 16px;
+}
+
+button:hover {
+background-color: #555;
+}
+  
+  .burger {
+  display: none; /* Escondido por defecto */
+  }
+  
+  @media (max-width: 768px) {
+  .nav-links {
+  display: none; /* Esconder menú en pantallas pequeñas */
+  }.header-right {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .header-right a {
+      margin-left: 0;
+      margin-bottom: 10px;
+  }
+  
+  .buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .buttons button {
+      width: 100%;
+      text-align: center;
+  }
+  }    
+  ul {
+      list-style: none;
+
+    }
+    .notifications  {
+      margin-left: 20px;
+
+  }
+  .notifications h2 {
+      margin-bottom: 20px;
+      margin-left: 10px;
+
+    }
+    .notifications a {
+      color: #000;
+
+    }
+
+  
+  
+  .notification {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+  }
+  
+  .notification img {
+      height: 80px;
+      margin-right: 20px;
+      
+  }
+  
+  .notification-content {
+      flex: 1;
+  }
+  
+  .notification-content h3 {
+      margin: 0;
+  }
+  
+  .notification-content .time {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 10px;
+  }
+  
+  .notification-content p {
+      margin: 0;
+      color: #555;
+  }
+  
