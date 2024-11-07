@@ -6,17 +6,15 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>entrepreneurs</th>
-                <th>investors</th>
+                <th>Nombre</th>
             </tr>
         </thead>
         <tbody>
            
             <tr>
-                <td>{{ $entrepreneurList['id'] }}</td> 
-                <td>{{ $entrepreneurList['entrepreneurs_id'] }}</td>
-                <td>{{ $entrepreneurList['investors_id'] }}</td>
-
+                <td>{{ $connections['id'] }}</td> 
+                <td>{{ $connections['connections_id'] }}</td>
+                {{-- <td>{{ $connection['connections_id'] }}</td> --}}
 
 
             </tr>
@@ -24,4 +22,3 @@
         </tbody>
     </table>
 @endsection
-

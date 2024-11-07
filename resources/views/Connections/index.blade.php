@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Lista de emprededores</h1>
+    <h1>Connections</h1>
     <div>
 
         <br><br><br>
@@ -12,16 +12,18 @@
                     <th>entrepreneurs</th>
                     <th>investors</th>
                     <th>DETALLE</th>
+                    <th>ELIMINAR</th>
+                    <th>Actualizar datos</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($entrepreneurLists as $entrepreneurList)
+                @foreach ($connections as $connections)
                     <tr>
-                        <td>{{ $entrepreneurList['id'] }}</td>
-                        <td>{{ $entrepreneurList['entrepreneurs_id'] }}</td>
-                        <td>{{ $entrepreneurList['investors_id'] }}</td>
+                        <td>{{ $connections['id'] }}</td>
+                        <td>{{ $connections['connections_id'] }}</td>
+                        {{-- <td>{{ $entrepreneurList['investors_id'] }}</td> --}}
 
-                        <td><a href="{{ route('EntrepreneurLists.show', $entrepreneurList['id']) }}"><button>Ver más</button></a></td>
+                        <td><a href="{{ route('connections.show', $connections['id']) }}"><button>Ver más</button></a></td>
                         <td>
                             {{-- <form action="{{ route('apprentices.destroy', $apprentice['id']) }}" method="POST">
                     @csrf

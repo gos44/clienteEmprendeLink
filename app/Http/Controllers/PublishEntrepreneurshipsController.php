@@ -10,6 +10,7 @@ class PublishEntrepreneurshipsController extends Controller
     // Método privado para manejar llamadas HTTP repetitivas
     private function fetchDataFromApi($url)
     {
+        $url='http://api.emprendelink/api/publicare?included=entrepreneurs';
         $response = Http::get($url);
         return $response->json();
     }
@@ -34,10 +35,7 @@ class PublishEntrepreneurshipsController extends Controller
         $url = env('URL_SERVER_API');
         $publishEntrepreneurship = $this->fetchDataFromApi($url . '/publicare/' . $id);
 
-        // Si los datos están vacíos, retornamos un array vacío
-        if (!$publishEntrepreneurship) {
-            $publishEntrepreneurship = [];
-        }
+        $publishEntrepreneurship = $this->fetchDataFromApi($url . './publicare/' . $id);
 
         return view('publish_Entrepreneurships.show', compact('publishEntrepreneurship'));
     }
