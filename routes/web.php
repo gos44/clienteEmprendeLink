@@ -14,10 +14,7 @@ use App\Http\Controllers\PerfilIverEditarController;
 use App\Http\Controllers\PerfilUserEditarController;
 use App\Http\Controllers\ListEntrepreneur_InverController;
 use App\Http\Controllers\ListEntrepreneur_UserController;
-
 use App\Http\Controllers\PerfilUsuarioController;
-
-
 use App\Http\Controllers\usaurioPerfil_inversionistaController;
 
 
@@ -46,6 +43,7 @@ Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->na
 
 Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+
 
 
 
