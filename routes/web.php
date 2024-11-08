@@ -49,7 +49,6 @@ use App\Http\Controllers\Controllers_Sebas\registro_inversionista_ingreso;
 use App\Http\Controllers\Controllers_Sebas\verificar_codigo_usuario;
 use App\Http\Controllers\Controllers_Sebas\Verificar_codigo_inversionista;
 use App\Http\Controllers\Controllers_Sebas\verificar_identidad_inversionista;
-use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
 
 
 /*
@@ -70,15 +69,17 @@ use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
 
 Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
+//Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('PerfilUsuario.index');
+//Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
 
-Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
+//Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
+//Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
 
-Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
-Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
 
-Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
-Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 
 
 
@@ -160,49 +161,50 @@ Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::
 Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');
 
 
-
-// RUTAS DEL SEBAS
-
-// BUsqueda por filtro usuario e inversionista
-Route::get('Buscar_Emprendimientos_usuario',[Busqueda_Filtro_UsuarioController::class,'index'])->name('filtrar_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('Buscar_Emprendimientos_inversionista',[Busqueda_Filtro_InversionistaController::class,'index'])->name('filtrar_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-// verificar identidad usuario e inversionista
-Route::get('verificar_identidad_usuario',[Verificar_identidad_cambio_contraseña::class,'index'])->name('verificar_identidad_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('verificar_identidad_inversionista',[verificar_identidad_inversionista::class,'index'])->name('verificar_identidad_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//cambiar contraseñas nuevas usuario e inversioinista
-Route::get('cambiar_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'index'])->name('cambiar_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionistacontroller::class,'index'])->name('cambiar_contraseña_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//iniciar sesion usuario e inversionista
-Route::get('iniciar_sesion_usuario',[inicio_de_sesion_usuariocontroller::class,'index'])->name('iniciar_sesion_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//registro usuario e inversionista
-Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//registro ingreso usuario e inversionista
-Route::get('registrar_usuario_ingreso',[Registro_usuario_ingreso::class,'index'])->name('registrar_usuario_ingreso'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('registrar_inversionista_ingreso',[registro_inversionista_ingreso::class,'index'])->name('registrar_inversionista_ingreso'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//verificar codigo usuario e inversionista
-Route::get('verificar_codigo_usuario',[verificar_codigo_usuario::class,'index'])->name('verificar_codigo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::class,'index'])->name('verificar_codigo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-//emprendimientos deportivos usuario
-
-Route::get('emprendimientos_deportivos_usuario',[emprendimientos_deportivos_usuario::class,'index'])->name('emprendimientos_deportivos_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-
-
-// RUTAS DEL Miguel
-Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
-//publicar emprendimiento
-Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])->name('Publicar_Emprendimiento1');
-Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])->name('Publicar_Emprendimiento2');
-Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])->name('Publicar_Emprendimiento3');
+//<----//
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rutas k
+
+Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+
+Route::get('resena', [ReviewController::class, 'Resena'])->name('resena'); 
+Route::get('resena2', [ReviewController::class, 'Resena2'])->name('resena2');
+Route::get('resena3', [ReviewController::class, 'Resena3'])->name('resena3');
+Route::get('resena4', [ReviewController::class, 'Resena4'])->name('resena4');
+//inver
+Route::get('resenaInver', [ReviewController::class, 'ResenaInver'])->name('resenaInver');
 
