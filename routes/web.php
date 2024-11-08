@@ -21,7 +21,7 @@ use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_usuario_2;
 use App\Http\Controllers\InvestorController;    
 use App\Http\Controllers\entrepreneursController;
 use App\Http\Controllers\PerfilInverController;
-use App\Http\Controllers\PerfilIverEditarController;
+use App\Http\Controllers\PerfilInverEditarController;
 use App\Http\Controllers\PerfilUserEditarController;
 use App\Http\Controllers\ListEntrepreneur_InverController;
 use App\Http\Controllers\ListEntrepreneur_UserController;
@@ -43,11 +43,13 @@ use App\Http\Controllers\usaurioPerfil_inversionistaController;
         return 'prueba 1234';
     });
 
+    // Views_Gos--->
+
 Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
 
 Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
+Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
 Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
 Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');

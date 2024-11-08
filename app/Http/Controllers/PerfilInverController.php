@@ -16,6 +16,6 @@ class PerfilInverController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('PerfilInversionista', compact('connections'));
+        return view('Views_gos/PerfilInversionista', compact('connections'));
     }
 }
