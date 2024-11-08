@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Controller_Miguel\Home_inversor;
+use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento;
+use App\Http\Controllers\Controllers_Sebas\cambiar_contraseña_inversionistacontroller;
+use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
+use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
+use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
@@ -153,6 +159,10 @@ Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor
 
 
 
+
+
+
+
 // RUTAS DEL SEBAS
 
 // BUsqueda por filtro usuario e inversionista
@@ -169,7 +179,7 @@ Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionist
 
 //iniciar sesion usuario e inversionista
 Route::get('iniciar_sesion_usuario',[inicio_de_sesion_usuariocontroller::class,'index'])->name('iniciar_sesion_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro usuario e inversionista
 Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
@@ -187,7 +197,6 @@ Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::cla
 
 Route::get('emprendimientos_deportivos_usuario',[emprendimientos_deportivos_usuario::class,'index'])->name('emprendimientos_deportivos_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
-
 // RUTAS DEL Miguel
 Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
 //publicar emprendimiento
@@ -197,4 +206,16 @@ Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publica
 
 
 
+
+//rutas k
+
+Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+
+Route::get('resena', [ReviewController::class, 'Resena'])->name('resena');
+Route::get('resena2', [ReviewController::class, 'Resena2'])->name('resena2');
+Route::get('resena3', [ReviewController::class, 'Resena3'])->name('resena3');
+Route::get('resena4', [ReviewController::class, 'Resena4'])->name('resena4');
+//inver
+Route::get('resenaInver', [ReviewController::class, 'ResenaInver'])->name('resenaInver');
 
