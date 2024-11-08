@@ -30,7 +30,7 @@
       <h3>Explorar Todo</h3>
       <ul>
               <li><a href="busqueda_filtro.html"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
-              <li><a href="articulos deportivos.html"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
+              <li><a href="{{ route('emprendimientos_deportivos_usuario') }}"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
               <li><a href="articulos_hogar.html"><img src="images/deportes.png" alt="Artículos para el hogar">Emprendimientos sobre articulos de la casa hogar</a></li>
               <li><a href="articulos_electronicos.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
               <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Emprendimientos de indumentaria</a></li>
