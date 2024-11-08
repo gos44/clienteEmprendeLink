@@ -7,6 +7,7 @@ use App\Http\Controllers\MyentrepreneurshipController;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
+use App\Http\Controllers\Controller_Miguel\Home_inversor;
 use App\Http\Controllers\Controllers_Dayron\Chat_Inversor;
 use App\Http\Controllers\Controllers_Dayron\Chat_Usuario;
 use App\Http\Controllers\Controllers_Dayron\Editar_Emprendimiento;
@@ -183,4 +184,8 @@ Route::get('registrar_inversionista_ingreso',[registro_inversionista_ingreso::cl
 //verificar codigo usuario e inversionista
 Route::get('verificar_codigo_usuario',[verificar_codigo_usuario::class,'index'])->name('verificar_codigo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::class,'index'])->name('verificar_codigo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+// RUTAS DEL Miguel
+Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
+
 
