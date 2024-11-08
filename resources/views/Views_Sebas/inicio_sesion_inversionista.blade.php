@@ -43,7 +43,7 @@
         </div>
         <a href="{{ route('Home_inversor.index') }}" class="button-submit"  onclick="logear()">Iniciar sesión  </a>
 
-        <p class="p">¿No tienes una cuenta? <a href="registro_usuario.html" class="span">Regístrate</a></p>
+        <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_inversionista') }}" class="span">Regístrate</a></p>
         <p class="p line">O con</p>
 
         <div class="flex-row">

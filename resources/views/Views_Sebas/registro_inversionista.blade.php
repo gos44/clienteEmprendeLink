@@ -84,9 +84,9 @@
 
             <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
         </div>
-        <a href="registro_inver3.html" class="button-submit">Registrarse</a>
+        <a href="{{ route('registrar_inversionista_ingreso') }}" class="button-submit">Registrarse</a>
 
-        <p class="p">¿Ya tienes una cuenta? <a href="iniciosesion1_usuario.html" class="span">Iniciar sesion</a></p>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_inversionista') }}" class="span">Iniciar sesion</a></p>
 
     </script>
 
