@@ -31,6 +31,16 @@ use App\Http\Controllers\usaurioPerfil_inversionistaController;
 
 
 use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_UsuarioController;
+use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_InversionistaController;
+use App\Http\Controllers\Controllers_Sebas\Verificar_identidad_cambio_contraseña;
+use App\Http\Controllers\Controllers_Sebas\Cambiar_Contraseña_nueva;
+use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_controller;
+use App\Http\Controllers\Controllers_Sebas\Registro_inversionista_Controller;
+use App\Http\Controllers\Controllers_Sebas\Registro_usuario_Controller;
+use App\Http\Controllers\Controllers_Sebas\registro_usuario_ingreso;
+use App\Http\Controllers\Controllers_Sebas\registro_inversionista_ingreso;
+use App\Http\Controllers\Controllers_Sebas\verificar_codigo_usuario;
+use App\Http\Controllers\Controllers_Sebas\Verificar_codigo_inversionista;
 
 
 /*
@@ -138,9 +148,33 @@ Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2
 Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::class, 'index'])->name('Visitar_Emprendimiento_Inversor.index');
 Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');
 
+// RUTAS DEL SEBAS
 
+// BUsqueda por filtro usuario e inversionista
+Route::get('Buscar_Emprendimientos_usuario',[Busqueda_Filtro_UsuarioController::class,'index'])->name('filtrar_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('Buscar_Emprendimientos_inversionista',[Busqueda_Filtro_InversionistaController::class,'index'])->name('filtrar_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
-Route::get('Buscar_Emprendimientos',[Busqueda_Filtro_UsuarioController::class,'index'])->name('buscar'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+// verificar identidad usuario e inversionista
+Route::get('verificar_identidad_usuario',[Verificar_identidad_cambio_contraseña::class,'index'])->name('cambio_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('verificar_identidad_inversionista',[Verificar_identidad_cambio_contraseña::class,'index'])->name('cambio_contraseña_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
+//cambiar contraseñas nuevas usuario e inversioinista
+Route::get('ingrese_nueva_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'index'])->name('ingrese_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('ingrese_nueva_contraseña_inversionista',[Cambiar_Contraseña_nueva::class,'index'])->name('ingrese_contraseña_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
-//<----//
+//iniciar sesion usuario e inversionista
+Route::get('iniciar_sesion_usuario',[inicio_de_sesion_controller::class,'index'])->name('iniciar_sesion_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('iniciar_sesion_inversionista',[inicio_de_sesion_controller::class,'index'])->name('iniciar_sesion_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+//registro usuario e inversionista
+Route::get('registrar_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('registrar_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+//registro INGRESO usuario e inversionista
+Route::get('registrar_usuario_ingreso',[Registro_usuario_ingreso::class,'index'])->name('registrar_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('registrar_inversionista_ingreso',[registro_inversionista_ingreso::class,'index'])->name('registrar_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+//verificar codigo usuario e inversionista
+Route::get('verificar_codigo_usuario',[verificar_codigo_usuario::class,'index'])->name('verificar_codigo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::class,'index'])->name('verificar_codigo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
