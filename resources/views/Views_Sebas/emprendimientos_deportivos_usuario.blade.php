@@ -35,7 +35,7 @@
         <h3>Explorar Todo</h3>
       <ul>
 
-        <li><a href="{{ route('Busqueda_Filtro_Usuario') }}"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
+        <li><a href="{{ route('filtrar_usuario') }}"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
         <li><a href="articulos deportivos.html" style="color: rgb(67, 184, 67);"><img src="images/deportes.png" alt="Artículos deportivos">Empredimietos deportivos</a></li>
         <li><a href="articulos_hogar.html"><img src="images/hogar.png" alt="Artículos deportivos">Emprendimientos sobre articulos de la casa hogar</a></li>
         <li><a href="articulos_electronicos.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
