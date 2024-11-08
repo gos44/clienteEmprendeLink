@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Controllers_Sebas\cambiar_contraseña_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
@@ -8,8 +7,6 @@ use App\Http\Controllers\MyentrepreneurshipController;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
-use App\Http\Controllers\Controller_Miguel\Home_inversor;
-use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento;
 use App\Http\Controllers\Controllers_Dayron\Chat_Inversor;
 use App\Http\Controllers\Controllers_Dayron\Chat_Usuario;
 use App\Http\Controllers\Controllers_Dayron\Editar_Emprendimiento;
@@ -37,11 +34,7 @@ use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_UsuarioController;
 use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_InversionistaController;
 use App\Http\Controllers\Controllers_Sebas\Verificar_identidad_cambio_contraseña;
 use App\Http\Controllers\Controllers_Sebas\Cambiar_Contraseña_nueva;
-
-use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
-use App\Http\Controllers\Controllers_Sebas\cambiar_contraseña_inversionistacontroller;
-
-use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
+use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_controller;
 use App\Http\Controllers\Controllers_Sebas\Registro_inversionista_Controller;
 use App\Http\Controllers\Controllers_Sebas\Registro_usuario_Controller;
 use App\Http\Controllers\Controllers_Sebas\registro_usuario_ingreso;
@@ -49,7 +42,6 @@ use App\Http\Controllers\Controllers_Sebas\registro_inversionista_ingreso;
 use App\Http\Controllers\Controllers_Sebas\verificar_codigo_usuario;
 use App\Http\Controllers\Controllers_Sebas\Verificar_codigo_inversionista;
 use App\Http\Controllers\Controllers_Sebas\verificar_identidad_inversionista;
-use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
 
 
 /*
@@ -177,7 +169,7 @@ Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionist
 
 //iniciar sesion usuario e inversionista
 Route::get('iniciar_sesion_usuario',[inicio_de_sesion_usuariocontroller::class,'index'])->name('iniciar_sesion_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inver'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro usuario e inversionista
 Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas

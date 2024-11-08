@@ -42,5 +42,27 @@ class ReviewController extends Controller
 
         // Pasando los datos a la vista 'Reviews.show'
         return view('Reviews.show', compact('review')); // 'review' para un solo registro
+
+        
     }
+    public function Resena (){
+        return view('kevin.Reseña');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
+    public function Resena2 (){
+        return view('kevin.Reseña2');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
+
+    public function Resena3 (){
+        return view('kevin.Reseña3');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
+
+    public function Resena4 (){
+        return view('kevin.Reseña4');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
+
+    public function ResenaInver (){
+        return view('kevin.ReseñaInver');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
+    }
+
+
 }
