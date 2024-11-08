@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambio Contraseña Usuario</title>
-
-    <link rel="stylesheet" href="{{ asset('css/cambiar_contraseña.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cambiar_contraseñas_nuevas.css') }}">
 
 </head>
 <body>
@@ -32,10 +31,7 @@
       <div class="flex-row">
         <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
       </div>
-      <a href="{{ route('verificar_codigo_usuario') }}" class="button-submit">Enviar</a>
-
-     
-
+      <a href="verificar_codigo_inversionista.html" class="button-submit">Enviar</a>
 
       <p class="p">¿Ya tienes una cuenta? <a href="inicio_sesion_inver.html" class="span">Iniciar sesión</a></p>
     </form>

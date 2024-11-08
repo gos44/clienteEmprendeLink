@@ -41,13 +41,12 @@
 
         <div class="flex-row">
 
-           
-            <a class="span" href="{{ route('verificar_identidad_usuario') }}">
-                <i class="fas fa-comment-dots me-2"></i> ¿Olvidaste tu contraseña?
+
+            <a class="span" href="{{ route('verificar_identidad_usuario') }}"><i class="fas fa-comment-dots me-2"></i> ¿Olvidaste tu contraseña?
         </div>
         <a href="#" class="button-submit" onclick="logear()" >Iniciar sesión</a>
 
-        <p class="p">¿No tienes una cuenta? <a href="registro_inver1.html" class="span">Regístrate</a></p>
+        <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_usuario') }}" class="span">Regístrate</a></p>
         <p class="p line">O con</p>
 
         <div class="flex-row">

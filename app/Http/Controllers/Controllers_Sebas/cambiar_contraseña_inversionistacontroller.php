@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class registro_usuario_ingreso extends Controller
+class cambiar_contraseña_inversionistacontroller extends Controller
 {
     public function index()
     {
@@ -17,6 +17,6 @@ class registro_usuario_ingreso extends Controller
         // ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Sebas.registro_usuario_ingreso');
+        return view('Views_Sebas.Cambiar_contraseñas');
     }
 }
