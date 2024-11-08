@@ -16,6 +16,6 @@ class ListEntrepreneur_InverController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('listaUsuarios_Inver', compact('connections'));
+        return view('Views_gos/listaUsuarios_Inver', compact('connections'));
     }
 }

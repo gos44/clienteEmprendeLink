@@ -105,12 +105,12 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand me-4" href="HOME.HTML">
+            <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
                 <img src="images/16.png" alt="Logo" width="180" height="70">
             </a>
-            
+
             <!-- Botón hamburguesa -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -120,15 +120,15 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Búsqueda -->
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="busqueda_filtro.html">
-                            
+                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
+
                             <i class="fas fa-search fa-lg me-1"></i> Buscar Emprendimientos
                         </a>
                     </li>
 
                     <!-- Emprendimientos (Dropdown solo en desktop) -->
                     <li class="nav-item dropdown me-3 desktop-only">
-                        <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button" 
+                        <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-briefcase fa-lg me-1"></i> Mis Emprendimientos
                         </a>
@@ -139,7 +139,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="publicarEmprendimiento.html">
+                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
@@ -153,7 +153,7 @@
 
                     <!-- Comunicación (Dropdown solo en desktop) -->
                     <li class="nav-item dropdown me-3 desktop-only">
-                        <a class="nav-link dropdown-toggle" href="#" id="communicationDropdown" role="button" 
+                        <a class="nav-link dropdown-toggle" href="#" id="communicationDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-comments fa-lg me-1"></i> Comunicación
                         </a>
@@ -179,7 +179,7 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="publicarEmprendimiento.html">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
                             <i class="fas fa-plus-circle fa-lg me-1"></i> Publicar Emprendimiento
                         </a>
                     </li>
