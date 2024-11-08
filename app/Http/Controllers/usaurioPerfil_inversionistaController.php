@@ -16,6 +16,6 @@ class usaurioPerfil_inversionistaController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('usaurioPerfil-inversionista', compact('connections'));
+        return view('Views_gos/usaurioPerfil-inversionista', compact('connections'));
     }
 }

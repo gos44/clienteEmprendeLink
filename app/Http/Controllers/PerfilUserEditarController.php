@@ -16,7 +16,7 @@ class PerfilUserEditarController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('EditarPerfilUsuario', compact('connections'));
+        return view('Views_gos/EditarPerfilUsuario', compact('connections'));
     // }}
 
     // // Configura el directorio de carga de archivos

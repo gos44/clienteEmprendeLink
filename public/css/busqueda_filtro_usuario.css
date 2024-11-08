@@ -1,0 +1,828 @@
+html, body {
+    overflow-x: hidden;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+  }
+
+   .content {
+     max-height: 80px; /* Limitar la altura del contenido */
+     overflow: hidden;
+   }
+
+   .content.expanded {
+     max-height: none; /* Sin límite de altura cuando está expandido */
+   }
+
+   .ver-mas {
+     color: blue;
+     cursor: pointer;
+     font-size: 12px;
+   }
+
+         .main-content h2 {
+             margin-top: 0;
+             display: flex;
+             color: #555;
+
+
+         }
+
+
+         .cards {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 20px;
+         }
+
+
+
+
+
+         .card button {
+             background-color: black;
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             cursor: pointer;
+             border-radius: 5px;
+             float: right;
+         }
+         .card button:hover {
+             background-color: #333;
+         }
+
+
+
+
+   /* footer {
+     background-color: #000000;
+     color: #fff;
+     padding: 20px 0;
+     margin-top: 39.3px;
+   }
+
+   .footer-content {
+     width: 90%;
+     margin: 0 auto;
+     display: flex;
+     justify-content: space-between;
+     flex-wrap: wrap;
+   }
+
+   .footer-section {
+     flex: 1;
+     margin: 10px;
+   }
+
+   .footer-section h3 {
+     border-bottom: 1px solid #555;
+     padding-bottom: 5px;
+     margin-bottom: 10px;
+   }
+
+   .footer-section ul {
+     list-style: none;
+     padding: 0;
+   }
+
+   .footer-section ul li {
+     margin-bottom: 10px;
+   }
+
+   .footer-section ul li a {
+     text-decoration: none;
+     color: #bbb;
+   }
+
+
+
+
+   ul {
+     list-style: none;
+   }
+
+   .footer-bottom {
+     text-align: center;
+     margin-top: 20px;
+     border-top: 1px solid #555;
+     padding-top: 10px;
+     }
+
+
+
+
+       .example-2 {
+         display: flex;
+         justify-content:left;
+         align-items: center;
+         translate: 65px -20px;
+       }
+       .example-2 .icon-content {
+         margin: 0 10px;
+         position: relative;
+       }
+       .example-2 .icon-content .tooltip {
+         position: absolute;
+         top: -30px;
+         left: 50%;
+         transform: translateX(-50%);
+         color: #fff;
+         padding: 6px 10px;
+         border-radius: 5px;
+         opacity: 0;
+         visibility: hidden;
+         font-size: 14px;
+         transition: all 0.3s ease;
+       }
+       .example-2 .icon-content:hover .tooltip {
+         opacity: 1;
+         visibility: visible;
+         top: -50px;
+       }
+       .example-2 .icon-content a {
+         position: relative;
+         overflow: hidden;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         color: #4d4d4d;
+         background-color: #fff;
+         transition: all 0.3s ease-in-out;
+       }
+       .example-2 .icon-content a:hover {
+         box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+       }
+       .example-2 .icon-content a svg {
+         position: relative;
+         z-index: 1;
+         width: 30px;
+         height: 30px;
+       }
+       .example-2 .icon-content a:hover {
+         color: white;
+       }
+       .example-2 .icon-content a .filled {
+         position: absolute;
+         top: auto;
+         bottom: 0;
+         left: 0;
+         width: 100%;
+         height: 0;
+         background-color: #0a0ef7;
+         transition: all 0.3s ease-in-out;
+       }
+       .example-2 .icon-content a:hover .filled {
+         height: 100%;
+       }
+
+       .example-2 .icon-content a[data-social="Facebook"] .filled,
+       .example-2 .icon-content a[data-social="Facebook"] ~ .tooltip {
+         background-color: #0274b3;
+       }
+
+       .example-2 .icon-content a[data-social="twitter"] .filled,
+       .example-2 .icon-content a[data-social="twitter"] ~ .tooltip {
+         background-color: #24262a;
+       }
+       .example-2 .icon-content a[data-social="instagram"] .filled,
+       .example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+         background: linear-gradient(
+           45deg,
+           #405de6,
+           #5b51db,
+           #b33ab4,
+           #c135b4,
+           #e1306c,
+           #fd1f1f
+         );
+       }
+       .example-2 .icon-content a[data-social="youtube"] .filled,
+       .example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+         background-color: #ff0000;
+       }
+
+             .footer-content .logoda img {
+             height: 52%;
+             width: 78%;
+         } */
+
+
+   .card a {
+     text-decoration: none;
+     color: white;
+   }
+
+
+
+   /* Logo responsiveness */
+   .logoda img {
+    max-width: 100%;
+    height: auto;
+   }
+
+   /* Responsive styles */
+   /* @media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+    }
+
+    .example-2 {
+        justify-content: center;
+        translate: 0;
+    }
+   }
+
+   @media screen and (max-width: 480px) {
+    .example-2 .icon-content {
+        margin: 0 5px;
+    }
+
+    .example-2 .icon-content a {
+        width: 40px;
+        height: 40px;
+    }
+
+    .example-2 .icon-content a svg {
+        width: 20px;
+        height: 20px;
+    }
+   } */
+
+
+
+
+
+
+
+
+
+
+   .main-content {
+     flex: 1; /* Ocupa el resto del espacio disponible */
+   }
+
+   .cards {
+     display: flex;
+     flex-wrap: wrap; /* Permite que las tarjetas se ajusten a la línea */
+   }
+
+   .card {
+     width: 30%; /* Ancho de cada tarjeta, ajusta según sea necesario */
+     height: 30%;
+     margin: 10px; /* Espacio entre tarjetas */
+
+   }
+
+
+
+
+
+   /* Estilos para la fila */
+   .row {
+     display: flex; /* Usa flexbox para organizar las tarjetas */
+     flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
+     justify-content: space-between; /* Espacio entre las tarjetas */
+   }
+
+   /* Estilos para la tarjeta */
+   .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    max-width: 1000000%;
+    height: 350px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 20px 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+
+  }
+
+   /* Estilos para la imagen */
+
+
+   /* Estilos para el contenido de texto */
+   .card h3, .card p {
+     text-align: center; /* Texto centrado */
+     width: 100%; /* Ancho completo */
+     margin: 5px 0; /* Espacio entre elementos de texto */
+   }
+
+   /* Estilos para el botón Visitar */
+   .card button {
+     background-color: black; /* Color de fondo del botón */
+     color: white; /* Color del texto del botón */
+     border: none; /* Sin borde */
+     padding: 10px 20px; /* Espaciado interno */
+     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+     border-radius: 5px; /* Bordes redondeados */
+     position: relative; /* Posicionamiento relativo */
+     bottom: 0; /* Alineado al fondo de la tarjeta */
+     transition: background-color 0.3s ease; /* Transición suave */
+     margin-top: auto; /* Empuja el botón hacia abajo */
+     margin-left: auto; /* Alinea el botón a la derecha */
+     display: block; /* Asegura que el botón ocupe el ancho completo disponible */
+     width: fit-content; /* Ajusta el ancho del botón al contenido */
+     border-radius: 25px;
+   }
+
+
+
+
+
+
+
+
+  /* NUEVOS ESTILOS */
+
+
+  /* Pagination Styles */
+  .pagination  {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    align-items: center;
+
+  }
+
+  .page-btn {
+    padding: 10px 15px;
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    background: #000;
+    color: #fff;
+  }
+
+  .page-btn.active {
+    background: #000;
+    color: #fff;
+  }
+
+  .page-btn:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* Responsive Design */
+
+
+
+
+
+  .background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Changed from 120% to 100% */
+    height: 42%;
+    object-fit: cover;
+    z-index: 0;
+     filter: brightness(0.6); /* Darkens the background image */
+  }
+  .logo-img {
+    position: relative;
+    width: 40%;
+    height: 60%;
+    background: white;
+    border-radius: 10%;
+    padding: 10px;
+    z-index: 1;
+    margin-top: 90px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius:50%;
+  }
+
+
+
+  .card h3 {
+    position: relative;
+    z-index: 1;
+    color: #000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    margin-top: 20px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .card p {
+    position: relative;
+    z-index: 1;
+    color: #333;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    line-height: 1.5;
+    width: 90%; /* Added to control text width */
+    margin-top: 1px;
+  }
+
+
+  .card button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+  }
+
+  /* Efectos hover para la card */
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+
+
+
+
+
+
+
+  /* estilos del filtro*/
+
+
+
+
+  /* Sidebar Styles */
+  .carticas {
+    width: 30%;
+    /* min-width: 300px; */
+    height: calc(100vh - 200px);
+    top: 20px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    transition: all 0.3s ease;
+
+  }
+
+  .carticas h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #000;
+  }
+
+  .carticas h3 {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1rem 0;
+  }
+
+  .carticas ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .carticas ul li {
+    margin-bottom: 0.8rem;
+  }
+
+  .carticas ul li a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .carticas ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+  }
+
+  .carticas ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    object-fit: contain;
+  }
+
+  /* Main Content Area */
+  .main-content {
+    flex: 1;
+    height: calc(120vh - 200px);
+    overflow-y: auto;
+    padding-right: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+
+  .main-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .main-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .main-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  /* Search Bar Improvements */
+  .search-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    padding: 1rem 0;
+    margin: 0 1rem 1rem 1rem;
+    width: calc(100% - 2rem);
+    max-width: 500px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .search-bar input[type="text"]:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+
+  @media screen and (max-width: 1092px) {
+    .container-bar {
+        flex-direction: column;
+    }
+
+    .carticas {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        position: relative;
+        top: 0;
+    }
+
+    .main-content {
+        height: auto;
+        max-height: none;
+    }
+
+    .search-bar {
+        position: relative;
+        margin: 1rem auto;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .container-bar {
+        padding: 0 0.5rem;
+    }
+
+    .carticas {
+        padding: 1rem;
+    }
+
+    .carticas ul li a {
+        padding: 0.6rem;
+    }
+
+    .search-bar input[type="text"] {
+        padding: 0.8rem 1.2rem;
+    }
+  }
+
+  /* Custom Scrollbar for Carticas */
+  .carticas {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+
+  .carticas::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .carticas::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .carticas::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  /* Animation for cards on scroll */
+  .row {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+  }
+
+  .row.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+
+
+
+  .container-bar {
+    display: flex;
+    gap: 2rem;
+
+    left: 0;
+    top: 0;
+
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0;
+
+  }
+
+  /* Sidebar Content Styles */
+  .sidebar-content {
+    width: 30%;
+    height: 100vh;
+    top: 20px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+  }
+
+
+  /* Header Section Styles */
+  .header-section {
+    padding-bottom: 1rem;
+  }
+
+  .header-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #000;
+    text-align: center;
+  }
+
+  /* Search Section Styles */
+  .search-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .search-section input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .search-section input:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  /* Explorar Todo Section */
+  .sidebar-content h3 {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 1rem 0;
+    padding-top: 0.5rem;
+  }
+
+  /* Navigation List Styles */
+  .sidebar-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-content ul li {
+    margin-bottom: 0.8rem;
+  }
+
+  .sidebar-content ul li a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .sidebar-content ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+  }
+
+  .sidebar-content ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    object-fit: contain;
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 1200px) {
+    .container-bar {
+        gap: 1.5rem;
+    }
+
+    .sidebar-content {
+        width: 100%;
+        min-width: 250px;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .container-bar {
+        flex-direction: column;
+    }
+
+    .sidebar-content {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .container-bar {
+        padding: 0 0.5rem;
+    }
+
+    .sidebar-content {
+        padding: 1rem;
+    }
+
+    .search-section input {
+        padding: 0.8rem;
+    }
+  }
+
+
+  /* Container Bar y Layout Principal */
+  /* .container-bar {
+    display: flex;
+    gap: 2rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0;
+
+    background-color: #f5f5f5;
+  }
+
+  /* Sidebar Content Styles */
+
+
+
+
+
+
+
+

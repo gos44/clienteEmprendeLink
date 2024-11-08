@@ -16,6 +16,6 @@ class PerfilUsuarioController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('PerfilUsuario', compact('connections'));
+        return view('Views_gos/PerfilUsuario', compact('connections'));
     }
 }
