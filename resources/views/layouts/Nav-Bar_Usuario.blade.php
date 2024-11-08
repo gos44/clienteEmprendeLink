@@ -159,7 +159,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="communicationDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route('Chat_Usuario.index') }}">
+                                 <a class="dropdown-item" href="">{{--{{ route('Chat_Usuario.index') }} --}}
                                     <i class="fas fa-comment-dots me-2"></i> Chat
                                 </a>
                             </li>

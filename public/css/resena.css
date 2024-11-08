@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+html, body {
+    overflow-x: hidden;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+}
+
+
+
+
+
+
+
+
+
+.reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.reviews-title {
+    text-align: center;
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+    position: relative;
+}
+
+.reviews-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #4a90e2, #67b8e3);
+    border-radius: 2px;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.review-card {
+    background: #f4f1f15f;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.review-header {
+    margin-bottom: 20px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.company-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+.company-details {
+    flex-grow: 1;
+}
+
+.company-details h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.timestamp {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+}
+
+.rating-container {
+    margin-top: 10px;
+}
+
+.rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+}
+
+.rating > label {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ffd700;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #ffed4a;
+}
+
+.rating > input:checked ~ label {
+    color: #ffd700;
+}
+
+.review-content {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.review-content p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .reviews-container {
+        padding: 20px 15px;
+    }
+
+    .reviews-title {
+        font-size: 2rem;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-card {
+        padding: 20px;
+    }
+}
+
+

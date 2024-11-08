@@ -29,6 +29,8 @@ use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\usaurioPerfil_inversionistaController;
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,17 +45,17 @@ use App\Http\Controllers\usaurioPerfil_inversionistaController;
         return 'prueba 1234';
     });
 
-Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
+//Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('PerfilUsuario.index');
+//Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
 
-Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
+//Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
+//Route::get('perfilInverEditar', [PerfilInverController::class, 'index'])->name('perfilInverEditar.index');
 
-Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
-Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
 
-Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
-Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+//Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 
 
 
@@ -83,7 +85,6 @@ Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index']
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
 Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
 
-Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 
 // Ruta para la lista de reseñas
@@ -136,4 +137,20 @@ Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::
 Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');  
 
 
-//<----//
+//rutas k
+
+Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+
+Route::get('resena', [ReviewController::class, 'Resena'])->name('resena'); 
+Route::get('resena2', [ReviewController::class, 'Resena2'])->name('resena2');
+Route::get('resena3', [ReviewController::class, 'Resena3'])->name('resena3');
+Route::get('resena4', [ReviewController::class, 'Resena4'])->name('resena4');
+//inver
+Route::get('resenaInver', [ReviewController::class, 'ResenaInver'])->name('resenaInver');
+
+
+
+
+
+
