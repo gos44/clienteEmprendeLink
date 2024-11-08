@@ -162,3 +162,49 @@ Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor
 
 
 //<----//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rutas k
+
+Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+
+
+Route::get('resena', [ReviewController::class, 'Resena'])->name('resena'); 
+Route::get('resena2', [ReviewController::class, 'Resena2'])->name('resena2');
+Route::get('resena3', [ReviewController::class, 'Resena3'])->name('resena3');
+Route::get('resena4', [ReviewController::class, 'Resena4'])->name('resena4');
+//inver
+Route::get('resenaInver', [ReviewController::class, 'ResenaInver'])->name('resenaInver');
+
