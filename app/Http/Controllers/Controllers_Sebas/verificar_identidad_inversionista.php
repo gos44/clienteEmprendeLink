@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use App\Mail\VerificationCodeMail; // Clase de Mail para enviar el código al correo
 use Twilio\Rest\Client; // Paquete de Twilio para SMS
 
-class Verificar_identidad_cambio_contraseña extends Controller
+class verificar_identidad_inversionista extends Controller
 {
     // Método privado para realizar llamadas a la API
     private function sendDataToApi($url, $data)
@@ -61,7 +61,7 @@ class Verificar_identidad_cambio_contraseña extends Controller
     // Método para mostrar la vista de cambio de contraseña
     public function index()
     {
-        return view('Views_Sebas.Verificar_identidad_usuario');
+        return view('Views_Sebas.Verificar_identidad_inversionista');
     }
 
     // Método para procesar la solicitud de verificación (correo o teléfono)
@@ -143,7 +143,7 @@ class Verificar_identidad_cambio_contraseña extends Controller
     // Método para mostrar el formulario de cambio de contraseña
     public function showChangePasswordForm()
     {
-        return view('Views_Sebas.Verificar_identidad_usuario');
+        return view('Views_Sebas.verificar_identidad_inversionista');
     }
 
     // Método para procesar el cambio de contraseña

@@ -1,3 +1,6 @@
+@extends('layouts.Nav-Bar_Usuario')
+
+
 <!DOCTYPE html>
 <html lang="es">
     <head>

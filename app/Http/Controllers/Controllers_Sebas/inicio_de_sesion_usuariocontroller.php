@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class inicio_de_sesion_controller extends Controller
+class inicio_de_sesion_usuariocontroller extends Controller
 {
     public function index()
     {
@@ -17,6 +17,6 @@ class inicio_de_sesion_controller extends Controller
         // ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Sebas.iniciar_sesion');
+        return view('Views_Sebas.iniciar_sesion_usuario');
     }
 }

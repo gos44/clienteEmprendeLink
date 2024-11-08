@@ -1,5 +1,6 @@
 html, body {
     overflow-x: hidden;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
   }
 
    .content {

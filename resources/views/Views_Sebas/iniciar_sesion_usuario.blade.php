@@ -41,7 +41,9 @@
 
         <div class="flex-row">
 
-            <span class="span"><a href="cambiar_contraseña_inversionista.html" class="link">¿Olvidaste tu contraseña?</a></span>
+           
+            <a class="span" href="{{ route('verificar_identidad_usuario') }}">
+                <i class="fas fa-comment-dots me-2"></i> ¿Olvidaste tu contraseña?
         </div>
         <a href="#" class="button-submit" onclick="logear()" >Iniciar sesión</a>
 
