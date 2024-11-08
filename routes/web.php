@@ -8,6 +8,7 @@ use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\Controller_Miguel\Home_inversor;
+use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento;
 use App\Http\Controllers\Controllers_Dayron\Chat_Inversor;
 use App\Http\Controllers\Controllers_Dayron\Chat_Usuario;
 use App\Http\Controllers\Controllers_Dayron\Editar_Emprendimiento;
@@ -187,5 +188,11 @@ Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::cla
 
 // RUTAS DEL Miguel
 Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
+//publicar emprendimiento
+Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])->name('Publicar_Emprendimiento1');
+Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])->name('Publicar_Emprendimiento2');
+Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])->name('Publicar_Emprendimiento3');
+
+
 
 

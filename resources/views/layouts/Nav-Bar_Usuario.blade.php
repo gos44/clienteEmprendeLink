@@ -105,7 +105,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand me-4" href="HOME.HTML">
+            <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
                 <img src="images/16.png" alt="Logo" width="180" height="70">
             </a>
 
@@ -139,7 +139,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="publicarEmprendimiento.html">
+                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
@@ -179,7 +179,7 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="publicarEmprendimiento.html">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
                             <i class="fas fa-plus-circle fa-lg me-1"></i> Publicar Emprendimiento
                         </a>
                     </li>
