@@ -17,6 +17,6 @@ class cambiar_contraseña_inversionistacontroller extends Controller
         // ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Sebas.Cambiar_contraseñas');
+        return view('Views_Sebas.Cambiar_contraseña_inversionista');
     }
 }

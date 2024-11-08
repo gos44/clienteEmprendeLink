@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="icon" href="img/logoCuadrado.png" type="image/png">
-    
+
     <link rel="stylesheet" href="{{ asset('css/inicio_de_sesion.css') }}">
 
 
@@ -39,11 +39,11 @@
 
         <div class="flex-row">
 
-            <span class="span"><a href="cambio_contraseña_usuario.html" class="link">¿Olvidaste tu contraseña?</a></span>
+            <span class="span"><a href="{{ route('verificar_identidad_inversionista') }}" class="link">¿Olvidaste tu contraseña?</a></span>
         </div>
-        <a href="#" class="button-submit"  onclick="logear()">Iniciar sesión  </a>
+        <a href="{{ route('Home_inversor.index') }}" class="button-submit"  onclick="logear()">Iniciar sesión  </a>
 
-        <p class="p">¿No tienes una cuenta? <a href="registro_usuario.html" class="span">Regístraate</a></p>
+        <p class="p">¿No tienes una cuenta? <a href="registro_usuario.html" class="span">Regístrate</a></p>
         <p class="p line">O con</p>
 
         <div class="flex-row">
