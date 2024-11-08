@@ -18,7 +18,7 @@ use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_Inversor;
 use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_Inversor_2;
 use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_Usuario;
 use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_usuario_2;
-use App\Http\Controllers\InvestorController;    
+use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\entrepreneursController;
 use App\Http\Controllers\PerfilInverController;
 use App\Http\Controllers\PerfilInverEditarController;
@@ -27,6 +27,10 @@ use App\Http\Controllers\ListEntrepreneur_InverController;
 use App\Http\Controllers\ListEntrepreneur_UserController;
 use App\Http\Controllers\PerfilUsuarioController;
 use App\Http\Controllers\usaurioPerfil_inversionistaController;
+
+
+
+use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_UsuarioController;
 
 
 /*
@@ -111,30 +115,34 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
 // Views_Dayron--->
 
 // Home Usuario -->
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index'); 
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 // Route::get('Home_Usuario/{id}', [Home_Usuario::class, 'show'])->name('Home_Usuario.show');
 
 // Chat Usuario -->
-Route::get('Chat_Usuario', [Chat_Usuario::class, 'index'])->name('Chat_Usuario.index'); 
+Route::get('Chat_Usuario', [Chat_Usuario::class, 'index'])->name('Chat_Usuario.index');
 
 // Chat Inversor -->
-Route::get('Chat_Inversor', [Chat_Inversor::class, 'index'])->name('Chat_Inversor.index'); 
+Route::get('Chat_Inversor', [Chat_Inversor::class, 'index'])->name('Chat_Inversor.index');
 
 // Mi-Emprendimiento -->
-Route::get('Mi_Emprendimiento', [Mi_Emprendimiento::class, 'index'])->name('Mi_Emprendimiento.index'); 
-Route::get('Mi_Emprendimiento_2', [Mi_Emprendimiento_2::class, 'index'])->name('Mi_Emprendimiento_2.index'); 
+Route::get('Mi_Emprendimiento', [Mi_Emprendimiento::class, 'index'])->name('Mi_Emprendimiento.index');
+Route::get('Mi_Emprendimiento_2', [Mi_Emprendimiento_2::class, 'index'])->name('Mi_Emprendimiento_2.index');
 
 // Editar-Emprendimiento -->
-Route::get('Editar_Emprendimiento', [Editar_Emprendimiento::class, 'index'])->name('Editar_Emprendimiento.index'); 
-Route::get('Editar_Emprendimiento_2', [Editar_Emprendimiento_2::class, 'index'])->name('Editar_Emprendimiento_2.index'); 
+Route::get('Editar_Emprendimiento', [Editar_Emprendimiento::class, 'index'])->name('Editar_Emprendimiento.index');
+Route::get('Editar_Emprendimiento_2', [Editar_Emprendimiento_2::class, 'index'])->name('Editar_Emprendimiento_2.index');
 
 // Visitar-Emprendimiento -->
-Route::get('Visitar_Emprendimiento_Usuario', [Visitar_Emprendimiento_Usuario::class, 'index'])->name('Visitar_Emprendimiento_Usuario.index'); 
-Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2::class, 'index'])->name('Visitar_Emprendimiento_usuario_2.index'); 
+Route::get('Visitar_Emprendimiento_Usuario', [Visitar_Emprendimiento_Usuario::class, 'index'])->name('Visitar_Emprendimiento_Usuario.index');
+Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2::class, 'index'])->name('Visitar_Emprendimiento_usuario_2.index');
 
 // Visitar-Emprendimiento - Inversor -->
 Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::class, 'index'])->name('Visitar_Emprendimiento_Inversor.index');
-Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');  
+Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');
+
+
+
+Route::get('Buscar_Emprendimientos',[Busqueda_Filtro_UsuarioController::class,'index'])->name('buscar'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 
 //<----//
