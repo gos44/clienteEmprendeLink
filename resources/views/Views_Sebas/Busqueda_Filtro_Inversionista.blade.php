@@ -39,8 +39,8 @@
         <div class="divider"></div>
         <h3>Explorar Todo</h3>
           <ul>
-            <li><a href="busqueda_filtro_inver.html"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
-              <li><a href="articulos_deportivosinver.html"><img src="images/deportes.png" alt="Artículos deportivos">Empredimietos deportivos</a></li>
+            <li><a href="{{ asset('Buscar_Emprendimientos_inversionista') }}"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
+              <li><a href="{{ asset('emprendimientos_deportivos_inversionista') }}"><img src="images/deportes.png" alt="Artículos deportivos">Empredimietos deportivos</a></li>
               <li><a href="articulos_hogarinver.html"><img src="images/deportes.png" alt="Artículos para el hogar">Emprendimientos sobre articulos de la casa hogar</a></li>
               <li><a href="articulos_electronicosinver.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
               <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Empredimientos de indumentaria</a></li>
