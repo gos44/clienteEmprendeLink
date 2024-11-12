@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
 
-class ListEntrepreneur_InverController extends Controller
+class PerfilUsuarioController extends Controller
 {
     public function index()
     {
@@ -16,6 +16,6 @@ class ListEntrepreneur_InverController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_gos/listaUsuarios_Inver', compact('connections'));
+        return view('Views_gos/PerfilUsuario', compact('connections'));
     }
 }

@@ -26,13 +26,15 @@ use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_Usuario;
 use App\Http\Controllers\Controllers_Dayron\Visitar_Emprendimiento_usuario_2;
 use App\Http\Controllers\InvestorController;
 use App\Http\Controllers\entrepreneursController;
-use App\Http\Controllers\PerfilInverController;
-use App\Http\Controllers\PerfilInverEditarController;
-use App\Http\Controllers\PerfilUserEditarController;
-use App\Http\Controllers\ListEntrepreneur_InverController;
-use App\Http\Controllers\ListEntrepreneur_UserController;
-use App\Http\Controllers\PerfilUsuarioController;
-use App\Http\Controllers\usaurioPerfil_inversionistaController;
+
+//CONTROLADORES DEL GOS
+use App\Http\Controllers\Controllers_Gos\PerfilInverController;
+use App\Http\Controllers\Controllers_Gos\PerfilInverEditarController;
+use App\Http\Controllers\Controllers_Gos\PerfilUserEditarController;
+use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_InverController;
+use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_UserController;
+use App\Http\Controllers\Controllers_Gos\PerfilUsuarioController;
+use App\Http\Controllers\Controllers_Gos\usaurioPerfil_inversionistaController;
 
 
 // CONTROLADORES DEL SEBAS
@@ -67,23 +69,23 @@ use App\Http\Controllers\Controllers_Sebas\articulos_deportivos_inversionista;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
- Route::get('/prueba', function () {
-        return 'prueba 1234';
+ Route::get('/prueba2', function () {
+        return 'prueba CLIENte';
     });
 
     // Views_Gos--->
 
-//Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
-//Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
+Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
 
-//Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
-//Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
+Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
-//Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
-//Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
+Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
+Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
 
-//Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
-//Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
+Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 
 
 

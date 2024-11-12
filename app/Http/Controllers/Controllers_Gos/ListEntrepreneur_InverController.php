@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
 
-class ListEntrepreneur_UserController extends Controller
+class ListEntrepreneur_InverController extends Controller
 {
     public function index()
     {
