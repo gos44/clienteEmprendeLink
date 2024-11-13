@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
 
-class AcuedosYTerminosUserController extends Controller
+class MisEmpredimientosController extends Controller
 {
     public function index()
     {
@@ -16,6 +16,6 @@ class AcuedosYTerminosUserController extends Controller
         ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_gos/acuerdosyterminos', compact('connections'));
+        return view('Views_gos/ListaMisEmprendiientos', compact('connections'));
     }
 }

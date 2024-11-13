@@ -1,6 +1,6 @@
-@extends('layouts.app')
-@extends('layouts.Nav-Bar_Usuario')
-@extends('layouts.Footer_Usuario')<!DOCTYPE html>
+@extends('layouts.Footer_Home')
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,9 @@
 <body>
   <header>
     <div class="header-left">
-        <img src="link/16.png" alt="Emprende Link" width="300px">
+        <a href="{{ route('Home1.index') }}">
+        <img src="link/16.png" alt="Emprende Link" width="200px" >
+    </a>
     </div>
     <div class="header-right">
     <a href="acuerdosyterminos.html"><i class="fas fa-question-circle"></i> Ayuda</a>
@@ -45,10 +47,6 @@
             <button id="cerrarInicioSesionModal" style="color: rgb(0, 0, 0); border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Cerrar</button>
         </div>
     </div>
-
-    <!-- JavaScript para manejar los modales -->
-    
-
 </header>
 
 <aside class="sidebar">

@@ -1,4 +1,3 @@
-@extends('layouts.app')
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
@@ -14,7 +13,6 @@
 
 </head>
 <body>
-   
   <h2 class="section-title-1">Mis Emprendimientos Publicados</h2>
             <section>
               <div class="latest-posts">
@@ -29,7 +27,8 @@
                           <p class="description">Descubre una experiencia que va más allá de simplemente beber vino. En VINO EL ÉXTASIS, cada copa se convierte en un viaje que deleita todos tus sentidos. Más que una simple bebida, el vino es nuestra pasión, una forma de vida, y te invitamos a ser parte de este mundo fascinante.
 
                             Cada botella que ofrecemos ha sido seleccionada cuidadosamente para llevarte en un recorrido por las más exquisitas tierras vinícolas, donde la tradición y el arte de la viticultura se combinan en cada sorbo. Nuestros vinos no solo cuentan historias de siglos de dedicación, sino que también te transportan a un universo lleno de matices, desde los aromas afrutados hasta los sabores más complejos y refinados.</p>
-                          <a href="MI-EMPRENDIMIENTO.HTML" class="butn">Mas Informacion...</a>
+                          <a href="{{ route('Mi_Emprendimiento.index') }}" class="butn">Mas Informacion...</a>
+
                       </div>
                   </div>
                  
@@ -45,7 +44,7 @@
                         <h3>AREPA PURO MAIZ</h3>
                         <p class="quote">"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo pero sobre todo las arepas de maiz."</p>
                         <p class="description">AREPA PURO MAÍZ es una empresa dedicada a la elaboración de auténticas arepas 100% de maíz, conservando la tradición y el sabor casero. Nuestro objetivo es ofrecer productos frescos, naturales y libres de aditivos, respetando las raíces culturales y gastronómicas de América Latina. Nos especializamos en brindar una experiencia culinaria única, utilizando ingredientes de alta calidad y fomentando el consumo consciente de alimentos nutritivos y deliciosos. En AREPA PURO MAÍZ, cada arepa está hecha con dedicación y pasión por la tradición, garantizando una explosión de sabor en cada bocado</p>
-                        <a href="MI-EMPRENDIMIENTO2.HTML" class="butn">Mas Informacion...</a>
+                        <a href="{{ route('Mi_Emprendimiento_2.index') }}" class="butn">Mas Informacion...</a>
                     </div>
                 </div>
               </div>
@@ -79,7 +78,6 @@
                       </div>
                   </div>
                 </div>
-
         </section>
     
 </body>

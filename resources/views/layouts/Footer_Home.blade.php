@@ -11,8 +11,6 @@ footer {
     background-color: #000000;
     color: #fff;
     width: 100%;
-  
- 
 }
 
 .footer-content {
@@ -23,7 +21,10 @@ footer {
     justify-content: space-between;
     /* align-items: center; */
 }
+.footer-bottom p{
+    /* margin-left: 10% */
 
+}
 .footer-section {
     flex: 1;
     margin: 20px;
@@ -79,6 +80,7 @@ footer {
     list-style: none;
     padding: 0;
     margin-top: 1px;
+    margin-right: 6%
 }
 
 .example-2 .icon-content {
@@ -115,7 +117,7 @@ footer {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    color: whitesmoke;
+    color: rgb(0, 0, 0);
     transition: all 0.3s ease-in-out;
 }
 
@@ -148,7 +150,7 @@ footer {
 /* Specific social media colors */
 .example-2 .icon-content a[data-social="linkedin"] .filled,
 .example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
-    background-color: #0274b3;
+    background-color: #050505FF;
 }
 
 .example-2 .icon-content a[data-social="twitter"] .filled,
@@ -181,10 +183,6 @@ footer {
     margin-top: 7%;
 }
 
-
-
-
-
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .footer-content {
@@ -216,9 +214,9 @@ footer {
             <div class="footer-section links">
                 <h3>Legales</h3>
                 <ul>
-                    <li><a href="{{ route('sobreEmUser.index') }}">Sobre Emprende Link</a></li>
-                    <li><a href="{{ route('PoliticaUser.index') }}">Política de privacidad</a></li>
-                    <li><a href="{{ route('AcuerdosUser.index') }}">Acuerdos y términos</a></li>
+                    <li><a href="{{ route('sobreEmHome.index') }}">Sobre Emprende Link</a></li>
+                    <li><a href="{{ route('PoliticaHome.index') }}">Política de privacidad</a></li>
+                    <li><a href="{{ route('AcuerdosHome.index') }}">Acuerdos y términos</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">

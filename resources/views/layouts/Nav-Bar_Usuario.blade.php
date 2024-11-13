@@ -101,6 +101,13 @@
     </style>
 </head>
 <body>
+
+
+    <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
+{{-- 
+        <button onclick="window.location.href="{{ route('registrar_usuario_ingreso') }} class="modal-button">Usuario</button>
+        <button onclick="window.location.href={{ route('registrar_inversionista_ingreso') }}"class="modal-button">Inversionista</button> --}}
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
