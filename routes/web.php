@@ -66,7 +66,7 @@ Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->
 
 // Ruta para obtener lista de usurios
 
-Route::get('EntrepreneurLists', [EntrepreneurListController::class, 'index'])->name('EntrepreneurLists.index');
+Route::get('listaEmprendedores', [EntrepreneurListController::class, 'index'])->name('EntrepreneurLists.index');
 Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->name('EntrepreneurLists.show');
 
 // Ruta para obtener "Publish_Entrepreneurships"
