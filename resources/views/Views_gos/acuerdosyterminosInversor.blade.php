@@ -1,11 +1,14 @@
+@extends('layouts.app')
+@extends('layouts.Nav-Bar_Usuario')
+@extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cssgos/acuerdosyterminosInversor.css">
     <title>Emprende Link</title>
     <link rel="icon" href="img/logoCuadrado.png" type="image/png">
+    <link rel="stylesheet" href="{{ asset('css/acuerdosyterminosInversor.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -20,14 +23,6 @@
 
 <body>
   
-  <!-- Navbar container -->
-  <div id="navbar-container"></div>
-
-  <!-- Scripts -->
-  <script src="Scrips/navbarInversionista.js"></script>
-
-
-
 
     <div class="container">
       <div class="cont">
@@ -66,35 +61,5 @@
           <p>Si tienes alguna pregunta sobre estos términos, por favor contáctanos a través de emprendelink234@gmail.com.</p>
       </div>
   </div>
-  <div id="footer"></div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch("footerInversor.html")
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById("footer").innerHTML = data;
-        });
-    });
-  </script>
-    
-    <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            this.classList.toggle('active');
-            document.querySelector('.sidebar').classList.toggle('active');
-        });
-
-        document.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordionContent = button.nextElementSibling;
-                button.classList.toggle('active');
-
-                if (button.classList.contains('active')) {
-                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
-                } else {
-                    accordionContent.style.maxHeight = 0;
-                }
-            });
-        });
-    </script>
 </body>
 </html>
