@@ -1,4 +1,3 @@
-@extends('layouts.app')
 
 
 <!DOCTYPE html>
@@ -14,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-  
 
-    
+
+
     <div class="chat-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -254,7 +253,7 @@ function setupEventListeners() {
     document.getElementById('emojiBtn').addEventListener('click', toggleEmojiPicker);
     document.getElementById('searchInput').addEventListener('input', handleSearch);
     document.querySelector('.toggle-sidebar').addEventListener('click', toggleSidebar);
-    
+
     // Botones de acción
     document.getElementById('newContactBtn').addEventListener('click', showNewContactModal);
     document.getElementById('blockedListBtn').addEventListener('click', showBlockedModal);
@@ -286,14 +285,14 @@ function renderContacts() {
     const contactsList = document.getElementById('contactsList');
     const filteredContacts = state.contacts
         .filter(contact => !state.blockedContacts.has(contact.id))
-        .filter(contact => 
+        .filter(contact =>
             contact.name.toLowerCase().includes(state.searchTerm) ||
             contact.lastMessage.toLowerCase().includes(state.searchTerm)
         );
-    
+
     contactsList.innerHTML = filteredContacts
         .map(contact => `
-            <div class="contact-item ${state.currentChat === contact.id ? 'active' : ''}" 
+            <div class="contact-item ${state.currentChat === contact.id ? 'active' : ''}"
                  onclick="selectContact(${contact.id})">
                 <img src="${contact.avatar}" alt="${contact.name}" class="contact-avatar">
                 <div class="contact-info">
@@ -304,10 +303,10 @@ function renderContacts() {
                     <p class="contact-last-message">${contact.lastMessage}</p>
                 </div>
                 ${contact.isOnline ? '<span class="online-indicator"></span>' : ''}
-                ${contact.unreadCount > 0 ? 
+                ${contact.unreadCount > 0 ?
                     `<span class="unread-badge">${contact.unreadCount}</span>` : ''}
                 <div class="contact-options">
-                    <button onclick="blockContact(${contact.id}, event)" 
+                    <button onclick="blockContact(${contact.id}, event)"
                             class="action-button" title="Bloquear contacto">
                         <i class="fas fa-ban"></i>
                     </button>
@@ -352,9 +351,9 @@ function clearCurrentChat() {
 // Función mejorada para búsqueda de mensajes
 function searchMessages(searchTerm) {
     if (!state.currentChat || !searchTerm) return [];
-    
+
     const messages = state.messages[state.currentChat] || [];
-    return messages.filter(message => 
+    return messages.filter(message =>
         message.content.toLowerCase().includes(searchTerm.toLowerCase())
     );
 }
@@ -383,7 +382,7 @@ function setupSearchModal() {
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const chatContainer = document.querySelector('.chat-container');
-    
+
     sidebar.classList.toggle('active');
     chatContainer.classList.toggle('sidebar-active');
 }
@@ -391,22 +390,22 @@ function toggleSidebar() {
 // Actualizar los event listeners
 function setupEventListeners() {
     // Event listeners existentes...
-    
+
     // Añadir listener para borrar chat
     document.getElementById('clearChatBtn').addEventListener('click', clearCurrentChat);
-    
+
     // Mejorar el listener del toggle sidebar
     document.querySelector('.toggle-sidebar').addEventListener('click', toggleSidebar);
-    
+
     // Búsqueda de contactos
     document.getElementById('searchInput').addEventListener('input', handleSearch);
-    
+
     // Búsqueda de mensajes
     document.getElementById('searchChatBtn').addEventListener('click', () => {
         showModal('searchModal');
         setupSearchModal();
     });
-    
+
     // Cerrar modales al hacer clic fuera
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal')) {
@@ -421,10 +420,10 @@ function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const chatArea = document.querySelector('.chat-area');
     const chatContainer = document.querySelector('.chat-container');
-    
+
     sidebar.classList.toggle('show-sidebar');
     chatArea.classList.toggle('hide-chat');
-    
+
     // Actualizar aria-expanded para accesibilidad
     const toggleButton = document.querySelector('.toggle-sidebar');
     const isExpanded = sidebar.classList.contains('show-sidebar');
@@ -440,7 +439,7 @@ function addResponsiveStyles() {
                 position: relative;
                 width: 100%;
             }
-            
+
             .sidebar {
                 position: absolute;
                 left: -100%;
@@ -450,21 +449,21 @@ function addResponsiveStyles() {
                 transition: left 0.3s ease;
                 z-index: 1000;
             }
-            
+
             .sidebar.show-sidebar {
                 left: 0;
             }
-            
+
             .chat-area {
                 width: 100%;
                 transition: opacity 0.3s ease;
             }
-            
+
             .chat-area.hide-chat {
                 opacity: 0;
                 pointer-events: none;
             }
-            
+
             /* Asegurar que el botón de toggle siempre sea visible */
             .toggle-sidebar {
                 position: fixed;
@@ -477,14 +476,14 @@ function addResponsiveStyles() {
                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             }
         }
-        
+
         /* Estilos para pantallas más grandes */
         @media (min-width: 769px) {
             .sidebar {
                 position: relative;
                 left: 0;
             }
-            
+
             .toggle-sidebar {
                 display: none;
             }
@@ -500,7 +499,7 @@ function setupEventListeners() {
     if (toggleButton) {
         toggleButton.addEventListener('click', toggleSidebar);
     }
-    
+
     // Event listener para cerrar el sidebar al seleccionar un contacto en modo móvil
     document.querySelectorAll('.contact-item').forEach(contact => {
         contact.addEventListener('click', () => {
@@ -509,7 +508,7 @@ function setupEventListeners() {
             }
         });
     });
-    
+
     // Event listener para manejar cambios en el tamaño de la ventana
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
@@ -531,7 +530,7 @@ function selectContact(contactId) {
     renderContacts();
     renderMessages();
     updateChatHeader(contact);
-    
+
     // Si estamos en móvil, cerrar el sidebar después de seleccionar un contacto
     if (window.innerWidth <= 768) {
         const sidebar = document.querySelector('.sidebar');
@@ -548,7 +547,7 @@ function initializeChat() {
     loadMockMessages();
     setupEmojiPicker();
     renderContacts();
-    
+
     if (state.contacts.length > 0) {
         selectContact(state.contacts[0].id);
     }
@@ -566,7 +565,7 @@ function handleMessageInput(e) {
 function sendMessage() {
     const input = document.getElementById('messageInput');
     const content = input.value.trim();
-    
+
     if (!content || !state.currentChat) return;
 
     const newMessage = {
@@ -595,10 +594,10 @@ function addMessage(message) {
 
 function renderMessages() {
     if (!state.currentChat) return;
-    
+
     const container = document.getElementById('messagesContainer');
     const messages = state.messages[state.currentChat] || [];
-    
+
     container.innerHTML = messages.map(message => `
         <div class="message ${message.sent ? 'sent' : 'received'} animate__animated animate__fadeIn">
             <div class="message-content">
@@ -785,7 +784,7 @@ function loadMockMessages() {
 function setupEmojiPicker() {
     const commonEmojis = ['😊', '😂', '❤️', '👍', '👋', '🎉', '✨', '🔥', '😅', '🙌', '👏', '💪', '🤝', '👀', '💡', '⭐'];
     const picker = document.getElementById('emojiPicker');
-    picker.innerHTML = commonEmojis.map(emoji => 
+    picker.innerHTML = commonEmojis.map(emoji =>
         `<div class="emoji-item" onclick="insertEmoji('${emoji}')">${emoji}</div>`
     ).join('');
 }
@@ -850,7 +849,7 @@ function simulateResponse() {
 function sendMessage() {
     const input = document.getElementById('messageInput');
     const content = input.value.trim();
-    
+
     if (!content || !state.currentChat) return;
 
     const newMessage = {
@@ -877,7 +876,7 @@ function handleFileUpload(acceptType) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = acceptType;
-    
+
     input.onchange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -894,7 +893,7 @@ function handleFileUpload(acceptType) {
                 };
                 addMessage(message);
             };
-            
+
             if (file.type.startsWith('image/')) {
                 reader.readAsDataURL(file);
             } else {
@@ -902,7 +901,7 @@ function handleFileUpload(acceptType) {
             }
         }
     };
-    
+
     input.click();
 }
 
@@ -912,7 +911,7 @@ function initializeChat() {
     loadMockMessages();
     setupEmojiPicker();
     renderContacts();
-    
+
     // Seleccionar el primer contacto por defecto
     if (state.contacts.length > 0) {
         selectContact(state.contacts[0].id);
@@ -923,7 +922,7 @@ function initializeChat() {
 function setupEventListeners() {
     const messageInput = document.getElementById('messageInput');
     const sendBtn = document.getElementById('sendBtn');
-    
+
     // Event listener para enviar mensaje
     messageInput?.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -931,28 +930,28 @@ function setupEventListeners() {
             sendMessage();
         }
     });
-    
+
     sendBtn?.addEventListener('click', sendMessage);
-    
+
     // Event listeners para archivos y multimedia
     document.getElementById('fileBtn')?.addEventListener('click', () => handleFileUpload('*'));
     document.getElementById('imageBtn')?.addEventListener('click', () => handleFileUpload('image/*'));
     document.getElementById('audioBtn')?.addEventListener('click', () => handleFileUpload('audio/*'));
-    
+
     // Event listener para emojis
     document.getElementById('emojiBtn')?.addEventListener('click', toggleEmojiPicker);
-    
+
     // Event listener para cerrar emoji picker al hacer click fuera
     document.addEventListener('click', (e) => {
         const emojiPicker = document.getElementById('emojiPicker');
         const emojiBtn = document.getElementById('emojiBtn');
-        
+
         if (!emojiPicker?.contains(e.target) && !emojiBtn?.contains(e.target)) {
             emojiPicker.style.display = 'none';
         }
     });
 }
- 
+
 function handleSearch(e) {
     state.searchTerm = e.target.value.toLowerCase();
     renderContacts();
@@ -962,7 +961,7 @@ function handleSearch(e) {
 document.addEventListener('DOMContentLoaded', initializeChat);
 </script>
 
-    
+
 </body>
 </html>
 
