@@ -26,7 +26,7 @@
 
 
       <div class="flex-row">
-        <span class="span"><a href="cambiar_contraseña_inversionista.html" class="link">No e recibido ningun codigo</a></span>
+        <span class="span"><a href="{{ route('verificar_identidad_inversionista') }}" class="link">No e recibido ningun codigo</a></span>
       </div>
       <a href="{{ route('cambiar_contraseña_inversionista') }}" class="button-submit">Enviar</a>
 

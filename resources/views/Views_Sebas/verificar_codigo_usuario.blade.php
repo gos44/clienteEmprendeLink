@@ -27,7 +27,7 @@
 
 
       <div class="flex-row">
-        <span class="span"><a href="cambio_contraseña_usuario.html" class="link">No e recibido ningun codigo</a></span>
+        <span class="span"><a href="{{ route('verificar_identidad_usuario') }}" class="link">No e recibido ningun codigo</a></span>
       </div>
 
 
