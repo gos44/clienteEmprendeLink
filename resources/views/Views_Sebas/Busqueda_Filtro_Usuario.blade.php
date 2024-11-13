@@ -1,16 +1,23 @@
+@extends('layouts.Nav-Bar_Usuario')
+
+
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emprende Link</title>
+    <head>
 
-    <link rel="stylesheet" href="{{ asset('css/busqueda_filtro_usuario.css') }}">
-
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Emprende Link</title>
+        <link rel="icon" href="img/logoCuadrado.png" type="image/png">
+        <link rel="stylesheet" href="{{ asset('css/busqueda_filtro_usuario.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
 <body>
 
- 
+
 <div class="container-bar">
   <div class="sidebar-content">
       <div class="header-section">
@@ -23,7 +30,7 @@
       <h3>Explorar Todo</h3>
       <ul>
               <li><a href="busqueda_filtro.html"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
-              <li><a href="articulos deportivos.html"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
+              <li><a href="{{ route('emprendimientos_deportivos_usuario') }}"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
               <li><a href="articulos_hogar.html"><img src="images/deportes.png" alt="Artículos para el hogar">Emprendimientos sobre articulos de la casa hogar</a></li>
               <li><a href="articulos_electronicos.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
               <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Emprendimientos de indumentaria</a></li>
