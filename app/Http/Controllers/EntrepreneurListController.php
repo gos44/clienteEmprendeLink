@@ -13,6 +13,7 @@ class EntrepreneurListController extends Controller
         // Método privado para manejar llamadas HTTP repetitivas
         private function fetchDataFromApi($url)
         {
+
             $response = Http::get($url);
             return $response->json();
         }

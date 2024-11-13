@@ -1,0 +1,261 @@
+   /* Estilo para el body para que ocupe el 100% de la altura de la ventana */
+   body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor principal de reseñas */
+.review-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Caja de reseña */
+.review-box {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 25px;
+}
+
+/* Encabezado de la reseña */
+.review-header {
+    margin-bottom: 25px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+
+.review-info h2 {
+    font-size: 24px;
+    color: #1a1a1a;
+    margin: 0 0 10px 0;
+}
+
+.review-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.review-date {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Estrellas de calificación */
+.rating-container {
+    margin-top: 10px;
+  }
+  
+  .rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+  }
+  
+  .rating > label {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+  }
+  
+  .rating:not(:checked) > label:before {
+    content: '★';
+  }
+  
+  .rating > input:checked + label:hover,
+  .rating > input:checked + label:hover ~ label,
+  .rating > input:checked ~ label:hover,
+  .rating > input:checked ~ label:hover ~ label,
+  .rating > label:hover ~ input:checked ~ label {
+    color: #ffd700;
+  }
+  
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+    color: #ffed4a;
+  }
+  
+  .rating > input:checked ~ label {
+    color: #ffd700;
+  }
+
+/* Contenido de la reseña */
+.review-content {
+    margin: 25px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.review-subject h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.review-body {
+    color: #444;
+    line-height: 1.6;
+}
+
+.greeting {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.message-content p {
+    margin-bottom: 15px;
+}
+
+.message-footer {
+    margin-top: 30px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.signature {
+    color: #666;
+    font-style: italic;
+}
+
+/* Sección de comentarios */
+.comment-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.comment-box {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.commenter-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.comment-text {
+    color: #444;
+    line-height: 1.5;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Efectos hover */
+.review-box:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-box:hover {
+    background-color: #f0f2f5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .review-container {
+        padding: 15px;
+        margin: 20px 15px;
+    }
+
+    .company-info {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+    }
+
+    .review-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .comment-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .comment-header {
+        flex-direction: column;
+        align-items: center;
+    }
+}
