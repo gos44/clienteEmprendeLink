@@ -36,6 +36,23 @@ use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_UserController;
 use App\Http\Controllers\Controllers_Gos\PerfilUsuarioController;
 use App\Http\Controllers\Controllers_Gos\usaurioPerfil_inversionistaController;
 
+use App\Http\Controllers\Controllers_Gos\AcuedosYTerminosUserController;
+use App\Http\Controllers\Controllers_Gos\acuerdosyterminosHomeController;
+use App\Http\Controllers\Controllers_Gos\acuerdosyterminosInverController;
+use App\Http\Controllers\Controllers_Gos\politicayprivacidadController;
+use App\Http\Controllers\Controllers_Gos\politicayprivacidadHomeController;
+use App\Http\Controllers\Controllers_Gos\politicayprivacidadInverController;
+use App\Http\Controllers\Controllers_Gos\HomeController;
+use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkController;
+use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkHomeController;
+use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkInversorController;
+use App\Http\Controllers\Controllers_Gos\MisEmpredimientosController;
+
+
+
+
+
+
 
 // CONTROLADORES DEL SEBAS
 use App\Http\Controllers\Controllers_Sebas\Busqueda_Filtro_UsuarioController;
@@ -73,19 +90,6 @@ use App\Http\Controllers\Controllers_Sebas\articulos_deportivos_inversionista;
         return 'prueba CLIENte';
     });
 
-    // Views_Gos--->
-
-Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilInverEditar.index');
-
-Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
-Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
-
-Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
-Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaUsuarios.index');
-
-Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
-Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('listaUsuarios.index');
 
 
 
@@ -246,4 +250,37 @@ Route::get('contactanosInver', [Contactanos::class, 'ContactanosInver'])->name('
 Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('ContactanosHome');
 
 
+
+    // Views_Gos--->
+
+    Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
+
+
+Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
+Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+
+Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
+Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
+
+Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
+Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaInver.index');
+
+Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerInver.index');
+Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerUser.index');
+
+
+Route::get('AcuerdosUser', action: [AcuedosYTerminosUserController::class, 'index'])->name('AcuerdosUser.index');
+Route::get('AcuerdosHome', [acuerdosyterminosHomeController::class, 'index'])->name('AcuerdosHome.index');
+Route::get('AcuerdosInver', action: [acuerdosyterminosInverController::class, 'index'])->name('AcuerdosInver.index');
+
+Route::get('PoliticaUser', [politicayprivacidadController::class, 'index'])->name('PoliticaUser.index');
+Route::get('PoliticaHome', action: [politicayprivacidadHomeController::class, 'index'])->name('PoliticaHome.index');
+Route::get('PoliticaInver', [politicayprivacidadInverController::class, 'index'])->name('PoliticaInver.index');
+
+
+Route::get('sobreEmUser', [sobreEmpredelinkController::class, 'index'])->name('sobreEmUser.index');
+Route::get('sobreEmHome', action: [sobreEmpredelinkHomeController::class, 'index'])->name('sobreEmHome.index');
+Route::get('sobreEmInver', [sobreEmpredelinkInversorController::class, 'index'])->name('sobreEmInver.index');
+
+Route::get('MisEmpredimientos', [MisEmpredimientosController::class, 'index'])->name('MisEmpredimientos.index');
 

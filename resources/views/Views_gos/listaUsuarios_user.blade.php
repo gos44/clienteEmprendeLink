@@ -1,3 +1,5 @@
+@extends('layouts.Nav-Bar_Usuario')
+@extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,14 +18,6 @@
 </head>
 
 <body>
-
-    <div id="navbar-container"></div>
-
-    <!-- Scripts -->
-    <script src="http://localHost/clienteEmprendeLink/resources/js/navbarInversionista.js"></script>
-  
-  
-
 <main>
     <section class="notifications">
         <div class="search-bar">
@@ -58,12 +52,6 @@
         
     </section>
 </main>
-<div id="Footer"></div>
-
-<!-- Scripts -->
-<script src="http://localHost/clienteEmprendeLink/resources/js/navbarUsuario.js"></script>
-
-
 
 </body>
 </html>

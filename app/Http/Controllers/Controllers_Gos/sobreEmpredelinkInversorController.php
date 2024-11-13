@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
 
-class ssobreEmpredelinkInversorController extends Controller
+class sobreEmpredelinkInversorController extends Controller
 {
     public function index()
     {

@@ -1,9 +1,5 @@
-
-@extends('layouts.app')
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
