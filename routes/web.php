@@ -35,6 +35,7 @@ use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_InverController;
 use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_UserController;
 use App\Http\Controllers\Controllers_Gos\PerfilUsuarioController;
 use App\Http\Controllers\Controllers_Gos\usaurioPerfil_inversionistaController;
+use App\Http\Controllers\Controllers_Gos\usaurioPerfil_usuarioController;
 
 use App\Http\Controllers\Controllers_Gos\AcuedosYTerminosUserController;
 use App\Http\Controllers\Controllers_Gos\acuerdosyterminosHomeController;
@@ -266,7 +267,7 @@ Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->
 Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaInver.index');
 
 Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerInver.index');
-Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerUser.index');
+Route::get('VerUser', [usaurioPerfil_usuarioController::class, 'index'])->name('VerUser.index');
 
 
 Route::get('AcuerdosUser', action: [AcuedosYTerminosUserController::class, 'index'])->name('AcuerdosUser.index');
