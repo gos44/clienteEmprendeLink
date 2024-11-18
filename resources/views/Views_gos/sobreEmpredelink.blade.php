@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/SobreEmpredelink.css') }}">
 
     <title>Emprende Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
