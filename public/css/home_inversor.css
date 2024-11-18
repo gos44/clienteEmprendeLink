@@ -11,8 +11,14 @@ body {
 }
 html, body {
     overflow-x: hidden;
-}
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px; /* Ajusta según la altura de tu navbar */
 
+}
 
 .btn a{
     text-decoration: none;
