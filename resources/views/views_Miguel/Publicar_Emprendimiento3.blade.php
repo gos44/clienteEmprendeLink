@@ -47,7 +47,7 @@
           <div class="modal-content">
               <span class="close">&times;</span>
               <p>¡Emprendimiento Publicado!</p>
-              <a href="{{ route('Publicar_Emprendimiento3') }}" class="btn-aceptar">Aceptar</a>
+              <a href="{{ route('MisEmpredimientos.index') }}" class="btn-aceptar">Aceptar</a>
           </div>
       </div>
     </form>
