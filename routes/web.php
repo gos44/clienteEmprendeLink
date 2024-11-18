@@ -257,7 +257,7 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 
     // Views_Gos--->
 
-    Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
+Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
 
 Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');

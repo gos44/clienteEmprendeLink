@@ -60,14 +60,19 @@
         </div>
 
         <div class="profile-actions">
-            <button class="btn-primary"  href="{{ route('profile.update') }}">
+
+        <a  href="{{ route('profile.update') }}">
+            <button class="btn-primary" >
                 Editar perfil
             </button>
-            <button class="btn-outline"  href="{{ route('Home1.index') }}">
+        </a>
+        <a href="{{ route('Home1.index') }}">
+            <button class="btn-outline"  >
                 Cerrar Sesión
             </button>
+        </a>
         </div>
     </main>
- 
+
 </body>
 </html>

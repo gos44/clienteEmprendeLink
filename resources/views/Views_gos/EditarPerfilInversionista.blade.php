@@ -1,5 +1,5 @@
-@extends('layouts.Nav-Bar_Usuario')
-@extends('layouts.Footer_Usuario')
+@extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -89,9 +89,11 @@ EditarPerfilUsuario.blade.php
     </div>
 
     <div class="profile-actions">
-      <button type="submit" class="btn-primary">Guardar cambios</button>
-      <a href="perfilInversor.html"><button type="button" class="btn-outline">Cancelar</button></a> 
+      <a href="{{ route('perfilInver.index') }}"><button type="submit" class="btn-primary">Guardar cambios</button></a>
+      <a href="{{ route('perfilInver.index') }}"><button type="button" class="btn-outline">Cancelar</button></a> 
     </div>  
+
+
 </form>
 
 <!-- Modal para cambiar foto -->
