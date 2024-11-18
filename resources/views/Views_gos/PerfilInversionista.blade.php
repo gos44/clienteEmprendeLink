@@ -1,16 +1,11 @@
-
-@extends('layouts.app')
-@extends('layouts.Nav-Bar_Usuario')
-@extends('layouts.Footer_Usuario')
-
-
+@extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de inversor - Emprende Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
 
     <link rel="stylesheet" href="{{ asset('css/perfilInversionista.css') }}">
@@ -75,14 +70,18 @@
     </div>
 
     <div class="profile-actions">
-        <button class="btn-primary" onclick="window.location.href='perfilInversorEditarPerfil.html'">
+
+
+        <a href="{{ route('profile.update') }}">
+        <button class="btn-primary" >
             Editar perfil
-        </button>
-        <button class="btn-outline" onclick="window.location.href='index.html'">
+        </button> </a>
+         <a href="{{ route('Home1.index') }}">
+        <button class="btn-outline"  >
             Cerrar Sesión
         </button>
+    </a>
     </div>
-</main>
-   
+</main> 
 </body>
 </html>

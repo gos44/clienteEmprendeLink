@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Registro_usuario_ingreso extends Controller
+class registro_usuario_ingreso extends Controller
 {
     public function index()
     {

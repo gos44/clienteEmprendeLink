@@ -1,0 +1,259 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url(img/fondo.png);
+    background-size: 100% 100%;
+
+}
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.barra {
+    height: 35px; 
+    margin-right: 10px;
+    margin-left: 8px;
+    z-index: 3;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.header-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.header-right  {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+    z-index: 4;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+
+/* Linea 1 2 3 4 */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    margin: 20px auto;
+}
+.page {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #090909;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.page.active {
+    background-color: #000;
+    color: white;
+}
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #000;
+    max-width: 50px;
+}
+
+/* fin Linea 1 2 3 4 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+h1, h2 {
+    text-align: center;
+    color: #000000;
+}
+.form-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.form-section {
+    flex: 1 1 100%;
+}
+.form-group {
+    margin-bottom: 1.5em;
+}
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #202020;
+}
+input[type="text"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+.btn-publicar {
+    display: block;
+    width: 200px;
+    margin: 2em auto 0;
+    padding: 1em;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.btn-publicar:hover {
+    background-color: #333;
+}
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+.page {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+.page.active {
+    background-color: #000;
+    color: #fff;
+}
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #ddd;
+    max-width: 50px;
+}
+/* parte estilo del publiado  */
+/* Estilo del modal */
+  /* Estilo del modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; /* Asegura que el modal ocupe toda la pantalla */
+    height: 100%; /* Ocupar toda la altura */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 100px; /* Ancho reducido */
+    max-width: 20%; /* Limita el ancho máximo al 90% de la pantalla */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+
+.modal-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.modal-content a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #131313;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    width: 100px; /* Ancho fijo para el botón */
+    text-align: center; /* Alinea el texto dentro del botón */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+}
+
+.modal-content a:hover {
+    background-color: #333;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+/* fin de js */
+ul {
+    list-style: none;
+  }
+
+ 

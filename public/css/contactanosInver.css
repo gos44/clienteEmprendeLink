@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+/* Estilos responsive para el header */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .nav-item.bordered {
+        border: none;
+        border-radius: 0;
+        padding: 5px 0;
+    }
+
+    .Inversor {
+        order: -1;
+    }
+
+    .menu-toggle,
+    .profile-pic {
+        display: none;
+    }
+}
+
+/* Restaurar estilos para pantallas grandes */
+@media screen and (min-width: 769px) {
+    nav {
+        flex-direction: row;
+    }
+
+    .nav-item {
+        width: auto;
+    }
+
+    .menu-toggle,
+    .profile-pic {
+        display: block;
+    }
+}
+
+
+
+main { /*maneja el tamaño y ancho del texto del centro */
+    width: 90%;
+    margin: 60px auto; 
+    position: relative;
+    z-index: 100;
+}
+
+/* .notifications, .contact { coloca el fondo blanco al link
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+} */
+
+.notifications h2, .contact h2 { /*maneja el espacio entre contactanos y el resto del texto */
+    margin-bottom: 20px;
+}
+.contact h2{
+    text-align: center;
+}
+
+.notification, .accordion-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification p {
+    margin: 0;
+}
+
+.accordion-button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: background-color 0.3s;
+    position: relative;  /* Asegura que el pseudo-elemento esté posicionado correctamente */
+}
+
+.accordion-button.active, .accordion-button:hover {
+    background-color: #e1e1e1;
+}
+
+ .accordion-content {/*hace que se las fechas funcionen  */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 10px;
+}
+
+.accordion-content p {
+    margin: 10px 0;
+}
+
+/*todo la parte de abajo */

@@ -1,4 +1,3 @@
-@extends('layouts.app')
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 
@@ -11,12 +10,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Inversionista - Emprende Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('css/perfilEditarInversionista.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -91,9 +88,10 @@
     </div>
 
     <div class="profile-actions">
-      <button type="submit" class="btn-primary">Guardar cambios</button>
-      <a href="perfilInversor.html"><button type="button" class="btn-outline">Cancelar</button></a> 
-    </div>  
+    <a href="{{ route('perfilUser.index') }}"> <button type="submit" class="btn-primary">Guardar cambios</button></a>
+    <a href="{{ route('perfilUser.index') }}"><button type="button" class="btn-outline">Cancelar</button></a> 
+
+    </div>
 </form>
 
 <!-- Modal para cambiar foto -->

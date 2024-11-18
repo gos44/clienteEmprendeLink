@@ -1,16 +1,18 @@
+@extends('layouts.Nav-Bar_Usuario')
+
+
 <!DOCTYPE html>
 <html lang="es">
-    <head>
 
+
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Emprende Link</title>
-        <link rel="icon" href="img/logoCuadrado.png" type="image/png">
+        <title>Emprende Link buscar emprendimientos</title>
         <link rel="stylesheet" href="{{ asset('css/busqueda_filtro_usuario.css') }}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </head>
 <body>
 
@@ -27,7 +29,7 @@
       <h3>Explorar Todo</h3>
       <ul>
               <li><a href="busqueda_filtro.html"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
-              <li><a href="articulos deportivos.html"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
+              <li><a href="{{ route('emprendimientos_deportivos_usuario') }}"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
               <li><a href="articulos_hogar.html"><img src="images/deportes.png" alt="Artículos para el hogar">Emprendimientos sobre articulos de la casa hogar</a></li>
               <li><a href="articulos_electronicos.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
               <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Emprendimientos de indumentaria</a></li>
@@ -51,7 +53,7 @@
                     <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>  VINO EL EXTASIS</h3>
                     <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-1.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -60,7 +62,7 @@
                     <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>AREPA PURO MAIZ</h3>
                     <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-2-USUARIO.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_usuario_2.index') }}">Visitar</a></button>
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -69,7 +71,7 @@
                     <img src="images/carne.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>  CARNES LA BUENA VACA</h3>
                     <p>"Somos un emprendimiento enfocado en el procesamiento de carnes rojas."</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-1.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -78,7 +80,7 @@
                     <img src="images/restaurante.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>RESTAURANTE DON MIGUEL</h3>
                     <p>"Restaurante familiar enfocado en darle la mayor atención al cliente.</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-1.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -87,7 +89,7 @@
                     <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>  VINO EL EXTASIS</h3>
                     <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-1.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
                 </div>
                 </div>
                 <div class="col-md-6">
@@ -96,7 +98,7 @@
                     <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
                     <h3>AREPA PURO MAIZ</h3>
                     <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                    <button><a href="VISITAR-EMPRENDIMIENTO-2-USUARIO.HTML">Visitar</a></button>
+                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
                 </div>
 
                 </div>

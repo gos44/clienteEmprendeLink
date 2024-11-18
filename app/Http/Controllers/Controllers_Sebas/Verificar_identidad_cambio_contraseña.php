@@ -61,7 +61,7 @@ class Verificar_identidad_cambio_contraseña extends Controller
     // Método para mostrar la vista de cambio de contraseña
     public function index()
     {
-        return view('Views_Sebas.Verificar_identidad');
+        return view('Views_Sebas.Verificar_identidad_usuario');
     }
 
     // Método para procesar la solicitud de verificación (correo o teléfono)
@@ -143,7 +143,7 @@ class Verificar_identidad_cambio_contraseña extends Controller
     // Método para mostrar el formulario de cambio de contraseña
     public function showChangePasswordForm()
     {
-        return view('Views_Sebas.Verificar_identidad');
+        return view('Views_Sebas.Verificar_identidad_usuario');
     }
 
     // Método para procesar el cambio de contraseña

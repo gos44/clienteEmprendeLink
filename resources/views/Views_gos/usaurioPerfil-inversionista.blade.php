@@ -1,20 +1,17 @@
+@extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario - Emprende Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
-    <link rel="stylesheet" href="http://localHost/clienteEmprendeLink/resources/css/usurioPerfil.css">
+    <link rel="stylesheet" href="{{ asset('css/usurioPerfil.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Navbar -->
-    <div id="navbar-container"></div>
-
-    <script src="http://localHost/clienteEmprendeLink/resources/js/navbarInversionista.js"></script>
   
     
     <div class="form-container">
@@ -57,11 +54,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <div id="Footer"></div>
-
-<script src="http://localHost/clienteEmprendeLink/resources/js/navbarUsuario.js"></script>
 
 </body>
 </html>

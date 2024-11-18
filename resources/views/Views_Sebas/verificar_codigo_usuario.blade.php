@@ -27,11 +27,15 @@
 
 
       <div class="flex-row">
-        <span class="span"><a href="cambio_contraseña_usuario.html" class="link">No e recibido ningun codigo</a></span>
+        <span class="span"><a href="{{ route('verificar_identidad_usuario') }}" class="link">No e recibido ningun codigo</a></span>
       </div>
-      <a href="cambio_exitoso.html" class="button-submit">Enviar</a>
 
-      <p class="p">¿Ya tienes una cuenta? <a href="iniciosesion1_usuario.html" class="span">Iniciar sesión</a></p>
+
+
+
+      <a href="{{ route('cambiar_contraseña_usuario') }}" class="button-submit">Enviar</a>
+
+      <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesión</a></p>
     </form>
 </body>
 </html>

@@ -48,8 +48,8 @@
         <div class="flex-row">
             <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
         </div>
-        <a href="inicio_sesion_inver.html" class="button-submit">Registrarse</a>
-        <p class="p">¿Ya tienes una cuenta? <a href="iniciosesion1_usuario.html" class="span">Iniciar sesion</a></p>
+        <a href="{{ route('iniciar_sesion_usuario') }}" class="button-submit">Registrarse</a>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesion</a></p>
 
 
     </script>

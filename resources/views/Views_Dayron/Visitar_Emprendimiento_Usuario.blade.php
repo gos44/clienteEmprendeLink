@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 
@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende Link - Mercado de Vinos</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="CSS/MI-EMPRENDIMIENTO.CSS">
     <link rel="stylesheet" href="{{ asset('css/Mi_Emprendimiento.css') }}">

@@ -69,8 +69,6 @@
             }
         });
     </script>
-
-
             <label>Telefono</label>
         </div>
         <div class="inputForm">
@@ -86,9 +84,9 @@
 
             <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
         </div>
-        <a href="registro_usuario_ingreso.html" class="button-submit">Registrarse</a>
+        <a href="{{ route('registrar_usuario_ingreso') }}" class="button-submit">Registrarse</a>
 
-        <p class="p">¿Ya tienes una cuenta? <a href="iniciosesion1_usuario.html" class="span">Iniciar sesion</a></p>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesion</a></p>
 
 
 

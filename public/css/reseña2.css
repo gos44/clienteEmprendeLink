@@ -1,0 +1,257 @@
+/* Estilo para el body para que ocupe el 100% de la altura de la ventana */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+
+
+
+
+
+
+
+.reviews-wrapper {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 200px);
+}
+
+.review-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: transparent;
+  box-shadow: none;
+}
+
+.reviews-title {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Tarjeta de reseña */
+.review-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Encabezado de la reseña */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.company-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
+  object-fit: cover;
+  margin-right: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header-text h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.review-metadata {
+  display: flex;
+  align-items: end;
+ 
+}
+
+.timestamp {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.rating-container {
+  margin-top: 10px;
+}
+
+.rating {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.rating > label {
+  font-size: 1.5rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #ffd700;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ffed4a;
+}
+
+.rating > input:checked ~ label {
+  color: #ffd700;
+}
+
+.status-badge {
+  background-color: #e5e7eb;
+  color: #4b5563;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Contenido de la reseña */
+.review-content {
+  color: #374151;
+  line-height: 1.6;
+}
+
+.subject h3 {
+  color: #111827;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.message-content {
+  margin-bottom: 2rem;
+}
+
+.message-content p {
+  margin-bottom: 1rem;
+}
+
+.signature {
+  margin-top: 2rem;
+  color: #4b5563;
+}
+
+.sender-info {
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Botones de acción */
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.action-button.reply {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.action-button.reply:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-1px);
+}
+
+.span.button-icon {
+  font-size: 1.25rem;
+  background-color: #000000;
+  color: #000000;
+ 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reviews-wrapper {
+      padding: 1rem;
+  }
+
+  .review-card {
+      padding: 1.5rem;
+  }
+
+  .review-header {
+      flex-direction: column;
+      gap: 1rem;
+  }
+
+  .company-info {
+      width: 100%;
+  }
+
+  .company-logo {
+      width: 60px;
+      height: 60px;
+  }
+
+  .status-badge {
+      align-self: flex-start;
+  }
+}

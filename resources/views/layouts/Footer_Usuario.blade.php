@@ -11,8 +11,10 @@ footer {
     background-color: #000000;
     color: #fff;
     width: 100%;
-  
+   justify-content: flex-end;
  
+  
+
 }
 
 .footer-content {
@@ -216,9 +218,9 @@ footer {
             <div class="footer-section links">
                 <h3>Legales</h3>
                 <ul>
-                    <li><a href="sobreEmpredelink.html">Sobre Emprende Link</a></li>
-                    <li><a href="politicayprivacidad.html">Política de privacidad</a></li>
-                    <li><a href="acuerdosyterminos.html">Acuerdos y términos</a></li>
+                    <li><a href="{{ route('sobreEmUser.index') }}">Sobre Emprende Link</a></li>
+                    <li><a href="{{ route('PoliticaUser.index') }}">Política de privacidad</a></li>
+                    <li><a href="{{ route('AcuerdosUser.index') }}">Acuerdos y términos</a></li>
                 </ul>
             </div>
             <div class="footer-section contact">

@@ -5,6 +5,17 @@ body {
 }
 
 
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
 .container {
     z-index: 1;
     display: flex;
@@ -18,6 +29,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     padding: 20px;
+    margin-top: 6%;
 }
 
 .cont {

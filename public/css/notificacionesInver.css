@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 100px; /* Ajusta según la altura de tu navbar */
+
+}
+
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+
+/* Estilos responsive para el header */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .nav-item.bordered {
+        border: none;
+        border-radius: 0;
+        padding: 5px 0;
+    }
+
+    .Inversor {
+        order: -1;
+    }
+
+    .menu-toggle,
+    .profile-pic {
+        display: none;
+    }
+}
+
+/* Restaurar estilos para pantallas grandes */
+@media screen and (min-width: 769px) {
+    nav {
+        flex-direction: row;
+    }
+
+    .nav-item {
+        width: auto;
+    }
+
+    .menu-toggle,
+    .profile-pic {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+main {
+    width: 90%;
+    margin: 20px auto;
+    
+}
+
+.notifications {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    
+
+}
+
+.notifications h2 {
+    
+    margin-bottom: 40px;
+    
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.notification img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification a{
+  color: #000;
+}
+
+.notification-content h3 {
+    margin: 0;
+}
+
+.notification-content .time {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #555;
+}

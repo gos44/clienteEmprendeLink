@@ -1,3 +1,9 @@
+
+@extends('layouts.Nav-Bar_Inversionista')
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +11,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/busqueda_filtro_usuario.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -34,8 +39,8 @@
         <div class="divider"></div>
         <h3>Explorar Todo</h3>
           <ul>
-            <li><a href="busqueda_filtro_inver.html"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
-              <li><a href="articulos_deportivosinver.html"><img src="images/deportes.png" alt="Artículos deportivos">Empredimietos deportivos</a></li>
+            <li><a href="{{ asset('Buscar_Emprendimientos_inversionista') }}"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
+              <li><a href="{{ asset('emprendimientos_deportivos_inversionista') }}"><img src="images/deportes.png" alt="Artículos deportivos">Empredimietos deportivos</a></li>
               <li><a href="articulos_hogarinver.html"><img src="images/deportes.png" alt="Artículos para el hogar">Emprendimientos sobre articulos de la casa hogar</a></li>
               <li><a href="articulos_electronicosinver.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
               <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Empredimientos de indumentaria</a></li>
@@ -49,7 +54,6 @@
               <li><a href="#"><img src="images/vehiculos.png" alt="Vehículos">Empredimientos sobre Vehículos</a></li>
           </ul>
       </div>
-
       <main class="main-content">
         <h2>RESULTADOS DE BUSQUEDA...</h2>
         <div class="row">
@@ -59,7 +63,7 @@
                 <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>  VINO EL EXTASIS</h3>
                 <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-inversionista.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor.index') }}">Visitar</a></button>
             </div>
             </div>
             <div class="col-md-6">
@@ -68,7 +72,7 @@
                 <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>AREPA PURO MAIZ</h3>
                 <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-2-INVERSOR.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor_2.index') }}">Visitar</a></button>
             </div>
             </div>
             <div class="col-md-6">
@@ -77,7 +81,7 @@
                 <img src="images/carne.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>  CARNES LA BUENA VACA</h3>
                 <p>"Somos un emprendimiento enfocado en el procesamiento de carnes rojas."</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-inversionista.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor_2.index') }}">Visitar</a></button>
             </div>
             </div>
             <div class="col-md-6">
@@ -86,7 +90,7 @@
                 <img src="images/restaurante.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>RESTAURANTE DON MIGUEL</h3>
                 <p>"Restaurante familiar enfocado en darle la mayor atención al cliente.</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-inversionista.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor_2.index') }}">Visitar</a></button>
             </div>
             </div>
             <div class="col-md-6">
@@ -95,7 +99,7 @@
                 <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>  VINO EL EXTASIS</h3>
                 <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-inversionista.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor_2.index') }}">Visitar</a></button>
             </div>
             </div>
             <div class="col-md-6">
@@ -104,8 +108,21 @@
                 <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
                 <h3>AREPA PURO MAIZ</h3>
                 <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                <button><a href="VISITAR-EMPRENDIMIENTO-2-INVERSOR.HTML">Visitar</a></button>
+                <button><a href="{{ route('Visitar_Emprendimiento_Inversor_2.index') }}">Visitar</a></button>
             </div>
+
+            </div>
+            <div class="pagination">
+              <button class="page-btn" disabled>&laquo;</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">&raquo;</button>
+          </div>
+        </div>
+    </main>
+</div>
+
 
             </div>
             <div class="pagination">

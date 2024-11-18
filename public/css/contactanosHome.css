@@ -1,0 +1,356 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px; /* Ajusta según la altura de tu navbar */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle img {
+    font-size: 24px;
+    cursor: pointer;
+    
+}
+
+.barra {
+    height: 35px; 
+    margin-right: 10px;
+    margin-left: 8px;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+.logo img {
+    height: 80px;
+}
+.header-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.header-right a i {
+    margin-right: 5px;
+}
+.header-right a img {
+    margin-right: 5px;
+    width: 12px;
+}
+
+
+.sidebar {
+    position: fixed;/*maneja el menu de barras */
+    left: -300px; /* maneja la salida de el menu de barras*/
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    transition: left 0.3s ease;
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar .profile {
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar .profile img {/*maneja la imagen del menu */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {/* maneja el espacio de las opciones del menu, y color */
+    padding: 15px 20px;
+    border-bottom: 2px solid #444;
+}
+
+.sidebar ul li a { /* maneja el color de las letras del menu */
+    color: #fff;
+    text-decoration: none;
+}
+
+main { /*maneja el tamaño y ancho del texto del centro */
+    width: 90%;
+    margin: 60px auto; 
+    position: relative;
+    z-index: 100;
+}
+
+/* .notifications, .contact { coloca el fondo blanco al link
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+} */
+
+.notifications h2, .contact h2 { /*maneja el espacio entre contactanos y el resto del texto */
+    margin-bottom: 20px;
+}
+
+.notification, .accordion-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification p {
+    margin: 0;
+}
+
+.accordion-button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    transition: background-color 0.3s;
+    position: relative;  /* Asegura que el pseudo-elemento esté posicionado correctamente */
+}
+
+.accordion-button.active, .accordion-button:hover {
+    background-color: #e1e1e1;
+}
+
+ .accordion-content {/*hace que se las fechas funcionen  */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 10px;
+}
+
+.accordion-content p {
+    margin: 10px 0;
+}
+
+/*todo la parte de abajo */
+.footer-content a{
+    color: #bbb;
+  }
+
+footer {/*coloca el fondo negro de abajo */
+    background-color: #000000;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content { /*hace q se alinien en columnas y no en filas */
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {/*aumenta el tamaño de la parte negra de abajo*/
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-section h3 {
+    border-bottom: 1px solid #555;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #bbb;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+
+}
+
+ul {
+    list-style: none;
+  }
+  
+  .example-2 {
+    display: flex;
+   justify-content: start;
+   margin-right: 100px;
+   align-items: start;
+  }
+  .example-2 .icon-content {
+    margin: 0 10px;
+    position: relative;
+  }
+  .example-2 .icon-content .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  .example-2 .icon-content:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -50px;
+  }
+  .example-2 .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #4d4d4d;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+  }
+  .example-2 .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+  }
+  .example-2 .icon-content a svg {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+  }
+  .example-2 .icon-content a:hover {
+    color: white;
+  }
+  .example-2 .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+    transition: all 0.3s ease-in-out;
+  }
+  .example-2 .icon-content a:hover .filled {
+    height: 100%;
+  }
+  
+  .example-2 .icon-content a[data-social="linkedin"] .filled,
+  .example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+    background-color: #0274b3;
+  }
+  
+  .example-2 .icon-content a[data-social="github"] .filled,
+  .example-2 .icon-content a[data-social="github"] ~ .tooltip {
+    background-color: #24262a;
+  }
+  .example-2 .icon-content a[data-social="instagram"] .filled,
+  .example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+    background: linear-gradient(
+      45deg,
+      #405de6,
+      #5b51db,
+      #b33ab4,
+      #c135b4,
+      #e1306c,
+      #fd1f1f
+    );
+  }
+  .example-2 .icon-content a[data-social="youtube"] .filled,
+  .example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+    background-color: #ff0000;
+  }
+/*
+.footer-content .about p {
+    font-size: 14px; /*maneja el tamñano de la letra emprende link de la parte de abajo 
+} */
+
+
+
+
+
+.accordion-button::after {
+    content: '\25bc';  /* Triángulo hacia abajo */
+    font-size: 12px;
+    position: absolute;
+    right: 20px;  /* Ajusta la posición de la flecha según sea necesario */
+    transition: transform 0.3s ease;
+}
+
+.accordion-button.active::after {
+    transform: rotate(180deg);  /* Rota la flecha hacia arriba */
+}
+
+.accordion-button.active, .accordion-button:hover {
+    background-color: #e1e1e1;
+}
+
+
+
+
+.menu-toggle {
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    font-size: 24px;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.menu-toggle.active span {
+    transform: rotate(180deg); /* Rota la flecha hacia arriba */
+}

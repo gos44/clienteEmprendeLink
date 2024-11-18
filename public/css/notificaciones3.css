@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    
+}
+body {
+    justify-content: center;
+
+    padding-top: 90px; /* Ajusta según la altura de tu navbar */
+
+}
+
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 150px;
+
+    position: relative;
+}
+
+.message {/*coloca el fondo del centro o recuadro */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sender-logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.sender-info strong {
+    display: block;
+    font-size: 18px;
+}
+
+.sender-info span {
+    color: #888;
+    font-size: 14px;
+}
+
+.message-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.message-content h3 {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.message-content ul {
+    list-style: none;
+    margin-left: 20px;
+}
+
+.message-content ul li {
+    margin-bottom: 10px;
+}
+
+
+
+.message-actions { /*coloca eliminar a la derecha */
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.message-actions .delete-btn, .message-actions .reply-btn { /*acomoda los botones eliminar */
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+
+
+.notification {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notification button {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    
+    justify-content: center;
+}
+
+
+ul {
+list-style: none;
+}
+
+
+.ultimo{
+  width: 85%;
+  height: 60px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+.imagen-izquierda {
+  width: 8%;
+  height: 80%;
+float: left; /* Alinea la imagen a la izquierda */
+margin-right: 10px; /* Añade un margen a la derecha para separar la imagen del contenido */
+}

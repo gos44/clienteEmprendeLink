@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambio Contraseña Usuario</title>
-    
+
     <link rel="stylesheet" href="{{ asset('css/verificar_codigo_usuario.css') }}">
 
 
@@ -26,11 +26,11 @@
 
 
       <div class="flex-row">
-        <span class="span"><a href="cambiar_contraseña_inversionista.html" class="link">No e recibido ningun codigo</a></span>
+        <span class="span"><a href="{{ route('verificar_identidad_inversionista') }}" class="link">No e recibido ningun codigo</a></span>
       </div>
-      <a href="cambio_exitoso_inversionista.html" class="button-submit">Enviar</a>
+      <a href="{{ route('cambiar_contraseña_inversionista') }}" class="button-submit">Enviar</a>
 
-      <p class="p">¿Ya tienes una cuenta? <a href="inicio_sesion_inver.html" class="span">Iniciar sesión</a></p>
+      <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_inversionista') }}" class="span">Iniciar sesión</a></p>
     </form>
 </body>
 </html>

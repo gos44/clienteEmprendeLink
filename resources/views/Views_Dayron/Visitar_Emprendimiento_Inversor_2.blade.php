@@ -1,5 +1,5 @@
-
-@extends('layouts.app')
+@extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 
 
 <!DOCTYPE html>
@@ -8,13 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende Link - Mercado de Vinos</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('css/Mi_Emprendimiento.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    
+
 
 </head>
 
@@ -51,8 +50,8 @@
                 <p><i class="fas fa-phone"></i> 320-898-7646</p>
                 <p><i class="fas fa-city"></i> Popayán</p>
             </div>
-        </div>  
-    </section>  
+        </div>
+    </section>
 
       <div class="content">
           <section class="products">
@@ -89,16 +88,16 @@
           <section class="description">
             <h3>Descripción</h3>
             <p><strong>AREPA PURO MAÍZ</strong> es una empresa apasionada por la elaboración de auténticas arepas 100% de maíz, que se dedica a preservar la tradición y el sabor casero de este emblemático alimento. En nuestro compromiso con la calidad y la autenticidad, nos enfocamos en ofrecer productos frescos y naturales, sin aditivos ni conservantes, asegurando así una experiencia culinaria que respeta y celebra las raíces culturales y gastronómicas de América Latina.</p>
-  
+
   <p>Nuestra misión es proporcionar una experiencia gastronómica única, caracterizada por la excelencia de nuestros ingredientes y la dedicación a la preparación. Cada arepa que producimos es el resultado de un meticuloso proceso que garantiza no solo un sabor inigualable, sino también una alta calidad nutricional. En AREPA PURO MAÍZ, nos especializamos en fomentar el consumo consciente de alimentos que sean tanto nutritivos como deliciosos, contribuyendo a un estilo de vida saludable.</p>
-  
+
   <p>Cada bocado de nuestras arepas representa el cuidado y la pasión que ponemos en cada etapa de su elaboración, desde la selección del maíz hasta el momento en que llega a tu mesa. Queremos que cada experiencia con AREPA PURO MAÍZ sea una celebración del sabor, la tradición y la autenticidad, ofreciendo una explosión de sabor que te transportará a las raíces de una rica herencia culinaria.</p>
-  
+
           </section>
       </div>
   </div>
 </main>
 
-    
+
 </body>
 </html>

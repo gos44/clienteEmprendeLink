@@ -1,0 +1,351 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    background-image: url(img/fondo.png);
+    background-size: 100% 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+
+
+}
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.barra {
+    height: 35px; 
+    margin-right: 10px;
+    margin-left: 8px;
+    z-index: 3;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.header-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.header-right  {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+    z-index: 4;
+}
+
+.main-content {
+    padding: 20px;
+}
+.sidebar {
+    position: fixed;
+    left: -250px; /* Inicialmente oculto fuera de la pantalla */
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #000000;
+    color: #fff;
+    transition: left 0.3s ease;
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    left: 0; /* Muestra el menú cuando tiene la clase 'active' */
+}
+
+.sidebar .profile-1 {
+    padding: 20px;
+    text-align: center;
+
+}
+
+.sidebar .profile-1 img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+    border-bottom: 2px solid #444;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+ul {
+    list-style: none;
+  }
+/* Linea 1 2 3 4 */
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    margin: 20px auto;
+}
+.page {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 18px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.page.active {
+    background-color: #000;
+    color: white;
+}
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #000;
+    max-width: 50px;
+}
+/* fin Linea 1 2 3 4 */
+
+
+.container {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.form-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: #202020;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* ... (resto del CSS sin cambios) ... */
+
+.image-preview {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto; /* Cambiado de margin-top a margin para centrar horizontalmente */
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.image-preview.square {
+    width: 200px;
+    height: 200px;
+}
+
+.image-preview.rectangle {
+    width: 600px;
+    height: 300px;
+}
+
+/* Asegúrate de que las imágenes dentro de .image-preview estén centradas */
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Esto asegura que la imagen se ajuste sin distorsionarse */
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item input[type="file"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.product-item textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+.btn-publicar {
+    display: block;
+    width: 200px;
+    margin: 2em auto 0;
+    padding: 1em;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-publicar:hover {
+    background-color: #333;
+}
+/* parte 2  */
+
+/* fotter asta el final */
+    .burger {
+    display: none; /* Escondido por defecto */
+    }
+    
+    .logo-dark {
+        height: 100px;
+    }
+/* esto es js */
+/* Estilo del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1; /* En frente de todo */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Añadir barra de desplazamiento si es necesario */
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro con transparencia */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrado vertical y horizontal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+}
+
+/* El botón de cerrar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Botones del modal */
+.modal-content button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50; /* Color verde para el botón */
+    color: white;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #45a049; /* Color más oscuro cuando se pasa el ratón */
+}
+/* fin de js */
+ul {
+    list-style: none;
+  }
