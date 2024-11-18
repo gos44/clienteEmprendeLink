@@ -141,7 +141,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="emprendimientosDropdown">
                             <li>
-                                <a class="dropdown-item" href="ListaMisEmprendiientos.html">
+                                <a class="dropdown-item" href="{{ route('MisEmpredimientos.index') }}">
                                     <i class="fas fa-list me-2"></i> Ver Mis Emprendimientos
                                 </a>
                             </li>
@@ -151,7 +151,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="ListaUsuarios.html">
+                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
                                     <i class="fas fa-users me-2"></i> Lista de Usuarios
                                 </a>
                             </li>
@@ -181,7 +181,7 @@
 
                     <!-- Opciones de emprendimiento en móvil -->
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="ListaMisEmprendiientos.html">
+                        <a class="nav-link"  href="{{ route('MisEmpredimientos.index') }}">
                             <i class="fas fa-list fa-lg me-1"></i> Ver Mis Emprendimientos
                         </a>
                     </li>
@@ -191,14 +191,14 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="ListaUsuarios.html">
+                        <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
                             <i class="fas fa-users fa-lg me-1"></i> Lista de Usuarios
                         </a>
                     </li>
 
                     <!-- Opciones de comunicación en móvil -->
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="CHAT-EMPRENDEDOR.HTML">
+                        <a class="dropdown-item" href="{{ route('Chat_Usuario.index') }}">
                             <i class="fas fa-comment-dots fa-lg me-1"></i> Chat
                         </a>
                     </li>
@@ -215,9 +215,9 @@
                         </a>
                     </li>
 
-                    <!-- Perfil -->
+                    <!-- Perfil -->                  
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="perfilUsaurio.html">
+                        <a class="nav-link" href="{{ route('perfilUser.index') }}">
                             <i class="fas fa-user fa-lg me-1"></i> Perfil
                         </a>
                     </li>

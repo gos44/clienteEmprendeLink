@@ -66,7 +66,7 @@
 
 
         <div class="header-right">
-          <a href="{{ route('AcuerdosHome.index') }}"><i class="fas fa-question-circle"></i> Ayuda</a>
+          <a href="{{ route('ContactanosHome') }}"><i class="fas fa-question-circle"></i> Ayuda</a>
           <a href="#" id="registroBtn">Registrarse</a>
           <a href="#" id="iniciarSesionBtn"><i class="fas fa-user"></i> Iniciar sesión</a>
       </div>

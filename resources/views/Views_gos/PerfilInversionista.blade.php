@@ -1,5 +1,5 @@
-@extends('layouts.Nav-Bar_Usuario')
-@extends('layouts.Footer_Usuario')
+@extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,14 +70,18 @@
     </div>
 
     <div class="profile-actions">
-        <button class="btn-primary" onclick="window.location.href='perfilInversorEditarPerfil.html'">
+
+
+        <a href="{{ route('profile.update') }}">
+        <button class="btn-primary" >
             Editar perfil
-        </button>
-        <button class="btn-outline" onclick="window.location.href='index.html'">
+        </button> </a>
+         <a href="{{ route('Home1.index') }}">
+        <button class="btn-outline"  >
             Cerrar Sesión
         </button>
+    </a>
     </div>
-</main>
-   
+</main> 
 </body>
 </html>
