@@ -1,3 +1,5 @@
+    <!-- navbar usuario -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,6 +19,7 @@
             color: black
 
         }
+        
 
         .nav-link {
             color: black;
@@ -141,7 +144,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="emprendimientosDropdown">
                             <li>
-                                <a class="dropdown-item" href="ListaMisEmprendiientos.html">
+                                <a class="dropdown-item" href="{{ route('MisEmpredimientos.index') }}">
                                     <i class="fas fa-list me-2"></i> Ver Mis Emprendimientos
                                 </a>
                             </li>
@@ -172,7 +175,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="notificaciones1 copy.html">
+                                <a class="dropdown-item" href="{{ route('Notificaciones') }}">
                                     <i class="fas fa-bell me-2"></i> Notificaciones
                                 </a>
                             </li>
@@ -203,14 +206,14 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="notificaciones1 copy.html">
+                        <a class="nav-link" href="{{ route('Notificaciones') }}">
                             <i class="fas fa-bell fa-lg me-1"></i> Notificaciones
                         </a>
                     </li>
 
                     <!-- Ayuda -->
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="contactanos1 copy.html">
+                        <a class="nav-link" href="{{ route('ContactanosUsu') }}">
                             <i class="fas fa-question-circle fa-lg me-1"></i> Ayuda
                         </a>
                     </li>

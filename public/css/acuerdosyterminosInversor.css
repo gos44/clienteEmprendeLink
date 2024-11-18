@@ -4,7 +4,15 @@ body {
     padding: 0;
 }
 
-
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px; /* Ajusta según la altura de tu navbar */
+}
 
 
 .logo {

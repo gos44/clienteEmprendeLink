@@ -77,8 +77,8 @@
               <span class="close-button" id="cerrarRegistroModal">&times;</span>
               <h2>Seleccione tipo de registro</h2>
               <div class="button-container">
-                  <button onclick="window.location.href='registro_usuario.html'" class="modal-button">Usuario</button>
-                  <button onclick="window.location.href='registro_inver1.html'" class="modal-button">Inversionista</button>
+                  <button onclick="window.location.href=' {{ route('registrar_nuevo_usuario') }}'" class="modal-button">Usuario</button>
+                  <button onclick="window.location.href='{{ route('registrar_nuevo_inversionista') }}'" class="modal-button">Inversionista</button>
               </div>
           </div>
       </div>
@@ -90,11 +90,8 @@
               <span class="close-button" id="cerrarInicioSesionModal">&times;</span>
               <h2>Seleccione tipo de inicio de sesión</h2>
               <div class="button-container">
-
-                  <button onclick="window.location.href='iniciosesion1_usuario.html'" class="modal-button">Usuario</button>
-
-                  
-                  <button onclick="window.location.href='inicio_sesion_inver.html'" class="modal-button">Inversionista</button>
+                  <button onclick="window.location.href='{{ route('iniciar_sesion_usuario') }}'" class="modal-button">Usuario</button>
+                  <button onclick="window.location.href='{{ route('iniciar_sesion_inversionista') }}'" class="modal-button">Inversionista</button>
               </div>
           </div>
       </div>

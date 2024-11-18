@@ -205,7 +205,7 @@ footer {
             <div class="footer-section links">
                 <h3>Legales</h3>
                 <ul>
-                    <li><a href="{{('#')}}">Sobre Emprende Link</a></li>
+                    <li><a href="{{('sobreEmInver')}}">Sobre Emprende Link</a></li>
                     <li><a href="{{('PoliticaInver')}}">Política de privacidad</a></li>
                     <li><a href="{{('AcuerdosInver')}}">Acuerdos y términos</a></li>
                 </ul>

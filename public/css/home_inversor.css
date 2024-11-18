@@ -7,12 +7,18 @@ body {
     background-image: url(img_inversor/fondo.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    padding-top: 100px; /* Ajusta según la altura de tu navbar */
+    padding-top: 90px; /* Ajusta según la altura de tu navbar */
 }
 html, body {
     overflow-x: hidden;
-}
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px; /* Ajusta según la altura de tu navbar */
 
+}
 
 .btn a{
     text-decoration: none;
@@ -33,26 +39,28 @@ html, body {
 .hero {
     text-align: center;
     background-image: url('../images/logoplanta.png');
-    background-size: contain;
+    background-size: cover; /* esto hace que la imagen cubra el contenedor sin distorsionarse */
     background-repeat: no-repeat;
     background-position: center;
     color: #fff;
-    padding: 200px;
+    padding: 150px 40px; /* aquí controlas el alto del hero: primer valor es arriba/abajo, segundo es izquierda/derecha */
+    margin: 0 100px;
     text-shadow: 
-        1px 1px 2px rgba(0, 0, 0, 0.6),
-        -1px -1px 2px rgba(0, 0, 0, 0.6), 
-        1px -1px 2px rgba(0, 0, 0, 0.6), 
-        -1px 1px 2px rgba(0, 0, 0, 0.6);
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        -2px -2px 4px rgba(0, 0, 0, 0.8),
+        2px -2px 4px rgba(0, 0, 0, 0.8),
+        -2px 2px 4px rgba(0, 0, 0, 0.8);
     font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 .hero h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 2em;
+    margin-bottom: 15px;
 }
 
 .hero p {
-    font-size: 1.2em;
+    font-size: 1em;
     margin-bottom: 20px;
 }
 
