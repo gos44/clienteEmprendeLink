@@ -16,6 +16,15 @@
     --transition: all 0.3s ease;
   }
 
+  html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px; /* Ajusta según la altura de tu navbar */
+}
 
   .message-content img {
     max-width: 250px; /* Ancho máximo de las imágenes */

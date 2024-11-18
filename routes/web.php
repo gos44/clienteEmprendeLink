@@ -35,6 +35,7 @@ use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_InverController;
 use App\Http\Controllers\Controllers_Gos\ListEntrepreneur_UserController;
 use App\Http\Controllers\Controllers_Gos\PerfilUsuarioController;
 use App\Http\Controllers\Controllers_Gos\usaurioPerfil_inversionistaController;
+use App\Http\Controllers\Controllers_Gos\usaurioPerfil_usuarioController;
 
 use App\Http\Controllers\Controllers_Gos\AcuedosYTerminosUserController;
 use App\Http\Controllers\Controllers_Gos\acuerdosyterminosHomeController;
@@ -211,6 +212,9 @@ Route::get('verificar_codigo_inversionista',[Verificar_codigo_inversionista::cla
 Route::get('emprendimientos_deportivos_usuario',[emprendimientos_deportivos_usuario::class,'index'])->name('emprendimientos_deportivos_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('emprendimientos_deportivos_inversionista',[articulos_deportivos_inversionista::class,'index'])->name('emprendimientos_deportivos_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
+
+
+
 // RUTAS DEL Miguel
 Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
 //publicar emprendimiento
@@ -266,7 +270,7 @@ Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->
 Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaInver.index');
 
 Route::get('VerInver', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerInver.index');
-Route::get('VerUser', [usaurioPerfil_inversionistaController::class, 'index'])->name('VerUser.index');
+Route::get('VerUser', [usaurioPerfil_usuarioController::class, 'index'])->name('VerUser.index');
 
 
 Route::get('AcuerdosUser', action: [AcuedosYTerminosUserController::class, 'index'])->name('AcuerdosUser.index');

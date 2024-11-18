@@ -4,7 +4,6 @@
 <html lang="en">
   <head>
     <title>Emprede Link</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <meta property="og:title" content="Ill Informed Cool Llama" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -11,8 +11,10 @@ footer {
     background-color: #000000;
     color: #fff;
     width: 100%;
-  
+   justify-content: flex-end;
  
+  
+
 }
 
 .footer-content {
