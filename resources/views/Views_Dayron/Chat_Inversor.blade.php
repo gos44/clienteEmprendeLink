@@ -1,4 +1,4 @@
-
+@extends('layouts.Nav-Bar_Inversionista')
 
 <!DOCTYPE html>
 <html lang="es">
