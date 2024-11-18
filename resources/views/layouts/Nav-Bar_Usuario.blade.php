@@ -141,7 +141,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="emprendimientosDropdown">
                             <li>
-                                <a class="dropdown-item" href="ListaMisEmprendiientos.html">
+                                <a class="dropdown-item" href="{{ route('MisEmpredimientos.index') }}">
                                     <i class="fas fa-list me-2"></i> Ver Mis Emprendimientos
                                 </a>
                             </li>

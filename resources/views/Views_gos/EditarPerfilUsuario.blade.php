@@ -88,9 +88,10 @@
     </div>
 
     <div class="profile-actions">
-      <button type="submit" class="btn-primary">Guardar cambios</button>
-      <a href="perfilInversor.html"><button type="button" class="btn-outline">Cancelar</button></a> 
-    </div>  
+    <a href="{{ route('perfilUser.index') }}"> <button type="submit" class="btn-primary">Guardar cambios</button></a>
+    <a href="{{ route('perfilUser.index') }}"><button type="button" class="btn-outline">Cancelar</button></a> 
+
+    </div>
 </form>
 
 <!-- Modal para cambiar foto -->
