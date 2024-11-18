@@ -67,7 +67,7 @@
 
 
         <div class="header-right">
-          <a href="{{ route('AcuerdosHome.index') }}"><i class="fas fa-question-circle"></i> Ayuda</a>
+          <a href="{{ route('ContactanosHome') }}"><i class="fas fa-question-circle"></i> Ayuda</a>
           <a href="#" id="registroBtn">Registrarse</a>
           <a href="#" id="iniciarSesionBtn"><i class="fas fa-user"></i> Iniciar sesión</a>
       </div>
@@ -91,7 +91,10 @@
               <span class="close-button" id="cerrarInicioSesionModal">&times;</span>
               <h2>Seleccione tipo de inicio de sesión</h2>
               <div class="button-container">
+
                   <button onclick="window.location.href='iniciosesion1_usuario.html'" class="modal-button">Usuario</button>
+
+                  
                   <button onclick="window.location.href='inicio_sesion_inver.html'" class="modal-button">Inversionista</button>
               </div>
           </div>

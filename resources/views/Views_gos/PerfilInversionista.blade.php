@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
@@ -71,10 +72,12 @@
     </div>
 
     <div class="profile-actions">
-        <button class="btn-primary" onclick="window.location.href='perfilInversorEditarPerfil.html'">
+
+        <button class="btn-primary"  href="{{ route('profile.update') }}">
             Editar perfil
         </button>
-        <button class="btn-outline" onclick="window.location.href='index.html'">
+
+        <button class="btn-outline"  href="{{ route('Home1.index') }}">
             Cerrar Sesión
         </button>
     </div>
