@@ -285,6 +285,5 @@ Route::get('PoliticaInver', [politicayprivacidadInverController::class, 'index']
 Route::get('sobreEmUser', [sobreEmpredelinkController::class, 'index'])->name('sobreEmUser.index');
 Route::get('sobreEmHome', action: [sobreEmpredelinkHomeController::class, 'index'])->name('sobreEmHome.index');
 Route::get('sobreEmInver', [sobreEmpredelinkInversorController::class, 'index'])->name('sobreEmInver.index');
-
 Route::get('MisEmpredimientos', [MisEmpredimientosController::class, 'index'])->name('MisEmpredimientos.index');
 
