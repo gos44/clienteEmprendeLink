@@ -35,8 +35,8 @@
               <p class="hero-quote">"Somos un emprendimiento enfocado en el procesamiento de arepas"</p>
           </div>
           <div class="hero-buttons">
-              <a href="reseñas.html" class="btn btn-primary">Reseñas</a>
-              <a href="MI-EMPRENDIMIENTO-EDITAR-2-USUARIO.HTML" class="btn btn-secondary">Editar</a>
+            <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+            <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
           </div>
       </div>
   </section>

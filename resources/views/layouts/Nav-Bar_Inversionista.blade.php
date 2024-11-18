@@ -1,3 +1,54 @@
+<style>
+    .navbar {
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: black;
+        font-weight: 500;
+        padding: 0.8rem 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: gray;
+    }
+
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .dropdown-item {
+        padding: 0.7rem 1.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .dropdown-divider {
+        margin: 0.5rem 0;
+    }
+
+    .nav-item-mobile {
+        display: none;
+    }
+
+    @media (max-width: 991.98px) {
+        .nav-item-desktop {
+            display: none !important;
+        }
+
+        .nav-item-mobile {
+            display: block;
+        }
+    }
+</style>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -93,54 +144,3 @@
 </nav>
 
 <!-- Estilos personalizados -->
-<style>
-    .navbar {
-        background-color: #f8f9fa;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 0.5rem 1rem;
-    }
-
-    .navbar-nav .nav-link {
-        color: black;
-        font-weight: 500;
-        padding: 0.8rem 1rem;
-        transition: color 0.3s ease;
-    }
-
-    .navbar-nav .nav-link:hover {
-        color: gray;
-    }
-
-    .dropdown-menu {
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
-
-    .dropdown-item {
-        padding: 0.7rem 1.5rem;
-        transition: background-color 0.3s ease;
-    }
-
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-
-    .dropdown-divider {
-        margin: 0.5rem 0;
-    }
-
-    .nav-item-mobile {
-        display: none;
-    }
-
-    @media (max-width: 991.98px) {
-        .nav-item-desktop {
-            display: none !important;
-        }
-
-        .nav-item-mobile {
-            display: block;
-        }
-    }
-</style>
