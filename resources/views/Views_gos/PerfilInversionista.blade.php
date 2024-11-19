@@ -6,11 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de inversor - Emprende Link</title>
+    <link rel="stylesheet" href="{{ asset('/css/perfil.css') }}">
 
-
-    <link rel="stylesheet" href="{{ asset('css/perfilInversionista.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-
+    
 </head>
 
 <body>
@@ -70,18 +69,18 @@
     </div>
 
     <div class="profile-actions">
-
-
         <a href="{{ route('profile.update') }}">
         <button class="btn-primary" >
             Editar perfil
         </button> </a>
          <a href="{{ route('Home1.index') }}">
-        <button class="btn-outline"  >
+        <button class="btn-outline">
             Cerrar Sesión
         </button>
     </a>
     </div>
 </main> 
+
+
 </body>
 </html>

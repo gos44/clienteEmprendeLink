@@ -70,7 +70,7 @@
           <a href="#" id="registroBtn">Registrarse</a>
           <a href="#" id="iniciarSesionBtn"><i class="fas fa-user"></i> Iniciar sesión</a>
       </div>
-  
+
       <!-- Modal para opciones de registro -->
       <div id="registroModal" class="modal">
           <div class="modal-content">
@@ -95,7 +95,7 @@
               </div>
           </div>
       </div>
-  
+
       <script>
           document.addEventListener('DOMContentLoaded', function() {
               var registroModal = document.getElementById('registroModal');
@@ -104,25 +104,25 @@
               var iniciarSesionBtn = document.getElementById('iniciarSesionBtn');
               var cerrarRegistroModal = document.getElementById('cerrarRegistroModal');
               var cerrarInicioSesionModal = document.getElementById('cerrarInicioSesionModal');
-  
+
               registroBtn.onclick = function(e) {
                   e.preventDefault();
                   registroModal.style.display = "block";
               }
-  
+
               iniciarSesionBtn.onclick = function(e) {
                   e.preventDefault();
                   inicioSesionModal.style.display = "block";
               }
-  
+
               cerrarRegistroModal.onclick = function() {
                   registroModal.style.display = "none";
               }
-  
+
               cerrarInicioSesionModal.onclick = function() {
                   inicioSesionModal.style.display = "none";
               }
-  
+
               window.onclick = function(event) {
                   if (event.target == registroModal) {
                       registroModal.style.display = "none";
@@ -136,7 +136,7 @@
 
     </header>
       <div class="home-container">
-    
+
         <hero17-wrapper class="hero17-wrapper">
           <!--Hero17 component-->
           <div class="hero17-header78">
@@ -168,7 +168,7 @@
                   <span>
                     <fragment class="home-fragment114">
                       <span class="home-text114 thq-body-small">
-                        <a href="registro_usuario.html">Regístrate como emprendedor</a>
+                        <a href=" {{ route('registrar_nuevo_usuario') }}">Regístrate como emprendedor</a>
                       </span>
                     </fragment>
                   </span>
@@ -177,14 +177,14 @@
                   <span>
                     <fragment class="home-fragment115">
                       <span class="home-text115 thq-body-small">
-                        <a href="registro_inver1.html">Regístrate como inversionista</a>
+                        <a href="{{ route('registrar_nuevo_inversionista') }}">Regístrate como inversionista</a>
                       </span>
                     </fragment>
                   </span>
                 </button>
               </div>
             </div>
-            
+
             <div class="hero17-content2">
               <div
                 class="hero17-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal"
@@ -212,10 +212,10 @@
                     src="images/video4.jpg"
                     class="hero17-placeholder-image13 thq-img-ratio-1-1 thq-img-scale"
                   />
-                </div>            
-            </div>        
+                </div>
+            </div>
           </div>
-        </hero17-wrapper>    
+        </hero17-wrapper>
         <cta26-wrapper class="cta26-wrapper">
           <!--CTA26 component-->
           <div class="thq-section-padding">
@@ -347,11 +347,11 @@
         </features25-wrapper>
         <pricing14-wrapper class="pricing14-wrapper">
           <!--Pricing14 component-->
-          
+
         </pricing14-wrapper>
         <steps2-wrapper class="steps2-wrapper">
 
-          
+
           <!--Steps2 component-->
           <div class="steps2-container1 thq-section-padding">
             <div class="steps2-max-width thq-section-max-width">
@@ -371,8 +371,8 @@
                     </button>
                   </div>
                 </div>
-                
-              
+
+
                <br>
                 <div class="steps2-column">
                   <div class="steps2-container4 thq-card">
@@ -663,12 +663,12 @@
         <contact10-wrapper class="contact10-wrapper">
           <!--Contact10 component-->
         </contact10-wrapper>
-        
-        
+
+
       </div>
           <!--Footer4 component-->
-          
-        
+
+
     </div>
     <script
       defer=""
