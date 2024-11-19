@@ -129,19 +129,10 @@
         </div>
     </main>
     </div>
-
-
-
-
-
-
-
-
-
 <script>
 
 
-  document.querySelectorAll('.accordion-button').forEach(button => {
+ document.querySelectorAll('.accordion-button').forEach(button => {
       button.addEventListener('click', () => {
           const accordionContent = button.nextElementSibling;
           button.classList.toggle('active');
