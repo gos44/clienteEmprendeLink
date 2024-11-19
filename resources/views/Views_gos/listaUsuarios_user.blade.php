@@ -16,40 +16,74 @@
 </head>
 
 <body>
-<main>
-    <section class="notifications">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar...">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </div>
-        
-        <?php
-        // Ejemplo de datos de notificación
-        $notifications = [
-            ["img" => "images/perfilusu1.png", "name" => "Miguel Angel Bonilla", "email" => "miguel@example.com", "location" => "Popayán, Colombia"],
-            ["img" => "images/perfilusu2.png", "name" => "Kevin Alexis Ortiz", "email" => "kevin@example.com", "location" => "Medellín, Colombia"],
-            // Agrega más notificaciones aquí
-        ];
-
-        // Generar cada notificación
-        foreach ($notifications as $notification) {
-            echo '
+    <main>
+        <section class="notifications">
+            <div class="search-bar">
+              <input type="text" id="searchInput" placeholder="Buscar...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
             <div class="notification">
-                <img src="' . $notification["img"] . '" alt="' . $notification["name"] . '">
+                <img src="images/perfilusu1.png" alt="LEGO">
                 <div class="notification-content">
-                    <h3>' . $notification["name"] . '</h3>
-                    <p><strong>Correo:</strong> ' . $notification["email"] . '</p>
-                    <p><strong>Ubicación:</strong> ' . $notification["location"] . '</p>
+                  <h3><a href="{{ route('VerUser.index') }}">Miguel Angel Bonilla</a></h3>
+                  <p><strong>Correo:</strong> miguel@example.com</p>
+                  <p><strong>Ubicación:</strong> Popayán, Colombia</p>
                 </div>
-                <a href="CHAT-EMPRENDEDOR.HTML">
-                    <button class="send-message"><i class="fas fa-envelope"></i> Enviar mensaje</button>
-                </a>
-            </div>';
-        }
-        ?>
-        
-    </section>
-</main>
-
+               <a href="{{ route('Chat_Usuario.index') }}"> <button class="send-message"><i class="fas fa-envelope"></i> Enviar mensaje</button></a>
+            </div>
+            <div class="notification">  
+                <img src="images/perfilusu2.png" alt="FANTA">
+                <div class="notification-content">
+                    <h3>Kevin alexis ortiz</h3>
+                    <p><strong>Correo:</strong> kevin@example.com</p>
+                    <p><strong>Ubicación:</strong> Medellín, Colombia</p>
+                </div>
+                <a href="{{ route('Chat_Usuario.index') }}"> <button class="send-message"><i class="fas fa-envelope"></i> Enviar mensaje</button></a>
+            </div>
+            <div class="notification">
+                <img src="images/perfilusu3.png" alt="Sprite">
+                <div class="notification-content">
+                    <h3>Cristian sebastian delgado</h3>
+                    <p><strong>Correo:</strong> cristian@example.com</p>
+                    <p><strong>Ubicación:</strong> Cali, Colombia</p>
+                </div>
+                <a href="{{ route('Chat_Usuario.index') }}"> <button class="send-message"><i class="fas fa-envelope"></i> Enviar mensaje</button></a>
+            </div>
+            <div class="notification">
+                <img src="images/perfilusu4.png" alt="Senaworks">
+                <div class="notification-content">
+                    <h3> Dayron Hernandez</h3>
+                    <p><strong>Correo:</strong> hernandez@example.com</p>
+                    <p><strong>Ubicación:</strong> Barranquilla, Colombia</p>
+                </div>
+                <a href="{{ route('Chat_Usuario.index') }}"> <button class="send-message"><i class="fas fa-envelope"></i> Enviar mensaje</button></a>
+            </div>
+        </section>
+      </main>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const notificationsList = document.querySelector('.notifications');
+            const notifications = notificationsList.querySelectorAll('.notification');
+    
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+    
+                notifications.forEach(notification => {
+                    const name = notification.querySelector('h3').textContent.toLowerCase();
+                    const messages = Array.from(notification.querySelectorAll('p')).map(p => p.textContent.toLowerCase());
+                    
+                    // Combinar nombre y mensajes para la búsqueda
+                    const fullContent = [name, ...messages].join(' ');
+    
+                    if (fullContent.includes(searchTerm)) {
+                        notification.style.display = '';
+                    } else {
+                        notification.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
