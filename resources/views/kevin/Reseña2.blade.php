@@ -77,7 +77,7 @@
               </div>
   
               <div class="review-actions">
-                  <a href="reseñas3.html" class="action-button reply">
+                  <a href="{{asset('resena3')}}" class="action-button reply">
                       <!-- <span class="button-icon">↪</span> -->
                       Responder
                   </a>

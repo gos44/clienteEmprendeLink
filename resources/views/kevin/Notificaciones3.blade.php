@@ -58,14 +58,14 @@
                   
                   <div class="message-actions">
                     <button type="button" class="delete-btn" onclick="showNotification()">Eliminar</button>
-                    <a href="notificaciones2.html"><button type="button" class="reply-btn">Responder</button></a>
+                    <a href="{{asset('notificaciones2')}}"><button type="button" class="reply-btn">Responder</button></a>
                 </div>
             </div>
         
             <!-- Notificación oculta por defecto -->
             <div class="notification" id="notification" style="display: none;">
                 <p><h2>¡Notificación eliminada exitosamente!</h2></p>
-                <button onclick="hideNotification()">Cerrar</button>
+                <a href="{{asset('notificaciones')}}"><button onclick="hideNotification()">Cerrar</button></a>
             </div>
         </main>
 

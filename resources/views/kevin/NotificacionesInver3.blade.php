@@ -1,5 +1,6 @@
 
 @extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,14 +50,14 @@
                 </div>
                 <div class="message-actions">
                   <button type="button" class="delete-btn" onclick="showNotification()">Eliminar</button>
-                  <a href="inverNoti2.html"><button type="button" class="reply-btn">Responder</button></a>
+                  <a href="{{asset('notificacionesInver2')}}"><button type="button" class="reply-btn">Responder</button></a>
               </div>
           </div>
       
           <!-- Notificación oculta por defecto -->
           <div class="notification" id="notification" style="display: none;">
               <p><h2>¡Notificación eliminada exitosamente!</h2></p>
-              <button onclick="hideNotification()">Cerrar</button>
+              <a href="{{asset('notificacionesInver')}}"><button onclick="hideNotification()">Cerrar</button></a>
           </div>
         </main>
 

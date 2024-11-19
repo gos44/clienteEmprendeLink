@@ -77,7 +77,7 @@ Atentamente,
   </div>
   <div class="notification" id="notification" style="display: none;">
       <p><h2>¡Su respuesta ha sido enviada Exitosamente!</h2></p>
-      <button onclick="hideNotification()">Cerrar</button>
+      <a href="{{asset('notificaciones')}}"><button onclick="hideNotification()">Cerrar</button></a>
   </div>
     </main>
 

@@ -23,7 +23,7 @@
             <div class="notification">
                 <img src="images/lego.png" alt="LEGO">
                 <div class="notification-content">
-                    <a href="notificaciones3 copy.html"><h3>LEGO</h3></a>
+                    <a href="{{asset('notificaciones3')}}"><h3>LEGO</h3></a>
                     <span class="time">3:15 PM</span>
                     <p>A career in website design can involve the design, creation, and coding of a range of website types. Other tasks will typically include liaising with clients and discussing website specifications, incorporating feedback, working on graphic design and image editing...</p>
                 </div>
@@ -31,7 +31,7 @@
             <div class="notification">
                 <img src="https://i0.wp.com/www.elpoderdelasideas.com/wp-content/uploads/nuevo-logo-fanta-600x456.png?resize=600%2C456" alt="FANTA">
                 <div class="notification-content">
-                    <h3>FANTA</h3>
+                    <a href="{{asset('notificaciones3')}}"><h3>FANTA</h3></a>
                     <span class="time">4:32 PM</span>
                     <p>A career in website design can involve the design, creation, and coding of a range of website types. Other tasks will typically include liaising with clients and discussing website specifications, incorporating feedback, working on graphic design and image editing...</p>
                 </div>
@@ -39,7 +39,7 @@
             <div class="notification">
                 <img src="https://cdn.worldvectorlogo.com/logos/sprite-8.svg" alt="Sprite">
                 <div class="notification-content">
-                    <h3>Sprite</h3>
+                    <a href="{{asset('notificaciones3')}}"><h3>Sprite</h3></a>
                     <span class="time">8:00 AM</span>
                     <p>A career in website design can involve the design, creation, and coding of a range of website types. Other tasks will typically include liaising with clients and discussing website specifications, incorporating feedback, working on graphic design and image editing...</p>
                 </div>
@@ -47,7 +47,7 @@
             <div class="notification">
                 <img src="link/3.png" alt="Senaworks">
                 <div class="notification-content">
-                    <h3>Senaworks</h3>
+                    <a href="{{asset('notificaciones3')}}"><h3>Senaworks</h3></a>
                     <span class="time">11:15 AM</span>
                     <p>A career in website design can involve the design, creation, and coding of a range of website types. Other tasks will typically include liaising with clients and discussing website specifications, incorporating feedback, working on graphic design and image editing...</p>
                 </div>

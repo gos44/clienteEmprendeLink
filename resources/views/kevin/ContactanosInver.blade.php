@@ -1,5 +1,6 @@
 
 @extends('layouts.Nav-Bar_Inversionista')
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
