@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReseñasUsu</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{asset('css/resena.css')}}"> 
 </head>
@@ -26,7 +25,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">
@@ -58,7 +57,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">
@@ -90,7 +89,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">
@@ -122,7 +121,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">
@@ -154,7 +153,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">
@@ -186,7 +185,7 @@
       <div class="review-card">
           <div class="review-header">
               <div class="company-info">
-                  <a href="reseñas2.html">
+                  <a href="{{asset('resena2')}}">
                       <img src="https://images.pexels.com/photos/1758144/pexels-photo-1758144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sony" class="company-logo">
                   </a>
                   <div class="company-details">

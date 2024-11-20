@@ -18,7 +18,7 @@
 </head>
 <body>
  
-<br><br>
+
     <section class="hero">
         
         <h1>Invierte en nuevas empresas en desarrollo!</h1>
@@ -28,6 +28,7 @@
             
         </div>
     </section>
+    <br><br>
     <h2>¿Qué Puedes Hacer?</h2>
     <div class="main-options">
         <div class="option1">

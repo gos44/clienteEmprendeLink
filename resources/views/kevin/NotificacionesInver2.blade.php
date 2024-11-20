@@ -1,13 +1,12 @@
 
 @extends('layouts.Nav-Bar_Inversionista')
-
+@extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>inver2</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{asset('css/notificacionesInver2.css')}}"> 
 
@@ -79,7 +78,7 @@ Atentamente,
         </div>
         <div class="notification" id="notification" style="display: none;">
             <p><h2>¡Su respuesta ha sido enviada Exitosamente!</h2></p>
-            <button onclick="hideNotification()">Cerrar</button>
+           <a href="{{asset('notificacionesInver')}}"> <button onclick="hideNotification()">Cerrar</button></a>
         </div>
         </section>
        

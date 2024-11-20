@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reseñas3</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{asset('css/reseña3.css')}}"> 
 
@@ -73,7 +72,7 @@
                   <div class="reply-input-container">
                       <div class="reply-input" contenteditable="true" placeholder="Escribe tu respuesta aquí..."></div>
                       <div class="reply-actions">
-                          <a href="resenas4.html"><button class="reply-button">
+                          <a href="{{asset('resena4')}}"><button class="reply-button">
                               <i class="fas fa-paper-plane"></i>
                               <span>Enviar respuesta</span>
                           </button></a>

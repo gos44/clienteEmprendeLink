@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifica 2</title>
-    <link rel="icon" href="img/logoCuadrado.png" type="image/png">
 
     <link rel="stylesheet" href="{{asset('css/notificaciones2.css')}}"> 
     <!-- Asegúrate de cargar Bootstrap CSS -->
@@ -78,7 +77,7 @@ Atentamente,
   </div>
   <div class="notification" id="notification" style="display: none;">
       <p><h2>¡Su respuesta ha sido enviada Exitosamente!</h2></p>
-      <button onclick="hideNotification()">Cerrar</button>
+      <a href="{{asset('notificaciones')}}"><button onclick="hideNotification()">Cerrar</button></a>
   </div>
     </main>
 

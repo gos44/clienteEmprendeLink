@@ -82,7 +82,7 @@
 
         <div class="flex-row">
 
-            <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
+            <span class="span"><a href="{{ route('ContactanosHome') }}" class="link">¿Necesitas ayuda?</a></span>
         </div>
         <a href="{{ route('registrar_usuario_ingreso') }}" class="button-submit">Registrarse</a>
 

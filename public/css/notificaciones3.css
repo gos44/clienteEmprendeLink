@@ -19,7 +19,7 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+    padding-top: 150px; /* Ajusta según la altura de tu navbar */
 
 }
 
@@ -41,6 +41,7 @@ main {
     padding: 20px;
     max-width: 1200px;
     width: 100%;
+    padding-top: 55%; /* Ajusta según la altura de tu navbar */
 }
 
 .message-header {

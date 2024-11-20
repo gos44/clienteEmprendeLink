@@ -46,7 +46,7 @@
             <input type="text" class="input" placeholder="Ingrese su contraseña" />
         </div>
         <div class="flex-row">
-            <span class="span"><a href="contactanosayuda.html" class="link">¿Necesitas ayuda?</a></span>
+            <span class="span"><a href="{{ route('ContactanosHome') }}" class="link">¿Necesitas ayuda?</a></span>
         </div>
         <a href="{{ route('iniciar_sesion_usuario') }}" class="button-submit">Registrarse</a>
         <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesion</a></p>
