@@ -45,6 +45,13 @@
             </div>
         </section>
 
+        <div class="background-change-container">
+            <button id="changeBackgroundBtn" class="change-background-btn">
+                <i class="fas fa-image"></i>
+                Cambiar imagen de fondo
+            </button>
+        </div>
+
         <section class="profile">
             <div class="profile-card">
                 <img src="images/perfil.png" alt="Cristian Sebastian Delgado" class="profile-image">
@@ -371,7 +378,97 @@ function saveProducts() {
 </script>
 
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener referencias a los elementos
+        const changeBackgroundBtn = document.getElementById('changeBackgroundBtn');
+        const heroBackgroundImage = document.querySelector('.hero-background img');
+        
+        // Función para manejar el cambio de imagen
+        function handleImageChange() {
+            // Crear input de tipo file
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            
+            // Manejar la selección del archivo
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        // Actualizar la imagen
+                        heroBackgroundImage.src = event.target.result;
+                        
+                        // Opcional: Guardar en localStorage
+                        localStorage.setItem('heroBackground', event.target.result);
+                        
+                        // Mostrar mensaje de éxito
+                        showNotification('Imagen actualizada con éxito');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            };
+            
+            // Activar el input file
+            fileInput.click();
+        }
+        
+        // Función para mostrar notificación
+        function showNotification(message) {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            // Añadir estilos inline para la notificación
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 4px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            // Añadir la notificación al DOM
+            document.body.appendChild(notification);
+            
+            // Remover la notificación después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+        
+        // Añadir el evento click al botón
+        changeBackgroundBtn.addEventListener('click', handleImageChange);
+        
+        // Añadir estilos de animación al documento
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+    </script>
+    
 
     
 </body>
