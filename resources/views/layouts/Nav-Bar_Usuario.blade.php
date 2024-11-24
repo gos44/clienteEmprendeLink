@@ -15,11 +15,10 @@
         .navbar {
             background-color: #f8f9fa;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.6;
             color: black
 
         }
-        
 
         .nav-link {
             color: black;
@@ -113,7 +112,7 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid p-0">
             <!-- Logo -->
             <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
                 <img src="images/16.png" alt="Logo" width="180" height="70">
