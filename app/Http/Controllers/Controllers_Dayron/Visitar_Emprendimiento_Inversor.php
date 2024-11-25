@@ -14,9 +14,9 @@ class Visitar_Emprendimiento_Inversor extends Controller
         //     // Ejemplo de datos
         //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
         //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
+        // ];Views_Dayron
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Dayron.Visitar_Emprendimiento_Inversor');
+        return view('Pruebas_gos.Visitar_Emprendimiento_Inversor');
     }
 }
