@@ -7,14 +7,11 @@
     <style>
         /* Footer usuarioo */
 /* Base styles */
+   
 footer {
     background-color: #000000;
     color: #fff;
     width: 100%;
-   justify-content: flex-end;
- 
-  
-
 }
 
 .footer-content {
@@ -183,10 +180,6 @@ footer {
     margin-top: 7%;
 }
 
-
-
-
-
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .footer-content {
@@ -199,7 +192,6 @@ footer {
         margin: 20px 0;
     }
 }
-
     </style>
 </head>
 <body>

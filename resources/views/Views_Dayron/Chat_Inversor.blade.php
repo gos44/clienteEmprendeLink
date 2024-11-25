@@ -22,7 +22,7 @@
                 <h2>Chats</h2>
                 <div class="sidebar-actions">
                     <button class="action-button" id="newContactBtn" title="Nuevo contacto">
-                       <a href="ListaUsuarios.html"> <i class="fas fa-user-plus"></i></a>
+                       <a href="{{ route('listaInver.index') }}"> <i class="fas fa-user-plus"></i></a>
                     </button>
                     <button class="action-button" id="blockedListBtn" title="Contactos bloqueados">
                         <i class="fas fa-ban"></i>

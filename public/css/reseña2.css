@@ -12,25 +12,6 @@ body {
 
 
 
-html, body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-top: 70px; /* Ajusta según la altura de tu navbar */
-
-}
-
-
-
-
-
-
-
-
-
 .reviews-wrapper {
   padding: 2rem;
   background-color: #f8f9fa;
@@ -91,11 +72,7 @@ html, body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.header-text h2 {
-  font-size: 1.5rem;
-  color: #1a1a1a;
-  margin: 0 0 0.5rem 0;
-}
+
 
 .review-metadata {
   display: flex;

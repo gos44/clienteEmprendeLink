@@ -10,49 +10,54 @@
     <link rel="stylesheet" href="{{ asset('css/Publicar_Emprendimiento3.css') }}">
 </head>
 <body>
-
     <br><br>
     <h1>¡Vamos a crear tu emprendimiento!</h1>
-<!--linea 1 2 3 4 -->
-<div class="navigation">
-  <div class="page">1</div>
-  <div class="line"></div>
-  <div class="page">2</div>
-  <div class="line"></div>
-  <div class="page active">3</div>
-  
-</div>
-<!-- fin linea 1 2 3 4 -->
 
-<div class="container">
-    <h2>Registro de Emprendimiento</h2>
-    <br>
-    <form>
-        <div class="form-sections">
-            <div class="form-section">
-               
-                <div class="form-group">
-                    <label for="especificaciones">Añade una gran descripcion general de todo tu emprendimiento</label>
-                    <textarea id="especificaciones" name="especificaciones"></textarea>
+    <div class="navigation">
+        <div class="page">1</div>
+        <div class="line"></div>
+        <div class="page">2</div>
+        <div class="line"></div>
+        <div class="page active">3</div>
+    </div>
+
+    <div class="container">
+        <h2>Registro de Emprendimiento</h2>
+        <br>
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <form method="POST" action="{{ route('Publicar_Emprendimiento3') }}" id="final-form">
+            @csrf
+            <div class="form-sections">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="descripcion_general">Añade una gran descripción general de todo tu emprendimiento</label>
+                        <textarea id="descripcion_general" name="descripcion_general" required>{{ old('descripcion_general') }}</textarea>
+                    </div>
                 </div>
             </div>
-                       
-                
-                
-            </div>
-            <a href="#" class="btn-publicar" id="publicarBtn">Publicar</a>
-        </div>
+            <button type="submit" class="btn-publicar" id="publicarBtn">Publicar</button>
+        </form>
+
         <!-- Modal -->
         <div id="myModal" class="modal">
-          <div class="modal-content">
-              <span class="close">&times;</span>
-              <p>¡Emprendimiento Publicado!</p>
-              <a href="{{ route('MisEmpredimientos.index') }}" class="btn-aceptar">Aceptar</a>
-          </div>
-      </div>
-    </form>
-    
-</div>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>¡Emprendimiento Publicado!</p>
+                <a href="{{ route('MisEmpredimientos.index') }}" class="btn-aceptar">Aceptar</a>
+            </div>
+        </div>
+    </div>
+
     
 
    
@@ -87,6 +92,6 @@
 
     
    
-    
+<script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
 </body>
 </html>

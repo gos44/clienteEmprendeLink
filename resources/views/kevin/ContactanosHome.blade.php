@@ -20,7 +20,7 @@
     </div>
     <div class="header-right">
         
-      <a href="index.html" ><img src="images/flecha.png" alt=""></i> Atras</a>
+      <a href="{{asset('Home1')}}" ><img src="images/flecha.png" alt=""></i> Atras</a>
     </div>
 </header>
    

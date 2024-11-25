@@ -72,7 +72,7 @@
                   <div class="reply-input-container">
                       <div class="reply-input" contenteditable="true" placeholder="Escribe tu respuesta aquí..."></div>
                       <div class="reply-actions">
-                          <a href="resenas4.html"><button class="reply-button">
+                          <a href="{{asset('resena4')}}"><button class="reply-button">
                               <i class="fas fa-paper-plane"></i>
                               <span>Enviar respuesta</span>
                           </button></a>

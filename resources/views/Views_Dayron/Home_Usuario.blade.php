@@ -33,7 +33,7 @@
                   <div class="card-content">
                       <h3>Publicar Emprendimiento</h3>
                       <p>Comparte tu emprendimiento: descubre estrategias para conectar y establecer relaciones con personas y empresas.</p>
-                      <a href="publicarEmprendimiento.html" class="btn">Ver más</a>
+                      <a href="{{ route('Publicar_Emprendimiento1') }}" class="btn">Ver más</a>
                   </div>
               </div>
               <div class="card">
@@ -41,7 +41,7 @@
                   <div class="card-content">
                       <h3>Conectate con más personas</h3>
                       <p>A través de esta asociación estratégica, buscamos maximizar el impacto, la eficiencia y el crecimiento.</p>
-                      <a href="ListaUsuarios.html" class="btn">Ver más</a>
+                      <a href="{{ route('listaUsuarios.index') }}" class="btn">Ver más</a>
                   </div>
               </div>
               <div class="card">
@@ -49,7 +49,7 @@
                   <div class="card-content">
                     <h3>Conéctate con Inversionistas</h3>
                     <p>Habla directamente con inversionistas interesados en apoyar y financiar tu emprendimiento.</p>
-                      <a href="CHAT-EMPRENDEDOR.HTML" class="btn">Ver más</a>
+                      <a href="{{ route('Chat_Usuario.index') }}" class="btn">Ver más</a>
                   </div>
               </div>
               <div class="card">
@@ -57,7 +57,7 @@
                   <div class="card-content">
                     <h3>Explora Emprendimientos</h3>
                       <p>Explora una variedad de emprendimientos y conoce lo que cada uno ofrece.</p>
-                      <a href="busqueda_filtro.html" class="btn">Ver más</a>
+                      <a href="{{ route('filtrar_usuario') }}" class="btn">Ver más</a>
                   </div>
               </div>
           </div>

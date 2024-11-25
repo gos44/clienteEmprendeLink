@@ -79,10 +79,16 @@
                           esa perspectiva" es una forma útil y versátil de responder a las opiniones 
                           sin expresar una opinión definitiva...
                       </div>
+                      
                   </div>
+                  
               </div>
+              
           </div>
       </div>
+      <div class="exit-button-container">
+        <a href="{{asset('resena')}}"><button class="exit-button">Cerrar</button></a>
+    </div>
   </div>
      
    

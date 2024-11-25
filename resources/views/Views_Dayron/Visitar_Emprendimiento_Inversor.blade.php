@@ -32,8 +32,8 @@
               <p class="hero-quote">"Aquel que vino al mundo y no toma vino, ¿entonces a qué vino?"</p>
           </div>
           <div class="hero-buttons">
-              <a href="reseñas.html" class="btn btn-primary">Reseñas</a>
-              <a href="CHAT-EMPRENDEDOR.HTML" class="btn btn-secondary">Mensaje</a>
+              <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
+              <a href="{{ route('Chat_Inversor.index') }}" class="btn btn-secondary">Mensaje</a>
           </div>
       </div>
   </section>
