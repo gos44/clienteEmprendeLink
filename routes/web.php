@@ -234,12 +234,12 @@ Route::post('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'storeS
 Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])
     ->name('Publicar_Emprendimiento3');
 
-
-
+Route::post('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'store'])
+    ->name('Publicar_Emprendimiento3.store');
 
 //rutas k
 
-Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+// Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //reseñas
 Route::get('resena', [ReviewController::class, 'Resena'])->name('resena');
