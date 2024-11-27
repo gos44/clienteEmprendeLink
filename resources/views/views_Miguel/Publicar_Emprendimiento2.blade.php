@@ -33,21 +33,21 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('Publicar_Emprendimiento2.store') }}" enctype="multipart/form-data" id="emprendimiento-form">
+        <form method="POST" action="{{ route('Publicar_Emprendimiento2') }}" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
             <div class="form-sections">
                 <div class="form-group">
                     <label for="logo">Elige tu logo (El logo debe ser cuadrado)</label>
                     <input type="file" id="logo" name="logo" accept="image/*" required>
                     <div class="image-preview square" id="logo-preview">
-                        <img src="{{ session('entrepreneurship.logo') ? asset('storage/' . session('entrepreneurship.logo')) : 'img/logoMarca.png' }}" alt="Logo preview">
+                        <img src="img/logoMarca.png" alt="Logo preview">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="portada">¡Elige una portada! (La portada debe ser rectangular)</label>
                     <input type="file" id="portada" name="portada" accept="image/*" required>
                     <div class="image-preview rectangle" id="portada-preview">
-                        <img src="{{ session('entrepreneurship.cover') ? asset('storage/' . session('entrepreneurship.cover')) : 'LINK/FONDO-VINOS.png' }}" alt="Portada preview">
+                        <img src="LINK/FONDO-VINOS.png" alt="Portada preview">
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,68 +57,77 @@
                         <div class="product-item" id="product{{ $i + 1 }}">
                             <input type="file" name="products[{{ $i }}][image]" class="product-image-input" accept="image/*" required>
                             <div class="product-image">
-                                <img src="{{ session("entrepreneurship.product_image_" . ($i + 1)) ? asset('storage/' . session("entrepreneurship.product_image_" . ($i + 1))) : 'LINK/VINOS-' . ($i + 1) . '.png' }}" alt="Product {{ $i + 1 }}">
+                                <img src="LINK/VINOS-{{ $i + 1 }}.png" alt="Product {{ $i + 1 }}">
                             </div>
-                            <textarea name="products[{{ $i }}][descripcion]" placeholder="Descripción del producto" rows="4" required>{{ session("entrepreneurship.product_description_" . ($i + 1)) }}</textarea>
+                            <textarea name="products[{{ $i }}][descripcion]" placeholder="Descripción del producto" rows="4" required></textarea>
                         </div>
                         @endfor
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-publicar">Siguiente</button>
+            <a href="{{ route('Publicar_Emprendimiento3') }}" class="btn-publicar">Siguiente</a>
         </form>
     </div>
+    
+
+
+
+
+
 
     <script>
-        // Función para manejar la vista previa de imágenes
-        function handleImagePreview(input, previewId) {
-            const preview = document.getElementById(previewId);
-            const previewImg = preview.querySelector('img');
-            const file = input.files[0];
-            const reader = new FileReader();
+   
 
-            reader.onloadend = function () {
-                previewImg.src = reader.result;
-            }
+        // Función para manejar la vista previa de imágenes
+function handleImagePreview(input, previewId) {
+    const preview = document.getElementById(previewId);
+    const previewImg = preview.querySelector('img');
+    const file = input.files[0];
+    const reader = new FileReader();
 
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                previewImg.src = ''; // Imagen vacía si no hay archivo seleccionado
-            }
+    reader.onloadend = function () {
+        previewImg.src = reader.result;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        previewImg.src = ''; // Imagen vacía si no hay archivo seleccionado
+    }
+}
+
+// Manejar la vista previa del logo
+document.getElementById('logo').addEventListener('change', function() {
+    handleImagePreview(this, 'logo-preview');
+});
+
+// Manejar la vista previa de la portada
+document.getElementById('portada').addEventListener('change', function() {
+    handleImagePreview(this, 'portada-preview');
+});
+
+// Manejar la vista previa de las imágenes de productos
+document.querySelectorAll('.product-image-input').forEach(function(input) {
+    input.addEventListener('change', function() {
+        const productItem = this.closest('.product-item');
+        const preview = productItem.querySelector('.product-image img');
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
         }
 
-        // Manejar la vista previa del logo
-        document.getElementById('logo').addEventListener('change', function() {
-            handleImagePreview(this, 'logo-preview');
-        });
-
-        // Manejar la vista previa de la portada
-        document.getElementById('portada').addEventListener('change', function() {
-            handleImagePreview(this, 'portada-preview');
-        });
-
-        // Manejar la vista previa de las imágenes de productos
-        document.querySelectorAll('.product-image-input').forEach(function(input) {
-            input.addEventListener('change', function() {
-                const productItem = this.closest('.product-item');
-                const preview = productItem.querySelector('.product-image img');
-                const file = this.files[0];
-                const reader = new FileReader();
-
-                reader.onloadend = function () {
-                    preview.src = reader.result;
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = ''; // Imagen vacía si no hay archivo seleccionado
-                }
-            });
-        });
-    </script>
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = ''; // Imagen vacía si no hay archivo seleccionado
+        }
+    });
+});
+    </script>
    
-    <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
+   <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
+
 </body>
 </html>

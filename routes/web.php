@@ -235,23 +235,27 @@ Route::get('emprendimientos_deportivos_inversionista',[articulos_deportivos_inve
 Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
 //publicar emprendimiento
 
-Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])
-    ->name('Publicar_Emprendimiento1');
+Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])->name('Publicar_Emprendimiento1');
+Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])->name('Publicar_Emprendimiento2');
+Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])->name('Publicar_Emprendimiento3');
 
-Route::post('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'storeStep1'])
-    ->name('Publicar_Emprendimiento1.store');
+// Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])
+//     ->name('Publicar_Emprendimiento1');
 
-Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])
-    ->name('Publicar_Emprendimiento2');
+// Route::post('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'storeStep1'])
+//     ->name('Publicar_Emprendimiento1.store');
 
-Route::post('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'storeStep2'])
-    ->name('Publicar_Emprendimiento2.store');
+// Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])
+//     ->name('Publicar_Emprendimiento2');
 
-Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])
-    ->name('Publicar_Emprendimiento3');
+// Route::post('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'storeStep2'])
+//     ->name('Publicar_Emprendimiento2.store');
 
-Route::post('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'store'])
-    ->name('Publicar_Emprendimiento3.store');
+// Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])
+//     ->name('Publicar_Emprendimiento3');
+
+// Route::post('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'store'])
+//     ->name('Publicar_Emprendimiento3.store');
 
 //rutas k
 
