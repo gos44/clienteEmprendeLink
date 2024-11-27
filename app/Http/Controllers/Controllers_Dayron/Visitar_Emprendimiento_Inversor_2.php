@@ -17,6 +17,6 @@ class Visitar_Emprendimiento_Inversor_2 extends Controller
         // ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Dayron.Visitar_Emprendimiento_Inversor_2');
+        return view('Views_Dayron.Visitar_Emprendimiento_Inversor');
     }
 }
