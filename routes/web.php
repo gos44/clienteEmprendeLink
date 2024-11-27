@@ -234,16 +234,28 @@ Route::get('emprendimientos_deportivos_inversionista',[articulos_deportivos_inve
 // RUTAS DEL Miguel
 Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inversor.index');
 //publicar emprendimiento
-Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])->name('Publicar_Emprendimiento1');
-Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])->name('Publicar_Emprendimiento2');
-Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])->name('Publicar_Emprendimiento3');
 
+Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])
+    ->name('Publicar_Emprendimiento1');
 
+Route::post('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'storeStep1'])
+    ->name('Publicar_Emprendimiento1.store');
 
+Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])
+    ->name('Publicar_Emprendimiento2');
+
+Route::post('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'storeStep2'])
+    ->name('Publicar_Emprendimiento2.store');
+
+Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])
+    ->name('Publicar_Emprendimiento3');
+
+Route::post('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'store'])
+    ->name('Publicar_Emprendimiento3.store');
 
 //rutas k
 
-Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+// Route::get('PublicarEmprendimiento',[PublishEntrepreneurshipsController::class,'Publicar_emprendimiento'])->name('publicentrepreneurships'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //reseñas
 Route::get('resena', [ReviewController::class, 'Resena'])->name('resena');
