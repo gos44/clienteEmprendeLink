@@ -51,6 +51,16 @@
                 </div>
 
                 <div class="flex-column">
+                    <label>Fecha de nacimiento</label>
+                    <div class="inputForm">
+                        <input type="date" class="input" name="birth_date" required />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="form-column">
+                <div class="flex-column">
                     <label>Ubicación</label>
                     <div class="inputForm">
                         <input type="text" class="input" name="location" placeholder="Ingrese su ubicación" required />
@@ -65,16 +75,6 @@
                 </div>
 
                 <div class="flex-column">
-                    <label>Fecha de nacimiento</label>
-                    <div class="inputForm">
-                        <input type="date" class="input" name="birth_date" required />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Columna Derecha -->
-            <div class="form-column">
-                <div class="flex-column">
                     <label>Contraseña</label>
                     <div class="inputForm">
                         <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
@@ -87,7 +87,6 @@
                         <input type="password" class="input" name="password_confirmation" placeholder="Confirme su contraseña" required />
                     </div>
                 </div>
-
 
                 <div class="flex-column">
                     <label>Imagen</label>
@@ -104,7 +103,7 @@
 
         <button type="submit" class="button-submit">Registrarse</button>
 
-        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_inversionista') }}" class="span">Iniciar sesión</a></p>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesión</a></p>
     </form>
 
     <script>
@@ -120,3 +119,5 @@
             }
         });
     </script>
+</body>
+</html>

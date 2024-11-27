@@ -60,14 +60,10 @@ class Registro_usuario_Controller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('http://127.0.0.1:8000/api/auth/register', $data);
 
-
-            // Debugging: imprimir respuesta completa
-            dd($response->json());
-
-            // Si la API respondió correctamente, redirige con éxito
+            // Si la API respondió correctamente, redirige a la vista de login
             if ($response->successful()) {
-                return redirect()->route('registrar_nuevo_usuario')
-                    ->with('success', 'Usuario registrado con éxito.');
+                return redirect()->route('iniciar_sesion_usuario')
+                    ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
             } else {
                 // Si hubo un error con la API, muestra los errores
                 return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
@@ -79,5 +75,4 @@ class Registro_usuario_Controller extends Controller
                 ->withInput();
         }
     }
-
 }
