@@ -196,6 +196,22 @@ Route::get('iniciar_sesion_usuario',[inicio_de_sesion_usuariocontroller::class,'
 Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro usuario e inversionista
+
+
+
+//ruta de prueva:
+
+
+// Route::get('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'index'])
+//     ->name('registrar_nuevo_usuario');
+Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
+
+
+
+
+
+
+
 Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
@@ -237,7 +253,7 @@ Route::get('resena4', [ReviewController::class, 'Resena4'])->name('resena4');
 //inver
 Route::get('resenaInver', [ReviewController::class, 'ResenaInver'])->name('resenaInver');
 
-//notificaciones 
+//notificaciones
 
 Route::get('notificaciones', [Notificaciones::class, 'Notificaciones'])->name('Notificaciones');
 Route::get('notificaciones2', [Notificaciones::class, 'Notificaciones2'])->name('Notificaciones2');

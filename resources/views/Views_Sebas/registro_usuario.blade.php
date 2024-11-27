@@ -4,60 +4,111 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="{{ asset('css/registro_usuario.css') }}">
 
+    <title>Registro Usuario</title>
 </head>
-
 <body>
-    <form class="form">
+    <form class="form" action="{{ route('registrar_nuevo_usuario.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf <!-- Token de seguridad para Laravel -->
+
         <div class="flex-column">
-            <label>Registro Usuario </label>
-        </div>
-        Nombre
-        <div class="inputForm">
-            <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-                <g id="Layer_3" data-name="Layer 3">
-                </g>
-            </svg>
-            <input type="text" class="input" placeholder="Ingrese su Nombre" />
+            <label class="form-title">Registro Usuario</label>
         </div>
 
+        <div class="form-grid">
+            <!-- Columna Izquierda -->
+            <div class="form-column">
+                <div class="flex-column">
+                    <label>Nombre</label>
+                    <div class="inputForm">
+                        <input type="text" class="input" name="name" placeholder="Ingrese su nombre" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Apellido</label>
+                    <div class="inputForm">
+                        <input type="text" class="input" name="lastname" placeholder="Ingrese su apellido" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Correo electrónico</label>
+                    <div class="inputForm">
+                        <input type="email" class="input" name="email" id="emailInput" placeholder="Ingrese su correo electrónico" required />
+                    </div>
+                    <p id="errorMessage" style="color:red; display:none;">Por favor, ingrese un correo electrónico válido que contenga un '@'</p>
+                </div>
+
+                <div class="flex-column">
+                    <label>Teléfono</label>
+                    <div class="inputForm">
+                        <input type="text" class="input" name="phone" placeholder="Ingrese su número de teléfono" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Ubicación</label>
+                    <div class="inputForm">
+                        <input type="text" class="input" name="location" placeholder="Ingrese su ubicación" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Número</label>
+                    <div class="inputForm">
+                        <input type="text" class="input" name="number" placeholder="Ingrese su número" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Fecha de nacimiento</label>
+                    <div class="inputForm">
+                        <input type="date" class="input" name="birth_date" required />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="form-column">
+                <div class="flex-column">
+                    <label>Contraseña</label>
+                    <div class="inputForm">
+                        <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label>Confirmar contraseña</label>
+                    <div class="inputForm">
+                        <input type="password" class="input" name="password_confirmation" placeholder="Confirme su contraseña" required />
+                    </div>
+                </div>
 
 
-            <label>Apellido</label>
+                <div class="flex-column">
+                    <label>Imagen</label>
+                    <div class="inputForm">
+                        <input type="file" class="input" name="pic_profile" accept="image/*" />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="inputForm">
-            <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-                <g id="Layer_3" data-name="Layer 3">
-                </g>
-            </svg>
-            <input type="text" class="input" placeholder="Ingrese su Apellido" />
+
+        <div class="flex-row">
+            <span class="span"><a href="{{ route('ContactanosHome') }}" class="link">¿Necesitas ayuda?</a></span>
         </div>
 
+        <button type="submit" class="button-submit">Registrarse</button>
 
-
-            <label>Documento</label>
-        </div>
-        <div class="inputForm">
-            <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-                <g id="Layer_3" data-name="Layer 3">
-                </g>
-            </svg>
-            <input type="text" class="input" placeholder="Ingrese su Documento" />
-        </div>
-        <label>Correo electronico o gmail</label>
-    </div>
-    <div class="inputForm">
-        <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-            <g id="Layer_3" data-name="Layer 3">
-            </g>
-        </svg>
-        <input type="text" class="input" id="emailInput" placeholder="Ingrese su correo electronico o gmail" />
-    </div>
-    <p id="errorMessage" style="color:red; display:none;">Por favor, ingrese un correo electrónico válido que contenga un '@'</p>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_inversionista') }}" class="span">Iniciar sesión</a></p>
+    </form>
 
     <script>
+        // Script para el email
         const emailInput = document.getElementById('emailInput');
         const errorMessage = document.getElementById('errorMessage');
 
@@ -69,29 +120,3 @@
             }
         });
     </script>
-            <label>Telefono</label>
-        </div>
-        <div class="inputForm">
-            <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
-                <g id="Layer_3" data-name="Layer 3">
-                </g>
-            </svg>
-            <input type="text" class="input" placeholder="Ingrese su Telefono" />
-        </div>
-
-
-        <div class="flex-row">
-
-            <span class="span"><a href="{{ route('ContactanosHome') }}" class="link">¿Necesitas ayuda?</a></span>
-        </div>
-        <a href="{{ route('registrar_usuario_ingreso') }}" class="button-submit">Registrarse</a>
-
-        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesion</a></p>
-
-
-
-    </script>
-
-</body>
-
-</html>
