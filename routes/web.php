@@ -188,11 +188,10 @@ Route::get('verificar_identidad_usuario',[Verificar_identidad_cambio_contraseña
 Route::get('verificar_identidad_inversionista',[verificar_identidad_inversionista::class,'index'])->name('verificar_identidad_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //cambiar contraseñas nuevas usuario e inversioinista
-Route::get('cambiar_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'index'])->name('cambiar_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::post('cambiar_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'index'])->name('cambiar_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionistacontroller::class,'index'])->name('cambiar_contraseña_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //iniciar sesion usuario e inversionista
-Route::get('iniciar_sesion_usuario',[inicio_de_sesion_usuariocontroller::class,'index'])->name('iniciar_sesion_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro usuario e inversionista
@@ -206,6 +205,7 @@ Route::get('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'i
 //     ->name('registrar_nuevo_usuario');
 Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
 
+Route::post('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
 
 
 
