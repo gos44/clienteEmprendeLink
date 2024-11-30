@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <link rel="stylesheet" href="{{ asset('css/registro_usuario.css') }}">
-
     <title>Registro Usuario</title>
 </head>
 <body>
@@ -22,38 +20,38 @@
             <!-- Columna Izquierda -->
             <div class="form-column">
                 <div class="flex-column">
-                    <label>Nombre</label>
+                    <label for="name">Nombre</label>
                     <div class="inputForm">
-                        <input type="text" class="input" name="name" placeholder="Ingrese su nombre" required />
+                        <input type="text" class="input" name="name" id="name" placeholder="Ingrese su nombre" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Apellido</label>
+                    <label for="lastname">Apellido</label>
                     <div class="inputForm">
-                        <input type="text" class="input" name="lastname" placeholder="Ingrese su apellido" required />
+                        <input type="text" class="input" name="lastname" id="lastname" placeholder="Ingrese su apellido" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Correo electrónico</label>
+                    <label for="email">Correo electrónico</label>
                     <div class="inputForm">
-                        <input type="email" class="input" name="email" id="emailInput" placeholder="Ingrese su correo electrónico" required />
+                        <input type="email" class="input" name="email" id="email" placeholder="Ingrese su correo electrónico" required />
                     </div>
                     <p id="errorMessage" style="color:red; display:none;">Por favor, ingrese un correo electrónico válido que contenga un '@'</p>
                 </div>
 
                 <div class="flex-column">
-                    <label>Teléfono</label>
+                    <label for="phone">Teléfono</label>
                     <div class="inputForm">
-                        <input type="text" class="input" name="phone" placeholder="Ingrese su número de teléfono" required />
+                        <input type="text" class="input" name="phone" id="phone" placeholder="Ingrese su número de teléfono" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Fecha de nacimiento</label>
+                    <label for="birth_date">Fecha de nacimiento</label>
                     <div class="inputForm">
-                        <input type="date" class="input" name="birth_date" required />
+                        <input type="date" class="input" name="birth_date" id="birth_date" required />
                     </div>
                 </div>
             </div>
@@ -61,37 +59,47 @@
             <!-- Columna Derecha -->
             <div class="form-column">
                 <div class="flex-column">
-                    <label>Ubicación</label>
+                    <label for="location">Ubicación</label>
                     <div class="inputForm">
-                        <input type="text" class="input" name="location" placeholder="Ingrese su ubicación" required />
+                        <input type="text" class="input" name="location" id="location" placeholder="Ingrese su ubicación" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Número</label>
+                    <label for="number">Número</label>
                     <div class="inputForm">
-                        <input type="text" class="input" name="number" placeholder="Ingrese su número" required />
+                        <input type="text" class="input" name="number" id="number" placeholder="Ingrese su número" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Contraseña</label>
+                    <label for="password">Contraseña</label>
                     <div class="inputForm">
-                        <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
+                        <input type="password" class="input" name="password" id="password" placeholder="Ingrese su contraseña" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Confirmar contraseña</label>
+                    <label for="password_confirmation">Confirmar contraseña</label>
                     <div class="inputForm">
-                        <input type="password" class="input" name="password_confirmation" placeholder="Confirme su contraseña" required />
+                        <input type="password" class="input" name="password_confirmation" id="password_confirmation" placeholder="Confirme su contraseña" required />
                     </div>
                 </div>
 
                 <div class="flex-column">
-                    <label>Imagen</label>
+                    <label for="pic_profile">Imagen de perfil</label>
                     <div class="inputForm">
-                        <input type="file" class="input" name="pic_profile" accept="image/*" />
+                        <input type="file" class="input" name="pic_profile" id="pic_profile" accept="image/*" />
+                    </div>
+                </div>
+
+                <div class="flex-column">
+                    <label for="role">Rol</label>
+                    <div class="inputForm">
+                        <select name="role" id="role" class="input" required>
+                            <option value="entrepreneur">Emprendedor</option>
+                            <option value="investor">Inversionista</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -107,8 +115,8 @@
     </form>
 
     <script>
-        // Script para el email
-        const emailInput = document.getElementById('emailInput');
+        // Script para validación de email
+        const emailInput = document.getElementById('email');
         const errorMessage = document.getElementById('errorMessage');
 
         emailInput.addEventListener('input', function() {
@@ -116,6 +124,19 @@
                 errorMessage.style.display = 'block';
             } else {
                 errorMessage.style.display = 'none';
+            }
+        });
+
+        // Validación adicional si es necesario
+        document.querySelector('form').addEventListener('submit', function(event) {
+            // Validación de campos requeridos
+            const requiredFields = document.querySelectorAll('input[required], select[required]');
+            for (let field of requiredFields) {
+                if (!field.value) {
+                    event.preventDefault();
+                    alert('Por favor, complete todos los campos requeridos.');
+                    return;
+                }
             }
         });
     </script>

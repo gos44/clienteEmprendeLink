@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Redirect;
 
 class Registro_usuario_Controller extends Controller
 {
+    /**
+     * Muestra el formulario de registro.
+     */
     public function index()
     {
-        // Muestra el formulario de registro
         return view('Views_Sebas.registro_usuario');
     }
 
+    /**
+     * Almacena los datos del nuevo usuario y los envía a la API.
+     */
     public function store(Request $request)
     {
         // Validación de los datos del formulario
@@ -22,21 +26,22 @@ class Registro_usuario_Controller extends Controller
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'password' => 'required|confirmed|min:8', // Asegura confirmación de contraseña
+            'password' => 'required|confirmed|min:8',  // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'pic_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pic_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Imagen de perfil
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
+            'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
         ]);
 
-        // Manejo de la imagen (si existe)
+        // Manejo de la imagen de perfil
         $imagePath = null;
         if ($request->hasFile('pic_profile')) {
             $image = $request->file('pic_profile');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/profile_pics'), $imageName);
-            $imagePath = 'uploads/profile_pics/' . $imageName;
+            $imageName = time() . '.' . $image->getClientOriginalExtension();  // Generar un nombre único
+            $image->move(public_path('uploads/profile_pics'), $imageName);  // Mover la imagen a la carpeta
+            $imagePath = 'uploads/profile_pics/' . $imageName;  // Guardar la ruta relativa
         }
 
         // Preparación de los datos para enviar a la API
@@ -44,33 +49,35 @@ class Registro_usuario_Controller extends Controller
             'name' => $validated['name'],
             'lastname' => $validated['lastname'],
             'birth_date' => $validated['birth_date'],
-            'password' => $validated['password'],
-            'password_confirmation' => $request->input('password_confirmation'), // Añadido explícitamente
+            'password' => $validated['password'],  // Contraseña
+            'password_confirmation' => $request->input('password_confirmation'), // Confirmación de la contraseña
             'phone' => $validated['phone'],
-            'image' => $imagePath,
+            'image' => $imagePath,  // Ruta de la imagen de perfil
             'email' => $validated['email'],
             'location' => $validated['location'],
             'number' => $validated['number'],
+            'role' => $validated['role'], // El rol
         ];
 
         try {
-            // Enviar la solicitud POST a la API local
+            // Enviar la solicitud POST a la API local para registrar al usuario
             $response = Http::withHeaders([
-                'Accept' => 'application/json', // Asegura que se espera una respuesta JSON
+                'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post('https://clienteemprendelink-production.up.railway.app/register', $data);
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
 
-            // Si la API respondió correctamente, redirige a la vista de login
+            // Comprobar si la respuesta fue exitosa
             if ($response->successful()) {
+                // Redirigir al login si el registro es exitoso
                 return redirect()->route('iniciar_sesion_usuario')
                     ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
             } else {
-                // Si hubo un error con la API, muestra los errores
+                // Si hubo errores, mostrarlos al usuario
                 return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
-                    ->withInput();
+                    ->withInput(); // Mantener los datos anteriores en el formulario
             }
         } catch (\Exception $e) {
-            // Manejo de excepciones (problemas de conexión, etc.)
+            // Manejo de excepciones en caso de fallos de conexión o errores
             return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
                 ->withInput();
         }
