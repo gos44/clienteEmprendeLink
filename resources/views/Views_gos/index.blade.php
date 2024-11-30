@@ -90,7 +90,7 @@
               <span class="close-button" id="cerrarInicioSesionModal">&times;</span>
               <h2>Seleccione tipo de inicio de sesión</h2>
               <div class="button-container">
-                  <button onclick="window.location.href='{{ route('iniciar_sesion_usuario') }}'" class="modal-button">Usuario</button>
+                  <button onclick="window.location.href='{{ route('iniciar_sesion_usuario.login') }}'" class="modal-button">Usuario</button>
                   <button onclick="window.location.href='{{ route('iniciar_sesion_inversionista') }}'" class="modal-button">Inversionista</button>
               </div>
           </div>
