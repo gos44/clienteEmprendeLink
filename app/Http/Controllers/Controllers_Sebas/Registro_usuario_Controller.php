@@ -58,7 +58,7 @@ class Registro_usuario_Controller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json', // Asegura que se espera una respuesta JSON
                 'Content-Type' => 'application/json',
-            ])->post('http://127.0.0.1:8000/api/auth/register', $data);
+            ])->post('https://clienteemprendelink-production.up.railway.app/register', $data);
 
             // Si la API respondió correctamente, redirige a la vista de login
             if ($response->successful()) {
