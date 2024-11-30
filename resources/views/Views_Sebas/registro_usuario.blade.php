@@ -111,7 +111,7 @@
 
         <button type="submit" class="button-submit">Registrarse</button>
 
-        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario') }}" class="span">Iniciar sesión</a></p>
+        <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario.login') }}" class="span">Iniciar sesión</a></p>
     </form>
 
     <script>

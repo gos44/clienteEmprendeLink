@@ -83,7 +83,6 @@
                 <button onclick="window.location.href='{{ route('registrar_nuevo_inversionista') }}?role=investor'" class="modal-button">Inversionista</button>
 
 
-
               </div>
           </div>
       </div>
