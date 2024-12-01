@@ -42,10 +42,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             if ($userRole == 'entrepreneur') {
                 return redirect()->route('Home_Usuario.index')
                     ->with('success', 'Usuario emprendedor registrado con éxito.');
-            } elseif ($userRole == 'investor') {
-                return redirect()->route('Home_Investor.index')
-                    ->with('success', 'Usuario inversor registrado con éxito.');
-            }
+            } 
 
 
 
