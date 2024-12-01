@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Controllers_Sebas;
 
-use Illuminate\Support\Facades\Http; // <-- Asegúrate de incluir esta línea
-
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,33 +22,52 @@ class inicio_de_sesion_usuariocontroller extends Controller
             'password' => 'required',
         ]);
 
-        try {
-            // Enviar solicitud POST a la API
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+        // Enviar solicitud POST a la API para autenticar
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            if ($response->successful()) {
-                // Extraer token del cuerpo de la respuesta
-                $data = $response->json();
+        if ($response->successful()) {
+            // Extraer datos del token
+            $data = $response->json();
+            $token = $data['access_token'];
 
-                // Retornar el token como JSON
+            // Hacer una solicitud para obtener la información del usuario
+            $userInfoResponse = Http::withToken($token)->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+
+            if ($userInfoResponse->successful()) {
+                $userData = $userInfoResponse->json();
+
+                // Verificar el rol del usuario
+                if ($userData['role'] === 'entrepreneur') {
+                    return response()->json([
+                        'access_token' => $token,
+                        'redirect' => route('Home_Usuario.index')
+                    ], 200);
+                } elseif ($userData['role'] === 'investor') {
+                    return response()->json([
+                        'access_token' => $token,
+                        'redirect' => route('Home_inversor.index')
+                    ], 200);
+                }
+
+                // Si no se encuentra un rol definido, devolver el token
                 return response()->json([
-                    'access_token' => $data['access_token'],
+                    'access_token' => $token,
                     'token_type' => $data['token_type'] ?? 'bearer',
                 ], 200);
             } else {
-                // Manejar errores de la API
+                // Error al obtener información del usuario
                 return response()->json([
-                    'error' => $response->json()['error'] ?? 'Credenciales incorrectas.',
-                ], 401);
+                    'error' => 'No se pudo obtener la información del usuario',
+                ], 400);
             }
-        } catch (\Exception $e) {
-            // Manejar excepciones generales
+        } else {
+            // Manejar errores de la API
             return response()->json([
-                'error' => 'Error al comunicarse con la API: ' . $e->getMessage(),
-            ], 500);
+                'error' => $response->json()['error'] ?? 'Credenciales incorrectas.',
+            ], 401);
         }
     }
 }
