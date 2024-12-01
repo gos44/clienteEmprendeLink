@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
-class Publicar_Emprendimiento extends Controller
+class Publicar_Emprendimiento_Controller extends Controller
 {
    /**
      * Muestra el primer paso del formulario de publicación.
