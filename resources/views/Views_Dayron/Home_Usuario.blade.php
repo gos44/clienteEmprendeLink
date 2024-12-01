@@ -94,7 +94,7 @@
             // Verificar si la tecla presionada es "Enter"
             if (event.key === "Enter") {
                 // Redirigir a otro archivo HTML
-                window.location.href = "busqueda_filtro.html";
+                window.location.href = "{{ route('filtrar_usuario') }}";
             }
         }
     </script>

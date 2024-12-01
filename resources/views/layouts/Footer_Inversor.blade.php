@@ -19,20 +19,20 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* align-items: center; */
 }
 
 .footer-section {
     flex: 1;
-    margin: 20px;
-    min-width: 200px;
+    margin: 10px;
+    min-width: 180px;
 }
 
 .footer-section h3 {
     border-bottom: 1px solid #555;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    max-width: 220px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    max-width: 200px;
+    font-size: 0.9em;
 }
 
 .footer-section ul {
@@ -41,7 +41,8 @@ footer {
 }
 
 .footer-section ul li {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    font-size: 0.8em;
 }
 
 .footer-section ul li a,
@@ -59,12 +60,13 @@ footer {
 .footer-bottom {
     text-align: center;
     border-top: 1px solid #555;
-    padding-top: 15px;
+    padding-top: 10px;
+    font-size: 0.8em;
 }
 
 /* Social icons styles */
 .imagenes {
-    height:60px;    
+    height: 40px;    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,28 +82,28 @@ footer {
 }
 
 .example-2 .icon-content {
-    margin: 0 12px;
+    margin: 0 8px;
     position: relative;
 }
 
 .example-2 .icon-content .tooltip {
     position: absolute;
-    top: -40px;
+    top: -35px;
     left: 50%;
     transform: translateX(-50%);
     color: #fff;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: 5px;
     opacity: 0;
     visibility: hidden;
-    font-size: 14px;
+    font-size: 12px;
     transition: all 0.3s ease;
 }
 
 .example-2 .icon-content:hover .tooltip {
     opacity: 1;
     visibility: visible;
-    top: -50px;
+    top: -45px;
 }
 
 .example-2 .icon-content a {
@@ -110,8 +112,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     color: whitesmoke;
     transition: all 0.3s ease-in-out;
@@ -125,8 +127,8 @@ footer {
 .example-2 .icon-content a svg {
     position: relative;
     z-index: 1;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 }
 
 .example-2 .icon-content a .filled {
@@ -143,40 +145,11 @@ footer {
     height: 100%;
 }
 
-/* Specific social media colors */
-.example-2 .icon-content a[data-social="linkedin"] .filled,
-.example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
-    background-color: #0274b3;
-}
-
-.example-2 .icon-content a[data-social="twitter"] .filled,
-.example-2 .icon-content a[data-social="twitter"] ~ .tooltip {
-    background-color: #24262a;
-}
-
-.example-2 .icon-content a[data-social="instagram"] .filled,
-.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
-    background: linear-gradient(
-        45deg,
-        #405de6,
-        #5b51db,
-        #b33ab4,
-        #c135b4,
-        #e1306c,
-        #fd1f1f
-    );
-}
-
-.example-2 .icon-content a[data-social="youtube"] .filled,
-.example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
-    background-color: #ff0000;
-}
-
 /* Logo responsiveness */
 .logoda img {
-    max-width: 80%;
+    max-width: 60%;
     height: auto;
-    margin-top: 7%;
+    margin-top: 5%;
 }
 
 /* Media queries for responsiveness */
@@ -188,7 +161,7 @@ footer {
     }
 
     .footer-section {
-        margin: 20px 0;
+        margin: 10px 0;
     }
 }
     </style>

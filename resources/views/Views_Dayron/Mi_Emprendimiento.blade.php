@@ -34,10 +34,7 @@
               <h1>Vino el Éxtasis</h1>
               <p class="hero-quote">"Aquel que vino al mundo y no toma vino, ¿entonces a qué vino?"</p>
           </div>
-          <div class="hero-buttons">
-              <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-              <a href="{{ route('Editar_Emprendimiento.index') }}" class="btn btn-secondary">Editar</a>
-          </div>
+          
       </div>
   </section>
 
@@ -53,7 +50,10 @@
             </div>
         </div>
     </section>
-
+    <div class="hero-buttons">
+        <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+        <a href="{{ route('Editar_Emprendimiento.index') }}" class="btn btn-secondary">Editar</a>
+    </div>
       <div class="content">
           <section class="products">
               <div class="product">
