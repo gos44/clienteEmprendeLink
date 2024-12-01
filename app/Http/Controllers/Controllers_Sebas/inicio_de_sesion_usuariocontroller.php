@@ -34,7 +34,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $token = $data['access_token'];
 
             // Hacer una solicitud para obtener la información del usuario
-            $userInfoResponse = Http::withToken($token)->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+            $userInfoResponse = Http::withToken($token)->get('https://apiemprendelink-production-9272.up.railway.app/api/users');
 
             if ($userInfoResponse->successful()) {
                 $userData = $userInfoResponse->json();
