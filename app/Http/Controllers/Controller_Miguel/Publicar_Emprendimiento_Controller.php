@@ -14,7 +14,7 @@ class Publicar_Emprendimiento_Controller extends Controller
      */
     public function Publicar_Emprendimiento1()
     {
-        return view('Views_Miguel.Publicar_Emprendimiento1');
+        return view('views_Miguel.Publicar_Emprendimiento1');
     }
 
     /**
