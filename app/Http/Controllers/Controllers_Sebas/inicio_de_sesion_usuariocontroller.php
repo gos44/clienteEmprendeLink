@@ -35,13 +35,19 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 $data = $response->json();
                 $token = $data['access_token'];
 
+                // Verificar si el token está presente y válido
+                if (empty($token)) {
+                    return response()->json([
+                        'error' => 'Token de acceso no recibido o es inválido.',
+                    ], 400);
+                }
+
                 // Intentar obtener la información del usuario con el token
-                $userInfoResponse = Http::withToken($token)
-                    ->withHeaders([
+                $userInfoResponse = Http::withHeaders([
                         'Accept' => 'application/json',
                         'Authorization' => 'Bearer ' . $token
                     ])
-                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/users');
+                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/users');  // Verificar que este sea el endpoint correcto
 
                 // Registro de depuración para la respuesta del usuario
                 Log::info('Token de acceso:', ['token' => $token]);
