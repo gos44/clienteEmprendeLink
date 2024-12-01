@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/inicio_de_sesion.css') }}">
 </head>
 <body>
-    <form class="form" action="{{ route('iniciar_sesion_usuario.login') }}" method="POST">
+    <form class="form" action="/iniciar_sesion_usuario/login" method="POST">
         @csrf <!-- Token de seguridad para Laravel -->
         <div class="flex-column">
             <label>Iniciar Sesión</label>
