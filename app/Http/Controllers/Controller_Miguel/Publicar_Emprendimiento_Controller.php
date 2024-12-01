@@ -9,42 +9,97 @@ use Illuminate\Support\Facades\Auth;
 
 class Publicar_Emprendimiento extends Controller
 {
+   /**
+     * Muestra el primer paso del formulario de publicación.
+     */
     public function Publicar_Emprendimiento1()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
-
-        // Retorna la vista 'Perfil' con los datos de prueba
         return view('Views_Miguel.Publicar_Emprendimiento1');
     }
+
+    /**
+     * Procesa los datos del primer paso y avanza al segundo.
+     */
+    public function storeStep1(Request $request)
+    {
+        $validated = $request->validate([
+            'basic_data_field1' => 'required|string|max:255',
+            'basic_data_field2' => 'required|string|max:255',
+        ]);
+
+        // Guardar los datos en sesión para los siguientes pasos
+        session(['step1' => $validated]);
+
+        return redirect()->route('Publicar_Emprendimiento2');
+    }
+
+    /**
+     * Muestra el segundo paso del formulario de publicación.
+     */
     public function Publicar_Emprendimiento2()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
-
-        // Retorna la vista 'Perfil' con los datos de prueba
         return view('Views_Miguel.Publicar_Emprendimiento2');
     }
+
+    /**
+     * Procesa los datos del segundo paso y avanza al tercero.
+     */
+    public function storeStep2(Request $request)
+    {
+        $validated = $request->validate([
+            'image_field' => 'nullable|string|max:255',
+        ]);
+
+        // Guardar los datos en sesión para los siguientes pasos
+        session(['step2' => $validated]);
+
+        return redirect()->route('Publicar_Emprendimiento3');
+    }
+
+    /**
+     * Muestra el tercer paso del formulario de publicación.
+     */
     public function Publicar_Emprendimiento3()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
-
-        // Retorna la vista 'Perfil' con los datos de prueba
         return view('Views_Miguel.Publicar_Emprendimiento3');
-}
+    }
+
+    /**
+     * Procesa los datos del tercer paso y publica el emprendimiento.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'final_data_field1' => 'required|string|max:255',
+            'final_data_field2' => 'required|string|max:255',
+        ]);
+
+        // Combina los datos de todos los pasos
+        $data = array_merge(
+            session('step1', []),
+            session('step2', []),
+            $validated
+        );
+
+        try {
+            // Enviar la solicitud POST a la API
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
+
+            if ($response->successful()) {
+                return redirect()->route('Publicar_Emprendimiento1')
+                    ->with('success', 'Emprendimiento publicado con éxito.');
+            } else {
+                return back()->withErrors($response->json()['errors'] ?? ['Error al publicar el emprendimiento.'])
+                    ->withInput();
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
 }
 // class Publicar_Emprendimiento extends Controller 
 // {
