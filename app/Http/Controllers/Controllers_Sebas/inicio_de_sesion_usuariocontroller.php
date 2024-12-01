@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class inicio_de_sesion_usuariocontroller extends Controller
@@ -17,26 +16,26 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validar datos
+        // Validar los datos de entrada
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         try {
-            // Enviar solicitud POST a la API para autenticar
+            // Enviar solicitud POST a la API para autenticar al usuario
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            // Verificar la respuesta de autenticación
+            // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
-                // Extraer datos del token
+                // Obtener el token de acceso
                 $data = $response->json();
                 $token = $data['access_token'];
 
-                // Intentar obtener información del usuario
+                // Intentar obtener la información del usuario con el token
                 $userInfoResponse = Http::withToken($token)
                     ->withHeaders([
                         'Accept' => 'application/json',
@@ -44,19 +43,20 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     ])
                     ->get('https://apiemprendelink-production-9272.up.railway.app/api/users');
 
-                // Registro de depuración
+                // Registro de depuración para la respuesta del usuario
                 Log::info('Token de acceso:', ['token' => $token]);
                 Log::info('Respuesta de información de usuario:', [
                     'status' => $userInfoResponse->status(),
                     'body' => $userInfoResponse->body()
                 ]);
 
-                // Verificar la respuesta de información de usuario
+                // Verificar si la respuesta para la información del usuario es exitosa
                 if ($userInfoResponse->successful()) {
                     $userData = $userInfoResponse->json();
 
-                    // Verificar el rol del usuario
+                    // Verificar si el usuario tiene un rol
                     if (isset($userData['role'])) {
+                        // Redirigir según el rol del usuario
                         if ($userData['role'] === 'entrepreneur') {
                             return response()->json([
                                 'access_token' => $token,
@@ -70,13 +70,13 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         }
                     }
 
-                    // Si no se encuentra un rol definido
+                    // Si no se encuentra un rol válido, enviar error
                     return response()->json([
                         'error' => 'Rol de usuario no definido',
                         'user_data' => $userData
                     ], 400);
                 } else {
-                    // Error al obtener información de usuario
+                    // Si no se pudo obtener la información del usuario
                     return response()->json([
                         'error' => 'No se pudo obtener información de usuario',
                         'status_code' => $userInfoResponse->status(),
@@ -85,7 +85,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     ], 401);
                 }
             } else {
-                // Error en la autenticación inicial
+                // Si la autenticación inicial falla
                 return response()->json([
                     'error' => $response->json()['error'] ?? 'Credenciales incorrectas',
                     'status_code' => $response->status(),
@@ -93,7 +93,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 ], 401);
             }
         } catch (\Exception $e) {
-            // Manejar cualquier excepción
+            // Manejar cualquier error inesperado
             return response()->json([
                 'error' => 'Error inesperado: ' . $e->getMessage()
             ], 500);
