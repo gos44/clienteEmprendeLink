@@ -17,39 +17,47 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validar datos
+        // Validar las credenciales
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         try {
-            // Enviar solicitud POST a la API
+            // Enviar solicitud POST a la API para autenticar
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Extraer token del cuerpo de la respuesta
+                // Extraer los datos del usuario autenticado
                 $data = $response->json();
+                $user = \App\Models\User::where('email', $credentials['email'])->first();
 
-                // Retornar el token como JSON
-                return response()->json([
-                    'access_token' => $data['access_token'],
-                    'token_type' => $data['token_type'] ?? 'bearer',
-                ], 200);
+                if (!$user) {
+                    return back()->withErrors(['error' => 'Usuario no encontrado en la base de datos.'])->withInput();
+                }
+
+                // Obtener el rol del usuario
+                $role = $user->role; // Asumiendo que hay un campo `role` en la tabla `users`
+
+                // Guardar el token en la sesión (opcional)
+                session(['token' => $data['access_token']]);
+
+                // Redirigir según el rol
+                if ($role === 'entrepreneur') {
+                    return redirect()->route('Home_Usuario.index')->with('success', 'Inicio de sesión exitoso.');
+                } elseif ($role === 'investor') {
+                    return redirect()->route('Home_inversor.index')->with('success', 'Inicio de sesión exitoso.');
+                } else {
+                    return back()->withErrors(['error' => 'Rol no válido.'])->withInput();
+                }
             } else {
-                // Manejar errores de la API
-                return response()->json([
-                    'error' => $response->json()['error'] ?? 'Credenciales incorrectas.',
-                ], 401);
+                return back()->withErrors($response->json()['error'] ?? 'Credenciales incorrectas.')->withInput();
             }
         } catch (\Exception $e) {
-            // Manejar excepciones generales
-            return response()->json([
-                'error' => 'Error al comunicarse con la API: ' . $e->getMessage(),
-            ], 500);
+            return back()->withErrors(['error' => 'Error al comunicarse con la API: ' . $e->getMessage()])->withInput();
         }
     }
 }
