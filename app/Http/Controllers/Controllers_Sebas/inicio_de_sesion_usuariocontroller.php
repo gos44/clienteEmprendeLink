@@ -45,12 +45,12 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
                 // Modificar la solicitud de información de usuario
                 $userInfoResponse = Http::withToken($token)
-                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+                    ->get('http://apiemprendelink-production-9272.up.railway.app/api/user');
 
                 // Registro de depuración detallado
                 Log::info('Solicitud de información de usuario:', [
                     'token' => $token,
-                    'endpoint' => 'https://apiemprendelink-production-9272.up.railway.app/api/user'
+                    'endpoint' => 'http://apiemprendelink-production-9272.up.railway.app/api/user'
                 ]);
 
                 // Verificar si la respuesta para la información del usuario es exitosa
