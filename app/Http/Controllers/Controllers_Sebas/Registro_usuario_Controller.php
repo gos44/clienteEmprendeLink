@@ -26,27 +26,24 @@ class Registro_usuario_Controller extends Controller
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'birth_date' => 'required|date',
-            'password' => 'required|confirmed|min:8',  // Confirmación de contraseña
+            'password' => 'required|confirmed|min:8', // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'pic_profile' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Imagen de perfil
+            'pic_profile' => 'nullable|string|max:255', // Ahora es un texto, no un archivo
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
             'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
         ]);
 
-        // Manejo de la imagen de perfil
-    
-
         // Preparación de los datos para enviar a la API
         $data = [
             'name' => $validated['name'],
             'lastname' => $validated['lastname'],
             'birth_date' => $validated['birth_date'],
-            'password' => $validated['password'],  // Contraseña
+            'password' => $validated['password'], // Contraseña
             'password_confirmation' => $request->input('password_confirmation'), // Confirmación de la contraseña
             'phone' => $validated['phone'],
-            'image' => $imagePath,  // Ruta de la imagen de perfil
+            'image' => $validated['pic_profile'], // Cambiar 'image' para aceptar texto directamente
             'email' => $validated['email'],
             'location' => $validated['location'],
             'number' => $validated['number'],
