@@ -39,10 +39,12 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            if ($userRole == 'entrepreneur') {
+
+            if ($response->successful()) {
+                // Redirigir al login si el registro es exitoso
                 return redirect()->route('Home_Usuario.index')
-                    ->with('success', 'Usuario emprendedor registrado con éxito.');
-            } 
+                    ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+            }
 
 
 
