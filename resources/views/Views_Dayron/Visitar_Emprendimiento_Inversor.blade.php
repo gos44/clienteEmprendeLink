@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende Link - Mercado de Vinos</title>
 
-    <link rel="stylesheet" href="CSS/MI-EMPRENDIMIENTO.CSS">
-    <link rel="stylesheet" href="{{ asset('css/Mi_Emprendimiento.css') }}">
+    <link rel="stylesheet" href="{{ asset('Visitar_Emprendimiento_1_Inversor.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
 
 </head>
@@ -31,10 +30,7 @@
               <h1>Vino el Éxtasis</h1>
               <p class="hero-quote">"Aquel que vino al mundo y no toma vino, ¿entonces a qué vino?"</p>
           </div>
-          <div class="hero-buttons">
-              <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
-              <a href="{{ route('Chat_Inversor.index') }}" class="btn btn-secondary">Mensaje</a>
-          </div>
+       
       </div>
   </section>
 
@@ -50,6 +46,10 @@
             </div>
         </div>
     </section>
+    <div class="hero-buttons">
+        <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
+        {{-- <a href="{{ route('Chat_Inversor.index') }}" class="btn btn-secondary">Mensaje</a> --}}
+    </div>
 
       <div class="content">
           <section class="products">

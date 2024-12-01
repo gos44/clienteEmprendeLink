@@ -9,58 +9,79 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+           :root {
+            --primary-color: black;
+            --secondary-color: black;
+            --hover-color:black;
+            --background-color: #f4f6f7;
+        body {
+            background-color: var(--background-color);
+            font-family: 'Arial', sans-serif;
+        }
+
         .navbar {
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 0.5rem 1rem;
-            color: black;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand img:hover {
+            transform: scale(1.05);
         }
 
         .nav-link {
-            color: black !important;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
         .nav-link:hover {
-            color: gray !important;
+            color: var(--hover-color);
+            background-color: gray;
         }
 
         .dropdown-menu {
             border: none;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 0.5rem 0;
+            margin-top: 10px;
         }
 
         .dropdown-item {
-            padding: 0.7rem 1.5rem;
-            transition: background-color 0.3s ease;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
         }
 
         .dropdown-item:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--hover-color);
         }
 
-        /* Elementos móviles ocultos por defecto */
         .mobile-only {
             display: none;
         }
 
-        /* Estilos para móvil */
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 position: fixed;
                 top: 0;
                 left: 0;
-                padding-left: 15px;
-                padding-right: 15px;
-                padding-bottom: 15px;
                 width: 75%;
                 height: 100%;
-                z-index: 1050;
                 background-color: white;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+                z-index: 1050;
+                padding: 20px;
                 overflow-y: auto;
             }
 
@@ -77,7 +98,6 @@
             }
 
             .navbar-toggler {
-                position: relative;
                 z-index: 2000;
             }
 
@@ -91,8 +111,20 @@
             }
 
             .navbar-nav .nav-link:hover {
-                background-color: #f8f9fa;
+                background-color: gray;
             }
+        }
+
+        /* Subtle notification badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -101,8 +133,8 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand me-4" href="{{('Home_inversor')}}">
-                <img src="images/16.png" alt="Logo" width="180" height="70">
+            <a class="navbar-brand me-3" href="{{('Home_inversor')}}">
+                <img src="images/16.png" alt="Logo" width="140" height="50">
             </a>
 
             <!-- Botón hamburguesa -->
@@ -114,8 +146,8 @@
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Búsqueda (Dropdown solo en desktop) -->
-                    <li class="nav-item dropdown me-3 desktop-only">
+                    <!-- Búsqueda -->
+                    <li class="nav-item dropdown me-2 desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-search fa-lg me-1"></i> Búsqueda
@@ -134,61 +166,36 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- Opciones de búsqueda en móvil -->
-                    <li class="nav-item mobile-only me-3">
+                    <li class="nav-item mobile-only me-2">
                         <a class="nav-link" href="{{('Buscar_Emprendimientos_inversionista')}}">
                             <i class="fas fa-building me-2"></i> Emprendimientos
                         </a>
                     </li>
-                    <li class="nav-item mobile-only me-3">
+                    <li class="nav-item mobile-only me-2">
                         <a class="nav-link" href="{{('listaInver')}}">
                             <i class="fas fa-users me-2"></i> Lista de Usuarios
                         </a>
                     </li>
 
-                    <!-- Comunicación (Dropdown solo en desktop) -->
-                    <li class="nav-item dropdown me-3 desktop-only">
-                        <a class="nav-link dropdown-toggle" href="#" id="commDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-comments fa-lg me-1"></i> Comunicación
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="commDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{{('Chat_Inversor')}}">
-                                    <i class="fas fa-comment-dots me-2"></i> Chat
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="{{('notificacionesInver')}}">
-                                    <i class="fas fa-bell me-2"></i> Notificaciones
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Opciones de comunicación en móvil -->
-                    <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="{{('Chat_Inversor')}}">
-                            <i class="fas fa-comment-dots me-2"></i> Chat
-                        </a>
-                    </li>
-                    <li class="nav-item mobile-only me-3">
-                        <a class="nav-link" href="{{('notificacionesInver')}}">
-                            <i class="fas fa-bell me-2"></i> Notificaciones
-                        </a>
-                    </li>
+                  
 
                     <!-- Ayuda -->
-                    <li class="nav-item me-3">
+                    <li class="nav-item me-2">
                         <a class="nav-link" href="{{('contactanosInver')}}">
                             <i class="fas fa-question-circle fa-lg me-1"></i> Ayuda
                         </a>
                     </li>
+                     
 
+                      <!-- Notificaciones -->
+                      <li class="nav-item me-2">
+                        <a class="nav-link" href="{{('notificacionesInver')}}">
+                            <i class="fas fa-bell fa-lg me-1"></i> Notificaciones
+                        </a>
+                    </li>
+                    
                     <!-- Perfil -->
-                    <li class="nav-item me-3">
+                    <li class="nav-item me-2">
                         <a class="nav-link" href="{{('perfilInver')}}">
                             <i class="fas fa-user fa-lg me-1"></i> Perfil
                         </a>

@@ -34,10 +34,7 @@
               <h1>Arepa Puro Maíz</h1>
               <p class="hero-quote">"Somos un emprendimiento enfocado en el procesamiento de arepas"</p>
           </div>
-          <div class="hero-buttons">
-              <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-              <a href="{{ route('Chat_Usuario.index') }}" class="btn btn-secondary">Mensaje</a>
-          </div>
+         
       </div>
   </section>
 
@@ -53,6 +50,10 @@
             </div>
         </div>  
     </section>  
+    <div class="hero-buttons">
+        <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+        {{-- <a href="{{ route('Chat_Usuario.index') }}" class="btn btn-secondary">Mensaje</a> --}}
+    </div>
 
       <div class="content">
           <section class="products">
