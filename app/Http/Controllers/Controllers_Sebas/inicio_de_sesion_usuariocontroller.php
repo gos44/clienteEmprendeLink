@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\User; // Asegúrate de importar el modelo User
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -60,23 +61,21 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 if ($userInfoResponse->successful()) {
                     $userData = $userInfoResponse->json();
 
-                    // Verificar si el usuario tiene un rol
-                    if (isset($userData['role'])) {
-                        // Redirigir según el rol del usuario
-                        if ($userData['role'] === 'entrepreneur') {
-                            return response()->json([
-                                'access_token' => $token,
-                                'redirect' => route('Home_Usuario.index')
-                            ], 200);
-                        } elseif ($userData['role'] === 'investor') {
-                            return response()->json([
-                                'access_token' => $token,
-                                'redirect' => route('Home_inversor.index')
-                            ], 200);
+                    // Buscar el usuario en la base de datos local
+                    $user = User::where('email', $userData['email'])->first();
+
+                    if ($user) {
+                        // Verificar el rol del usuario
+                        if ($user->entrepreneur) {
+                            // Si el rol es 'entrepreneur', redirigir a la vista correspondiente
+                            return redirect()->route('Home_Usuario.index');
+                        } elseif ($user->investor) {
+                            // Si el rol es 'investor', redirigir a la vista correspondiente
+                            return redirect()->route('Home_inversor.index');
                         }
                     }
 
-                    // Si no se encuentra un rol válido, enviar error
+                    // Si el usuario no tiene un rol válido
                     return response()->json([
                         'error' => 'Rol de usuario no definido',
                         'user_data' => $userData
