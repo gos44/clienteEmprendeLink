@@ -3,8 +3,7 @@
 use App\Http\Controllers\Controller_Miguel\Home_inversor;
 use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento;
 use App\Http\Controllers\Controllers_Sebas\cambiar_contraseña_inversionistacontroller;
-use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
-use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
+
 use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
@@ -69,6 +68,10 @@ use App\Http\Controllers\Controllers_Sebas\registro_inversionista_ingreso;
 use App\Http\Controllers\Controllers_Sebas\verificar_codigo_usuario;
 use App\Http\Controllers\Controllers_Sebas\Verificar_codigo_inversionista;
 use App\Http\Controllers\Controllers_Sebas\verificar_identidad_inversionista;
+
+use App\Http\Controllers\Controllers_Sebas\emprendimientos_deportivos_usuario;
+use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
+
 
 use App\Http\Controllers\Controller_k\Notificaciones;
 use App\Http\Controllers\Controller_k\Contactanos;
