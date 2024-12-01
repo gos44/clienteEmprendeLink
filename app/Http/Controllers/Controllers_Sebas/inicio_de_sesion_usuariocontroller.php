@@ -42,7 +42,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
             if ($response->successful()) {
                 // Redirigir al login si el registro es exitoso
-                return redirect()->route('Home_inversor.index')
+                return redirect()->route('Home_Usuario.index')
                     ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
             }
 
