@@ -36,13 +36,7 @@ class Registro_usuario_Controller extends Controller
         ]);
 
         // Manejo de la imagen de perfil
-        $imagePath = null;
-        if ($request->hasFile('pic_profile')) {
-            $image = $request->file('pic_profile');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();  // Generar un nombre único
-            $image->move(public_path('uploads/profile_pics'), $imageName);  // Mover la imagen a la carpeta
-            $imagePath = 'uploads/profile_pics/' . $imageName;  // Guardar la ruta relativa
-        }
+    
 
         // Preparación de los datos para enviar a la API
         $data = [
