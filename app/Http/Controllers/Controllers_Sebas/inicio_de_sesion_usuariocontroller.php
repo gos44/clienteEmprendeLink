@@ -25,11 +25,12 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
         try {
             // Enviar solicitud POST a la API para autenticar al usuario
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
-
+    // Cambiar de GET a POST
+$userInfoResponse = Http::withHeaders([
+    'Accept' => 'application/json',
+    'Authorization' => 'Bearer ' . $token,
+    'Content-Type' => 'application/json'
+])->post('https://apiemprendelink-production-9272.up.railway.app/api/user');
             // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
                 // Obtener el token de acceso
@@ -45,12 +46,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
                 // Modificar la solicitud de información de usuario
                 $userInfoResponse = Http::withToken($token)
-                    ->get('http://apiemprendelink-production-9272.up.railway.app/api/user');
+                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
 
                 // Registro de depuración detallado
-                Log::info('Solicitud de información de usuario:', [
-                    'token' => $token,
-                    'endpoint' => 'http://apiemprendelink-production-9272.up.railway.app/api/user'
+                Log::info('Detalles de solicitud de usuario:', [
+                    'method' => 'POST', // o el método correcto
+                    'url' => 'https://apiemprendelink-production-9272.up.railway.app/api/user',
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $token,
+                        'Accept' => 'application/json',
+                        'Content-Type' => 'application/json'
+                    ]
                 ]);
 
                 // Verificar si la respuesta para la información del usuario es exitosa
