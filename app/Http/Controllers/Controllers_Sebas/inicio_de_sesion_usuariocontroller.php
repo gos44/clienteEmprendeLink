@@ -28,30 +28,25 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $data);
-            // Inspecciona la respuesta de la API
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                return redirect()->route('Home1')
-                    ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-            } else {
-                // Si hubo un error con la API, muestra los errores
-                return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
-                    ->withInput();
-            }
-
-            // Si todo va bien, redirige o procesa el token
-            if ($response->successful()) {
+                // Extraer el token del cuerpo de la respuesta
                 $data = $response->json();
-                session(['token' => $data['access_token']]); // Guarda el token en la sesión (opcional)
-                return redirect()->route('home')->with('success', 'Inicio de sesión exitoso.');
+                $accessToken = $data['access_token'];
+
+                // Guardar el token en la sesión
+                session(['token' => $accessToken]);
+
+                // Redirigir al home con un mensaje de éxito
+                return redirect()->route('Home1')->with('success', 'Inicio de sesión exitoso.');
             } else {
-                return back()->withErrors($response->json()['error'] ?? 'Error desconocido.')
-                    ->withInput();
+                // Manejar errores de la API
+                return back()->withErrors($response->json()['error'] ?? 'Credenciales incorrectas.')->withInput();
             }
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Error al comunicarse con la API. ' . $e->getMessage()])
-                ->withInput();
+            // Manejar excepciones generales
+            return back()->withErrors(['error' => 'Error al comunicarse con la API. ' . $e->getMessage()])->withInput();
         }
     }
 }
