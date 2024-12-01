@@ -48,7 +48,7 @@
         <div class="flex-row">
             <span class="span"><a href="{{ route('ContactanosHome') }}" class="link">¿Necesitas ayuda?</a></span>
         </div>
-        <a href="{{ route('iniciar_sesion_usuario') }}" class="button-submit">Registrarse</a>
+        <a href="{{ route('iniciar_sesion_usuario.login') }}" class="button-submit">Registrarse</a>
         <p class="p">¿Ya tienes una cuenta? <a href="{{ route('iniciar_sesion_usuario.login') }}" class="span">Iniciar sesion</a></p>
 
 
