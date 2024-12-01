@@ -94,9 +94,11 @@
                     <div class="flex-column">
                         <label for="location">Imagen de perfil</label>
                         <div class="inputForm">
-                            <input type="text" class="input" name="pic_profile" id="pic_profile" placeholder="image/*" required />
+                            <input type="file" class="input" name="pic_profile" id="pic_profile" accept="image/*" required />
                         </div>
                     </div>
+                </div>
+
 
 
                 <div class="flex-column">
