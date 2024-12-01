@@ -25,11 +25,14 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
         try {
             // Enviar solicitud POST a la API
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
-
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $data);
             // Inspecciona la respuesta de la API
+
             if ($response->successful()) {
-                return redirect()->route('Home_Usuario.index')
+                return redirect()->route('Home1')
                     ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
             } else {
                 // Si hubo un error con la API, muestra los errores
