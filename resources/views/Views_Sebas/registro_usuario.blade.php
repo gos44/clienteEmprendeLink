@@ -86,12 +86,18 @@
                     </div>
                 </div>
 
-                <div class="flex-column">
-                    <label for="pic_profile">Imagen de perfil</label>
-                    <div class="inputForm">
-                        <input type="file" class="input" name="pic_profile" id="pic_profile" accept="image/*" />
+
+
+
+
+                <div class="form-column">
+                    <div class="flex-column">
+                        <label for="location">Imagen de perfil</label>
+                        <div class="inputForm">
+                            <input type="text" class="input" name="pic_profile" id="pic_profile" placeholder="image/*" required />
+                        </div>
                     </div>
-                </div>
+
 
                 <div class="flex-column">
                     <label for="role">Rol</label>
