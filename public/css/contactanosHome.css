@@ -2,18 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-
-}
-
-html, body {
-    
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 5px; /* Ajusta según la altura de tu navbar */
+    padding-top: 5px;
 }
 
 header {
@@ -29,64 +22,30 @@ header {
     align-items: center;
 }
 
-
-
-.barra {
-    height: 35px; 
-    margin-right: 10px;
-    margin-left: 8px;
-}
-
 .logo {
     height: 60px;
     margin-right: 10px;
     margin-top: 15px;
 }
-.logo img {
-    height: 80px;
-}
+
 .header-right a {
     margin-left: 20px;
     text-decoration: none;
     color: #000;
+    display: flex;
+    align-items: center;
 }
 
-.header-right a i {
-    margin-right: 5px;
-}
 .header-right a img {
     margin-right: 5px;
     width: 12px;
 }
 
-
-
-main { /*maneja el tamaño y ancho del texto del centro */
+main {
     width: 90%;
     margin: 60px auto; 
     position: relative;
     z-index: 100;
-}
-
-/* .notifications, .contact { coloca el fondo blanco al link
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-} */
-
-.notifications h2, .contact h2 { /*maneja el espacio entre contactanos y el resto del texto */
-    margin-bottom: 20px;
-}
-
-.notification, .accordion-item {
-    display: flex;
-    flex-direction: column;
-}
-
-.notification p {
-    margin: 0;
 }
 
 .accordion-button {
@@ -99,14 +58,14 @@ main { /*maneja el tamaño y ancho del texto del centro */
     text-align: left;
     outline: none;
     transition: background-color 0.3s;
-    position: relative;  /* Asegura que el pseudo-elemento esté posicionado correctamente */
+    position: relative;
 }
 
 .accordion-button.active, .accordion-button:hover {
     background-color: #e1e1e1;
 }
 
- .accordion-content {/*hace que se las fechas funcionen  */
+.accordion-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
@@ -117,46 +76,63 @@ main { /*maneja el tamaño y ancho del texto del centro */
     margin: 10px 0;
 }
 
-/*todo la parte de abajo */
-.footer-content a{
-    color: #bbb;
-  }
-
-
-
-
-
-
 .accordion-button::after {
-    content: '\25bc';  /* Triángulo hacia abajo */
+    content: '\25bc';
     font-size: 12px;
     position: absolute;
-    right: 20px;  /* Ajusta la posición de la flecha según sea necesario */
+    right: 20px;
     transition: transform 0.3s ease;
 }
 
 .accordion-button.active::after {
-    transform: rotate(180deg);  /* Rota la flecha hacia arriba */
+    transform: rotate(180deg);
 }
 
-.accordion-button.active, .accordion-button:hover {
-    background-color: #e1e1e1;
+/* Media Queries para Responsividad */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .header-left, .header-right {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        height: 40px;
+        margin-top: 0;
+    }
+
+    main {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .accordion-button {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .accordion-button::after {
+        right: 10px;
+    }
 }
 
+@media screen and (max-width: 480px) {
+    .header-right a {
+        margin-left: 10px;
+        font-size: 14px;
+    }
 
+    .logo {
+        height: 30px;
+    }
 
-
-.menu-toggle {
-    position: relative;
-    cursor: pointer;
-}
-
-.menu-toggle span {
-    font-size: 24px;
-    display: inline-block;
-    transition: transform 0.3s;
-}
-
-.menu-toggle.active span {
-    transform: rotate(180deg); /* Rota la flecha hacia arriba */
+    .accordion-button {
+        font-size: 14px;
+        padding: 6px;
+    }
 }
