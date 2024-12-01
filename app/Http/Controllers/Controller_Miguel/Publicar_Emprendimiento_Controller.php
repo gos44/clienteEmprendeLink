@@ -38,7 +38,7 @@ class Publicar_Emprendimiento_Controller extends Controller
      */
     public function Publicar_Emprendimiento2()
     {
-        return view('Views_Miguel.Publicar_Emprendimiento2');
+        return view('views_Miguel.Publicar_Emprendimiento2');
     }
 
     /**
@@ -61,7 +61,7 @@ class Publicar_Emprendimiento_Controller extends Controller
      */
     public function Publicar_Emprendimiento3()
     {
-        return view('Views_Miguel.Publicar_Emprendimiento3');
+        return view('views_Miguel.Publicar_Emprendimiento3');
     }
 
     /**
