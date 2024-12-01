@@ -29,39 +29,41 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', [
-                'email' => $credentials['email'],
-                'password' => $credentials['password']
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+
+            // Registro detallado de la respuesta de autenticación
+            Log::info('Respuesta de autenticación', [
+                'status' => $response->status(),
+                'body' => $response->body(),
             ]);
 
             // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
-                // Obtener el token de acceso de manera segura
+                // Obtener los datos de la respuesta
                 $data = $response->json();
-                $token = $data['access_token'] ?? null;
 
-                // Verificar si el token está presente y válido
-                if (empty($token)) {
+                // Verificar la existencia del token
+                if (!isset($data['access_token'])) {
+                    Log::error('No se encontró el token de acceso', ['response_data' => $data]);
                     return response()->json([
-                        'error' => 'Token de acceso no recibido o es inválido.',
+                        'error' => 'No se recibió el token de acceso',
                     ], 400);
                 }
 
-                // Intentar obtener la información del usuario con el token
-                $userInfoResponse = Http::withHeaders([
-                    'Accept' => 'application/json',
-                    'Authorization' => 'Bearer ' . $token,
-                    'Content-Type' => 'application/json'
-                ])->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+                $token = $data['access_token'];
 
-                // Registro de depuración para la respuesta del usuario
-                Log::info('Detalles de autenticación', [
+                // Intentar obtener la información del usuario
+                $userInfoResponse = Http::withToken($token)
+                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+
+                // Registro detallado de la solicitud de información de usuario
+                Log::info('Solicitud de información de usuario', [
                     'token' => $token,
-                    'user_info_status' => $userInfoResponse->status(),
-                    'user_info_body' => $userInfoResponse->body()
+                    'status' => $userInfoResponse->status(),
+                    'body' => $userInfoResponse->body(),
                 ]);
 
-                // Verificar si la respuesta para la información del usuario es exitosa
+                // Verificar si se obtuvo la información del usuario
                 if ($userInfoResponse->successful()) {
                     $userData = $userInfoResponse->json();
 
@@ -72,12 +74,13 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         // Iniciar sesión en Laravel
                         Auth::login($user);
 
+                        // Guardar el token en la sesión si es necesario
+                        session(['api_token' => $token]);
+
                         // Verificar el rol del usuario
                         if ($user->entrepreneur) {
-                            // Si el rol es 'entrepreneur', redirigir a la vista correspondiente
                             return redirect()->route('Home_Usuario.index');
                         } elseif ($user->investor) {
-                            // Si el rol es 'investor', redirigir a la vista correspondiente
                             return redirect()->route('Home_inversor.index');
                         }
                     }
@@ -88,7 +91,12 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         'user_data' => $userData
                     ], 400);
                 } else {
-                    // Si no se pudo obtener la información del usuario
+                    // Detalles del error al obtener información de usuario
+                    Log::error('Error al obtener información de usuario', [
+                        'status' => $userInfoResponse->status(),
+                        'body' => $userInfoResponse->body(),
+                    ]);
+
                     return response()->json([
                         'error' => 'No se pudo obtener información de usuario',
                         'status_code' => $userInfoResponse->status(),
@@ -96,16 +104,20 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     ], 401);
                 }
             } else {
-                // Si la autenticación inicial falla
+                // Error en la autenticación inicial
+                Log::error('Error de autenticación', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
+
                 return response()->json([
-                    'error' => $response->json()['error'] ?? 'Credenciales incorrectas',
+                    'error' => $response->json()['message'] ?? 'Credenciales incorrectas',
                     'status_code' => $response->status(),
-                    'response_body' => $response->body()
                 ], 401);
             }
         } catch (\Exception $e) {
-            // Manejar cualquier error inesperado
-            Log::error('Error de inicio de sesión', [
+            // Manejar errores inesperados
+            Log::error('Error inesperado en inicio de sesión', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
