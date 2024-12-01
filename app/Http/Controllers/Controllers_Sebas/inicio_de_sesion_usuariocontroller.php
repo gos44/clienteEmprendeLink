@@ -39,16 +39,26 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-
             if ($response->successful()) {
-                // Redirigir al login si el registro es exitoso
-                return redirect()->route('Home_Usuario.index')
-                    ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
+
+                if ($role == 'entrepreneur') {
+                    // Redirigir al home de entrepreneur
+                    return redirect()->route('Home_Usuario.index')
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                } elseif ($role == 'investor') {
+                    // Redirigir al home de investor
+                    return redirect()->route('Home_Investor.index')
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                }
             }
 
+            // Si el login no es exitoso
+            return back()->withErrors([
+                'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
+            ]);
 
-
-            // El resto de tu código permanece igual...
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
