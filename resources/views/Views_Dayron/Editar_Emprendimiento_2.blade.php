@@ -38,10 +38,7 @@
                     <h1 contenteditable="true">Arepa Puro Maíz</h1>
                     <p class="hero-quote" contenteditable="true">"Somos un emprendimiento enfocado en el procesamiento de arepas"</p>
                 </div>
-                <div class="hero-buttons">
-                    <a href="ListaMisEmprendiientos.html" class="btn btn-primary" onclick="saveChanges()">Guardar</a>
-                    <a href="MI-EMPRENDIMIENTO-EDITAR-2-USUARIO.HTML" class="btn btn-secondary">Eliminar</a>
-                </div>
+              
             </div>
         </section>
 
@@ -51,6 +48,7 @@
                 Cambiar imagen de fondo
             </button>
         </div>
+        
 
         <section class="profile">
             <div class="profile-card">
@@ -64,6 +62,7 @@
                 </div>
             </div>
         </section>
+     
 
         <div class="content">
             <section class="products">
@@ -128,6 +127,10 @@
                 
                 
         </div>
+    </div>
+    <div class="hero-buttons-1">
+        <a href="ListaMisEmprendiientos.html" class="btn btn-primary" onclick="saveChanges()">Guardar</a>
+        <a href="MI-EMPRENDIMIENTO-EDITAR-2-USUARIO.HTML" class="btn btn-secondary">Eliminar</a>
     </div>
 </main>
 
