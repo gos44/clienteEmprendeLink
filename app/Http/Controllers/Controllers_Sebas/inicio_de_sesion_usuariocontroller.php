@@ -42,7 +42,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         'Accept' => 'application/json',
                         'Authorization' => 'Bearer ' . $token
                     ])
-                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/users');
 
                 // Registro de depuración
                 Log::info('Token de acceso:', ['token' => $token]);
