@@ -5,12 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-
-
     <link rel="stylesheet" href="{{ asset('css/inicio_de_sesion.css') }}">
-
-
-
+</head>
+<body>
     <form class="form" action="{{ route('iniciar_sesion_usuario.login') }}" method="POST">
         @csrf <!-- Token de seguridad para Laravel -->
         <div class="flex-column">
@@ -35,3 +32,5 @@
     @if ($errors->has('loginError'))
         <p style="color: red;">{{ $errors->first('loginError') }}</p>
     @endif
+</body>
+</html>
