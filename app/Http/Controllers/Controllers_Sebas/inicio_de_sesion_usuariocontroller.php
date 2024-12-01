@@ -26,104 +26,53 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
         try {
             // Enviar solicitud POST a la API para autenticar al usuario
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            // Registro detallado de la respuesta de autenticación
-            Log::info('Respuesta de autenticación', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
-
-            // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
-                // Obtener los datos de la respuesta
                 $data = $response->json();
+                $token = $data['access_token'];
 
-                // Verificar la existencia del token
-                if (!isset($data['access_token'])) {
-                    Log::error('No se encontró el token de acceso', ['response_data' => $data]);
+                // Verificar si el token está presente
+                if (empty($token)) {
                     return response()->json([
-                        'error' => 'No se recibió el token de acceso',
+                        'error' => 'Token de acceso no recibido o es inválido.',
                     ], 400);
                 }
 
-                $token = $data['access_token'];
-
-                // Intentar obtener la información del usuario
+                // Usar el token para obtener la información del usuario
                 $userInfoResponse = Http::withToken($token)
-                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+                                        ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
 
-                // Registro detallado de la solicitud de información de usuario
-                Log::info('Solicitud de información de usuario', [
-                    'token' => $token,
-                    'status' => $userInfoResponse->status(),
-                    'body' => $userInfoResponse->body(),
-                ]);
-
-                // Verificar si se obtuvo la información del usuario
+                // Si la respuesta de la API es exitosa
                 if ($userInfoResponse->successful()) {
                     $userData = $userInfoResponse->json();
 
-                    // Buscar el usuario en la base de datos local
-                    $user = User::where('email', $userData['email'])->first();
+                    // Almacenar la información del usuario en la sesión
+                    Session::put('user', $userData);
 
-                    if ($user) {
-                        // Iniciar sesión en Laravel
-                        Auth::login($user);
-
-                        // Guardar el token en la sesión si es necesario
-                        session(['api_token' => $token]);
-
-                        // Verificar el rol del usuario
-                        if ($user->entrepreneur) {
-                            return redirect()->route('Home_Usuario.index');
-                        } elseif ($user->investor) {
-                            return redirect()->route('Home_inversor.index');
-                        }
+                    // Redirigir según el rol
+                    if ($userData['role'] === 'entrepreneur') {
+                        return redirect()->route('Home_Usuario.index');
+                    } elseif ($userData['role'] === 'investor') {
+                        return redirect()->route('Home_inversor.index');
                     }
 
-                    // Si el usuario no tiene un rol válido
                     return response()->json([
                         'error' => 'Rol de usuario no definido',
-                        'user_data' => $userData
                     ], 400);
                 } else {
-                    // Detalles del error al obtener información de usuario
-                    Log::error('Error al obtener información de usuario', [
-                        'status' => $userInfoResponse->status(),
-                        'body' => $userInfoResponse->body(),
-                    ]);
-
                     return response()->json([
                         'error' => 'No se pudo obtener información de usuario',
-                        'status_code' => $userInfoResponse->status(),
-                        'response_body' => $userInfoResponse->body(),
                     ], 401);
                 }
             } else {
-                // Error en la autenticación inicial
-                Log::error('Error de autenticación', [
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-
                 return response()->json([
-                    'error' => $response->json()['message'] ?? 'Credenciales incorrectas',
-                    'status_code' => $response->status(),
+                    'error' => 'Credenciales incorrectas',
                 ], 401);
             }
         } catch (\Exception $e) {
-            // Manejar errores inesperados
-            Log::error('Error inesperado en inicio de sesión', [
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-
             return response()->json([
-                'error' => 'Error inesperado: ' . $e->getMessage()
+                'error' => 'Error inesperado: ' . $e->getMessage(),
             ], 500);
         }
     }
