@@ -43,18 +43,14 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     ], 400);
                 }
 
-                // Intentar obtener la información del usuario con el token
-                $userInfoResponse = Http::withHeaders([
-                        'Accept' => 'application/json',
-                        'Authorization' => 'Bearer ' . $token
-                    ])
-                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user'); // Verificar que este sea el endpoint correcto
+                // Modificar la solicitud de información de usuario
+                $userInfoResponse = Http::withToken($token)
+                    ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
 
-                // Registro de depuración para la respuesta del usuario
-                Log::info('Token de acceso:', ['token' => $token]);
-                Log::info('Respuesta de información de usuario:', [
-                    'status' => $userInfoResponse->status(),
-                    'body' => $userInfoResponse->body()
+                // Registro de depuración detallado
+                Log::info('Solicitud de información de usuario:', [
+                    'token' => $token,
+                    'endpoint' => 'https://apiemprendelink-production-9272.up.railway.app/api/user'
                 ]);
 
                 // Verificar si la respuesta para la información del usuario es exitosa
@@ -67,38 +63,43 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     if ($user) {
                         // Verificar el rol del usuario
                         if ($user->entrepreneur) {
-                            // Si el rol es 'entrepreneur', redirigir a la vista correspondiente
                             return redirect()->route('Home_Usuario.index');
                         } elseif ($user->investor) {
-                            // Si el rol es 'investor', redirigir a la vista correspondiente
                             return redirect()->route('Home_inversor.index');
                         }
                     }
 
-                    // Si el usuario no tiene un rol válido
                     return response()->json([
                         'error' => 'Rol de usuario no definido',
                         'user_data' => $userData
                     ], 400);
                 } else {
-                    // Si no se pudo obtener la información del usuario
+                    // Depuración detallada si falla la obtención de información
+                    Log::error('Error al obtener información de usuario:', [
+                        'status' => $userInfoResponse->status(),
+                        'body' => $userInfoResponse->body(),
+                        'headers' => $userInfoResponse->headers()
+                    ]);
+
                     return response()->json([
                         'error' => 'No se pudo obtener información de usuario',
                         'status_code' => $userInfoResponse->status(),
                         'response_body' => $userInfoResponse->body(),
-                        'token' => $token
                     ], 401);
                 }
             } else {
-                // Si la autenticación inicial falla
                 return response()->json([
                     'error' => $response->json()['error'] ?? 'Credenciales incorrectas',
                     'status_code' => $response->status(),
-                    'response_body' => $response->body()
                 ], 401);
             }
         } catch (\Exception $e) {
-            // Manejar cualquier error inesperado
+            // Registro detallado de errores inesperados
+            Log::error('Error inesperado:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
             return response()->json([
                 'error' => 'Error inesperado: ' . $e->getMessage()
             ], 500);
