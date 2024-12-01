@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Controllers_Sebas;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -17,67 +18,77 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        // Validar los datos de entrada
+        $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+            'role' => 'required|in:entrepreneur,investor' // Añadir validación de rol
         ]);
 
         try {
-            // Enviar solicitud POST para obtener el token
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+            // Preparar datos para la autenticación
+            $credentials = [
+                'email' => $validated['email'],
+                'password' => $validated['password'],
+                'role' => $validated['role'] // Incluir rol en las credenciales
+            ];
 
+            // Enviar solicitud POST a la API para autenticar al usuario
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+
+            // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
                 $data = $response->json();
-                $token = $data['access_token'];
 
-                // Verificar que el token no esté vacío
-                if (empty($token)) {
-                    return response()->json([
-                        'error' => 'Token de acceso no recibido o es inválido.',
-                    ], 400);
-                }
+                // Buscar el usuario en la base de datos local
+                $user = User::where('email', $validated['email'])->first();
 
-                // Intentar obtener la información del usuario
-                $userInfoResponse = Http::withToken('Bearer ' . $token)
-                                        ->accept('application/json')  // Asegúrate de que se acepte JSON
-                                        ->get('https://apiemprendelink-production-9272.up.railway.app/api/user');
+                if ($user) {
+                    // Verificar el rol seleccionado
+                    if (
+                        ($validated['role'] === 'entrepreneur' && $user->entrepreneur) ||
+                        ($validated['role'] === 'investor' && $user->investor)
+                    ) {
+                        // Iniciar sesión en Laravel
+                        Auth::login($user);
 
-                // Log de la respuesta para depuración
-                \Log::info('Respuesta de la API para obtener el usuario: ' . $userInfoResponse->body());
-
-                // Si la respuesta es exitosa
-                if ($userInfoResponse->successful()) {
-                    $userData = $userInfoResponse->json();
-
-                    // Almacenar la información del usuario en la sesión
-                    session(['user' => $userData]);
-
-                    // Redirigir según el rol
-                    if ($userData['role'] === 'entrepreneur') {
-                        return redirect()->route('Home_Usuario.index');
-                    } elseif ($userData['role'] === 'investor') {
-                        return redirect()->route('Home_inversor.index');
+                        // Redirigir según el rol
+                        if ($validated['role'] === 'entrepreneur') {
+                            return redirect()->route('Home_Usuario.index');
+                        } else {
+                            return redirect()->route('Home_inversor.index');
+                        }
+                    } else {
+                        // El usuario no tiene el rol seleccionado
+                        return back()->withErrors([
+                            'role' => 'No tienes permisos para iniciar sesión con este rol.'
+                        ]);
                     }
-
-                    return response()->json([
-                        'error' => 'Rol de usuario no definido',
-                    ], 400);
                 } else {
-                    \Log::error('Error al obtener información de usuario: ' . $userInfoResponse->status());
-                    return response()->json([
-                        'error' => 'No se pudo obtener información de usuario',
-                        'status_code' => $userInfoResponse->status(),
-                    ], 401);
+                    // Usuario no encontrado en la base de datos local
+                    return back()->withErrors([
+                        'email' => 'Usuario no encontrado.'
+                    ]);
                 }
             } else {
-                return response()->json([
-                    'error' => 'Credenciales incorrectas',
-                ], 401);
+                // Error de autenticación
+                return back()->withErrors([
+                    'email' => $response->json()['message'] ?? 'Credenciales incorrectas'
+                ]);
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error inesperado: ' . $e->getMessage(),
-            ], 500);
+            // Manejar errores inesperados
+            Log::error('Error de inicio de sesión', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return back()->withErrors([
+                'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
+            ]);
         }
     }
 }
