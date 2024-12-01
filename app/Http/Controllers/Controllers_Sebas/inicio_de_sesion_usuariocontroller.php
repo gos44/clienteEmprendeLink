@@ -47,9 +47,9 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
                 // Redirigir según el rol
                 if ($role === 'entrepreneur') {
-                    return redirect()->route('entrepreneur.home')->with('success', 'Inicio de sesión exitoso.');
+                    return redirect()->route('Home_Usuario.index')->with('success', 'Inicio de sesión exitoso.');
                 } elseif ($role === 'investor') {
-                    return redirect()->route('investor.home')->with('success', 'Inicio de sesión exitoso.');
+                    return redirect()->route('Home_inversor.index')->with('success', 'Inicio de sesión exitoso.');
                 } else {
                     return back()->withErrors(['error' => 'Rol no válido.'])->withInput();
                 }
