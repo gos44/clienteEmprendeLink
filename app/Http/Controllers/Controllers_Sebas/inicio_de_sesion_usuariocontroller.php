@@ -17,10 +17,10 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Valida los datos
+        // Validar datos
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         try {
@@ -31,22 +31,25 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Extraer el token del cuerpo de la respuesta
+                // Extraer token del cuerpo de la respuesta
                 $data = $response->json();
-                $accessToken = $data['access_token'];
 
-                // Guardar el token en la sesión
-                session(['token' => $accessToken]);
-
-                // Redirigir al home con un mensaje de éxito
-                return redirect()->route('Home1')->with('success', 'Inicio de sesión exitoso.');
+                // Retornar el token como JSON
+                return response()->json([
+                    'access_token' => $data['access_token'],
+                    'token_type' => $data['token_type'] ?? 'bearer',
+                ], 200);
             } else {
                 // Manejar errores de la API
-                return back()->withErrors($response->json()['error'] ?? 'Credenciales incorrectas.')->withInput();
+                return response()->json([
+                    'error' => $response->json()['error'] ?? 'Credenciales incorrectas.',
+                ], 401);
             }
         } catch (\Exception $e) {
             // Manejar excepciones generales
-            return back()->withErrors(['error' => 'Error al comunicarse con la API. ' . $e->getMessage()])->withInput();
+            return response()->json([
+                'error' => 'Error al comunicarse con la API: ' . $e->getMessage(),
+            ], 500);
         }
     }
 }
