@@ -60,7 +60,7 @@ class Registro_usuario_Controller extends Controller
             // Comprobar si la respuesta fue exitosa
             if ($response->successful()) {
                 // Redirigir al login si el registro es exitoso
-                return redirect()->route('iniciar_sesion_usuario/login')
+                return redirect()->route('iniciar_sesion_usuario.login')
                     ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
             } else {
                 // Si hubo errores, mostrarlos al usuario
