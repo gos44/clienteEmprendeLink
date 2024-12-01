@@ -22,7 +22,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'role' => 'required|in:entrepreneur,investor' // Añadir validación de rol
+            'role' => 'required|in:entrepreneur,investor'
         ]);
 
         try {
@@ -30,7 +30,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $credentials = [
                 'email' => $validated['email'],
                 'password' => $validated['password'],
-                'role' => $validated['role'] // Incluir rol en las credenciales
+                'role' => $validated['role']
             ];
 
             // Enviar solicitud POST a la API para autenticar al usuario
@@ -38,6 +38,13 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+
+            // Log para depuración
+            Log::info('Respuesta de autenticación', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+                'validated' => $validated
+            ]);
 
             // Verificar si la autenticación fue exitosa
             if ($response->successful()) {
@@ -47,11 +54,21 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 $user = User::where('email', $validated['email'])->first();
 
                 if ($user) {
-                    // Verificar el rol seleccionado
-                    if (
-                        ($validated['role'] === 'entrepreneur' && $user->entrepreneur) ||
-                        ($validated['role'] === 'investor' && $user->investor)
-                    ) {
+                    // Log para verificar los campos del usuario
+                    Log::info('Datos del usuario', [
+                        'user' => $user,
+                        'role' => $validated['role']
+                    ]);
+
+                    // Modificar la verificación de rol
+                    $roleVerified = false;
+                    if ($validated['role'] === 'entrepreneur' && $user->entrepreneur) {
+                        $roleVerified = true;
+                    } elseif ($validated['role'] === 'investor' && $user->investor) {
+                        $roleVerified = true;
+                    }
+
+                    if ($roleVerified) {
                         // Iniciar sesión en Laravel
                         Auth::login($user);
 
@@ -63,6 +80,13 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         }
                     } else {
                         // El usuario no tiene el rol seleccionado
+                        Log::warning('Intento de inicio de sesión con rol no autorizado', [
+                            'email' => $validated['email'],
+                            'role' => $validated['role'],
+                            'user_entrepreneur' => $user->entrepreneur ?? 'No definido',
+                            'user_investor' => $user->investor ?? 'No definido'
+                        ]);
+
                         return back()->withErrors([
                             'role' => 'No tienes permisos para iniciar sesión con este rol.'
                         ]);
