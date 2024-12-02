@@ -193,17 +193,11 @@ Route::get('verificar_identidad_inversionista',[verificar_identidad_inversionist
 Route::post('cambiar_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'index'])->name('cambiar_contraseña_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionistacontroller::class,'index'])->name('cambiar_contraseña_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
-//iniciar sesion usuario e inversionista
-Route::post('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
-//registro usuario e inversionista
 
-//ruta de prueva:
 
-//kjnb
+//Estas son las rutas para el registro e inicio de sesion de los dos usuarios tanto emprendedor como inversionista
 
-// Route::get('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'index'])
-//     ->name('registrar_nuevo_usuario');
 Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
 
 Route::post('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
@@ -212,11 +206,6 @@ Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::
 
 
 
-
-
-
-Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
-Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro ingreso usuario e inversionista
 Route::get('registrar_usuario_ingreso',[Registro_usuario_ingreso::class,'index'])->name('registrar_usuario_ingreso'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas

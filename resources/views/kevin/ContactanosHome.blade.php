@@ -6,9 +6,9 @@
     <title>ContactHome</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-      
+
     </style>
-    <link rel="stylesheet" href="{{asset('css/contactanosHome.css')}}"> 
+    <link rel="stylesheet" href="{{asset('css/contactanosHome.css')}}">
 </head>
 <body>
     <header>
@@ -19,14 +19,14 @@
             <a href="{{asset('Home1')}}"><img src="images/flecha.png" alt=""> Atras</a>
         </div>
     </header>
-   
+
     <main>
         <section class="contact">
             <h2>Contactanos</h2>
             <p>Necesitas ayuda puedes escribirnos a estos numeros:</p>
-            <p>Numeros: 3108596745 o 3108974856 o 31152867569</p>
+            <p>Numeros: 3206320279 o 3166601299 o 310 6623658</p>
             <p>Tambien puedes contactarnos con este correo:</p>
-            <p>Correo: dayroncamilo@gmail.com</p>
+            <p>Correo: emprendelink2@gmail.com</p>
             <div class="accordion">
                 <div class="accordion-item">
                     <button class="accordion-button">Como cambiar la contraseña</button>
@@ -58,7 +58,7 @@
             </div>
         </section>
     </main>
-    
+
     <script>
         document.querySelectorAll('.accordion-button').forEach(button => {
             button.addEventListener('click', () => {

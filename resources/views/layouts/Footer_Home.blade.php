@@ -67,7 +67,7 @@ footer {
 
 /* Social icons styles */
 .imagenes {
-    height:60px;    
+    height:60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -199,14 +199,14 @@ footer {
     </style>
 </head>
 <body>
-    
+
     <footer>
         <div class="footer-content">
             <div class="footer-section about">
                 <div class="logoda">
                     <img class="logo-dark" src="images/LOGO-FONDO NEGRO.png" alt="Emprende Link">
                 </div>
-                
+
                 <!-- <p>Emprende Link busca facilitar la colaboración, el crecimiento empresarial al conectar de manera </p>
                 <p>  eficiente a emprendedores con grandes inversores, creando oportunidades para el desarrollo conjunto</p>
                 <p>de soluciones innovadoras.</p> -->
@@ -221,10 +221,10 @@ footer {
             </div>
             <div class="footer-section contact">
                 <h3>Nuestro correo:</h3>
-                <p><a href="mailto:emprendelink234@gmail.com">emprendelink234@gmail.com</a></p>
+                <p><a href="mailto:emprendelink234@gmail.com">emprendelink2@gmail.com</a></p>
             </div>
         </div>
-    
+
         <div class="footer-bottom">
             <p>&copy; Emprende Link - Copyright © 2024</p>
             <div class="imagenes">

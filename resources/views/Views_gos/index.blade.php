@@ -67,20 +67,13 @@
 
         <div class="header-right">
           <a href="{{ route('ContactanosHome') }}"><i class="fas fa-question-circle"></i> Ayuda</a>
-          <a href="#" id="registroBtn">Registrarse</a>
-          <a href="#" id="iniciarSesionBtn"><i class="fas fa-user"></i> Iniciar sesión</a>
+          <a href="{{ route('registrar_nuevo_usuario.store') }}"><i class="fas fa-question-circle"></i> Regístrate ahora</a>
+          <a href="{{ route('iniciar_sesion_usuario.login') }}"><i class="fas fa-question-circle"></i> Iniciar Sesion</a>
       </div>
 
       <!-- Modal para opciones de registro -->
-      <div id="registroModal" class="modal">
-          <div class="modal-content">
-              <span class="close-button" id="cerrarRegistroModal">&times;</span>
-              <h2>Seleccione tipo de registro</h2>
-              <div class="button-container">
 
-                ensayo
-                <button onclick="window.location.href='{{ route('registrar_nuevo_usuario') }}?role=entrepreneur'" class="modal-button">Usuario</button>
-                <button onclick="window.location.href='{{ route('registrar_nuevo_inversionista') }}?role=investor'" class="modal-button">Inversionista</button>
+
 
 
               </div>
@@ -89,13 +82,8 @@
       {{-- registrar_usuario_ingreso
       registrar_inversionista_ingreso --}}
       <!-- Modal para opciones de inicio de sesión -->
-      <div id="inicioSesionModal" class="modal">
-          <div class="modal-content">
-              <span class="close-button" id="cerrarInicioSesionModal">&times;</span>
-              <h2>Seleccione tipo de inicio de sesión</h2>
-              <div class="button-container">
-                  <button onclick="window.location.href='{{ route('iniciar_sesion_usuario.login') }}'" class="modal-button">Usuario</button>
-                  <button onclick="window.location.href='{{ route('iniciar_sesion_inversionista') }}'" class="modal-button">Inversionista</button>
+
+
               </div>
           </div>
       </div>
@@ -251,8 +239,8 @@
                       >
                         <span>
                           <fragment class="home-fragment124">
-                            <span class="home-text124"><a href="">Regístrate ahora</a></span>
-                          </fragment>
+                            <a href="{{ route('registrar_nuevo_usuario.store') }}"><i class="fas fa-question-circle"></i> Regístrate ahora</a>
+                        </fragment>
                         </span>
                       </button>
                     </div>
