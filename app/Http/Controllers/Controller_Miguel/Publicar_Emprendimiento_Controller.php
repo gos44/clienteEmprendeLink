@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Controller_Miguel;
+
+
+use App\Http\Controllers\Controller; // Importa la clase base
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http; // Necesario para enviar la solicitud HTTP
@@ -9,7 +12,7 @@ class Publicar_Emprendimiento_Controller extends Controller
 {
     public function paso1()
     {
-        return view('emprendimientos.paso1');
+        return view('Publicar_Emprendimiento1');
     }
 
     public function guardarPaso1(Request $request)
