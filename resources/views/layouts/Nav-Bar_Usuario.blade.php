@@ -73,71 +73,22 @@
             display: none;
         }
 
-        /* Improved Mobile Styles */
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 75%;
                 height: 100%;
                 background-color: white;
                 box-shadow: -2px 0 15px rgba(0,0,0,0.1);
                 z-index: 1050;
                 padding: 20px;
                 overflow-y: auto;
-                transition: transform 0.3s ease;
-            }
-
-            .navbar-collapse.show {
-                transform: translateX(0);
             }
 
             .navbar-nav {
                 padding-top: 60px;
-            }
-
-            .navbar-nav .nav-item {
-                margin-bottom: 15px;
-                width: 100%;
-            }
-
-            .navbar-nav .nav-link {
-                display: flex;
-                align-items: center;
-                padding: 12px 15px;
-                border-radius: 8px;
-                transition: background-color 0.3s ease;
-            }
-
-            .navbar-nav .nav-link i {
-                margin-right: 10px;
-                font-size: 1.2rem;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background-color: rgba(0,0,0,0.1);
-            }
-
-            .mobile-section-header {
-                color: #666;
-                font-weight: bold;
-                text-transform: uppercase;
-                font-size: 0.9rem;
-                margin: 20px 0 10px;
-                padding-bottom: 5px;
-                border-bottom: 1px solid #eee;
-            }
-
-            .navbar-close-btn {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                color: #333;
-                z-index: 2000;
             }
 
             .mobile-only {
@@ -146,6 +97,23 @@
 
             .desktop-only {
                 display: none;
+            }
+
+            .navbar-toggler {
+                z-index: 2000;
+            }
+
+            .navbar-nav .nav-item {
+                margin-bottom: 10px;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background-color: gray;
             }
         }
 
@@ -179,16 +147,9 @@
 
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <button class="navbar-close-btn" data-bs-dismiss="collapse" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
-
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Búsqueda Section -->
-                    <li class="mobile-section-header">Búsqueda</li>
-                    
-                    <!-- Búsqueda (Dropdown solo en desktop) -->
-                    <li class="nav-item dropdown me-2 desktop-only">
+                     <!-- Búsqueda -->
+                     <li class="nav-item dropdown me-2 desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-search fa-lg me-1"></i> Búsqueda
@@ -207,21 +168,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <!-- Búsqueda opciones en móvil -->
-                    <li class="nav-item mobile-only">
-                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
-                            <i class="fas fa-building me-2"></i> Emprendimientos
-                        </a>
-                    </li>
-                    <li class="nav-item mobile-only">
-                        <a class="nav-link" href="{{route('listaUsuarios.index')}}">
-                            <i class="fas fa-users me-2"></i> Lista de Usuarios
-                        </a>
-                    </li>
-
-                    <!-- Emprendimientos Section -->
-                    <li class="mobile-section-header">Emprendimientos</li>
 
                     <!-- Emprendimientos (Dropdown solo en desktop) -->
                     <li class="nav-item dropdown desktop-only">
@@ -244,6 +190,7 @@
                     </li>
 
                     <!-- Opciones de emprendimiento en móvil -->
+                     
                     <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
                             <i class="fas fa-list me-2"></i> Mis Emprendimientos
@@ -254,9 +201,11 @@
                             <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
                         </a>
                     </li>
-
-                    <!-- Herramientas Section -->
-                    <li class="mobile-section-header">Herramientas</li>
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
+                            <i class="fas fa-users me-2"></i> Lista de Usuarios
+                        </a>
+                    </li>
 
                     <!-- Ayuda -->
                     <li class="nav-item">
