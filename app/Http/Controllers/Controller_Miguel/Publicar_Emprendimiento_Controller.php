@@ -1,273 +1,135 @@
-<?php  
-namespace App\Http\Controllers\Controller_Miguel;  
+<?php
 
-use App\Http\Controllers\Controller; 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http; // Necesario para enviar la solicitud HTTP
 
-class Publicar_Emprendimiento_Controller extends Controller
+class EmprendimientoController extends Controller
 {
-   /**
-     * Muestra el primer paso del formulario de publicación.
-     */
-    public function Publicar_Emprendimiento1()
+    public function paso1()
     {
-        return view('views_Miguel.Publicar_Emprendimiento1');
+        return view('emprendimientos.paso1');
     }
 
-    /**
-     * Procesa los datos del primer paso y avanza al segundo.
-     */
-    public function storeStep1(Request $request)
+    public function guardarPaso1(Request $request)
     {
-        $validated = $request->validate([
-            'basic_data_field1' => 'required|string|max:255',
-            'basic_data_field2' => 'required|string|max:255',
+        // Validación de los datos del primer paso
+        $request->validate([
+            'nombre_emprendimiento' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'categoria' => 'required|string',
         ]);
 
-        // Guardar los datos en sesión para los siguientes pasos
-        session(['step1' => $validated]);
-
-        return redirect()->route('Publicar_Emprendimiento2');
-    }
-
-    /**
-     * Muestra el segundo paso del formulario de publicación.
-     */
-    public function Publicar_Emprendimiento2()
-    {
-        return view('views_Miguel.Publicar_Emprendimiento2');
-    }
-
-    /**
-     * Procesa los datos del segundo paso y avanza al tercero.
-     */
-    public function storeStep2(Request $request)
-    {
-        $validated = $request->validate([
-            'image_field' => 'nullable|string|max:255',
-        ]);
-
-        // Guardar los datos en sesión para los siguientes pasos
-        session(['step2' => $validated]);
-
-        return redirect()->route('Publicar_Emprendimiento3');
-    }
-
-    /**
-     * Muestra el tercer paso del formulario de publicación.
-     */
-    public function Publicar_Emprendimiento3()
-    {
-        return view('views_Miguel.Publicar_Emprendimiento3');
-    }
-
-    /**
-     * Procesa los datos del tercer paso y publica el emprendimiento.
-     */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'final_data_field1' => 'required|string|max:255',
-            'final_data_field2' => 'required|string|max:255',
-        ]);
-
-        // Combina los datos de todos los pasos
-        $data = array_merge(
-            session('step1', []),
-            session('step2', []),
-            $validated
-        );
+        // Preparar los datos para enviarlos a la API
+        $data = [
+            'nombre_emprendimiento' => $request->input('nombre_emprendimiento'),
+            'descripcion' => $request->input('descripcion'),
+            'categoria' => $request->input('categoria'),
+        ];
 
         try {
-            // Enviar la solicitud POST a la API
+            // Enviar la solicitud POST a la API para crear el emprendimiento
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
 
+            // Comprobar si la respuesta fue exitosa
             if ($response->successful()) {
-                return redirect()->route('Publicar_Emprendimiento1')
-                    ->with('success', 'Emprendimiento publicado con éxito.');
+                // Redirigir al siguiente paso del proceso de publicación
+                return redirect()->route('Publicar_Emprendimiento2')->with('emprendimiento_id', $response->json()['id']);
             } else {
-                return back()->withErrors($response->json()['errors'] ?? ['Error al publicar el emprendimiento.'])
-                    ->withInput();
+                // Si la API devuelve errores, mostrarlos al usuario
+                return back()->withErrors($response->json()['errors'] ?? ['Error al crear el emprendimiento.'])->withInput();
             }
         } catch (\Exception $e) {
+            // Manejo de excepciones en caso de fallo en la conexión o error en la API
+            return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
+
+    public function paso2()
+    {
+        return view('emprendimientos.paso2');
+    }
+
+    public function guardarPaso2(Request $request)
+    {
+        // Validación de los datos del segundo paso
+        $request->validate([
+            'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'portada' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'products.*.image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'products.*.descripcion' => 'required|string',
+        ]);
+
+        // Preparar los datos de imágenes y productos para enviar a la API
+        $data = [
+            'logo' => $request->file('logo')->store('logos', 'public'),
+            'portada' => $request->file('portada')->store('portadas', 'public'),
+            'products' => $request->input('products'),  // Asegúrate de que el formato de 'products' sea el correcto
+        ];
+
+        try {
+            // Enviar la solicitud POST a la API para guardar los datos del paso 2
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
+
+            // Comprobar si la respuesta fue exitosa
+            if ($response->successful()) {
+                // Redirigir al siguiente paso del proceso de publicación
+                return redirect()->route('Publicar_Emprendimiento3');
+            } else {
+                // Si la API devuelve errores, mostrarlos al usuario
+                return back()->withErrors($response->json()['errors'] ?? ['Error al guardar las imágenes y productos.'])->withInput();
+            }
+        } catch (\Exception $e) {
+            // Manejo de excepciones en caso de fallo en la conexión o error en la API
+            return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
+
+    public function paso3()
+    {
+        return view('emprendimientos.paso3');
+    }
+
+    public function guardarPaso3(Request $request)
+    {
+        // Validación de los datos del tercer paso
+        $request->validate([
+            'descripcion_general' => 'required|string',
+        ]);
+
+        // Preparar los datos para el último paso
+        $data = [
+            'descripcion_general' => $request->input('descripcion_general'),
+        ];
+
+        try {
+            // Enviar la solicitud POST a la API para guardar los datos del paso 3
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
+
+            // Comprobar si la respuesta fue exitosa
+            if ($response->successful()) {
+                // Redirigir a la página de los emprendimientos del usuario
+                return redirect()->route('MisEmpredimientos.index')->with('success', '¡Emprendimiento publicado!');
+            } else {
+                // Si la API devuelve errores, mostrarlos al usuario
+                return back()->withErrors($response->json()['errors'] ?? ['Error al finalizar la publicación.'])->withInput();
+            }
+        } catch (\Exception $e) {
+            // Manejo de excepciones en caso de fallo en la conexión o error en la API
             return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
                 ->withInput();
         }
     }
 }
-// class Publicar_Emprendimiento extends Controller 
-// {
-//     // <!-- FRONTEND -->
-//     private $apiBaseUrl = 'http://api.EmprendeLink/api';
-
-//     // Step 1: Basic Entrepreneurship Information View
-//     public function Publicar_Emprendimiento1()
-//     {     
-//         return view('Views_Miguel.Publicar_Emprendimiento1');
-//     }
-    
-//     // Step 2: Logo and Product Images View
-//     public function Publicar_Emprendimiento2()
-//     {     
-//         // Check if basic entrepreneurship data exists in session
-//         if (!session()->has('entrepreneurship.name')) {
-//             return redirect()->route('Publicar_Emprendimiento1')
-//                 ->with('error', 'Por favor, complete el paso 1 primero');
-//         }
-//         return view('Views_Miguel.Publicar_Emprendimiento2');
-//     }
-    
-//     // Step 3: Final Details View
-//     public function Publicar_Emprendimiento3()
-//     {     
-//         // Check if logo and product data exist in session
-//         if (!session()->has('entrepreneurship.logo')) {
-//             return redirect()->route('Publicar_Emprendimiento2')
-//                 ->with('error', 'Por favor, complete el paso 2 primero');
-//         }
-//         return view('Views_Miguel.Publicar_Emprendimiento3');
-//     }
-
-//     // Handle Step 1 Form Submission
-//     public function storeStep1(Request $request)
-//     {
-//         $validatedData = $request->validate([
-//             'nombre_emprendimiento' => 'required|max:255',
-//             'descripcion' => 'required',
-//             'categoria' => 'required',
-//             'especificaciones' => 'nullable'
-//         ]);
-
-//         // Store data in session for multi-step form
-//         session([
-//             'entrepreneurship.name' => $validatedData['nombre_emprendimiento'],
-//             'entrepreneurship.description' => $validatedData['descripcion'],
-//             'entrepreneurship.category' => $validatedData['categoria'],
-//             'entrepreneurship.specifications' => $validatedData['especificaciones'] ?? ''
-//         ]);
-
-//         return redirect()->route('Publicar_Emprendimiento2');
-//     }
-
-//     // Handle Step 2 Form Submission
-//     public function storeStep2(Request $request)
-//     {
-//         $validatedData = $request->validate([
-//             'logo' => 'required|image|max:2048',
-//             'portada' => 'required|image|max:2048',
-//             'productos' => 'nullable',
-//             'productos.*.image' => 'required|image|max:2048',
-//             'productos.*.descripcion' => 'required'
-//         ]);
-
-//         // Store logo
-//         $logoPath = $request->file('logo')->store('entrepreneurship/logos', 'public');
-//         $coverPath = $request->file('portada')->store('entrepreneurship/covers', 'public');
-
-//         // Store product images and descriptions
-//         $productImages = [];
-//         $productDescriptions = [];
-//         foreach ($validatedData['productos'] as $index => $product) {
-//             $imagePath = $product['image']->store('entrepreneurship/products', 'public');
-//             $productImages[] = $imagePath;
-//             $productDescriptions[] = $product['descripcion'];
-//         }
-
-//         // Store in session
-//         session([
-//             'entrepreneurship.logo' => $logoPath,
-//             'entrepreneurship.cover' => $coverPath,
-//             'entrepreneurship.product_image_1' => $productImages[0] ?? null,
-//             'entrepreneurship.product_image_2' => $productImages[1] ?? null,
-//             'entrepreneurship.product_image_3' => $productImages[2] ?? null,
-//             'entrepreneurship.product_image_4' => $productImages[3] ?? null,
-//             'entrepreneurship.product_description_1' => $productDescriptions[0] ?? null,
-//             'entrepreneurship.product_description_2' => $productDescriptions[1] ?? null,
-//             'entrepreneurship.product_description_3' => $productDescriptions[2] ?? null,
-//             'entrepreneurship.product_description_4' => $productDescriptions[3] ?? null,
-//         ]);
-
-//         return redirect()->route('Publicar_Emprendimiento3');
-//     }
-
-//     // Final Step: Publish Entrepreneurship
-//     public function store(Request $request)
-//     {
-//         $validatedData = $request->validate([
-//             'general_description' => 'required',
-//             'phone_number' => 'required|max:255',
-//             'email' => 'required|email|max:255',
-//             'location' => 'required|max:255',
-//             'url' => 'nullable|max:255',
-//             'expiration_date' => 'required|date'
-//         ]);
-
-//         try {
-//             // Retrieve JWT token
-//             $token = session('jwt_token') ?? request()->cookie('jwt_token');
-            
-//             if (!$token) {
-//                 throw new \Exception('No authentication token found');
-//             }
-
-//             // Prepare multipart request with all entrepreneurship data
-//             $response = Http::withToken($token)
-//                 ->attach([
-//                     'logo' => storage_path('app/public/' . session('entrepreneurship.logo')),
-//                     'cover' => storage_path('app/public/' . session('entrepreneurship.cover')),
-//                     'product_image_1' => storage_path('app/public/' . session('entrepreneurship.product_image_1')),
-//                     'product_image_2' => storage_path('app/public/' . session('entrepreneurship.product_image_2')),
-//                     'product_image_3' => storage_path('app/public/' . session('entrepreneurship.product_image_3')),
-//                     'product_image_4' => storage_path('app/public/' . session('entrepreneurship.product_image_4')),
-//                 ])
-//                 ->post("{$this->apiBaseUrl}/publicare", [
-//                     'name' => session('entrepreneurship.name'),
-//                     'description' => session('entrepreneurship.description'),
-//                     'category' => session('entrepreneurship.category'),
-//                     'specifications' => session('entrepreneurship.specifications'),
-//                     'product_description_1' => session('entrepreneurship.product_description_1'),
-//                     'product_description_2' => session('entrepreneurship.product_description_2'),
-//                     'product_description_3' => session('entrepreneurship.product_description_3'),
-//                     'product_description_4' => session('entrepreneurship.product_description_4'),
-//                     'general_description' => $validatedData['general_description'],
-//                     'phone_number' => $validatedData['phone_number'],
-//                     'email' => $validatedData['email'],
-//                     'location' => $validatedData['location'],
-//                     'url' => $validatedData['url'],
-//                     'expiration_date' => $validatedData['expiration_date']
-//                 ]);
-
-//             if ($response->successful()) {
-//                 // Clear session data after successful submission
-//                 session()->forget('entrepreneurship');
-
-//                 return redirect()->route('entrepreneurship.index')
-//                     ->with('success', 'Emprendimiento publicado exitosamente');
-//             } else {
-//                 // Log API error
-//                 Log::error('Publicación de emprendimiento fallida', [
-//                     'response' => $response->body(),
-//                     'status' => $response->status()
-//                 ]);
-
-//                 return redirect()->back()
-//                     ->with('error', 'No se pudo publicar el emprendimiento');
-//             }
-//         } catch (\Exception $e) {
-//             // Log unexpected errors
-//             Log::error('Error en publicación de emprendimiento', [
-//                 'message' => $e->getMessage(),
-//                 'trace' => $e->getTraceAsString()
-//             ]);
-
-//             return redirect()->back()
-//                 ->with('error', 'Ocurrió un error inesperado');
-//         }
-//     }
-// }
