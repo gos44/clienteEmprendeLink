@@ -194,6 +194,7 @@ Route::post('cambiar_contraseña_usuario',[Cambiar_Contraseña_nueva::class,'ind
 Route::get('cambiar_contraseña_inversionista',[cambiar_contraseña_inversionistacontroller::class,'index'])->name('cambiar_contraseña_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 
+Route::post('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'index'])->name('iniciar_sesion_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 
 //Estas son las rutas para el registro e inicio de sesion de los dos usuarios tanto emprendedor como inversionista
@@ -206,6 +207,11 @@ Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::
 
 
 
+
+
+
+Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
+Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 //registro ingreso usuario e inversionista
 Route::get('registrar_usuario_ingreso',[Registro_usuario_ingreso::class,'index'])->name('registrar_usuario_ingreso'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
@@ -325,4 +331,3 @@ Route::get('sobreEmUser', [sobreEmpredelinkController::class, 'index'])->name('s
 Route::get('sobreEmHome', action: [sobreEmpredelinkHomeController::class, 'index'])->name('sobreEmHome.index');
 Route::get('sobreEmInver', [sobreEmpredelinkInversorController::class, 'index'])->name('sobreEmInver.index');
 Route::get('MisEmpredimientos', [MisEmpredimientosController::class, 'index'])->name('MisEmpredimientos.index');
-
