@@ -12,10 +12,8 @@
         :root {
             --primary-color: black;
             --secondary-color: black;
-            --hover-color: black;
+            --hover-color:black;
             --background-color: #f4f6f7;
-        }
-
         body {
             background-color: var(--background-color);
             font-family: 'Arial', sans-serif;
@@ -186,6 +184,11 @@
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
+                            {{-- <li>
+                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                    <i class="fas fa-users me-2"></i> Usuarios
+                                </a>
+                            </li> --}}
                         </ul>
                     </li>
 
