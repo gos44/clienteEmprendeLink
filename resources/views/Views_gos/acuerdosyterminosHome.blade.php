@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende Link</title>
-    <link rel="stylesheet" href="{{ asset('css/acuerdosyterminosInversor.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/acuerdosyterminos.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -15,43 +15,13 @@
 <body>
     <header>
         <div class="header-left">
-            <a href="{{ route('Home1.index') }}">
-            <img src="link/16.png" alt="Emprende Link" width="200px" >
-        </a>
+            <img src="LINK/16.png" alt="Emprende Link Logo" class="logo">
         </div>
         <div class="header-right">
-        <a href="acuerdosyterminos.html"><i class="fas fa-question-circle"></i> Ayuda</a>
-        <a href="registro_usuario.html" id="registroBtn">Registrarse</a>
-        <a href="iniciosesion1_usuario.html"><i class="fas fa-user"></i> Iniciar sesión</a>
-    
-        <!-- Modal para opciones de registro -->
-        <div id="registroModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-            <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; text-align: center; border-radius: 10px;">
-                <h2 style="margin-bottom: 20px;">Seleccione tipo de registro</h2>
-                <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                    <button onclick="window.location.href='registro_usuario.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Usuario</button>
-                    <button onclick="window.location.href='registro_inver1.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Inversionista</button>
-                </div>
-                <button id="cerrarRegistroModal" style="color: rgb(0, 0, 0); border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Cerrar</button>
-            </div>
+            <a href="{{asset('Home1')}}"><img src="images/flecha.png" alt=""> Atras</a>
         </div>
-    
-        <!-- Modal para opciones de inicio de sesión -->
-        <div id="inicioSesionModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-            <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; text-align: center; border-radius: 10px;">
-                <h2 style="margin-bottom: 20px;">Seleccione tipo de inicio de sesión</h2>
-                <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                    <button onclick="window.location.href='iniciosesion1_usuario.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Usuario</button>
-                    <button onclick="window.location.href='inicio_sesion_inver.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Inversionista</button>
-                </div>
-                <button id="cerrarInicioSesionModal" style="color: rgb(0, 0, 0); border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Cerrar</button>
-            </div>
-        </div>
-    
-        <!-- JavaScript para manejar los modales -->
-        
-    
     </header>
+    
 <div class="container">
     <div class="cont">
         <h1>Acuerdos y Términos de Uso</h1>

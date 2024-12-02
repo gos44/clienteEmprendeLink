@@ -11,42 +11,14 @@
 </head>
 
 <body>
-    
-  <header>
-    <div class="header-left">
-        <a href="{{ route('Home1.index') }}">
-        <img src="link/16.png" alt="Emprende Link" width="200px" >
-    </a>
-    </div>
-    <div class="header-right">
-    <a href="acuerdosyterminos.html"><i class="fas fa-question-circle"></i> Ayuda</a>
-    <a href="registro_usuario.html" id="registroBtn">Registrarse</a>
-    <a href="iniciosesion1_usuario.html"><i class="fas fa-user"></i> Iniciar sesión</a>
-
-    <!-- Modal para opciones de registro -->
-    <div id="registroModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; text-align: center; border-radius: 10px;">
-            <h2 style="margin-bottom: 20px;">Seleccione tipo de registro</h2>
-            <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                <button onclick="window.location.href='registro_usuario.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Usuario</button>
-                <button onclick="window.location.href='registro_inver1.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Inversionista</button>
-            </div>
-            <button id="cerrarRegistroModal" style="color: rgb(0, 0, 0); border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Cerrar</button>
+    <header>
+        <div class="header-left">
+            <img src="LINK/16.png" alt="Emprende Link Logo" class="logo">
         </div>
-    </div>
-
-    <!-- Modal para opciones de inicio de sesión -->
-    <div id="inicioSesionModal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
-        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px; text-align: center; border-radius: 10px;">
-            <h2 style="margin-bottom: 20px;">Seleccione tipo de inicio de sesión</h2>
-            <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-                <button onclick="window.location.href='iniciosesion1_usuario.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Usuario</button>
-                <button onclick="window.location.href='inicio_sesion_inver.html'" style="background-color: black; color: white; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Inversionista</button>
-            </div>
-            <button id="cerrarInicioSesionModal" style="color: rgb(0, 0, 0); border: none; padding: 10px 15px; cursor: pointer; font-size: 14px; border-radius: 10px;">Cerrar</button>
+        <div class="header-right">
+            <a href="{{asset('Home1')}}"><img src="images/flecha.png" alt=""> Atras</a>
         </div>
-    </div>
-</header>
+    </header>
     <div class="container">
         <div class="cont">
             <h1>Política de Privacidad</h1>

@@ -17,6 +17,6 @@ class Home_inversor extends Controller
         // ];
 
         // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Miguel.Home_inversor');
+        return view('views_Miguel.home_inversor');
     }
 }
