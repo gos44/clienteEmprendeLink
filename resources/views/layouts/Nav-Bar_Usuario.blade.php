@@ -23,7 +23,7 @@
 
         .navbar {
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 0.5rem 1rem;
             transition: all 0.3s ease;
         }
@@ -53,7 +53,7 @@
 
         .dropdown-menu {
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 0.5rem 0;
             margin-top: 10px;
@@ -69,44 +69,96 @@
             color: var(--hover-color);
         }
 
+        .mobile-only {
+            display: none;
+        }
+
+        /* Improved Mobile Styles */
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 75%;
+                width: 100%;
                 height: 100%;
                 background-color: white;
-                box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+                box-shadow: -2px 0 15px rgba(0,0,0,0.1);
                 z-index: 1050;
                 padding: 20px;
                 overflow-y: auto;
+                transition: transform 0.3s ease;
+            }
+
+            .navbar-collapse.show {
+                transform: translateX(0);
             }
 
             .navbar-nav {
                 padding-top: 60px;
             }
 
-            .navbar-toggler {
-                z-index: 2000;
-            }
-
             .navbar-nav .nav-item {
-                margin-bottom: 10px;
+                margin-bottom: 15px;
+                width: 100%;
             }
 
             .navbar-nav .nav-link {
-                padding: 10px;
-                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                padding: 12px 15px;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+            }
+
+            .navbar-nav .nav-link i {
+                margin-right: 10px;
+                font-size: 1.2rem;
             }
 
             .navbar-nav .nav-link:hover {
-                background-color: gray;
+                background-color: rgba(0,0,0,0.1);
+            }
+
+            .mobile-section-header {
+                color: #666;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+                margin: 20px 0 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .navbar-close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #333;
+                z-index: 2000;
+            }
+
+            .mobile-only {
+                display: block;
             }
 
             .desktop-only {
-                display: none !important;
+                display: none;
             }
+        }
+
+        /* Subtle notification badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -127,9 +179,16 @@
 
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
+                <button class="navbar-close-btn" data-bs-dismiss="collapse" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Búsqueda -->
-                    <li class="nav-item dropdown me-2">
+                    <!-- Búsqueda Section -->
+                    <li class="mobile-section-header">Búsqueda</li>
+                    
+                    <!-- Búsqueda (Dropdown solo en desktop) -->
+                    <li class="nav-item dropdown me-2 desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-search fa-lg me-1"></i> Búsqueda
@@ -142,15 +201,30 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                <a class="dropdown-item" href="{{route('listaUsuarios.index')}}">
                                     <i class="fas fa-users me-2"></i> Usuarios
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- Emprendimientos -->
-                    <li class="nav-item dropdown">
+                    <!-- Búsqueda opciones en móvil -->
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
+                            <i class="fas fa-building me-2"></i> Emprendimientos
+                        </a>
+                    </li>
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{route('listaUsuarios.index')}}">
+                            <i class="fas fa-users me-2"></i> Lista de Usuarios
+                        </a>
+                    </li>
+
+                    <!-- Emprendimientos Section -->
+                    <li class="mobile-section-header">Emprendimientos</li>
+
+                    <!-- Emprendimientos (Dropdown solo en desktop) -->
+                    <li class="nav-item dropdown desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-briefcase me-2"></i> Emprendimientos
@@ -169,6 +243,21 @@
                         </ul>
                     </li>
 
+                    <!-- Opciones de emprendimiento en móvil -->
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
+                            <i class="fas fa-list me-2"></i> Mis Emprendimientos
+                        </a>
+                    </li>
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
+                            <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
+                        </a>
+                    </li>
+
+                    <!-- Herramientas Section -->
+                    <li class="mobile-section-header">Herramientas</li>
+
                     <!-- Ayuda -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('ContactanosUsu') }}">
@@ -180,10 +269,11 @@
                     <li class="nav-item position-relative">
                         <a class="nav-link" href="{{ route('Notificaciones') }}">
                             <i class="fas fa-bell me-2"></i> Notificaciones
+                            {{-- <span class="notification-badge">3</span> --}}
                         </a>
                     </li>
 
-                    <!-- Perfil -->
+                    <!-- Perfil -->                  
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('perfilUser.index') }}">
                             <i class="fas fa-user me-2"></i> Perfil

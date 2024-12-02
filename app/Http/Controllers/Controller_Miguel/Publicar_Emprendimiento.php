@@ -11,7 +11,7 @@ class Publicar_Emprendimiento extends Controller
 {
     public function paso1()
     {
-        return view('emprendimientos.paso1');
+        return view('views_Miguel.emprendimientos.paso1');
     }
 
     public function guardarPaso1(Request $request)
