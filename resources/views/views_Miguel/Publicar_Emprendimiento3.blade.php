@@ -34,7 +34,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('/publicar-emprendimiento/paso-3') }}" id="final-form">
+        <form method="POST" action="{{ route('Publicar_Emprendimiento3') }}" id="final-form">
             @csrf
             <div class="form-sections">
                 <div class="form-section">
