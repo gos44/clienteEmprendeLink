@@ -61,7 +61,7 @@
 
         <button type="submit" class="button-submit">Iniciar sesión</button>
 
-        <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_usuario') }}" class="span">Regístrate</a></p>
+        <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_usuario.store') }}" class="span">Regístrate</a></p>
     </form>
 </body>
 </html>
