@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Controllers_Dayron;
 
 use App\Http\Controllers\Controller;
+use App\Models\Emprendimiento; // Asegúrate de que el modelo Emprendimiento esté correctamente importado
 use Illuminate\Http\Request;
 
 class Mi_Emprendimiento extends Controller
 {
-    public function index()
+    public function show($id)
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
+        // Busca el emprendimiento por el ID
+        $emprendimiento = Emprendimiento::find($id);
 
-        // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Dayron.Mi_Emprendimiento');
+        if (!$emprendimiento) {
+            return redirect()->route('home')->with('error', 'Emprendimiento no encontrado');
+        }
+
+        // Retorna la vista con los datos del emprendimiento
+        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento'));
     }
 }
