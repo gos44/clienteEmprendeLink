@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Http;
 
 class MisEmpredimientosController extends Controller
 {
     public function index()
     {
-        // Simulación de datos que se pueden utilizar en la vista
-        $connections = [
-            // Ejemplo de datos
-            ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-            ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        ];
+        // Hacer la solicitud GET a la API para obtener todos los emprendimientos
+        $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
 
-        // Retorna la vista 'Perfil' con los datos de prueba
+        // Si la respuesta es exitosa
+        if ($response->successful()) {
+            // Obtener los datos del cuerpo de la respuesta
+            $connections = $response->json();
+        } else {
+            // En caso de error, inicializar el arreglo vacío
+            $connections = [];
+        }
+
+        // Retorna la vista con los emprendimientos
         return view('Views_gos/ListaMisEmprendiientos', compact('connections'));
     }
 }
