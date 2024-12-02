@@ -33,7 +33,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('Publicar_Emprendimiento1') }}">
+        <form action="{{ route('Publicar_Emprendimiento1.store') }}" method="POST">
             @csrf
             <div class="form-sections">
                 <div class="form-section">
@@ -46,10 +46,10 @@
                         <label for="descripcion">Escribe tu eslogan</label>
                         <textarea id="descripcion" name="descripcion" required>{{ old('descripcion') }}</textarea>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="especificaciones">Especificaciones</label>
                         <textarea id="especificaciones" name="especificaciones">{{ old('especificaciones') }}</textarea>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="form-section">
                     <div class="form-group">

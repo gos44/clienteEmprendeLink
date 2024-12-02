@@ -75,9 +75,7 @@ use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
 
 use App\Http\Controllers\Controller_k\Notificaciones;
 use App\Http\Controllers\Controller_k\Contactanos;
-
-
-
+use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento_Controller;
 use App\Http\Controllers\Controllers_Sebas\articulos_deportivos_inversionista;
 
 /*
@@ -242,6 +240,8 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 // Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])->name('Publicar_Emprendimiento1');
 // Route::get('Publicar_Emprendimiento2', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento2'])->name('Publicar_Emprendimiento2');
 // Route::get('Publicar_Emprendimiento3', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento3'])->name('Publicar_Emprendimiento3');
+
+
 
 
 

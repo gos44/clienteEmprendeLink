@@ -11,18 +11,14 @@
     <link rel="stylesheet" href="{{asset('css/contactanosHome.css')}}"> 
 </head>
 <body>
-  <header>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <div class="header-left">
-      
-        <img src="LINK/16.png" alt="Emprende Link Logo" class="logo">
-        
-    </div>
-    <div class="header-right">
-        
-      <a href="{{asset('Home1')}}" ><img src="images/flecha.png" alt=""></i> Atras</a>
-    </div>
-</header>
+    <header>
+        <div class="header-left">
+            <img src="LINK/16.png" alt="Emprende Link Logo" class="logo">
+        </div>
+        <div class="header-right">
+            <a href="{{asset('Home1')}}"><img src="images/flecha.png" alt=""> Atras</a>
+        </div>
+    </header>
    
     <main>
         <section class="contact">
@@ -64,8 +60,6 @@
     </main>
     
     <script>
-      
-
         document.querySelectorAll('.accordion-button').forEach(button => {
             button.addEventListener('click', () => {
                 const accordionContent = button.nextElementSibling;
@@ -78,8 +72,6 @@
                 }
             });
         });
-
-        
     </script>
 </body>
 </html>
