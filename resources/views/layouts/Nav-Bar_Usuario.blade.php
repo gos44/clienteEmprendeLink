@@ -11,7 +11,6 @@
     <style>
         :root {
             --primary-color: black;
-            --secondary-color: black;
             --hover-color: black;
             --background-color: #f4f6f7;
         }
@@ -23,7 +22,7 @@
 
         .navbar {
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 0.5rem 1rem;
             transition: all 0.3s ease;
         }
@@ -53,7 +52,7 @@
 
         .dropdown-menu {
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 0.5rem 0;
             margin-top: 10px;
@@ -74,38 +73,32 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 75%;
+                width: 100%;
                 height: 100%;
                 background-color: white;
-                box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+                box-shadow: -2px 0 15px rgba(0,0,0,0.1);
                 z-index: 1050;
                 padding: 20px;
                 overflow-y: auto;
             }
 
             .navbar-nav {
-                padding-top: 60px;
-            }
-
-            .navbar-toggler {
-                z-index: 2000;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                padding-top: 20px;
             }
 
             .navbar-nav .nav-item {
+                width: 100%;
+                text-align: left;
                 margin-bottom: 10px;
             }
 
             .navbar-nav .nav-link {
                 padding: 10px;
                 border-radius: 5px;
-            }
-
-            .navbar-nav .nav-link:hover {
-                background-color: gray;
-            }
-
-            .desktop-only {
-                display: none !important;
+                width: 100%;
             }
         }
     </style>
@@ -115,8 +108,8 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
-                <img src="images/16.png" alt="Logo" class="img-fluid">
+            <a class="navbar-brand" href="{{ route('Home_Usuario.index') }}">
+                <img src="images/16.png" alt="Logo">
             </a>
 
             <!-- Botón hamburguesa -->
@@ -127,46 +120,31 @@
 
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
+                <ul class="navbar-nav ms-auto">
                     <!-- Búsqueda -->
-                    <li class="nav-item dropdown me-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-search fa-lg me-1"></i> Búsqueda
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
+                            <i class="fas fa-search me-2"></i> Búsqueda
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="searchDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('filtrar_usuario') }}">
-                                    <i class="fas fa-building me-2"></i> Emprendimientos
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
-                                    <i class="fas fa-users me-2"></i> Usuarios
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <!-- Emprendimientos -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-briefcase me-2"></i> Emprendimientos
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
+                            <i class="fas fa-list me-2"></i> Mis Emprendimientos
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="emprendimientosDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('MisEmpredimientos.index') }}">
-                                    <i class="fas fa-list me-2"></i> Mis Emprendimientos
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
-                                    <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
-                                </a>
-                            </li>
-                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
+                            <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
+                        </a>
+                    </li>
+
+                    <!-- Usuarios -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
+                            <i class="fas fa-users me-2"></i> Lista de Usuarios
+                        </a>
                     </li>
 
                     <!-- Ayuda -->
@@ -177,7 +155,7 @@
                     </li>
 
                     <!-- Notificaciones -->
-                    <li class="nav-item position-relative">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('Notificaciones') }}">
                             <i class="fas fa-bell me-2"></i> Notificaciones
                         </a>
