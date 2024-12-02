@@ -160,7 +160,7 @@
                   <span>
                     <fragment class="home-fragment114">
                       <span class="home-text114 thq-body-small">
-                        <a href=" {{ route('registrar_nuevo_usuario') }}">Regístrate como emprendedor</a>
+                        <a href=" {{ route('registrar_nuevo_usuario.store') }}">Regístrate como emprendedor</a>
                       </span>
                     </fragment>
                   </span>
@@ -250,6 +250,8 @@
             </div>
           </div>
         </cta26-wrapper>
+
+
         <features25-wrapper class="features25-wrapper">
           <!--Features25 component-->
           <div class="thq-section-padding">
