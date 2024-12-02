@@ -76,7 +76,7 @@ use App\Http\Controllers\Controllers_Sebas\inicio_de_sesion_usuariocontroller;
 
 use App\Http\Controllers\Controller_k\Notificaciones;
 use App\Http\Controllers\Controller_k\Contactanos;
-use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento_Controller;
+
 use App\Http\Controllers\Controllers_Sebas\articulos_deportivos_inversionista;
 
 /*
