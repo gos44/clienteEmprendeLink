@@ -1,4 +1,3 @@
-
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
@@ -69,7 +68,7 @@
             <a href="{{ route('Publicar_Emprendimiento3') }}" class="btn-publicar">Siguiente</a>
         </form>
     </div>
-    
+
 
 
 
@@ -77,7 +76,7 @@
 
 
     <script>
-   
+
 
         // Función para manejar la vista previa de imágenes
 function handleImagePreview(input, previewId) {
@@ -127,7 +126,7 @@ document.querySelectorAll('.product-image-input').forEach(function(input) {
     });
 });
     </script>
-   
+
    <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
 
 </body>

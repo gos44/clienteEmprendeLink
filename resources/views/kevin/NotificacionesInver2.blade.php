@@ -1,4 +1,3 @@
-
 @extends('layouts.Nav-Bar_Inversionista')
 @extends('layouts.Footer_Inversor')
 <!DOCTYPE html>
@@ -6,15 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>inver2</title>
+    <title>Responder Notificación</title>
 
     <link rel="stylesheet" href="{{asset('css/notificacionesInver2.css')}}"> 
-
-   
 </head>
 <body>
-  
- 
     <main>
         <section class="message">
             <div class="message-header">
@@ -25,7 +20,7 @@
                     <span class="close">x</span>
                 </div>
             </div>
-            <form>
+            <form method="POST">
                 <div class="form-group">
                     <label for="destinatario">Destinatario</label>
                     <input type="email" id="destinatario" value="LegoLatam@gmail.com" readonly>
@@ -47,7 +42,6 @@ Con gran entusiasmo, le presentamos nuestro proyecto y solicitamos su valiosa at
 3. Alineación con [Nombre de la empresa]: [Explique cómo su emprendimiento se alinea con los valores, objetivos o necesidades de la empresa].
 4. Equipo apasionado y experimentado: [Describa brevemente el equipo detrás de su emprendimiento y sus capacidades].
 
-
 Para facilitar su revisión, hemos adjuntado un resumen ejecutivo que describe en detalle nuestro emprendimiento, incluyendo:
 • Problema que resuelve
 • Solución propuesta
@@ -59,7 +53,6 @@ Para facilitar su revisión, hemos adjuntado un resumen ejecutivo que describe e
 Agradecemos de antemano su tiempo y consideración. Estamos disponibles para responder cualquier pregunta que pueda tener sobre nuestro emprendimiento y para discutir las posibilidades de colaboración.
 
 Para concretar una breve llamada o reunión, puede contactarnos por correo electrónico a [Su dirección de correo electrónico] o por teléfono al [Su número de teléfono].
-
 
 Atentamente,
 [Su nombre]
@@ -75,27 +68,24 @@ Atentamente,
                 <button type="button" class="delete-btn" onclick="showNotification()">Enviar</button>
                 <button type="button" class="reply-btn">Adjuntar</button>
             </div>
-        </div>
-        <div class="notification" id="notification" style="display: none;">
-            <p><h2>¡Su respuesta ha sido enviada Exitosamente!</h2></p>
-           <a href="{{asset('notificacionesInver')}}"> <button onclick="hideNotification()">Cerrar</button></a>
-        </div>
+            
+            <div class="notification" id="notification" style="display: none;">
+                <p><h2>¡Su respuesta ha sido enviada Exitosamente!</h2></p>
+                <a href="{{asset('notificacionesInver')}}"> <button onclick="hideNotification()">Cerrar</button></a>
+            </div>
         </section>
-       
     </main>
-    
+
     <script>
-     
-       function showNotification() {
-        document.getElementById("notification").style.display = "block";
-    }
+        // Mostrar la notificación
+        function showNotification() {
+            document.getElementById("notification").style.display = "flex";
+        }
 
-    // Ocultar la notificación
-    function hideNotification() {
-        document.getElementById("notification").style.display = "none";
-    }
-
+        // Ocultar la notificación
+        function hideNotification() {
+            document.getElementById("notification").style.display = "none";
+        }
     </script>
-    
 </body>
 </html>

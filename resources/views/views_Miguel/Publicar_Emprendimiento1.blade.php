@@ -1,4 +1,3 @@
-
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
@@ -34,23 +33,23 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('Publicar_Emprendimiento1') }}">
+        <form action="{{ route('Publicar_Emprendimiento1.store') }}" method="POST">
             @csrf
             <div class="form-sections">
                 <div class="form-section">
                     <div class="form-group">
                         <label for="nombre_emprendimiento">Nombre del Emprendimiento</label>
-                        <input type="text" id="nombre_emprendimiento" name="nombre_emprendimiento" 
+                        <input type="text" id="nombre_emprendimiento" name="nombre_emprendimiento"
                                value="{{ old('nombre_emprendimiento') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Escribe tu eslogan</label>
                         <textarea id="descripcion" name="descripcion" required>{{ old('descripcion') }}</textarea>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="especificaciones">Especificaciones</label>
                         <textarea id="especificaciones" name="especificaciones">{{ old('especificaciones') }}</textarea>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="form-section">
                     <div class="form-group">
@@ -73,16 +72,16 @@
                     </div>
                 </div>
             </div>
-           
+
    <a href="{{ route('Publicar_Emprendimiento2') }}" class="btn-publicar">Siguiente</a>
         </form>
     </div>
-    
+
 
 {{-- <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script> --}}
 
 
 
-    
+
 </body>
 </html>

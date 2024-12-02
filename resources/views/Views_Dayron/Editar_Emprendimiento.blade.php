@@ -40,10 +40,7 @@
                     <h1 contenteditable="true">Vino el Éxtasis</h1>
                     <p class="hero-quote" contenteditable="true">"Aquel que vino al mundo y no toma vino, ¿entonces a qué vino?"</p>
                 </div>
-                <div class="hero-buttons">
-                    <a href="ListaMisEmprendiientos.html" class="btn btn-primary" onclick="saveChanges()">Guardar</a>
-                    <a href="MI-EMPRENDIMIENTO-EDITAR-2.HTML" class="btn btn-secondary">Eliminar</a>
-                </div>
+              
             </div>
            
         </section>
@@ -53,6 +50,7 @@
                 Cambiar imagen de fondo
             </button>
         </div>
+        
      
 
         <section class="profile">
@@ -67,6 +65,7 @@
                 </div>
             </div>
         </section>
+      
 
         <div class="content">
             <section class="products">
@@ -128,13 +127,19 @@
             <section class="description">
                 <h3 contenteditable="true">Descripción</h3>
                     <p contenteditable="true">Experimenta la magia del vino: Un viaje sensorial único. Imagina un atardecer en el viñedo, donde los rayos dorados del sol acarician las vides maduras, listas para ser cosechadas. Cada botella de vino que elaboramos es el resultado de este mágico proceso, donde la tierra, el clima y la pasión de nuestros enólogos se combinan para crear una obra de arte líquida. Más que una bebida, una pasión: Embárcate en un viaje sensorial sin igual donde cada gota te invita a descubrir un universo de sabores, aromas y tradición. Desde la frescura frutal de un vino joven hasta la complejidad y profundidad de un añejo, cada sorbo es una nueva experiencia. Un legado familiar: Sumérgete en la historia que cada botella cuenta, un relato de tradición familiar, innovación y dedicación inquebrantable. Nuestra bodega ha sido testigo de generaciones que han dedicado sus vidas a perfeccionar su arte.</p>
-
+                    
+                  
             </section>
+
+            <div class="hero-buttons-1">
+                <a href="ListaMisEmprendiientos.html" class="btn btn-primary" onclick="saveChanges()">Guardar</a>
+                <a href="MI-EMPRENDIMIENTO-EDITAR-2-USUARIO.HTML" class="btn btn-secondary">Eliminar</a>
+            </div>
           
     </main>
 
    
-   
+  
 
 
 
