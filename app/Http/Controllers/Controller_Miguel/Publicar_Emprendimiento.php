@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Controller_Miguel;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http; // Necesario para enviar la solicitud HTTP
+use App\Http\Controllers\Controller; // Importa la clase base
+
 
 class Publicar_Emprendimiento extends Controller
 {
