@@ -17,7 +17,7 @@
   <main class="profile-container">
     <div class="profile-banner">
         <div class="profile-img">
-            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/81273ca7-55d8-4cbc-8794-1b39725c261e/dga6e4t-0db8f8c3-e59c-45b4-8e5e-997ad15c9a20.jpg/v1/fill/w_894,h_894,q_70,strp/sukuna_smile_manga_3_by_ae19oe_dga6e4t-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzYwMCIsInBhdGgiOiJcL2ZcLzgxMjczY2E3LTU1ZDgtNGNiYy04Nzk0LTFiMzk3MjVjMjYxZVwvZGdhNmU0dC0wZGI4ZjhjMy1lNTljLTQ1YjQtOGU1ZS05OTdhZDE1YzlhMjAuanBnIiwid2lkdGgiOiI8PTM2MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.l_g3-4d6r-AZyDHigTm9byy-tFurBL7Ts73QeFCzXGg" alt="Foto de perfil">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Foto de perfil">
         </div>
     </div>
 

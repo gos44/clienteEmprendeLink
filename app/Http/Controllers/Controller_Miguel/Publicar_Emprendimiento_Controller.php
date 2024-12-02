@@ -41,7 +41,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             // Comprobar si la respuesta fue exitosa
             if ($response->successful()) {
                 // Redirigir al siguiente paso del proceso de publicación
-                return redirect()->route('Publicar_Emprendimiento2')->with('emprendimiento_id', $response->json()['id']);
+                return redirect()->route('/publicar-emprendimiento/paso-2')->with('emprendimiento_id', $response->json()['id']);
             } else {
                 // Si la API devuelve errores, mostrarlos al usuario
                 return back()->withErrors($response->json()['errors'] ?? ['Error al crear el emprendimiento.'])->withInput();
@@ -55,7 +55,7 @@ class Publicar_Emprendimiento_Controller extends Controller
 
     public function paso2()
     {
-        return view('emprendimientos.paso2');
+        return view('views_Miguel.Publicar_Emprendimiento2');
     }
 
     public function guardarPaso2(Request $request)
@@ -85,7 +85,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             // Comprobar si la respuesta fue exitosa
             if ($response->successful()) {
                 // Redirigir al siguiente paso del proceso de publicación
-                return redirect()->route('Publicar_Emprendimiento3');
+                return redirect()->route('/publicar-emprendimiento/paso-3');
             } else {
                 // Si la API devuelve errores, mostrarlos al usuario
                 return back()->withErrors($response->json()['errors'] ?? ['Error al guardar las imágenes y productos.'])->withInput();
@@ -99,7 +99,7 @@ class Publicar_Emprendimiento_Controller extends Controller
 
     public function paso3()
     {
-        return view('emprendimientos.paso3');
+        return view('views_Miguel.Publicar_Emprendimiento3');
     }
 
     public function guardarPaso3(Request $request)
