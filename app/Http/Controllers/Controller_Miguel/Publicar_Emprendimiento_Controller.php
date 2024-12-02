@@ -15,6 +15,7 @@ class Publicar_Emprendimiento_Controller extends Controller
         return view('Publicar_Emprendimiento1');
     }
 
+    
     public function guardarPaso1(Request $request)
     {
         // Validación de los datos del primer paso
