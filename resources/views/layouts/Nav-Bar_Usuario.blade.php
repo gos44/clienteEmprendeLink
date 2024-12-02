@@ -11,10 +11,9 @@
     <style>
         :root {
             --primary-color: black;
-            --hover-color: black;
+            --secondary-color: black;
+            --hover-color:black;
             --background-color: #f4f6f7;
-        }
-
         body {
             background-color: var(--background-color);
             font-family: 'Arial', sans-serif;
@@ -68,12 +67,16 @@
             color: var(--hover-color);
         }
 
+        .mobile-only {
+            display: none;
+        }
+
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 75%;
                 height: 100%;
                 background-color: white;
                 box-shadow: -2px 0 15px rgba(0,0,0,0.1);
@@ -83,23 +86,45 @@
             }
 
             .navbar-nav {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                padding-top: 20px;
+                padding-top: 60px;
+            }
+
+            .mobile-only {
+                display: block;
+            }
+
+            .desktop-only {
+                display: none;
+            }
+
+            .navbar-toggler {
+                z-index: 2000;
             }
 
             .navbar-nav .nav-item {
-                width: 100%;
-                text-align: left;
                 margin-bottom: 10px;
             }
 
             .navbar-nav .nav-link {
                 padding: 10px;
                 border-radius: 5px;
-                width: 100%;
             }
+
+            .navbar-nav .nav-link:hover {
+                background-color: gray;
+            }
+        }
+
+        /* Subtle notification badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -108,8 +133,8 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand" href="{{ route('Home_Usuario.index') }}">
-                <img src="images/16.png" alt="Logo">
+            <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
+                <img src="images/16.png" alt="Logo" class="img-fluid">
             </a>
 
             <!-- Botón hamburguesa -->
@@ -120,28 +145,70 @@
 
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <!-- Búsqueda -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
-                            <i class="fas fa-search me-2"></i> Búsqueda
+                <ul class="navbar-nav ms-auto align-items-center">
+                     <!-- Búsqueda -->
+                     <li class="nav-item dropdown me-2 desktop-only">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-search fa-lg me-1"></i> Búsqueda
                         </a>
+                        <ul class="dropdown-menu" aria-labelledby="searchDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('filtrar_usuario') }}">
+                                    <i class="fas fa-building me-2"></i> Emprendimientos
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{route('listaUsuarios.index')}}">
+                                    <i class="fas fa-users me-2"></i> Usuarios
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
-                    <!-- Emprendimientos -->
-                    <li class="nav-item">
+                    <!-- Emprendimientos (Dropdown solo en desktop) -->
+                    <li class="nav-item dropdown desktop-only">
+                        <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-briefcase me-2"></i> Emprendimientos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="emprendimientosDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('MisEmpredimientos.index') }}">
+                                    <i class="fas fa-list me-2"></i> Mis Emprendimientos
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
+                                    <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
+                                </a>
+                            </li>
+                            {{-- <li>
+                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                    <i class="fas fa-users me-2"></i> Usuarios
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </li>
+
+                    <!-- Opciones de emprendimiento en móvil -->
+                     <li>
+                                <a class="dropdown-item" href="{{ route('filtrar_usuario') }}">
+                                    <i class="fas fa-building me-2"></i> Emprendimientos
+                                </a>
+                            </li>
+                    <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
                             <i class="fas fa-list me-2"></i> Mis Emprendimientos
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
-                            <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
+                            <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
                         </a>
                     </li>
-
-                    <!-- Usuarios -->
-                    <li class="nav-item">
+                    <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
                             <i class="fas fa-users me-2"></i> Lista de Usuarios
                         </a>
@@ -155,13 +222,14 @@
                     </li>
 
                     <!-- Notificaciones -->
-                    <li class="nav-item">
+                    <li class="nav-item position-relative">
                         <a class="nav-link" href="{{ route('Notificaciones') }}">
                             <i class="fas fa-bell me-2"></i> Notificaciones
+                            {{-- <span class="notification-badge">3</span> --}}
                         </a>
                     </li>
 
-                    <!-- Perfil -->
+                    <!-- Perfil -->                  
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('perfilUser.index') }}">
                             <i class="fas fa-user me-2"></i> Perfil
