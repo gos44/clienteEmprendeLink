@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="header-left">
-            <img src="LINK/16.png" alt="Emprende Link Logo" class="logo">
+            <img src="LINK/16.png" alt="Emprende Link Logo" width="240px" class="logo">
         </div>
         <div class="header-right">
             <a href="{{asset('Home1')}}"><img src="images/flecha.png" alt=""> Atras</a>
