@@ -12,10 +12,8 @@
         :root {
             --primary-color: black;
             --secondary-color: black;
-            --hover-color: black;
+            --hover-color:black;
             --background-color: #f4f6f7;
-        }
-
         body {
             background-color: var(--background-color);
             font-family: 'Arial', sans-serif;
@@ -23,7 +21,7 @@
 
         .navbar {
             background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 0.5rem 1rem;
             transition: all 0.3s ease;
         }
@@ -53,7 +51,7 @@
 
         .dropdown-menu {
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 10px;
             padding: 0.5rem 0;
             margin-top: 10px;
@@ -69,6 +67,10 @@
             color: var(--hover-color);
         }
 
+        .mobile-only {
+            display: none;
+        }
+
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 position: fixed;
@@ -77,7 +79,7 @@
                 width: 75%;
                 height: 100%;
                 background-color: white;
-                box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+                box-shadow: -2px 0 15px rgba(0,0,0,0.1);
                 z-index: 1050;
                 padding: 20px;
                 overflow-y: auto;
@@ -85,6 +87,14 @@
 
             .navbar-nav {
                 padding-top: 60px;
+            }
+
+            .mobile-only {
+                display: block;
+            }
+
+            .desktop-only {
+                display: none;
             }
 
             .navbar-toggler {
@@ -103,10 +113,18 @@
             .navbar-nav .nav-link:hover {
                 background-color: gray;
             }
+        }
 
-            .desktop-only {
-                display: none !important;
-            }
+        /* Subtle notification badge */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -128,8 +146,8 @@
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Búsqueda -->
-                    <li class="nav-item dropdown me-2">
+                     <!-- Búsqueda -->
+                     <li class="nav-item dropdown me-2 desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-search fa-lg me-1"></i> Búsqueda
@@ -142,15 +160,15 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                <a class="dropdown-item" href="{{route('listaUsuarios.index')}}">
                                     <i class="fas fa-users me-2"></i> Usuarios
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- Emprendimientos -->
-                    <li class="nav-item dropdown">
+                    <!-- Emprendimientos (Dropdown solo en desktop) -->
+                    <li class="nav-item dropdown desktop-only">
                         <a class="nav-link dropdown-toggle" href="#" id="emprendimientosDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-briefcase me-2"></i> Emprendimientos
@@ -166,7 +184,30 @@
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
+                            {{-- <li>
+                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                    <i class="fas fa-users me-2"></i> Usuarios
+                                </a>
+                            </li> --}}
                         </ul>
+                    </li>
+
+                    <!-- Opciones de emprendimiento en móvil -->
+                     
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
+                            <i class="fas fa-list me-2"></i> Mis Emprendimientos
+                        </a>
+                    </li>
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
+                            <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
+                        </a>
+                    </li>
+                    <li class="nav-item mobile-only">
+                        <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
+                            <i class="fas fa-users me-2"></i> Lista de Usuarios
+                        </a>
                     </li>
 
                     <!-- Ayuda -->
@@ -180,10 +221,11 @@
                     <li class="nav-item position-relative">
                         <a class="nav-link" href="{{ route('Notificaciones') }}">
                             <i class="fas fa-bell me-2"></i> Notificaciones
+                            {{-- <span class="notification-badge">3</span> --}}
                         </a>
                     </li>
 
-                    <!-- Perfil -->
+                    <!-- Perfil -->                  
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('perfilUser.index') }}">
                             <i class="fas fa-user me-2"></i> Perfil
