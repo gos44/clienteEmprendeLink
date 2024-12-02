@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Http\Controllers\Controllers_Dayron;
 
 use App\Http\Controllers\Controller;
-use App\Models\Myentrepreneurship; // Asegúrate de que el modelo Emprendimiento esté correctamente importado
+use App\Models\Myentrepreneurship; // Asegúrate de que el modelo esté correctamente importado
 use Illuminate\Http\Request;
 
 class Mi_Emprendimiento extends Controller
@@ -14,6 +13,7 @@ class Mi_Emprendimiento extends Controller
         // Busca el emprendimiento por el ID
         $emprendimiento = Myentrepreneurship::find($id);
 
+        // Si no se encuentra el emprendimiento, redirige con un mensaje de error
         if (!$emprendimiento) {
             return redirect()->route('home')->with('error', 'Emprendimiento no encontrado');
         }
