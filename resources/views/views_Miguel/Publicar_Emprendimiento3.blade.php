@@ -1,11 +1,11 @@
-@extends('layouts.Nav-Bar_Usuario')
+@extends('layouts.Nav-Bar_Usuario') 
 @extends('layouts.Footer_Usuario')
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicar Emprendimiento</title>
+    <title>Publicar Emprendimiento - Paso 3</title>
     <link rel="stylesheet" href="{{ asset('css/Publicar_Emprendimiento3.css') }}">
 </head>
 <body>
@@ -34,13 +34,13 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('Publicar_Emprendimiento3') }}" id="final-form">
+        <form method="POST" action="{{ route('guardarPaso3') }}" id="final-form">
             @csrf
             <div class="form-sections">
                 <div class="form-section">
                     <div class="form-group">
-                        <label for="descripcion_general">Añade una gran descripción general de todo tu emprendimiento</label>
-                        <textarea id="descripcion_general" name="descripcion_general" required>{{ old('descripcion_general') }}</textarea>
+                        <label for="general_description">Añade una gran descripción general de todo tu emprendimiento</label>
+                        <textarea id="general_description" name="general_description" required>{{ old('general_description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
         </form>
 
         <!-- Modal -->
-        <div id="myModal" class="modal">
+        <div id="myModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <p>¡Emprendimiento Publicado!</p>
@@ -57,40 +57,32 @@
         </div>
     </div>
 
-    
-
-   
-<!-- ventana de publicado -->
+    <!-- Lógica para el modal -->
     <script>
-      // Obtener elementos
-      var modal = document.getElementById("myModal");
-      var btn = document.getElementById("publicarBtn");
-      var span = document.getElementsByClassName("close")[0];
+        // Obtener elementos
+        var modal = document.getElementById("myModal");
+        var form = document.getElementById("final-form");
+        var span = document.getElementsByClassName("close")[0];
 
-      // Cuando el usuario hace clic en el botón, muestra el modal
-      btn.onclick = function(event) {
-          event.preventDefault();  // Previene que el enlace recargue la página
-          modal.style.display = "block";
-      }
+        // Mostrar el modal al enviar el formulario
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        };
 
-      // Cuando el usuario hace clic en (x), cierra el modal
-      span.onclick = function() {
-          modal.style.display = "none";
-      }
+        // Cerrar el modal al hacer clic en (x)
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
 
-      // Cuando el usuario hace clic fuera del modal, cierra el modal
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
-  </script>
+        // Cerrar el modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 
-
-
-
-    
-   
-<script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
+    <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
 </body>
 </html>

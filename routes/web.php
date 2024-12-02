@@ -241,18 +241,26 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 
 
 
+// Route::get('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
+// Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1']);
+
+// Route::get('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
+// Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2']);
+
+// Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
+// Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
+
+// Paso 1: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
-Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1']);
+Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1'])->name('guardarPaso1');
 
+// Paso 2: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
-Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2']);
+Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2'])->name('guardarPaso2');
 
+// Paso 3: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
-Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
-
-
-
-
+Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3'])->name('guardarPaso3');
 
 
 

@@ -1,5 +1,6 @@
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,55 +34,43 @@
         </div>
         @endif
 
-        <form action="{{ route('Publicar_Emprendimiento1') }}" method="POST">
+        <form action="{{ route('guardarPaso1') }}" method="POST">
             @csrf
             <div class="form-sections">
                 <div class="form-section">
                     <div class="form-group">
-                        <label for="nombre_emprendimiento">Nombre del Emprendimiento</label>
-                        <input type="text" id="nombre_emprendimiento" name="nombre_emprendimiento"
-                               value="{{ old('nombre_emprendimiento') }}" required>
+                        <label for="name">Nombre del Emprendimiento</label>
+                        <input type="text" id="name" name="name" value="{{ old('name') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="descripcion">Escribe tu eslogan</label>
-                        <textarea id="descripcion" name="descripcion" required>{{ old('descripcion') }}</textarea>
+                        <label for="slogan">Escribe tu eslogan</label>
+                        <textarea id="slogan" name="slogan" required>{{ old('slogan') }}</textarea>
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="especificaciones">Especificaciones</label>
-                        <textarea id="especificaciones" name="especificaciones">{{ old('especificaciones') }}</textarea>
-                    </div> --}}
                 </div>
                 <div class="form-section">
                     <div class="form-group">
-                        <label for="categoria">Categoría</label>
-                        <select id="categoria" name="categoria" required>
+                        <label for="category">Categoría</label>
+                        <select id="category" name="category" required>
                             <option value="">Seleccione una categoría</option>
-                            <option value="articulos_deportivos" {{ old('categoria') == 'articulos_deportivos' ? 'selected' : '' }}>Artículos deportivos</option>
-                            <option value="articulos_hogar" {{ old('categoria') == 'articulos_hogar' ? 'selected' : '' }}>Artículos para el hogar</option>
-                            <option value="electronica" {{ old('categoria') == 'electronica' ? 'selected' : '' }}>Electrónica</option>
-                            <option value="indumentaria" {{ old('categoria') == 'indumentaria' ? 'selected' : '' }}>Indumentaria</option>
-                            <option value="instrumentos_musicales" {{ old('categoria') == 'instrumentos_musicales' ? 'selected' : '' }}>Instrumentos musicales</option>
-                            <option value="mascotas" {{ old('categoria') == 'mascotas' ? 'selected' : '' }}>Productos de mascotas</option>
-                            <option value="oficina" {{ old('categoria') == 'oficina' ? 'selected' : '' }}>Suministros de oficina</option>
-                            <option value="artesanias" {{ old('categoria') == 'artesanias' ? 'selected' : '' }}>Artesanías</option>
-                            <option value="herramientas" {{ old('categoria') == 'herramientas' ? 'selected' : '' }}>Herramientas de trabajo</option>
-                            <option value="educacion" {{ old('categoria') == 'educacion' ? 'selected' : '' }}>Educación</option>
-                            <option value="alimentacion" {{ old('categoria') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
-                            <option value="vehiculos" {{ old('categoria') == 'vehiculos' ? 'selected' : '' }}>Vehículos</option>
+                            <option value="articulos_deportivos" {{ old('category') == 'articulos_deportivos' ? 'selected' : '' }}>Artículos deportivos</option>
+                            <option value="articulos_hogar" {{ old('category') == 'articulos_hogar' ? 'selected' : '' }}>Artículos para el hogar</option>
+                            <option value="electronica" {{ old('category') == 'electronica' ? 'selected' : '' }}>Electrónica</option>
+                            <option value="indumentaria" {{ old('category') == 'indumentaria' ? 'selected' : '' }}>Indumentaria</option>
+                            <option value="instrumentos_musicales" {{ old('category') == 'instrumentos_musicales' ? 'selected' : '' }}>Instrumentos musicales</option>
+                            <option value="mascotas" {{ old('category') == 'mascotas' ? 'selected' : '' }}>Productos de mascotas</option>
+                            <option value="oficina" {{ old('category') == 'oficina' ? 'selected' : '' }}>Suministros de oficina</option>
+                            <option value="artesanias" {{ old('category') == 'artesanias' ? 'selected' : '' }}>Artesanías</option>
+                            <option value="herramientas" {{ old('category') == 'herramientas' ? 'selected' : '' }}>Herramientas de trabajo</option>
+                            <option value="educacion" {{ old('category') == 'educacion' ? 'selected' : '' }}>Educación</option>
+                            <option value="alimentacion" {{ old('category') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
+                            <option value="vehiculos" {{ old('category') == 'vehiculos' ? 'selected' : '' }}>Vehículos</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-   <a href="{{ route('Publicar_Emprendimiento2') }}" class="btn-publicar">Siguiente</a>
+            <button type="submit" class="btn-publicar">Siguiente</button>
         </form>
     </div>
-
-
-{{-- <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script> --}}
-
-
-
-
 </body>
 </html>
