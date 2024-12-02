@@ -61,7 +61,7 @@
 
         <div class="profile-actions">
 
-        <a  href="{{ route('profile.update') }}">
+        <a  href="{{ route('profile.update.index') }}">
             <button class="btn-primary" >
                 Editar perfil
             </button>
