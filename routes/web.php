@@ -240,14 +240,14 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 
 
 
-Route::get('/publicar-emprendimientos/paso-1', [EmprendimientoController::class, 'paso1'])->name('Publicar_Emprendimiento1');
-Route::post('/publicar-emprendimientos/paso-1', [EmprendimientoController::class, 'guardarPaso1']);
+Route::get('/publicar-emprendimientos/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
+Route::post('/publicar-emprendimientos/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1']);
 
-Route::get('/publicar-emprendimientos/paso-2', [EmprendimientoController::class, 'paso2'])->name('Publicar_Emprendimiento2');
-Route::post('/publicar-emprendimientos/paso-2', [EmprendimientoController::class, 'guardarPaso2']);
+Route::get('/publicar-emprendimientos/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
+Route::post('/publicar-emprendimientos/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2']);
 
-Route::get('/publicar-emprendimientos/paso-3', [EmprendimientoController::class, 'paso3'])->name('Publicar_Emprendimiento3');
-Route::post('/publicar-emprendimientos/paso-3', [EmprendimientoController::class, 'guardarPaso3']);
+Route::get('/publicar-emprendimientos/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
+Route::post('/publicar-emprendimientos/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
 
 
 
