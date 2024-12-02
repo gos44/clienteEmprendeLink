@@ -120,7 +120,7 @@ Route::get('entrepreneurships/{id}', [EntrepreneurshipController::class, 'show']
 Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index'])->name('myentrepreneurships.index');
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
-Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
+Route::get('myentrepreneurships/{id}', [Mi_Emprendimiento::class, 'show'])->name('myentrepreneurships.show');
 
 
 
@@ -159,6 +159,8 @@ Route::get('Chat_Inversor', [Chat_Inversor::class, 'index'])->name('Chat_Inverso
 
 // Mi-Emprendimiento -->
 Route::get('Mi_Emprendimiento', [Mi_Emprendimiento::class, 'index'])->name('Mi_Emprendimiento.index');
+
+
 Route::get('Mi_Emprendimiento_2', [Mi_Emprendimiento_2::class, 'index'])->name('Mi_Emprendimiento_2.index');
 
 // Editar-Emprendimiento -->
