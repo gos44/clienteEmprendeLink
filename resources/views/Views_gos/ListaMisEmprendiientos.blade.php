@@ -26,7 +26,7 @@
                       <h3>{{ $connection['name'] }}</h3>
                       <p class="quote">{{ $connection['slogan'] }}</p>
                       <p class="description">{{ $connection['general_description'] }}</p>
-                      <a href="{{ route('Mi_Emprendimiento.index', ['id' => $connection['id']]) }}" class="butn">Mas Información...</a>
+                      <a href="{{ route('myentrepreneurships.index', ['id' => $connection['id']]) }}" class="butn">Mas Información...</a>
                   </div>
               </div>
           @endforeach
