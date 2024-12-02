@@ -169,7 +169,7 @@
                   <span>
                     <fragment class="home-fragment115">
                       <span class="home-text115 thq-body-small">
-                        <a href="{{ route('registrar_nuevo_inversionista') }}">Regístrate como inversionista</a>
+                        <a href="{{ route('registrar_nuevo_usuario.store') }}">Regístrate como inversionista</a>
                       </span>
                     </fragment>
                   </span>
@@ -250,7 +250,6 @@
             </div>
           </div>
         </cta26-wrapper>
-
 
         <features25-wrapper class="features25-wrapper">
           <!--Features25 component-->
