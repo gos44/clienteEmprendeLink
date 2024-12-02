@@ -222,12 +222,12 @@
                         </a>
                     </li>
 
-                    {{-- <!-- Nueva opción -->
+                    <!-- Nueva opción -->
                     <li class="nav-item nuevo">
-                        <a class="nav-link" href="{{ route('Nuevo') }}">
-                            <i class="fas fa-star me-2"></i> Nuevo
+                        <a class="nav-link" href="{{ route('filtrar_usuario') }}">
+                            <i class="fas fa-star me-2"></i> Emprendimientos
                         </a>
-                    </li> --}}
+                    </li>
 
                     <!-- Ayuda -->
                     <li class="nav-item">
