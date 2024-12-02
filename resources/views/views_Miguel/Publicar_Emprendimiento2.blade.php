@@ -33,7 +33,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('Publicar_Emprendimiento2') }}" enctype="multipart/form-data" id="emprendimiento-form">
+        <form method="POST" action="/publicar-emprendimiento/paso-2" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
             <div class="form-sections">
                 <div class="form-group">
