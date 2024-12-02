@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http; // Necesario para enviar la solicitud HTTP
 
-class Publicar_Emprendimiento_Controller extends Controller
+class Publicar_Emprendimiento extends Controller
 {
     public function paso1()
     {
