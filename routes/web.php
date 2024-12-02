@@ -119,7 +119,7 @@ Route::get('entrepreneurships/{id}', [EntrepreneurshipController::class, 'show']
 Route::get('myentrepreneurships', [MisEmpredimientosController::class, 'index'])->name('myentrepreneurships.index');
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
-Route::get('myentrepreneurshipsssse/{id}', [Mi_Emprendimiento::class, 'show'])->name('myentrepreneurships.show');
+Route::get('myentrepreneurships/{id}', [Mi_Emprendimiento::class, 'show'])->name('myentrepreneurships.show');
 
 
 
