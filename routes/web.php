@@ -163,7 +163,6 @@ Route::get('Chat_Inversor', [Chat_Inversor::class, 'index'])->name('Chat_Inverso
 
 
 // Mi-Emprendimiento ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-Route::get('Mi_Emprendimiento', [Mi_Emprendimiento::class, 'index'])->name('Mi_Emprendimiento.index');
 Route::get('myentrepreneurships/{id}', [Mi_Emprendimiento::class, 'show'])->name('myentrepreneurships.show');
 
 
