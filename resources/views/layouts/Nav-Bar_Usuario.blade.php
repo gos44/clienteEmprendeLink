@@ -193,6 +193,11 @@
                     </li>
 
                     <!-- Opciones de emprendimiento en móvil -->
+                    <li>
+                        <a class="dropdown-item" href="{{ route('filtrar_usuario') }}">
+                            <i class="fas fa-building me-2"></i> Emprendimientos
+                        </a>
+                    </li>
                     <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
                             <i class="fas fa-list me-2"></i> Mis Emprendimientos
