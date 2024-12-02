@@ -8,13 +8,23 @@
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="{{ asset('css/inicio_de_sesion.css') }}">
     <style>
+        /* Ajustes específicos para el selector de rol */
         .rol-selector {
-            width: 100%;
-            padding: 10px;
+            width: 100%; /* Se asegura de que el selector ocupe todo el ancho disponible */
+            padding: 12px; /* Un poco más de espacio para que se vea más cómodo */
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: 14px; /* Ajuste en el tamaño de la fuente */
+            background-color: #fff; /* Fondo blanco para que se vea limpio */
+        }
+
+        /* Enfocar el selector de rol */
+        .rol-selector:focus {
+            border-color: #5cb85c; /* Cambio de color al hacer foco */
+            outline: none;
+            background-color: #f9f9f9; /* Fondo suave cuando está en foco */
         }
     </style>
 </head>
