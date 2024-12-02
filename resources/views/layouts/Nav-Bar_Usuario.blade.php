@@ -14,8 +14,6 @@
             --secondary-color: black;
             --hover-color:black;
             --background-color: #f4f6f7;
-        }
-
         body {
             background-color: var(--background-color);
             font-family: 'Arial', sans-serif;
@@ -128,21 +126,6 @@
             padding: 2px 6px;
             font-size: 0.7rem;
         }
-
-        /* Nueva opción */
-        .nav-item.nuevo {
-            background-color: #4CAF50;
-            border-radius: 20px;
-            margin-left: 1rem;
-        }
-
-        .nav-item.nuevo .nav-link {
-            color: white;
-        }
-
-        .nav-item.nuevo:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
@@ -201,11 +184,20 @@
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
+                            {{-- <li>
+                                <a class="dropdown-item" href="{{ route('listaUsuarios.index') }}">
+                                    <i class="fas fa-users me-2"></i> Usuarios
+                                </a>
+                            </li> --}}
                         </ul>
                     </li>
 
                     <!-- Opciones de emprendimiento en móvil -->
-                     
+                     <li>
+                                <a class="dropdown-item" href="{{ route('filtrar_usuario') }}">
+                                    <i class="fas fa-building me-2"></i> Emprendimientos
+                                </a>
+                            </li>
                     <li class="nav-item mobile-only">
                         <a class="nav-link" href="{{ route('MisEmpredimientos.index') }}">
                             <i class="fas fa-list me-2"></i> Mis Emprendimientos
@@ -221,13 +213,6 @@
                             <i class="fas fa-users me-2"></i> Lista de Usuarios
                         </a>
                     </li>
-
-                    {{-- <!-- Nueva opción -->
-                    <li class="nav-item nuevo">
-                        <a class="nav-link" href="{{ route('Nuevo') }}">
-                            <i class="fas fa-star me-2"></i> Nuevo
-                        </a>
-                    </li> --}}
 
                     <!-- Ayuda -->
                     <li class="nav-item">

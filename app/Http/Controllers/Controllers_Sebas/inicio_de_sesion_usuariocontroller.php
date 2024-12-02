@@ -49,7 +49,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                         ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
                 } elseif ($role == 'investor') {
                     // Redirigir al home de investor
-                    return redirect()->route('Home_Investor.index')
+                    return redirect()->route('Home_inversor.index')
                         ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
                 }
             }
@@ -71,5 +71,4 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ]);
         }
     }
-
 }
