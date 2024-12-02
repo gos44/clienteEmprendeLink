@@ -8,7 +8,7 @@ use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
-use App\Http\Controllers\ListaMisEmprendiientos;
+use App\Http\Controllers\Controllers_Gos\ListaMisEmprendiientos;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
