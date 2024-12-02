@@ -12,7 +12,7 @@ class MyentrepreneurshipController extends Controller
     private function fetchDataFromApi($url)
     {
         $response = Http::get($url);
-        
+
         // Comprobación de errores en la respuesta de la API
         if ($response->successful()) {
             return $response->json();

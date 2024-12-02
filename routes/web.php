@@ -8,7 +8,7 @@ use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
-use App\Http\Controllers\MyentrepreneurshipController;
+use App\Http\Controllers\ListaMisEmprendiientos;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
@@ -117,11 +117,11 @@ Route::get('entrepreneurships/{id}', [EntrepreneurshipController::class, 'show']
 
 
 // Ruta para obtener la lista de todos los "Myentrepreneurships"
-Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index'])->name('myentrepreneurships.index');
+Route::get('myentrepreneurships', [ListaMisEmprendiientos::class, 'index'])->name('myentrepreneurships.index');
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
-Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
-Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
+Route::get('myentrepreneurships/{id}', [ListaMisEmprendiientos::class, 'show'])->name('myentrepreneurships.show');
+Route::get('myentrepreneurships/{id}', [ListaMisEmprendiientos::class, 'show'])->name('myentrepreneurships.show');
 
 
 
