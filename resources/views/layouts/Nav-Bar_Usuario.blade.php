@@ -183,9 +183,7 @@
                     <i class="fas fa-times"></i>
                 </button>
 
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <!-- Búsqueda Section -->
-                    <li class="mobile-section-header">Búsqueda</li>
+                
                     
                     <!-- Búsqueda (Dropdown solo en desktop) -->
                     <li class="nav-item dropdown me-2 desktop-only">
@@ -220,8 +218,7 @@
                         </a>
                     </li>
 
-                    <!-- Emprendimientos Section -->
-                    <li class="mobile-section-header">Emprendimientos</li>
+                    
 
                     <!-- Emprendimientos (Dropdown solo en desktop) -->
                     <li class="nav-item dropdown desktop-only">
@@ -255,8 +252,7 @@
                         </a>
                     </li>
 
-                    <!-- Herramientas Section -->
-                    <li class="mobile-section-header">Herramientas</li>
+                    
 
                     <!-- Ayuda -->
                     <li class="nav-item">
