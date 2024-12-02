@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller_Miguel\Home_inversor;
 use App\Http\Controllers\Controller_Miguel\Publicar_Emprendimiento;
+use App\Http\Controllers\Controller_Miguel\EmprendimientoController;
 use App\Http\Controllers\Controllers_Sebas\cambiar_contraseña_inversionistacontroller;
 
 use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
