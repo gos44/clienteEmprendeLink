@@ -49,7 +49,7 @@
         </div>
         <div class="inputForm">
             <select name="role" class="rol-selector" required>
-                <option value="">Seleccione un rol</option>
+                <option value="">Seleccione su rol</option>
                 <option value="entrepreneur">Emprendedor</option>
                 <option value="investor">Inversor</option>
             </select>
