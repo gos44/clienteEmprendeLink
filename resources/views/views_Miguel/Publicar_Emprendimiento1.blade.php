@@ -39,7 +39,7 @@
                 <div class="form-section">
                     <div class="form-group">
                         <label for="nombre_emprendimiento">Nombre del Emprendimiento</label>
-                        <input type="text" id="nombre_emprendimiento" name="nombre_emprendimiento" 
+                        <input type="text" id="nombre_emprendimiento" name="nombre_emprendimiento"
                                value="{{ old('nombre_emprendimiento') }}" required>
                     </div>
                     <div class="form-group">
@@ -72,16 +72,16 @@
                     </div>
                 </div>
             </div>
-           
+
    <a href="{{ route('Publicar_Emprendimiento2') }}" class="btn-publicar">Siguiente</a>
         </form>
     </div>
-    
+
 
 {{-- <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script> --}}
 
 
 
-    
+
 </body>
 </html>
