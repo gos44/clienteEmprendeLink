@@ -15,13 +15,7 @@
     <br><br>
     <h1>¡Vamos a crear tu emprendimiento!</h1>
 
-    <div class="navigation">
-        <div class="page active">1</div>
-        <div class="line"></div>
-        <div class="page">2</div>
-        <div class="line"></div>
-        <div class="page">3</div>
-    </div>
+    
 
     <div class="container">
         <h2>Registro de Emprendimiento</h2>
