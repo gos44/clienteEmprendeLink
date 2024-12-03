@@ -173,8 +173,9 @@ footer {
         <div class="footer-content">
             <div class="footer-section about">
                 <div class="logoda">
-                    <img class="logo-dark" src="images/LOGO-FONDO NEGRO.png" alt="Emprende Link">
+                    <img class="logo-dark" src="{{ asset('images/LOGO-FONDO NEGRO.png') }}" alt="Emprende Link">
                 </div>
+                
                 
                 <!-- <p>Emprende Link busca facilitar la colaboración, el crecimiento empresarial al conectar de manera </p>
                 <p>  eficiente a emprendedores con grandes inversores, creando oportunidades para el desarrollo conjunto</p>
