@@ -61,8 +61,8 @@
 
       <header>
         <div class="header-left">
-          <img src="{{ asset('link/16.png') }}" alt="Emprende Link" width="240px">
-      </div>
+          <img src="{{ asset('LINK/16.png') }}" alt="Emprende Link4" width="240px">
+              </div>
 
 
         <div class="header-right">
@@ -350,7 +350,7 @@
                     <button
                       class="thq-button-filled thq-button-animated steps2-button"
                     >
-                      <span class="thq-body-small"><a href="index.html">Publicar ahora</a></span>
+                      <span class="thq-body-small"><a href="#">Publicar ahora</a></span>
                     </button>
                   </div>
                 </div>
