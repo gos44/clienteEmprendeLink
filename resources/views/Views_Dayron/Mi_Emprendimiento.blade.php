@@ -1,7 +1,5 @@
-
 @extends('layouts.Nav-Bar_Usuario')
 @extends('layouts.Footer_Usuario')
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,29 +25,43 @@
                 </div>
             </div>
         </section>
-
-        <section class="profile">
-            <div class="profile-card">
-                <h2>Descripción General</h2>
-                <p>{{ $emprendimiento->general_description }}</p>
+Copy    <section class="profile">
+        <div class="profile-card">
+            <img src="{{ asset('images/'.$emprendimiento->owner_image) }}" alt="{{ $emprendimiento->owner_name }}" class="profile-image">
+            <div class="profile-info">
+                <h2>{{ $emprendimiento->owner_name }}</h2>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $emprendimiento->email }}">{{ $emprendimiento->email }}</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento->address }}</p>
+                <p><i class="fas fa-phone"></i> {{ $emprendimiento->phone }}</p>
+                <p><i class="fas fa-city"></i> {{ $emprendimiento->city }}</p>
             </div>
+        </div>
+    </section>
+
+    <div class="hero-buttons">
+        <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+        <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
+    </div>
+
+    <div class="content">
+        <section class="products">
+            @foreach($emprendimiento->products as $product)
+            <div class="product">
+                <img src="{{ asset('images/'.$product->image) }}" alt="{{ $product->name }}">
+                <div class="product-info">
+                    <h4>{{ $product->name }}</h4>
+                    <p>{{ $product->description }}</p>
+                </div>
+            </div>
+            @endforeach
         </section>
 
-        <div class="content">
-            <section class="products">
-                <h3>Productos</h3>
-                @foreach($emprendimiento->name_products as $index => $name)
-                <div class="product">
-                    <img src="{{ asset('images/'.$emprendimiento->product_images[$index]) }}" alt="{{ $name }}">
-                    <div class="product-info">
-                        <h4>{{ $name }}</h4>
-                        <p>{{ $emprendimiento->product_descriptions[$index] }}</p>
-                    </div>
-                </div>
-                @endforeach
-            </section>
-        </div>
+        <section class="description">
+            <h3>Descripción</h3>
+            <p>{{ $emprendimiento->description }}</p>
+        </section>
     </div>
+</div>
 </main>
 </body>
 </html>
