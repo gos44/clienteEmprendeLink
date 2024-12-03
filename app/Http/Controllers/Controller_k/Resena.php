@@ -9,20 +9,26 @@ use Illuminate\Support\Facades\Http;
 class Resena extends Controller
 {
     public function Resena()
-    {
-      // Solicitud GET a la API
-        $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor');
+{
+    $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,entrepreneurship,investor');
 
-        // Verificar si la respuesta fue exitosa
-        if ($response->successful()) {
-            $reviews = $response->json();
-        } else {
-            $reviews = [];
-        }
+    if ($response->successful()) {
+        $data = $response->json();
 
-        // Pasar los datos a la vista
-        return view('kevin/Reseña', compact('reviews'));
+        $reviews = collect($data)->map(function ($review) {
+            return [
+                'qualification' => $review['qualification'] ?? null,
+                'comment' => $review['comment'] ?? '',
+                'entrepreneurship_name' => $review['entrepreneurship']['name'] ?? 'Desconocido',
+                'investor_name' => $review['investor']['name'] ?? 'Anónimo',
+            ];
+        });
+    } else {
+        $reviews = [];
     }
+
+    return view('kevin/Reseña', compact('reviews'));
+}
 
    
    
