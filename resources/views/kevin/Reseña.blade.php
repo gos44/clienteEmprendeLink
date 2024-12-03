@@ -32,7 +32,7 @@
                         <div class="review-meta">
                             <p class="review-author">
                                 Por: 
-                                @if(isset($review['investor']))
+                                @if(isset($review['investor']['name']))
                                     {{ $review['investor']['name'] }}
                                 @else
                                     Anónimo
