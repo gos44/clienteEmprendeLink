@@ -19,13 +19,21 @@
           @foreach($reviews as $review)
               <div class="review-post">
                   <div class="review-post-header">
-                      <h3>{{ $review['title'] }}</h3>
+                      <h3>Calificación: {{ $review['qualification'] }}/5</h3>
                   </div>
                   <div class="review-post-content">
                       <p class="review-text">"{{ $review['comment'] }}"</p>
-                      <p class="review-author">Por: {{ $review['author'] }}</p>
-                      <p class="review-rating">Calificación: {{ $review['rating'] }}/5</p>
-                      <p class="review-date">Fecha: {{ $review['date'] }}</p>
+                      <p class="review-author">
+                          Por: 
+                          @if(isset($review['investor']))
+                              {{ $review['investor']['name'] }}
+                          @else
+                              Anónimo
+                          @endif
+                      </p>
+                      <p class="review-date">
+                          Emprendimiento: {{ $review['entrepreneurships_id'] }}
+                      </p>
                   </div>
               </div>
           @endforeach

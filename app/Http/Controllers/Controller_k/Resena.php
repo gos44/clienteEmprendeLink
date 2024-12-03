@@ -10,21 +10,19 @@ class Resena extends Controller
 {
     public function Resena()
     {
-       // Hacer la solicitud GET a la API para obtener todas las reseñas
-       $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
+      // Solicitud GET a la API
+        $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor');
 
-       // Verificar si la respuesta es exitosa
-       if ($response->successful()) {
-           // Obtener los datos del cuerpo de la respuesta
-           $reviews = $response->json();
-       } else {
-           // En caso de error, inicializar el arreglo vacío
-           $reviews = [];
-       }
+        // Verificar si la respuesta fue exitosa
+        if ($response->successful()) {
+            $reviews = $response->json();
+        } else {
+            $reviews = [];
+        }
 
-       // Retornar la vista con las reseñas
-       return view('kevin/Reseña', compact('reviews'));
-   }
+        // Pasar los datos a la vista
+        return view('kevin/Reseña', compact('reviews'));
+    }
 
    
    
