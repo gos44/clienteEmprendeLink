@@ -323,8 +323,8 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
-Route::get('perfilUser', [PerfilUsuarioController::class, 'index'])->name('perfilUser.inde');
-Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
+Route::get('perfilUser', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
+// Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
 
 Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
