@@ -134,7 +134,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
-                <img src="images/16.png" alt="Logo" class="img-fluid">
+                <img src="{{ asset('images/16.png') }}" alt="Logo1" class="img-fluid">
             </a>
 
             <!-- Botón hamburguesa -->
@@ -180,7 +180,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
+                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento') }}">
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
@@ -200,7 +200,7 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only">
-                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento') }}">
                             <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
                         </a>
                     </li>

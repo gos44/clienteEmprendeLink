@@ -33,7 +33,7 @@
                   <div class="card-content">
                       <h3>Publicar Emprendimiento</h3>
                       <p>Comparte tu emprendimiento: descubre estrategias para conectar y establecer relaciones con personas y empresas.</p>
-                      <a href="{{ route('Publicar_Emprendimiento1') }}" class="btn">Ver más</a>
+                      <a href="{{ route('Publicar_Emprendimiento') }}" class="btn">Ver más</a>
                   </div>
               </div>
               <div class="card">

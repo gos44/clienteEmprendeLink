@@ -56,8 +56,8 @@
         </div>
 
         <div class="profile-actions">
-            <a href="{{ route('perfilUser.index', ['id' => $user->id]) }}">Ver Perfil</a>
-            <button class="btn-primary">
+            <a href="{{ route('perfilUser.index') }}"></a>
+                        <button class="btn-primary">
                     Editar perfil
                 </button>
             </a>
@@ -68,5 +68,6 @@
             </a>
         </div>
     </main>
+
 </body>
 </html>

@@ -256,18 +256,8 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 // Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
 // Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
 
-// Paso 1: Mostrar formulario y guardar datos
-Route::get('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
-Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1'])->name('guardarPaso1');
-
-// Paso 2: Mostrar formulario y guardar datos
-Route::get('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
-Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2'])->name('guardarPaso2');
-
-// Paso 3: Mostrar formulario y guardar datos
-Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
-Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3'])->name('guardarPaso3');
-
+Route::get('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'index'])->name('Publicar_Emprendimiento');
+Route::post('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'guardarEmprendimiento'])->name('guardarEmprendimiento');
 
 
 
@@ -324,7 +314,7 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
-Route::get('perfilUser', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
+Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 // Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
 
