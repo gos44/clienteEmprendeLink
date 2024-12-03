@@ -1,26 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f4f7f6;
+    line-height: 1.6;
 }
+
 html, body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 70px; /* Ajusta según la altura de tu navbar */
-
+    padding-top: 70px;
 }
-
-
-
-
-
-
-
 
 .reviews-container {
     max-width: 1200px;
@@ -30,10 +22,10 @@ html, body {
 
 .reviews-title {
     text-align: center;
-    color: #333;
+    color: #2c3e50;
     font-size: 2.5rem;
     margin-bottom: 40px;
-    font-weight: 600;
+    font-weight: 700;
     position: relative;
 }
 
@@ -43,120 +35,77 @@ html, body {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 80px;
     height: 4px;
-    background: linear-gradient(to right, #4a90e2, #67b8e3);
+    background: linear-gradient(to right, #3498db, #2ecc71);
     border-radius: 2px;
 }
 
 .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    margin-top: 20px;
 }
 
 .review-card {
-    background: #f4f1f15f;
+    background: white;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
 }
 
 .review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-.review-header {
-    margin-bottom: 20px;
-}
-
-.company-info {
+.star-rating {
     display: flex;
-    align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
 }
 
-.company-logo {
-    width: 90px;
-    height: 90px;
-    border-radius: 50px;
-    object-fit: cover;
-    margin-right: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-
-.company-details {
-    flex-grow: 1;
+.star-rating .fas.filled {
+    color: #ffd700;
 }
 
-.company-details h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #2c3e50;
-    font-weight: 600;
-}
-
-.timestamp {
-    font-size: 0.875rem;
-    color: #7f8c8d;
-}
-
-.rating-container {
-    margin-top: 10px;
-}
-
-.rating {
-    display: inline-flex;
-    flex-direction: row-reverse;
-}
-
-.rating > label {
-    font-size: 1.5rem;
+.star-rating .far {
     color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s ease;
 }
 
-.rating:not(:checked) > input {
-    position: absolute;
-    appearance: none;
-}
-
-.rating:not(:checked) > label:before {
-    content: '★';
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-    color: #ffd700;
-}
-
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-    color: #ffed4a;
-}
-
-.rating > input:checked ~ label {
-    color: #ffd700;
+.star-rating i {
+    font-size: 1.5rem;
+    margin: 0 2px;
 }
 
 .review-content {
+    text-align: center;
+}
+
+.review-text {
+    font-style: italic;
     color: #555;
-    line-height: 1.6;
-    font-size: 0.95rem;
+    margin-bottom: 15px;
 }
 
-.review-content p {
-    margin: 0;
+.review-meta {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
-/* Responsive adjustments */
+.review-author {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.review-entrepreneurship {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
     .reviews-container {
         padding: 20px 15px;
@@ -167,12 +116,6 @@ html, body {
     }
 
     .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .review-card {
-        padding: 20px;
+        grid-template-columns: 1fr 1fr;
     }
 }
-
-
