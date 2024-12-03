@@ -13,6 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+
     <main class="profile-container">
         <div class="profile-banner">
             <div class="profile-img">
@@ -68,5 +72,7 @@
             </a>
         </div>
     </main>
+</div>
+@endif
 </body>
 </html>
