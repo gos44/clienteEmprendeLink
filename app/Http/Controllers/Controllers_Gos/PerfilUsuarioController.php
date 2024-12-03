@@ -9,7 +9,7 @@ class PerfilUsuarioController extends Controller
 {
     public function index()
     {
-        $id = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs");
+        $id = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneur");
 
         $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$id}?included=user");
         
