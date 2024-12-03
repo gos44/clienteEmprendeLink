@@ -12,35 +12,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-
 <body>
-    <div class="emprendimiento-details">
-        <h1>{{ $emprendimiento->name }}</h1>
-        <h2>{{ $emprendimiento->slogan }}</h2>
-        <p><strong>Categoría:</strong> {{ $emprendimiento->category }}</p>
-        <p><strong>Descripción general:</strong> {{ $emprendimiento->general_description }}</p>
+<main>
+  <div class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background">
+          <img src="{{ asset('storage/' . $emprendimiento->background_image) }}" alt="{{ $emprendimiento->name }}">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+          <div class="hero-main">
+              <img src="{{ asset('storage/' . $emprendimiento->logo) }}" alt="{{ $emprendimiento->name }} Logo" class="hero-logo">
+              <h1>{{ $emprendimiento->name }}</h1>
+              <p class="hero-quote">"{{ $emprendimiento->slogan }}"</p>
+          </div>
+      </div>
+    </section>
 
-        <!-- Imagen de fondo -->
-        <div class="background-image" style="background-image: url('{{ $emprendimiento->background }}');">
-            <!-- Puedes agregar un overlay o más detalles aquí si lo deseas -->
+    <!-- Profile Section -->
+    <section class="profile">
+        <div class="profile-card">
+            <img src="{{ asset('storage/' . $usuario->profile_picture) }}" alt="{{ $usuario->name }}" class="profile-image">
+            <div class="profile-info">
+                <h2>{{ strtoupper($usuario->name) }}</h2>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $usuario->email }}">{{ $usuario->email }}</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ $usuario->address }}</p>
+                <p><i class="fas fa-phone"></i> {{ $usuario->phone }}</p>
+                <p><i class="fas fa-city"></i> {{ $usuario->city }}</p>
+            </div>
         </div>
+    </section>
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="{{ $emprendimiento->logo_path }}" alt="Logo de {{ $emprendimiento->name }}">
-        </div>
-
-        <!-- Productos -->
-        <div class="productos">
-            <h3>Productos</h3>
-            @foreach($emprendimiento->name_products as $index => $product)
-                <div class="producto">
-                    <h4>{{ $product }}</h4>
-                    <img src="{{ $emprendimiento->product_images[$index] }}" alt="{{ $product }}">
-                    <p>{{ $emprendimiento->product_descriptions[$index] }}</p>
-                </div>
-            @endforeach
-        </div>
+    <!-- Buttons -->
+    <div class="hero-buttons">
+        <a href="{{ route('resena', ['id' => $emprendimiento->id]) }}" class="btn btn-primary">Reseñas</a>
+        <a href="{{ route('Editar_Emprendimiento_2.index', ['id' => $emprendimiento->id]) }}" class="btn btn-secondary">Editar</a>
     </div>
+
+    <!-- Products Section -->
+    <div class="content">
+        <section class="products">
+            @foreach($productos as $producto)
+            <div class="product">
+                <img src="{{ asset('storage/' . $producto->image) }}" alt="{{ $producto->name }}">
+                <div class="product-info">
+                    <h4>{{ $producto->name }}</h4>
+                    <p>{{ $producto->description }}</p>
+                </div>
+            </div>
+            @endforeach
+        </section>
+
+        <!-- Description Section -->
+        <section class="description">
+            <h3>Descripción</h3>
+            <p>{{ $emprendimiento->description }}</p>
+        </section>
+    </div>
+  </div>
+</main>
 </body>
 </html>
