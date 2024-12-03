@@ -108,7 +108,7 @@ Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->
 
 // Ruta para obtener "Publish_Entrepreneurships"
 
-Route::get('Publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
+Route::get('publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
 Route::get('Publicare/{id}',[PublishEntrepreneurshipsController::class,'show'])->name('Publish_Entrepreneurships.show');
 
 
@@ -191,6 +191,7 @@ Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor
 
 
 // RUTAS DEL SEBAS
+
 
 // BUsqueda por filtro usuario e inversionista
 Route::get('Buscar_Emprendimientos_usuario',[Busqueda_Filtro_UsuarioController::class,'index'])->name('filtrar_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
