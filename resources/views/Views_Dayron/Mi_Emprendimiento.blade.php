@@ -15,52 +15,37 @@
     <div class="main-content">
         <section class="hero">
             <div class="hero-background">
-                <img src="{{ asset('images/'.$emprendimiento->image) }}" alt="{{ $emprendimiento->name }}">
+                <img src="{{ asset('images/'.$emprendimiento->background) }}" alt="{{ $emprendimiento->name }}">
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="hero-main">
-                    <img src="{{ asset('images/'.$emprendimiento->logo) }}" alt="{{ $emprendimiento->name }} Logo" class="hero-logo">
+                    <img src="{{ asset('images/'.$emprendimiento->logo_path) }}" alt="{{ $emprendimiento->name }} Logo" class="hero-logo">
                     <h1>{{ $emprendimiento->name }}</h1>
-                    <p class="hero-quote">{{ $emprendimiento->quote }}</p>
+                    <p class="hero-quote">{{ $emprendimiento->slogan }}</p>
                 </div>
             </div>
         </section>
 
         <section class="profile">
             <div class="profile-card">
-                <img src="{{ asset('images/'.$emprendimiento->profile_image) }}" alt="{{ $emprendimiento->owner }}" class="profile-image">
-                <div class="profile-info">
-                    <h2>{{ $emprendimiento->owner }}</h2>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $emprendimiento->email }}">{{ $emprendimiento->email }}</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento->location }}</p>
-                    <p><i class="fas fa-phone"></i> {{ $emprendimiento->phone }}</p>
-                    <p><i class="fas fa-city"></i> {{ $emprendimiento->city }}</p>
-                </div>
+                <h2>Descripción General</h2>
+                <p>{{ $emprendimiento->general_description }}</p>
             </div>
         </section>
 
-        <div class="hero-buttons">
-            <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-            <a href="{{ route('Editar_Emprendimiento.index') }}" class="btn btn-secondary">Editar</a>
-        </div>
-
         <div class="content">
             <section class="products">
-                @foreach($emprendimiento->products as $product)
+                <h3>Productos</h3>
+                @foreach($emprendimiento->name_products as $index => $name)
                 <div class="product">
-                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
+                    <img src="{{ asset('images/'.$emprendimiento->product_images[$index]) }}" alt="{{ $name }}">
                     <div class="product-info">
-                        <h4>{{ $product->name }}</h4>
-                        <p>{{ $product->description }}</p>
+                        <h4>{{ $name }}</h4>
+                        <p>{{ $emprendimiento->product_descriptions[$index] }}</p>
                     </div>
                 </div>
                 @endforeach
-            </section>
-
-            <section class="description">
-                <h3>Descripción</h3>
-                <p>{{ $emprendimiento->description }}</p>
             </section>
         </div>
     </div>
