@@ -1,6 +1,3 @@
-@extends('layouts.Nav-Bar_Usuario')
-@extends('layouts.Footer_Usuario')
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,8 +11,6 @@
 <body>
     <br><br>
     <h1>¡Vamos a crear tu emprendimiento!</h1>
-
-    
 
     <div class="container">
         <h2>Registro de Emprendimiento</h2>
@@ -83,14 +78,17 @@
 
                 <div class="form-group">
                     <label for="products">Añade productos con sus detalles</label>
-                    <div class="product-item">
-                        <input type="file" name="product_images" class="product-image-input" accept="image/*" required>
-                        <div class="product-image">
-                            <img src="" alt="Vista previa del producto">
+                    <div class="product-container" id="product-container">
+                        <div class="product-item">
+                            <input type="file" name="product_images[]" class="product-image-input" accept="image/*" required multiple>
+                            <div class="product-image">
+                                <img src="" alt="Vista previa del producto">
+                            </div>
+                            <input type="text" name="name_products" placeholder="Nombres de los productos (separados por comas)" required>
+                            <textarea name="product_descriptions" placeholder="Descripciones de los productos (separadas por comas)" rows="4" required></textarea>
                         </div>
-                        <input type="text" name="name_products" placeholder="Nombres de los productos (separados por comas)" required>
-                        <textarea name="product_descriptions" placeholder="Descripciones de los productos (separadas por comas)" rows="4" required></textarea>
                     </div>
+                    <button type="button" id="add-product" class="btn-agregar-producto">+ Agregar Producto</button>
                 </div>
             </div>
 
@@ -142,44 +140,69 @@
             handleImagePreview(this, 'portada-preview');
         });
 
-        document.querySelectorAll('.product-image-input').forEach(function(input) {
-            input.addEventListener('change', function() {
-                const productItem = this.closest('.product-item');
-                const preview = productItem.querySelector('.product-image img');
-                const file = this.files[0];
-                const reader = new FileReader();
+        // Manejo de productos dinámicos
+        document.addEventListener('DOMContentLoaded', function() {
+            const productContainer = document.getElementById('product-container');
+            const addProductButton = document.getElementById('add-product');
 
-                reader.onloadend = function () {
-                    preview.src = reader.result;
-                };
+            addProductButton.addEventListener('click', function() {
+                const newProductItem = document.createElement('div');
+                newProductItem.classList.add('product-item');
+                newProductItem.innerHTML = `
+                    <input type="file" name="product_images[]" class="product-image-input" accept="image/*" required multiple>
+                    <div class="product-image">
+                        <img src="" alt="Vista previa del producto">
+                    </div>
+                    <input type="text" name="name_products" placeholder="Nombres de los productos (separados por comas)" required>
+                    <textarea name="product_descriptions" placeholder="Descripciones de los productos (separadas por comas)" rows="4" required></textarea>
+                    <button type="button" class="btn-eliminar-producto">Eliminar Producto</button>
+                `;
 
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    preview.src = '';
-                }
+                // Agregar listener para vista previa de imagen
+                const imageInput = newProductItem.querySelector('.product-image-input');
+                const preview = newProductItem.querySelector('.product-image img');
+                imageInput.addEventListener('change', function() {
+                    const file = this.files[0];
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        preview.src = reader.result;
+                    };
+                    if (file) {
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.src = '';
+                    }
+                });
+
+                // Agregar listener para eliminar producto
+                const deleteButton = newProductItem.querySelector('.btn-eliminar-producto');
+                deleteButton.addEventListener('click', function() {
+                    productContainer.removeChild(newProductItem);
+                });
+
+                productContainer.appendChild(newProductItem);
             });
-        });
 
-        // Modal logic
-        var modal = document.getElementById("myModal");
-        var form = document.getElementById("emprendimiento-form");
-        var span = document.getElementsByClassName("close")[0];
+            // Modal logic
+            var modal = document.getElementById("myModal");
+            var form = document.getElementById("emprendimiento-form");
+            var span = document.getElementsByClassName("close")[0];
 
-        form.onsubmit = function(event) {
-            event.preventDefault();
-            modal.style.display = "block";
-        };
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                modal.style.display = "block";
+            };
 
-        span.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
+            span.onclick = function() {
                 modal.style.display = "none";
-            }
-        };
+            };
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+        });
     </script>
 
     <script src="{{ asset('js/Publicar_Emprendimiento.js') }}"></script>
