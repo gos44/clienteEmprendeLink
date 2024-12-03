@@ -62,7 +62,12 @@ Copy    <section class="profile">
 
         <section class="description">
             <h3>Descripción</h3>
-            <p>{{ $emprendimiento->description ?? 'No se ha proporcionado una descripción del emprendimiento.' }}</p>
+            <p>{{ $emprendimiento->general_description ?? 'No se ha proporcionado una descripción general del emprendimiento.' }}</p>
+
+            @if(isset($emprendimiento->description) && $emprendimiento->description)
+                <h3 class="mt-4">Descripción Detallada</h3>
+                <p>{{ $emprendimiento->description }}</p>
+            @endif
         </section>
     </div>
 </div>
