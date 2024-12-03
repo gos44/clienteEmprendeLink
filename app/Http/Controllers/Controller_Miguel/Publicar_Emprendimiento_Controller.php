@@ -32,7 +32,7 @@ class Publicar_Emprendimiento_Controller extends Controller
               );
   
               if ($response->successful()) {
-                  session(['Entrepreneurship_id' => $response->json('id')]);
+                  session(['publish_Entrepreneurships_id' => $response->json('id')]);
                   return redirect()->route('guardarPaso2');
               }
   
@@ -61,7 +61,7 @@ class Publicar_Emprendimiento_Controller extends Controller
               'product_descriptions' => 'required|string|max:1000',
           ]);
   
-          $entrepreneurshipId = session('Entrepreneurship_id');
+          $entrepreneurshipId = session('publish_Entrepreneurships_id');
           if (!$entrepreneurshipId) {
               return redirect()->route('guardarPaso2')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
           }
@@ -107,7 +107,7 @@ class Publicar_Emprendimiento_Controller extends Controller
               'general_description' => 'required|string|max:2000',
           ]);
   
-          $entrepreneurshipId = session('Entrepreneurship_id');
+          $entrepreneurshipId = session('publish_Entrepreneurships_id');
           if (!$entrepreneurshipId) {
               return redirect()->route('guardarPaso1')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
           }
@@ -121,7 +121,7 @@ class Publicar_Emprendimiento_Controller extends Controller
               );
   
               if ($response->successful()) {
-                  session()->forget('Entrepreneurship_id');
+                  session()->forget('publish_Entrepreneurships_id');
                   return redirect()->route('MisEmpredimientos.index')->with('success', '¡Emprendimiento publicado con éxito!');
               }
   
