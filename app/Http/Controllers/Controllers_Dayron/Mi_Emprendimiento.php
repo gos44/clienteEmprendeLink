@@ -31,22 +31,7 @@ class Mi_Emprendimiento extends Controller
             $emprendimiento->name_products = json_decode($emprendimiento->name_products, true);
         }
 
-        // Obtener datos del usuario relacionado
-        $usuario = DB::table('users')
-            ->where('id', $emprendimiento->user_id)
-            ->first();
-
-        // Verificar si el usuario existe
-        if (!$usuario) {
-            return redirect()->route('home')->with('error', 'Usuario no encontrado');
-        }
-
-        // Opcional: Obtener productos desde una tabla separada
-        $productos = DB::table('products')
-            ->where('entrepreneurship_id', $id)
-            ->get();
-
-        // Retornar la vista con los datos necesarios
-        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento', 'usuario', 'productos'));
+        // Retorna la vista con los datos del emprendimiento
+        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento'));
     }
 }
