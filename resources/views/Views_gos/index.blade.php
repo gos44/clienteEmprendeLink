@@ -70,19 +70,9 @@
           <a href="{{ route('registrar_nuevo_usuario.store') }}"><i class="fas fa-question-circle"></i> Regístrate ahora</a>
           <a href="{{ route('iniciar_sesion_usuario.login') }}"><i class="fas fa-question-circle"></i> Iniciar Sesion</a>
       </div>
-
-      <!-- Modal para opciones de registro -->
-
-
-
-
               </div>
           </div>
       </div>
-      {{-- registrar_usuario_ingreso
-      registrar_inversionista_ingreso --}}
-      <!-- Modal para opciones de inicio de sesión -->
-
 
               </div>
           </div>

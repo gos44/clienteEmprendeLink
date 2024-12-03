@@ -16,16 +16,24 @@
   <section>
       <div class="latest-posts">
           <!-- Iterar sobre cada reseña -->
-          @foreach($connections as $connection)
+          @foreach($reviews as $review)
               <div class="review-post">
                   <div class="review-post-header">
-                      <h3>{{ $connection['title'] }}</h3>
+                      <h3>Calificación: {{ $review['qualification'] }}/5</h3>
                   </div>
                   <div class="review-post-content">
-                      <p class="review-text">"{{ $connection['comment'] }}"</p>
-                      <p class="review-author">Por: {{ $connection['author'] }}</p>
-                      <p class="review-rating">Calificación: {{ $connection['rating'] }}/5</p>
-                      <p class="review-date">Fecha: {{ $connection['date'] }}</p>
+                      <p class="review-text">"{{ $review['comment'] }}"</p>
+                      <p class="review-author">
+                          Por: 
+                          @if(isset($review['investor']))
+                              {{ $review['investor']['name'] }}
+                          @else
+                              Anónimo
+                          @endif
+                      </p>
+                      <p class="review-date">
+                          Emprendimiento: {{ $review['entrepreneurships_id'] }}
+                      </p>
                   </div>
               </div>
           @endforeach
