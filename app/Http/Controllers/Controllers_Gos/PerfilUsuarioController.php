@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Support\Facades\Http;
@@ -6,23 +7,21 @@ use Illuminate\Routing\Controller;
 
 class PerfilUsuarioController extends Controller
 {
-    public function index($id) // Recibir $id
+    public function index()
     {
-        // Validar si el ID está presente y es un número
-        if (!$id || !is_numeric($id)) {
-            abort(404, 'Usuario no encontrado.');
-        }
-
-        // Hacer la solicitud GET a la API
-        $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$id}?included=user");
-
+        $userId = 1; // Reemplaza con el ID de usuario que obtuviste en Postman
+    
+        $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$userId}?included=user");
+        
+      // En el controlador
         if ($response->successful()) {
-            $data = $response->json();
-            $connections = $data['data'] ?? [];
+            $connections = $response->json()['data'] ?? [];
+            if (empty($connections)) {
+                return view('Views_gos.PerfilUsuario', compact('connections'))->with('error', 'No se encontraron datos del perfil.');
+            }
+            return view('Views_gos.PerfilUsuario', compact('connections'));
         } else {
-            $connections = []; // Manejar el caso de error
+            return view('Views_gos.PerfilUsuario', compact('connections'))->with('error', 'Ocurrió un error al cargar los datos del perfil.');
         }
-
-        return view('Views_gos.PerfilUsuario', compact('connections'));
     }
 }

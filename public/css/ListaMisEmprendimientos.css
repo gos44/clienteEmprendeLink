@@ -1,18 +1,16 @@
 body {
     font-family: Arial, sans-serif;
-    
-
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 html, body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
     padding-top: 70px; /* Ajusta según la altura de tu navbar */
-
 }
 
 header {
@@ -54,140 +52,122 @@ header {
     z-index: 4;
 }
 
-
-
 .section-title-1 {
     font-size: 24px;
     margin-bottom: 20px;
     margin-left: 4.5%;
     margin-top: 30px; /* Ajustado para bajar el título */
+    text-align: center;
 }
 
-
-section{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }
 
 .latest-posts {
-    display:flex;
-    padding: 20px;
-    width: 700px;
-    border-radius: 10px;
-    margin-left: 6%;
-    margin-right: 6%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
 }
 
 .wine-post {
-    width: 50px;
-    height: auto;
+    width: 300px;
+    height: 450px;
     background: white;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    flex: 5;
-    border: 2px solid black;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.wine-post:hover {
+    transform: scale(1.05);
 }
 
 .wine-post-header {
     position: relative;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 200px;
+    overflow: hidden;
 }
 
 .background-img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 .logo-img {
-    position: relative;
-    width: 118px;
-    height: 105px;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
     background: white;
     border-radius: 10%;
     padding: 10px;
-    z-index: 1;
-    margin-top: 135px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
 }
 
 .wine-post-content {
     padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
 }
 
 .wine-post h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 20px;
     margin-top: 50px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .quote {
     font-style: italic;
+    color: #666;
     margin-bottom: 10px;
 }
 
 .description {
     font-size: 14px;
+    color: #555;
     margin-bottom: 15px;
+    flex-grow: 1;
 }
 
 .butn {
+    align-self: center;
     display: inline-flex;
-    background-color: rgb(0, 0, 0);
+    background-color: #000;
     color: white;
-    padding: 5px 10px;
+    padding: 8px 15px;
     text-decoration: none;
     border-radius: 5px;
     font-size: 14px;
-    border-color: #000;
+    transition: background-color 0.3s ease;
 }
 
-.profile-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    flex: 1;
-    margin-right: 100px;
-    border: 2px solid black;
+.butn:hover {
+    background-color: #333;
 }
 
-.profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .wine-post {
+        width: 100%;
+        max-width: 350px;
+    }
 }
-
-.profile-card h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.email {
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.profile-card hr {
-    border: none;
-    border-top: 1px solid black;
-    margin: 10px 0;
-}
-
-.profile-card p {
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-
-
