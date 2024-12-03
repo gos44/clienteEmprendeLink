@@ -134,7 +134,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand me-4" href="{{ route('Home_Usuario.index') }}">
-                <img src="images/16.png" alt="Logo" class="img-fluid">
+                <img src="{{ asset('images/16.png') }}" alt="Logo1" class="img-fluid">
             </a>
 
             <!-- Botón hamburguesa -->
