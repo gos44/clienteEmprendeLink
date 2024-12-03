@@ -350,7 +350,7 @@
                     <button
                       class="thq-button-filled thq-button-animated steps2-button"
                     >
-                      <span class="thq-body-small"><a href="index.html">Publicar ahora</a></span>
+                      <span class="thq-body-small"><a href="#">Publicar ahora</a></span>
                     </button>
                   </div>
                 </div>
