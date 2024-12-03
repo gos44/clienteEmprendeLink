@@ -10,28 +10,15 @@ class Mi_Emprendimiento extends Controller
 {
     public function show($id)
     {
-        // Consulta directa a la tabla publish_Entrepreneurships
-        $emprendimiento = DB::table('publish_Entrepreneurships')
-            ->where('id', $id)
-            ->first();
+        // Consulta directa a la tabla
+        $emprendimiento = DB::table('publish_Entrepreneurships')->where('id', $id)->first();
 
-        // Verificar si el emprendimiento existe
+        // Si no se encuentra el emprendimiento, devuelve un mensaje
         if (!$emprendimiento) {
-            return redirect()->route('home')->with('error', 'Emprendimiento no encontrado');
+            return response()->json(['error' => 'Emprendimiento no encontrado'], 404);
         }
 
-        // Convertir campos JSON si es necesario
-        if ($emprendimiento->product_images) {
-            $emprendimiento->product_images = json_decode($emprendimiento->product_images, true);
-        }
-        if ($emprendimiento->product_descriptions) {
-            $emprendimiento->product_descriptions = json_decode($emprendimiento->product_descriptions, true);
-        }
-        if ($emprendimiento->name_products) {
-            $emprendimiento->name_products = json_decode($emprendimiento->name_products, true);
-        }
-
-        // Retorna la vista con los datos del emprendimiento
-        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento'));
+        // Devuelve el emprendimiento como JSON para verificar los datos
+        return response()->json($emprendimiento);
     }
 }
