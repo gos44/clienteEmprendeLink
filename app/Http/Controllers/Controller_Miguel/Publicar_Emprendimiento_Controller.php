@@ -21,54 +21,59 @@ class Publicar_Emprendimiento_Controller extends Controller
             'category' => 'required|string|max:255',
             'logo_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'background' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'product_images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'product_images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             'name_products' => 'required|string',
             'product_descriptions' => 'required|string',
             'general_description' => 'required|string|max:2000',
         ]);
 
         try {
-            // Preparar datos de imágenes
-            $logoPath = $request->file('logo_path')->store('images/logos', 'public');
-            $backgroundPath = $request->file('background')->store('images/backgrounds', 'public');
+            // Guardar imágenes
+            $logoPath = $request->file('logo_path')->store('public/logos');
+            $backgroundPath = $request->file('background')->store('public/backgrounds');
 
-            // Procesar múltiples imágenes de productos
-            $productImagePaths = [];
+            // Procesar imágenes de productos
+            $productImages = [];
             if ($request->hasFile('product_images')) {
-                foreach ($request->file('product_images') as $productImage) {
-                    $productImagePaths[] = $productImage->store('images/products', 'public');
+                foreach ($request->file('product_images') as $image) {
+                    $productImages[] = $image->store('public/products');
                 }
             }
 
-            // Datos del emprendimiento
+            // Preparar datos para la API
             $entrepreneurshipData = [
                 'name' => $request->input('name'),
                 'slogan' => $request->input('slogan'),
                 'category' => $request->input('category'),
                 'logo_path' => Storage::url($logoPath),
                 'background' => Storage::url($backgroundPath),
-                'product_images' => $productImagePaths,
-                'name_products' => explode(',', $request->input('name_products')),
-                'product_descriptions' => explode(',', $request->input('product_descriptions')),
+                'product_images' => array_map(function($path) {
+                    return Storage::url($path);
+                }, $productImages),
+                'name_products' => array_filter(explode(',', $request->input('name_products'))),
+                'product_descriptions' => array_filter(explode(',', $request->input('product_descriptions'))),
                 'general_description' => $request->input('general_description')
             ];
 
-            // Enviar datos a la API
-            $response = Http::post(
+            // Enviar a la API
+            $response = Http::timeout(30)->post(
                 'https://apiemprendelink-production-9272.up.railway.app/api/publicare', 
                 $entrepreneurshipData
             );
 
-            if (!$response->successful()) {
-                return back()->withErrors($response->json('errors', ['Error al publicar el emprendimiento.']))
+            // Verificar respuesta
+            if ($response->successful()) {
+                return redirect()->route('MisEmpredimientos.index')
+                    ->with('success', '¡Emprendimiento publicado con éxito!');
+            } else {
+                return back()
+                    ->withErrors(['api_error' => 'Error al publicar: ' . $response->body()])
                     ->withInput();
             }
 
-            return redirect()->route('MisEmpredimientos.index')
-                ->with('success', '¡Emprendimiento publicado con éxito!');
-
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'No se pudo conectar con el servidor: ' . $e->getMessage()])
+            return back()
+                ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
                 ->withInput();
         }
     }
