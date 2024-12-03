@@ -9,9 +9,9 @@ class PerfilUsuarioController extends Controller
 {
     public function index()
     {
-        $userId = 1; // Reemplaza con el ID de usuario que obtuviste en Postman
+        // Reemplaza con el ID de usuario que obtuviste en Postman
     
-        $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$userId}?included=user");
+        $response = Http::get("apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/1?included=user");
         
       // En el controlador
         if ($response->successful()) {
