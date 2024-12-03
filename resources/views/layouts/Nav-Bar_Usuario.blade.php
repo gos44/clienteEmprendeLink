@@ -227,7 +227,7 @@
 
                     <!-- Perfil -->                  
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('perfilUser.index', ['id' => $user->id]) }}">
+                        <a class="nav-link" href="{{ route('perfilUser.index') }}">
                             <i class="fas fa-user me-2"></i> Perfil
                         </a>
                     </li>
