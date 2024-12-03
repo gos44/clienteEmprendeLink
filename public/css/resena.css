@@ -15,7 +15,7 @@ html, body {
 }
 
 .reviews-container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -41,9 +41,9 @@ html, body {
     border-radius: 2px;
 }
 
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.reviews-list {
+    display: flex;
+    flex-direction: column;
     gap: 30px;
 }
 
@@ -113,13 +113,5 @@ html, body {
 
     .reviews-title {
         font-size: 2rem;
-    }
-
-    .reviews-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .review-card {
-        padding: 20px;
     }
 }

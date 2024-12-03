@@ -13,7 +13,7 @@
 <body>
     <section class="reviews-container">
         <h2 class="reviews-title">Mis Reseñas</h2>
-        <div class="reviews-grid">
+        <div class="reviews-list">
             @foreach($reviews as $review)
                 <div class="review-card">
                     <div class="review-header">
