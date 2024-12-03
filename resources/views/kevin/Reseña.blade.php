@@ -12,17 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h2 class="section-title-1">Mis Reseñas</h2>
-  <section>
-      <div class="latest-posts">
+  <section class="reviews-container">
+      <h2 class="reviews-title">Mis Reseñas</h2>
+      <div class="reviews-grid">
           <!-- Iterar sobre cada reseña -->
           @foreach($reviews as $review)
-              <div class="review-post">
-                  <div class="review-post-header">
+              <div class="review-card">
+                  <div class="review-header">
                       <h3>Calificación: {{ $review['qualification'] }}/5</h3>
                   </div>
-                  <div class="review-post-content">
-                      <p class="review-text">"{{ $review['comment'] }}"</p>
+                  <div class="review-content">
+                      <p>"{{ $review['comment'] }}"</p>
                       <p class="review-author">
                           Por: 
                           @if(isset($review['investor']))
