@@ -33,7 +33,7 @@ class Publicar_Emprendimiento_Controller extends Controller
   
               if ($response->successful()) {
                   session(['Entrepreneurship_id' => $response->json('id')]);
-                  return redirect()->route('paso2');
+                  return redirect()->route('guardarPaso2');
               }
   
               return back()->withErrors($response->json('errors', ['Error desconocido al crear el emprendimiento.']))
@@ -63,7 +63,7 @@ class Publicar_Emprendimiento_Controller extends Controller
   
           $entrepreneurshipId = session('Entrepreneurship_id');
           if (!$entrepreneurshipId) {
-              return redirect()->route('paso1')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
+              return redirect()->route('guardarPaso2')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
           }
   
           try {
@@ -83,7 +83,7 @@ class Publicar_Emprendimiento_Controller extends Controller
               );
   
               if ($response->successful()) {
-                  return redirect()->route('paso3');
+                  return redirect()->route('guardarPaso2');
               }
   
               return back()->withErrors($response->json('errors', ['Error desconocido al guardar las imágenes y productos.']))
@@ -109,7 +109,7 @@ class Publicar_Emprendimiento_Controller extends Controller
   
           $entrepreneurshipId = session('Entrepreneurship_id');
           if (!$entrepreneurshipId) {
-              return redirect()->route('paso1')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
+              return redirect()->route('guardarPaso1')->withErrors(['error' => 'El ID del emprendimiento no está disponible.']);
           }
   
           $data = $request->only('general_description');
