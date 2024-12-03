@@ -7,8 +7,10 @@ use Illuminate\Routing\Controller;
 
 class PerfilUsuarioController extends Controller
 {
-    public function index($id)
+    public function index()
     {
+        $id = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs");
+
         $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$id}?included=user");
         
         if ($response->successful()) {
