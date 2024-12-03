@@ -45,24 +45,6 @@ class ReviewController extends Controller
 
         
     }
-    public function Resena (){
-        return view('kevin.Reseña');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
-    }
-    public function Resena2 (){
-        return view('kevin.Reseña2');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
-    }
-
-    public function Resena3 (){
-        return view('kevin.Reseña3');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
-    }
-
-    public function Resena4 (){
-        return view('kevin.Reseña4');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
-    }
-
-    public function ResenaInver (){
-        return view('kevin.ReseñaInver');//llamamos la carpeta donde esta u bicada la vista y despues el archivo dentro la vista 
-    }
 
 
 }
