@@ -256,9 +256,8 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 // Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
 // Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
 
-Route::get('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'index'])->name('Publicar_Emprendimiento');
-Route::post('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'guardarEmprendimiento'])->name('guardarEmprendimiento');
-
+Route::get('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'index'])->name('publicarEmprendimiento');
+Route::post('/guardar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'guardarEmprendimiento'])->name('guardarEmprendimiento');
 
 
 
