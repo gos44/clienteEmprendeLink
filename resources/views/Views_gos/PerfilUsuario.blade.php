@@ -56,7 +56,7 @@
         </div>
 
         <div class="profile-actions">
-            <a href="{{ route('perfilUser.index') }}">Ver Perfil</a>
+            <a href="{{ route('perfilUser.index') }}"></a>
                         <button class="btn-primary">
                     Editar perfil
                 </button>
