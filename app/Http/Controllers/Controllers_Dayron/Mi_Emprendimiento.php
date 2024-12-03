@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Controllers_Dayron;
 
 use App\Http\Controllers\Controller;
-use App\Models\Myentrepreneurship; // Asegúrate de que el modelo esté correctamente importado
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class Mi_Emprendimiento extends Controller
 {
     public function show($id)
     {
-        // Busca el emprendimiento por el ID
-        $entrepreneur = Myentrepreneurship::find($id);
+        // Consulta directa a la tabla
+        $emprendimiento = DB::table('publish_Entrepreneurships')->where('id', $id)->first();
 
-        // Si no se encuentra el emprendimiento, redirige con un mensaje de error
-        if (!$entrepreneur) {
-            return redirect()->route('home')->with('error', 'Emprendimiento no encontrado');
+        // Si no se encuentra el emprendimiento, devuelve un mensaje
+        if (!$emprendimiento) {
+            return response()->json(['error' => 'Emprendimiento no encontrado'], 404);
         }
 
-        // Retorna la vista con los datos del emprendimiento
-        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento'));
+        // Devuelve el emprendimiento como JSON para verificar los datos
+        return response()->json($emprendimiento);
     }
 }

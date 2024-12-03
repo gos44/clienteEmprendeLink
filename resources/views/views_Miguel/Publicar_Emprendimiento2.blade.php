@@ -57,18 +57,14 @@
 
             <!-- Productos -->
             <div class="form-group">
-                <label for="products">Añade hasta cuatro productos con sus detalles</label>
-                <div class="products-container">
-                    @for ($i = 0; $i < 4; $i++)
-                    <div class="product-item" id="product{{ $i + 1 }}">
-                        <input type="file" name="product_images[{{ $i }}]" class="product-image-input" accept="image/*" required>
-                        <div class="product-image">
-                            <img src="" alt="Vista previa del producto">
-                        </div>
-                        <input type="text" name="name_products[{{ $i }}]" placeholder="Nombre del producto" required>
-                        <textarea name="product_descriptions[{{ $i }}]" placeholder="Descripción del producto" rows="4" required></textarea>
+                <label for="products">Añade productos con sus detalles</label>
+                <div class="product-item">
+                    <input type="file" name="product_images" class="product-image-input" accept="image/*" required>
+                    <div class="product-image">
+                        <img src="" alt="Vista previa del producto">
                     </div>
-                    @endfor
+                    <input type="text" name="name_products" placeholder="Nombres de los productos (separados por comas)" required>
+                    <textarea name="product_descriptions" placeholder="Descripciones de los productos (separadas por comas)" rows="4" required></textarea>
                 </div>
             </div>
 
