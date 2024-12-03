@@ -180,7 +180,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento1') }}">
+                                <a class="dropdown-item" href="{{ route('Publicar_Emprendimiento') }}">
                                     <i class="fas fa-plus-circle me-2"></i> Publicar Nuevo
                                 </a>
                             </li>
@@ -200,7 +200,7 @@
                         </a>
                     </li>
                     <li class="nav-item mobile-only">
-                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento1') }}">
+                        <a class="nav-link" href="{{ route('Publicar_Emprendimiento') }}">
                             <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
                         </a>
                     </li>
