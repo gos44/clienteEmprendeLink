@@ -8,7 +8,7 @@ use App\Http\Controllers\Controllers_Sebas\inicio_sesion_inversionista;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepreneurListController;
 use App\Http\Controllers\EntrepreneurshipController;
-use App\Http\Controllers\MyentrepreneurshipController;
+use App\Http\Controllers\Controllers_Gos\MisEmpredimientosController;
 use App\Http\Controllers\PublishEntrepreneurshipsController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ConnectionController;
@@ -46,7 +46,6 @@ use App\Http\Controllers\Controllers_Gos\HomeController;
 use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkController;
 use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkHomeController;
 use App\Http\Controllers\Controllers_Gos\sobreEmpredelinkInversorController;
-use App\Http\Controllers\Controllers_Gos\MisEmpredimientosController;
 
 
 
@@ -122,11 +121,10 @@ Route::get('entrepreneurships/{id}', [EntrepreneurshipController::class, 'show']
 
 
 // Ruta para obtener la lista de todos los "Myentrepreneurships"
-Route::get('myentrepreneurships', [MyentrepreneurshipController::class, 'index'])->name('myentrepreneurships.index');
+Route::get('myentrepreneurships', [MisEmpredimientosController::class, 'index'])->name('myentrepreneurships.index');
 
 // Ruta para obtener el detalle de un "Myentrepreneurship" específico por su ID
-Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
-Route::get('myentrepreneurships/{id}', [MyentrepreneurshipController::class, 'show'])->name('myentrepreneurships.show');
+Route::get('myentrepreneurships/{id}', [Mi_Emprendimiento::class, 'show'])->name('myentrepreneurships.show');
 
 
 
@@ -248,18 +246,26 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 
 
 
+// Route::get('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
+// Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1']);
+
+// Route::get('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
+// Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2']);
+
+// Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
+// Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
+
+// Paso 1: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'paso1'])->name('Publicar_Emprendimiento1');
-Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1']);
+Route::post('/publicar-emprendimiento/paso-1', [Publicar_Emprendimiento_Controller::class, 'guardarPaso1'])->name('guardarPaso1');
 
+// Paso 2: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'paso2'])->name('Publicar_Emprendimiento2');
-Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2']);
+Route::post('/publicar-emprendimiento/paso-2', [Publicar_Emprendimiento_Controller::class, 'guardarPaso2'])->name('guardarPaso2');
 
+// Paso 3: Mostrar formulario y guardar datos
 Route::get('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'paso3'])->name('Publicar_Emprendimiento3');
-Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3']);
-
-
-
-
+Route::post('/publicar-emprendimiento/paso-3', [Publicar_Emprendimiento_Controller::class, 'guardarPaso3'])->name('guardarPaso3');
 
 
 
