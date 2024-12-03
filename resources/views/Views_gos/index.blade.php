@@ -61,8 +61,8 @@
 
       <header>
         <div class="header-left">
-          <img src="/link/16.png" alt="Emprende Link2" width="240px">
-      </div>
+          <img src="{{ asset('link/16.png') }}" alt="Emprende Link3" width="240px">
+              </div>
 
 
         <div class="header-right">
