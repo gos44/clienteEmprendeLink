@@ -108,7 +108,7 @@ Route::get('EntrepreneurList/{id}',[EntrepreneurListController::class,'show'])->
 
 // Ruta para obtener "Publish_Entrepreneurships"
 
-Route::get('Publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
+Route::get('publicare', [PublishEntrepreneurshipsController::class, 'index'])->name('Publish_Entrepreneurships.index');
 Route::get('Publicare/{id}',[PublishEntrepreneurshipsController::class,'show'])->name('Publish_Entrepreneurships.show');
 
 
