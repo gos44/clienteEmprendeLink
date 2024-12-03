@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Controller_Miguel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Publicar_Emprendimiento_Controller extends Controller
 {
@@ -25,9 +26,9 @@ class Publicar_Emprendimiento_Controller extends Controller
         ]);
 
         try {
-            // Procesar imágenes
-            $logoPath = $request->file('logo_path')->store('public/logos');
-            $backgroundPath = $request->file('background')->store('public/backgrounds');
+            // Subir imágenes a Cloudinary
+            $logoPath = Cloudinary::upload($request->file('logo_path')->getRealPath())->getSecurePath();
+            $backgroundPath = Cloudinary::upload($request->file('background')->getRealPath())->getSecurePath();
 
             // Preparar datos para la API
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', [
