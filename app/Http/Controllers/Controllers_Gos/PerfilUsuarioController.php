@@ -9,19 +9,19 @@ class PerfilUsuarioController extends Controller
 {
     public function index()
     {
-        $id = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneur");
-
-        $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$id}?included=user");
+        $userId = 1; // Reemplaza con el ID de usuario que obtuviste en Postman
+    
+        $response = Http::get("https://apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$userId}?included=user");
         
+      // En el controlador
         if ($response->successful()) {
-            $data = $response->json();
-            $connections = $data['data'] ?? [];
-            
-            // Opcional: Pasar más datos a la vista si es necesario
-            return view('Views_gos.PerfilUsuario', compact('connections', 'id'));
+            $connections = $response->json()['data'] ?? [];
+            if (empty($connections)) {
+                return view('Views_gos.PerfilUsuario', compact('connections'))->with('error', 'No se encontraron datos del perfil.');
+            }
+            return view('Views_gos.PerfilUsuario', compact('connections'));
         } else {
-            $connections = [];
-            return view('Views_gos.PerfilUsuario', compact('connections', 'id'));
+            return view('Views_gos.PerfilUsuario', compact('connections'))->with('error', 'Ocurrió un error al cargar los datos del perfil.');
         }
     }
 }
