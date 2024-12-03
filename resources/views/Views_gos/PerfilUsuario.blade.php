@@ -13,7 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
     <main class="profile-container">
+        @foreach($connections as $connection)
         <div class="profile-banner">
             <div class="profile-img">
                 <img src="{{ $connections['profile_picture'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}" alt="Foto de perfil">
@@ -54,6 +56,7 @@
                 <input type="text" value="{{ $connections['document'] ?? 'No disponible' }}" readonly>
             </div>
         </div>
+        @endforeach
 
         <div class="profile-actions">
             <a href="{{ route('perfilUser.index') }}"></a>
