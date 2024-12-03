@@ -227,8 +227,9 @@
 
                     <!-- Perfil -->                  
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('perfilUser.index') }}">
+                        <a class="nav-link" href="{{ route('perfilUser.index', ['id' => Auth::user()->id]) }}">
                             <i class="fas fa-user me-2"></i> Perfil
+                        </a>                        
                         </a>
                     </li>
                 </ul>
