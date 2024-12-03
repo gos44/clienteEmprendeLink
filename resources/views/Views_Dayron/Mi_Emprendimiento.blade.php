@@ -45,13 +45,13 @@ Copy    <section class="profile">
 
     <div class="content">
         <section class="products">
-            @if(isset($emprendimiento->products) && count($emprendimiento->products) > 0)
-                @foreach($emprendimiento->products as $product)
+            @if(isset($emprendimiento->name_products) && is_array($emprendimiento->name_products) && count($emprendimiento->name_products) > 0)
+                @foreach($emprendimiento->name_products as $index => $name)
                 <div class="product">
-                    <img src="{{ isset($product->image) ? asset('images/'.$product->image) : asset('images/default-product.png') }}" alt="{{ $product->name ?? 'Producto' }}">
+                    <img src="{{ isset($emprendimiento->product_images[$index]) ? asset('images/'.$emprendimiento->product_images[$index]) : asset('images/default-product.png') }}" alt="{{ $name ?? 'Producto' }}">
                     <div class="product-info">
-                        <h4>{{ $product->name ?? 'Nombre del Producto' }}</h4>
-                        <p>{{ $product->description ?? 'Descripción no disponible' }}</p>
+                        <h4>{{ $name ?? 'Nombre del Producto' }}</h4>
+                        <p>{{ $emprendimiento->product_descriptions[$index] ?? 'Descripción no disponible' }}</p>
                     </div>
                 </div>
                 @endforeach
