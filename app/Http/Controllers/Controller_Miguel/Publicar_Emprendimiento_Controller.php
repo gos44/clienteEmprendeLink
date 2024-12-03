@@ -27,16 +27,24 @@ class Publicar_Emprendimiento_Controller extends Controller
 
         try {
             // Subir imágenes a Cloudinary
-            $logoPath = Cloudinary::upload($request->file('logo_path')->getRealPath())->getSecurePath();
-            $backgroundPath = Cloudinary::upload($request->file('background')->getRealPath())->getSecurePath();
+            $logoUpload = Cloudinary::upload($request->file('logo_path')->getRealPath(), [
+                'folder' => 'emprendelink/logos',
+            ]);
+            $backgroundUpload = Cloudinary::upload($request->file('background')->getRealPath(), [
+                'folder' => 'emprendelink/backgrounds',
+            ]);
+
+            // Obtener las URLs de las imágenes subidas
+            $logoUrl = $logoUpload->getSecurePath();
+            $backgroundUrl = $backgroundUpload->getSecurePath();
 
             // Preparar datos para la API
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', [
                 'name' => $request->name,
                 'slogan' => $request->slogan,
                 'category' => $request->category,
-                'logo_path' => $logoPath,
-                'background' => $backgroundPath,
+                'logo_path' => $logoUrl,
+                'background' => $backgroundUrl,
                 'general_description' => $request->general_description,
             ]);
 
