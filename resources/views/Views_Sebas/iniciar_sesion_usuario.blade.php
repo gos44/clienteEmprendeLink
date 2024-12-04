@@ -19,34 +19,39 @@
     </style>
 </head>
 <body>
-    <form id="login-form" class="form">
+    <form id="login-form" class="form" method="POST" action="{{ route('iniciar_sesion_usuario.login') }}">
+        @csrf
         <div class="flex-column">
             <label>Iniciar Sesión</label>
         </div>
 
         <div class="inputForm">
-            <input type="email" id="email" class="input" placeholder="Ingrese su correo electrónico" required />
+            <input type="email" id="email" name="email" class="input" placeholder="Ingrese su correo electrónico" required />
         </div>
 
         <div class="flex-column">
             <label>Contraseña</label>
         </div>
         <div class="inputForm">
-            <input type="password" id="password" class="input" placeholder="Ingrese su contraseña" required />
+            <input type="password" id="password" name="password" class="input" placeholder="Ingrese su contraseña" required />
         </div>
 
         <div class="flex-column">
             <label>Seleccione su Rol</label>
         </div>
         <div class="inputForm">
-            <select id="role" class="rol-selector" required>
+            <select id="role" name="role" class="rol-selector" required>
                 <option value="">Seleccione su rol</option>
                 <option value="entrepreneur">Emprendedor</option>
                 <option value="investor">Inversor</option>
             </select>
         </div>
 
-        <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
+        <div id="error-message" style="color: red; margin-bottom: 15px;">
+            @if($errors->any())
+                <p>{{ $errors->first() }}</p>
+            @endif
+        </div>
 
         <button type="submit" class="button-submit">Iniciar sesión</button>
 
