@@ -6,53 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="{{ asset('css/inicio_de_sesion.css') }}">
-    <style>
-        .rol-selector {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-    </style>
 </head>
 <body>
-    <form id="login-form" class="form">
-        <div class="flex-column">
-            <label>Iniciar Sesión</label>
-        </div>
+    <form id="login-form">
+        <label>Correo electrónico:</label>
+        <input type="email" id="email" required>
 
-        <div class="inputForm">
-            <input type="email" id="email" class="input" placeholder="Ingrese su correo electrónico" required />
-        </div>
+        <label>Contraseña:</label>
+        <input type="password" id="password" required>
 
-        <div class="flex-column">
-            <label>Contraseña</label>
-        </div>
-        <div class="inputForm">
-            <input type="password" id="password" class="input" placeholder="Ingrese su contraseña" required />
-        </div>
+        <label>Rol:</label>
+        <select id="role" required>
+            <option value="entrepreneur">Emprendedor</option>
+            <option value="investor">Inversor</option>
+        </select>
 
-        <div class="flex-column">
-            <label>Seleccione su Rol</label>
-        </div>
-        <div class="inputForm">
-            <select id="role" class="rol-selector" required>
-                <option value="">Seleccione su rol</option>
-                <option value="entrepreneur">Emprendedor</option>
-                <option value="investor">Inversor</option>
-            </select>
-        </div>
-
-        <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
-        <div id="token-message" style="color: green; margin-bottom: 15px;"></div>
-
-        <button type="submit" class="button-submit">Iniciar sesión</button>
-
-        <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_usuario.store') }}" class="span">Regístrate</a></p>
+        <button type="submit">Iniciar sesión</button>
     </form>
+
+    <div id="message"></div>
 
     <script>
         document.getElementById('login-form').addEventListener('submit', async function(event) {
@@ -61,15 +33,13 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const role = document.getElementById('role').value;
-            const errorMessage = document.getElementById('error-message');
-            const tokenMessage = document.getElementById('token-message');
+            const messageDiv = document.getElementById('message');
 
             try {
                 const response = await fetch("{{ route('iniciar_sesion_usuario.login') }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({ email, password, role })
@@ -77,25 +47,15 @@
 
                 const data = await response.json();
 
-                if (response.ok && data.token) {
-                    // Guardar el token en localStorage
+                if (response.ok) {
+                    // Si la respuesta es correcta y contiene el token
                     localStorage.setItem('auth_token', data.token);
-                    tokenMessage.textContent = 'Token generado: ' + data.token;
-                    alert('Inicio de sesión exitoso');
-                    // Redirigir según el rol
-                    if (role === 'entrepreneur') {
-                        window.location.href = "{{ route('Home_Usuario.index') }}";
-                    } else if (role === 'investor') {
-                        window.location.href = "{{ route('Home_inversor.index') }}";
-                    }
+                    messageDiv.innerHTML = 'Inicio de sesión exitoso. Token: ' + data.token;
                 } else {
-                    // Mostrar error
-                    errorMessage.textContent = data.message || 'Error al iniciar sesión. Por favor, verifica tus datos.';
-                    tokenMessage.textContent = '';
+                    messageDiv.innerHTML = 'Error: ' + data.message;
                 }
             } catch (error) {
-                console.error('Error en el inicio de sesión:', error);
-                errorMessage.textContent = 'Ocurrió un error inesperado. Inténtalo de nuevo.';
+                messageDiv.innerHTML = 'Ocurrió un error al intentar iniciar sesión. Intenta de nuevo.';
             }
         });
     </script>
