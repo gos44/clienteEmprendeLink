@@ -65,6 +65,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'response' => $response->json()
             ]);
 
+            
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
