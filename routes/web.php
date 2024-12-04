@@ -228,7 +228,14 @@ Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'sto
 
 Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
 
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+// Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+    Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
+});
+
+
 
 
 
