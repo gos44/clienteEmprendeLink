@@ -44,73 +44,39 @@
           </ul>
       </div>
 
-        <main class="main-content">
-            <h2>RESULTADOS DE BUSQUEDA...</h2>
-            <div class="row">
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="images/FONDO-VINOS.png" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>  VINO EL EXTASIS</h3>
-                    <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
+        <!-- En la sección main-content, reemplaza los cards estáticos -->
+<main class="main-content">
+    <h2>RESULTADOS DE BUSQUEDA...</h2>
+    <div class="row">
+        @if(isset($publicaciones))
+            @foreach($publicaciones as $publicacion)
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="{{ $publicacion['imagen_fondo'] ?? 'images/default-background.png' }}" 
+                         alt="Fondo de emprendimiento" class="background-img">
+                    <img src="{{ $publicacion['logo'] ?? 'images/default-logo.png' }}" 
+                         alt="Logo de emprendimiento" class="logo-img">
+                    <h3>{{ $publicacion['nombre_emprendimiento'] ?? 'Sin nombre' }}</h3>
+                    <p>"{{ $publicacion['descripcion'] ?? 'Sin descripción' }}"</p>
+                    <button>
+                        <a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a>
+                    </button>
                 </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="images/arepa_fondo.png" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>AREPA PURO MAIZ</h3>
-                    <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_usuario_2.index') }}">Visitar</a></button>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="https://cdn.pixabay.com/photo/2016/01/22/02/13/meat-1155132_1280.jpg" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/carne.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>  CARNES LA BUENA VACA</h3>
-                    <p>"Somos un emprendimiento enfocado en el procesamiento de carnes rojas."</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_1280.jpg" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/restaurante.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>RESTAURANTE DON MIGUEL</h3>
-                    <p>"Restaurante familiar enfocado en darle la mayor atención al cliente.</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="images/FONDO-VINOS.png" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/vino.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>  VINO EL EXTASIS</h3>
-                    <p>"AQUEL QUE VINO AL MUNDO Y NO TOMA VINO, ¿ENTONCES A QUÉ VINO?"</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="card">
-                    <img src="images/arepa_fondo.png" alt="Fondo de [emprendimiento]" class="background-img">
-                    <img src="images/arepas.png" alt="Logo de [emprendimiento]" class="logo-img">
-                    <h3>AREPA PURO MAIZ</h3>
-                    <p>"Somos un emprendimiento enfocado en el procesamiento y comercialización de arepas de todo tipo"</p>
-                    <button><a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a></button>
-                </div>
-
-                </div>
-                <div class="pagination">
-                  <button class="page-btn" disabled>&laquo;</button>
-                  <button class="page-btn active">1</button>
-                  <button class="page-btn">2</button>
-                  <button class="page-btn">3</button>
-                  <button class="page-btn">&raquo;</button>
-              </div>
             </div>
-        </main>
+            @endforeach
+        @else
+            <p>No se encontraron publicaciones.</p>
+        @endif
+    </div>
+
+    <div class="pagination">
+        <button class="page-btn" disabled>&laquo;</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">&raquo;</button>
+    </div>
+</main>
     </div>
 
 </main>
