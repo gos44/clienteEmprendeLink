@@ -226,7 +226,6 @@ Route::post('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'
 
 Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
 
-Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
@@ -237,13 +236,29 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+// Rutas de autenticación
+Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])
+    ->name('iniciar_sesion_usuario.index');
+Route::post('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'login'])
+    ->name('iniciar_sesion_usuario.login');
+Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])
+    ->name('logout');
+
+// Rutas protegidas para emprendedores
+Route::middleware(['auth.role:entrepreneur'])->group(function () {
+    Route::get('home-usuario', [HomeUsuarioController::class, 'index'])
+        ->name('Home_Usuario.index');
+    // Otras rutas de emprendedor
+});
+
+// Rutas protegidas para inversores
+Route::middleware(['auth.role:investor'])->group(function () {
+    Route::get('home-inversor', [HomeInversorController::class, 'index'])
+        ->name('Home_inversor.index');
+    // Otras rutas de inversor
+});
 
 
-Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('iniciar_sesion_usuario.index');
-
-
-
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
 
 
@@ -266,6 +281,7 @@ Route::get('emprendimientos_deportivos_usuario',[emprendimientos_deportivos_usua
 Route::get('emprendimientos_deportivos_inversionista',[articulos_deportivos_inversionista::class,'index'])->name('emprendimientos_deportivos_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
 
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
 
 // RUTAS DEL Miguel
