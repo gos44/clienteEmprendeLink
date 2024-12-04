@@ -1,13 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-class inicio_de_sesion_usuariocontroller extends Controller 
+class inicio_de_sesion_usuariocontroller extends Controller
 {
     public function index()
     {
@@ -38,20 +40,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                $data = $response->json();
-                
-                // Guardar el token en la sesión
-                Session::put('api_token', $data['access_token']);
-                Session::put('user_role', $validated['role']);
-
-                $role = $validated['role'];
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
 
                 if ($role == 'entrepreneur') {
+                    // Redirigir al home de entrepreneur
                     return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Inicio de sesión exitoso');
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
                 } elseif ($role == 'investor') {
+                    // Redirigir al home de investor
                     return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Inicio de sesión exitoso');
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
                 }
             }
 
@@ -60,6 +59,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
             ]);
 
+            
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
@@ -71,17 +71,5 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
             ]);
         }
-    }
-
-    public function logout(Request $request)
-    {
-        // Enviar solicitud de logout a la API
-        Http::withToken(Session::get('api_token'))
-            ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/logout');
-
-        // Limpiar la sesión
-        Session::flush();
-
-        return redirect()->route('login')->with('success', 'Has cerrado sesión exitosamente');
     }
 }
