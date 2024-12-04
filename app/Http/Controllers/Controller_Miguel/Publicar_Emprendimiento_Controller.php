@@ -10,6 +10,7 @@ class Publicar_Emprendimiento_Controller extends Controller
 {
     public function index()
     {
+        
         return view('views_Miguel.Publicar_Emprendimiento1');
     }
 
@@ -21,7 +22,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             'category' => 'required|string|max:255',
             'logo_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'background' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'product_images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'product_images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name_products' => 'required|string',
             'product_descriptions' => 'required|string',
             'general_description' => 'required|string|max:2000',
