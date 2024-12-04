@@ -29,7 +29,7 @@
 
         <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
-            
+
             <!-- Paso 1: Información básica -->
             <div class="form-section">
                 <div class="form-group">

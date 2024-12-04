@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Controllers_Gos;
-
-use Illuminate\Support\Facades\Http;
-use Illuminate\Routing\Controller;
 
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Routing\Controller;
-
 
 class PerfilUsuarioController extends Controller
 {
@@ -19,14 +14,13 @@ class PerfilUsuarioController extends Controller
         $response = Http::get($url);
 
         if ($response->successful()) {
-            // Retorna directamente el JSON para depuración
-            return response()->json($response->json(), 200);
+            // Enviar los datos a la vista
+            $data = $response->json(); // Decodificar JSON a un arreglo
+            return view('Views_gos.PerfilUsuario', ['connections' => $data]); // Enviar datos a la vista
         } else {
-            // En caso de error, retorna el mensaje del error
-            return response()->json([
-                'error' => 'No se pudieron cargar los datos del perfil',
-                'details' => $response->json() // Incluye más detalles del error si están disponibles
-            ], $response->status());
+            // Enviar un mensaje de error a la vista
+            $error = 'No se pudieron cargar los datos del perfil';
+            return view('Views_gos.PerfilUsuario', ['error' => $error]);
         }
     }
 }

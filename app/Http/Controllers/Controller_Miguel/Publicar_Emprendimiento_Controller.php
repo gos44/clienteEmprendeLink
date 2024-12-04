@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class Publicar_Emprendimiento_Controller extends Controller 
+class Publicar_Emprendimiento_Controller extends Controller
 {
     public function index()
     {
@@ -57,7 +57,7 @@ class Publicar_Emprendimiento_Controller extends Controller
 
             // Enviar a la API
             $response = Http::timeout(30)->post(
-                'https://apiemprendelink-production-9272.up.railway.app/api/publicare', 
+                'https://apiemprendelink-production-9272.up.railway.app/api/publicare',
                 $entrepreneurshipData
             );
 
