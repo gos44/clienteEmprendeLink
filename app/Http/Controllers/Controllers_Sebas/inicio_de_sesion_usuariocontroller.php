@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use Illuminate\Support\Facades\Http;
@@ -17,17 +16,11 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validar los datos de entrada con mensajes personalizados
+        // Validar los datos de entrada
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
             'role' => 'required|in:entrepreneur,investor'
-        ], [
-            'email.required' => 'Por favor, ingrese su correo electrónico.',
-            'email.email' => 'El correo electrónico no es válido.',
-            'password.required' => 'Por favor, ingrese su contraseña.',
-            'role.required' => 'Debe seleccionar un rol',
-            'role.in' => 'El rol seleccionado no es válido'
         ]);
 
         try {
@@ -44,39 +37,44 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // $userData = $response->json();
+                // Guardar el token en la sesión
+                $token = $response->json()['token'];
+                session(['auth_token' => $token]);
+                session(['user_role' => $validated['role']]);
 
-                // // Guardar el token en la sesión
-                // session(['auth_token' => $userData['token']]);
-
-                // Redirigir según el rol
-                return match($validated['role']) {
-                    'entrepreneur' => Redirect::route('Home_Usuario.index')
-                        ->with('success', 'Bienvenido, emprendedor.'),
-                    'investor' => Redirect::route('Home_inversor.index')
-                        ->with('success', 'Bienvenido, inversor.'),
-                    default => back()->withErrors(['error' => 'Rol no reconocido'])
-                };
+                // Verificar el rol y redirigir
+                $role = $validated['role'];
+                if ($role == 'entrepreneur') {
+                    return redirect()->route('Home_Usuario.index');
+                } elseif ($role == 'investor') {
+                    return redirect()->route('Home_inversor.index');
+                }
             }
 
             // Si el login no es exitoso
             return back()->withErrors([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
-            ])->withInput($request->only('email'));
-            
+            ]);
         } catch (\Exception $e) {
-            // Registro de errores
+            // Manejo de errores
             Log::error('Error de inicio de sesión', [
                 'message' => $e->getMessage(),
-                'email' => $request->email,
-                'role' => $request->role
+                'trace' => $e->getTraceAsString()
             ]);
-
             return back()->withErrors([
                 'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
             ]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        // Limpiar la sesión
+        $request->session()->forget('auth_token');
+        $request->session()->forget('user_role');
+
+        // Redirigir al login
+        return redirect()->route('iniciar_sesion_usuario.index');
     }
 }
