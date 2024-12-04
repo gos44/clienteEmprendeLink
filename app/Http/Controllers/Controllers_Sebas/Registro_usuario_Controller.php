@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use App\Http\Controllers\Controller;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -28,13 +29,20 @@ class Registro_usuario_Controller extends Controller
             'birth_date' => 'required|date',
             'password' => 'required|confirmed|min:8', // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'pic_profile' => 'nullable|string|max:255', // Ahora es un texto, no un archivo
+            'pic_profile' =>  'required|image|mimes:jpeg,png,jpg|max:2048',// Ahora es un texto, no un archivo
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
             'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
         ]);
-
+ // Subir la imagen a Cloudinary si se proporciona
+ $picProfileUrl = null;
+ if ($request->hasFile('pic_profile')) {
+     $uploadedFileUrl = Cloudinary::upload($request->file('pic_profile')->getRealPath(), [
+         'folder' => 'profile_pictures'
+     ])->getSecurePath();
+     $picProfileUrl = $uploadedFileUrl;
+ }
         // Preparación de los datos para enviar a la API
         $data = [
             'name' => $validated['name'],
@@ -43,7 +51,7 @@ class Registro_usuario_Controller extends Controller
             'password' => $validated['password'], // Contraseña
             'password_confirmation' => $request->input('password_confirmation'), // Confirmación de la contraseña
             'phone' => $validated['phone'],
-            'image' => $validated['pic_profile'], // Cambiar 'image' para aceptar texto directamente
+            'image' => $picProfileUrl, // URL de la imagen en Cloudinary
             'email' => $validated['email'],
             'location' => $validated['location'],
             'number' => $validated['number'],
