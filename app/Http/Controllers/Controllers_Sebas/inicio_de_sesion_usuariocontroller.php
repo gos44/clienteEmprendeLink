@@ -39,6 +39,15 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
+
+              $userData = $response->json(); // Obtener datos del usuario
+
+                 // Guardar el token en la sesión
+                 session(['auth_token' => $userData['token']]); 
+    
+                 // Autenticar al usuario en Laravel
+                 // Auth::loginUsingId($userData['id']); 
+
             if ($response->successful()) {
                 // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
                 $role = $validated['role']; // Obtenemos el rol del usuario
