@@ -40,11 +40,6 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
 
-              $userData = $response->json(); // Obtener datos del usuario
-
-                 // Guardar el token en la sesión
-                 session(['auth_token' => $userData['token']]); 
-    
                  // Autenticar al usuario en Laravel
                  // Auth::loginUsingId($userData['id']); 
 
@@ -56,12 +51,23 @@ class inicio_de_sesion_usuariocontroller extends Controller
                     // Redirigir al home de entrepreneur
                     return redirect()->route('Home_Usuario.index')
                         ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+
+
                 } elseif ($role == 'investor') {
                     // Redirigir al home de investor
                     return redirect()->route('Home_inversor.index')
                         ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                        
                 }
             }
+
+            
+            $userData = $response->json(); // Obtener datos del usuario
+
+            // Guardar el token en la sesión
+            session(['auth_token' => $userData['token']]); 
+
+
 
             // Si el login no es exitoso
             return back()->withErrors([
