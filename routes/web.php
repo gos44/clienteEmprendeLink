@@ -246,16 +246,15 @@ Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])
 Route::middleware(['auth.role:entrepreneur'])->group(function () {
     Route::get('home-usuario', [HomeUsuarioController::class, 'index'])
         ->name('Home_Usuario.index');
-    // Otras rutas de emprendedor
+    // Agregar otras rutas de emprendedor aquí
 });
 
 // Rutas protegidas para inversores
 Route::middleware(['auth.role:investor'])->group(function () {
     Route::get('home-inversor', [HomeInversorController::class, 'index'])
         ->name('Home_inversor.index');
-    // Otras rutas de inversor
+    // Agregar otras rutas de inversor aquí
 });
-
 
 
 
