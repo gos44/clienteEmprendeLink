@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -38,17 +40,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Guardar el token en la sesión
-                $token = $response->json()['token'];
-                session(['auth_token' => $token]);
-                session(['user_role' => $validated['role']]);
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
 
-                // Verificar el rol y redirigir
-                $role = $validated['role'];
                 if ($role == 'entrepreneur') {
-                    return redirect()->route('Home_Usuario.index');
+                    // Redirigir al home de entrepreneur
+                    return redirect()->route('Home_Usuario.index')
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
                 } elseif ($role == 'investor') {
-                    return redirect()->route('Home_inversor.index');
+                    // Redirigir al home de investor
+                    return redirect()->route('Home_inversor.index')
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
                 }
             }
 
@@ -56,25 +58,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
             return back()->withErrors([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
             ]);
+
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
+
             return back()->withErrors([
                 'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
             ]);
         }
-    }
-
-    public function logout(Request $request)
-    {
-        // Limpiar la sesión
-        $request->session()->forget('auth_token');
-        $request->session()->forget('user_role');
-
-        // Redirigir al login
-        return redirect()->route('iniciar_sesion_usuario.index');
     }
 }

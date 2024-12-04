@@ -229,32 +229,19 @@ Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'sto
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
+Route::middleware(['auth'])->group(function () {
     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
     Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
-
-
-
-// Rutas de autenticación
-Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])
-    ->name('iniciar_sesion_usuario.index');
-Route::post('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'login'])
-    ->name('iniciar_sesion_usuario.login');
-Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])
-    ->name('logout');
-
-// Rutas protegidas para emprendedores
-Route::middleware(['auth.role:entrepreneur'])->group(function () {
-    Route::get('home-usuario', [HomeUsuarioController::class, 'index'])
-        ->name('Home_Usuario.index');
-    // Agregar otras rutas de emprendedor aquí
 });
 
-// Rutas protegidas para inversores
-Route::middleware(['auth.role:investor'])->group(function () {
-    Route::get('home-inversor', [HomeInversorController::class, 'index'])
-        ->name('Home_inversor.index');
-    // Agregar otras rutas de inversor aquí
-});
+
+
+Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
+
+
+Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('iniciar_sesion_usuario.index');
+
+
 
 
 
