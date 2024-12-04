@@ -46,10 +46,10 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                $userData = $response->json();
+                // $userData = $response->json();
 
-                // Guardar el token en la sesión
-                session(['auth_token' => $userData['token']]);
+                // // Guardar el token en la sesión
+                // session(['auth_token' => $userData['token']]);
 
                 // Redirigir según el rol
                 return match($validated['role']) {
