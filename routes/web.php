@@ -229,10 +229,12 @@ Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'sto
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+//     Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
+// });
     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
     Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
-});
 
 
 
