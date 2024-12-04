@@ -37,15 +37,14 @@ class Registro_usuario_Controller extends Controller
         ]);
 
         try {
-            $imageUrl = null;
-    
-            // Subir la imagen a Cloudinary
+            
             if ($request->hasFile('image')) {
                 $uploadedFile = Cloudinary::upload($request->file('image')->getRealPath(), [
-                    'folder' => 'profile_pictures', // Carpeta en Cloudinary
+                    'folder' => 'profile_pictures',
                 ]);
-                $imageUrl = $uploadedFile->getSecurePath(); // Obtener URL segura
+                $imageUrl = $uploadedFile->getSecurePath(); // La URL de la imagen
             }
+            
     
             // Preparar datos para enviar a la API
             $data = [
