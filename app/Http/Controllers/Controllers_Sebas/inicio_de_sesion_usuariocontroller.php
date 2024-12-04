@@ -40,17 +40,16 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
-                $role = $validated['role']; // Obtenemos el rol del usuario
-
+                // Guardar el token en la sesión
+                $token = $response->json('access_token');
+                session(['access_token' => $token]);
+        
+                // Resto de tu lógica de redirección
+                $role = $validated['role'];
                 if ($role == 'entrepreneur') {
-                    // Redirigir al home de entrepreneur
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                    return redirect()->route('Home_Usuario.index');
                 } elseif ($role == 'investor') {
-                    // Redirigir al home de investor
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                    return redirect()->route('Home_inversor.index');
                 }
             }
 
@@ -58,6 +57,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             return back()->withErrors([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
             ]);
+
 
         } catch (\Exception $e) {
             // Manejo de errores

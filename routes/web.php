@@ -152,10 +152,13 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
 // Views_Dayron--->
 
 // Home Usuario -->
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
-// Route::get('/Home_Usuario', [Home_Usuario::class, 'index'])
-//     ->middleware('auth');
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])
+    ->name('Home_Usuario.index')
+    ->middleware('auth.custom');
+
+// Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+
 
 // Route::get('Home_Usuario/{id}', [Home_Usuario::class, 'show'])->name('Home_Usuario.show');
 
@@ -217,7 +220,7 @@ Route::post('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'
 
 Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
 
-Route::post('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
+Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
 
 Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('iniciar_sesion_usuario.index');
 
