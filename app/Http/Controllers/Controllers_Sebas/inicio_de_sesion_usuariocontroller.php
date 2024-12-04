@@ -41,12 +41,13 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 // Obtener el token desde la respuesta
                 $responseData = $response->json();
 
-                if (isset($responseData['token'])) {
+                if (isset($responseData['access_token'])) {
                     // Retornar el token y otros datos en formato JSON
                     return response()->json([
                         'success' => true,
                         'message' => 'Token generado correctamente',
-                        'token' => $responseData['token'],
+                        'token' => $responseData['access_token'],
+                        'token_type' => $responseData['token_type'],
                         'role' => $validated['role']
                     ]);
                 } else {
@@ -65,7 +66,6 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'response' => $response->json()
             ]);
 
-            
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
