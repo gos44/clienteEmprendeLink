@@ -47,15 +47,16 @@ class inicio_de_sesion_usuariocontroller extends Controller
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
                 $userData = $response->json();
-
-                // Guardar el token en la sesión
+    
+                // Guardar el token y el rol del usuario en la sesión
                 session(['auth_token' => $userData['token']]);
-
+                session(['user_role' => $validated['role']]);
+    
                 // Redirigir según el rol
                 return match($validated['role']) {
-                    'entrepreneur' => Redirect::route('Home_Usuario.index')
+                    'entrepreneur' => Redirect::route('HomeUsuario.index')
                         ->with('success', 'Bienvenido, emprendedor.'),
-                    'investor' => Redirect::route('Home_inversor.index')
+                    'investor' => Redirect::route('HomeInversor.index')
                         ->with('success', 'Bienvenido, inversor.'),
                     default => back()->withErrors(['error' => 'Rol no reconocido'])
                 };
