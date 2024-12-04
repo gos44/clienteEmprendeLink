@@ -9,16 +9,20 @@ class Home_Usuario extends Controller
 {
     public function __construct()
     {
-        // Aplica el middleware de autenticación a todas las acciones de este controlador
-        $this->middleware('auth');
+        // Aplica el middleware de autenticación, si quieres asegurarte que solo los usuarios autenticados puedan acceder
+        $this->middleware('guest'); // Esto asegura que solo los no autenticados puedan acceder a la página Home1
     }
 
     public function index()
     {
-        // Aquí puedes agregar cualquier lógica que necesites antes de retornar la vista
+        // Verifica si el usuario está autenticado
+        if (auth()->check()) {
+            // Si está autenticado, redirige al perfil del usuario
+            return redirect()->route('Home_Usuario.index');
+        }
 
-        // Retorna la vista 'Home_Usuario'
-        return view('Views_Dayron.Home_Usuario');
+        // Si no está autenticado, retorna la vista de Home1 para registro/login
+        return view('Home1');
     }
 }
 
