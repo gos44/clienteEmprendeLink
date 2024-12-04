@@ -39,6 +39,9 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
+            // Depurar la respuesta de la API
+            dd($response->json());  // Veremos lo que está devolviendo la API
+
             if ($response->successful()) {
                 // Guardar el token en la sesión
                 $token = $response->json()['token'];
