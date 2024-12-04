@@ -35,48 +35,47 @@ class Registro_usuario_Controller extends Controller
             'number' => 'required|string|max:255',
             'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
         ]);
- // Subir la imagen a Cloudinary si se proporciona
- $picProfileUrl = null;
- if ($request->hasFile('pic_profile')) {
-     $uploadedFileUrl = Cloudinary::upload($request->file('pic_profile')->getRealPath(), [
-         'folder' => 'profile_pictures'
-     ])->getSecurePath();
-     $picProfileUrl = $uploadedFileUrl;
- }
-        // Preparación de los datos para enviar a la API
-        $data = [
-            'name' => $validated['name'],
-            'lastname' => $validated['lastname'],
-            'birth_date' => $validated['birth_date'],
-            'password' => $validated['password'], // Contraseña
-            'password_confirmation' => $request->input('password_confirmation'), // Confirmación de la contraseña
-            'phone' => $validated['phone'],
-            'image' => $picProfileUrl, // URL de la imagen en Cloudinary
-            'email' => $validated['email'],
-            'location' => $validated['location'],
-            'number' => $validated['number'],
-            'role' => $validated['role'], // El rol
-        ];
 
         try {
-            // Enviar la solicitud POST a la API local para registrar al usuario
+            $imageUrl = null;
+    
+            // Subir la imagen a Cloudinary
+            if ($request->hasFile('pic_profile')) {
+                $uploadedFile = Cloudinary::upload($request->file('pic_profile')->getRealPath(), [
+                    'folder' => 'profile_pictures', // Carpeta en Cloudinary
+                ]);
+                $imageUrl = $uploadedFile->getSecurePath(); // Obtener URL segura
+            }
+    
+            // Preparar datos para enviar a la API
+            $data = [
+                'name' => $validated['name'],
+                'lastname' => $validated['lastname'],
+                'birth_date' => $validated['birth_date'],
+                'password' => $validated['password'],
+                'password_confirmation' => $validated['password'],
+                'phone' => $validated['phone'],
+                'image' => $imageUrl, // Enviar la URL de Cloudinary
+                'email' => $validated['email'],
+                'location' => $validated['location'],
+                'number' => $validated['number'],
+                'role' => $validated['role'],
+            ];
+    
+            // Enviar datos a la API
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
-
-            // Comprobar si la respuesta fue exitosa
+    
             if ($response->successful()) {
-                // Redirigir al login si el registro es exitoso
                 return redirect()->route('iniciar_sesion_usuario.login')
-                    ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                    ->with('success', 'Usuario registrado con éxito.');
             } else {
-                // Si hubo errores, mostrarlos al usuario
                 return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
-                    ->withInput(); // Mantener los datos anteriores en el formulario
+                    ->withInput();
             }
         } catch (\Exception $e) {
-            // Manejo de excepciones en caso de fallos de conexión o errores
             return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
                 ->withInput();
         }
