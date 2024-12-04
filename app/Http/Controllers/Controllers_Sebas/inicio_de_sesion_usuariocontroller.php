@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -26,43 +24,44 @@ class inicio_de_sesion_usuariocontroller extends Controller
         ]);
 
         try {
-            // Preparar datos para la autenticación
+            // Preparar los datos para la autenticación
             $credentials = [
                 'email' => $validated['email'],
                 'password' => $validated['password'],
                 'role' => $validated['role']
             ];
 
-            // Enviar solicitud POST a la API para autenticar al usuario
+            // Enviar la solicitud POST a la API para autenticar al usuario
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
-            // Depurar la respuesta de la API
-            dd($response->json());  // Veremos lo que está devolviendo la API
-
+            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // Guardar el token en la sesión
-                $token = $response->json()['token'];
-                session(['auth_token' => $token]); // Guardar el token en la sesión
+                $data = $response->json();
 
-                // Obtener el rol y redirigir a la vista correspondiente
-                $role = $validated['role'];
-                if ($role == 'entrepreneur') {
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-                } elseif ($role == 'investor') {
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                // Verificar que la API haya devuelto un token
+                if (isset($data['token'])) {
+                    // Guardar el token en la sesión
+                    session(['auth_token' => $data['token']]);
+
+                    // Redirigir según el rol
+                    if ($validated['role'] == 'entrepreneur') {
+                        return redirect()->route('Home_Usuario.index')
+                            ->with('success', 'Inicio de sesión exitoso.');
+                    } elseif ($validated['role'] == 'investor') {
+                        return redirect()->route('Home_inversor.index')
+                            ->with('success', 'Inicio de sesión exitoso.');
+                    }
+                } else {
+                    // Si no se recibe un token
+                    return back()->withErrors(['error' => 'No se recibió un token válido.']);
                 }
+            } else {
+                // Si la respuesta de la API no fue exitosa
+                return back()->withErrors(['error' => 'Credenciales incorrectas. Por favor, revisa tus datos.']);
             }
-
-            // Si el login no es exitoso
-            return back()->withErrors([
-                'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
-            ]);
-
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
@@ -70,9 +69,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return back()->withErrors([
-                'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
-            ]);
+            return back()->withErrors(['error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.']);
         }
     }
 }
