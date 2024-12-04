@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;  // Usado para guardar el token en sesión
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -40,6 +41,12 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
+                // Obtener el token desde la respuesta de la API
+                $token = $response->json()['token'];  // Supongamos que el token está en la clave 'token'
+
+                // Guardar el token en la sesión del usuario
+                Session::put('api_token', $token);
+
                 // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
                 $role = $validated['role']; // Obtenemos el rol del usuario
 

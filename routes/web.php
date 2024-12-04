@@ -228,12 +228,12 @@ Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'sto
 
 Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
 
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
-
-
 
 Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('iniciar_sesion_usuario.index');
 
+
+
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
 
 
