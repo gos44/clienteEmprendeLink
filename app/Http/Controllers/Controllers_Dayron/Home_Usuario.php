@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Controllers_Dayron;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Home_Usuario extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        // Recuperar el token de la sesión
+        $token = session('auth_token');
 
-        if (!$user || $user->role !== 'entrepreneur') {
-            return redirect()->route('iniciar_sesion_usuario.login')->withErrors('Acceso denegado.');
+        if (!$token) {
+            return redirect()->route('login')->withErrors(['error' => 'Token no encontrado, por favor inicie sesión.']);
         }
-    
-        return view('Views_Dayron.Home_Usuario', compact('user'));
-    }
-    
-}
 
+        return view('Views_Dayron.Home_Usuario', compact('token'));
+    }
+}
