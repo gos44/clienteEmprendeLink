@@ -153,11 +153,11 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
 
 // Home Usuario -->
 
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])
-    ->name('Home_Usuario.index')
-    ->middleware('auth.custom');
+    // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])
+    //     ->name('Home_Usuario.index')
+    //     ->middleware('auth.custom');
 
-// Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
 
 // Route::get('Home_Usuario/{id}', [Home_Usuario::class, 'show'])->name('Home_Usuario.show');
