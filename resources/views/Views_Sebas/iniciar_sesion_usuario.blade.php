@@ -19,49 +19,81 @@
     </style>
 </head>
 <body>
-    <form class="form" action="{{ route('iniciar_sesion_usuario.login') }}" method="POST">
-        @csrf <!-- Token de seguridad para Laravel -->
+    <form id="login-form" class="form">
         <div class="flex-column">
             <label>Iniciar Sesión</label>
         </div>
 
-        @if ($errors->any())
-            <div style="color: red; margin-bottom: 15px;">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
-
         <div class="inputForm">
-            <input type="email" class="input" name="email" placeholder="Ingrese su correo electrónico" required />
+            <input type="email" id="email" class="input" placeholder="Ingrese su correo electrónico" required />
         </div>
 
         <div class="flex-column">
             <label>Contraseña</label>
         </div>
         <div class="inputForm">
-            <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
+            <input type="password" id="password" class="input" placeholder="Ingrese su contraseña" required />
         </div>
 
         <div class="flex-column">
             <label>Seleccione su Rol</label>
         </div>
         <div class="inputForm">
-            <select name="role" class="rol-selector" required>
+            <select id="role" class="rol-selector" required>
                 <option value="">Seleccione su rol</option>
                 <option value="entrepreneur">Emprendedor</option>
                 <option value="investor">Inversor</option>
             </select>
         </div>
 
-        <div class="flex-row">
-            <a class="span" href="{{ route('verificar_identidad_usuario') }}">¿Olvidaste tu contraseña?</a>
-        </div>
+        <div id="error-message" style="color: red; margin-bottom: 15px;"></div>
 
         <button type="submit" class="button-submit">Iniciar sesión</button>
 
         <p class="p">¿No tienes una cuenta? <a href="{{ route('registrar_nuevo_usuario.store') }}" class="span">Regístrate</a></p>
     </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const errorMessage = document.getElementById('error-message');
+
+            try {
+                const response = await fetch("{{ route('iniciar_sesion_usuario.login') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({ email, password, role })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    // Guardar el token en localStorage
+                    localStorage.setItem('auth_token', data.token);
+                    alert('Inicio de sesión exitoso');
+                    // Redirigir según el rol
+                    if (role === 'entrepreneur') {
+                        window.location.href = "{{ route('Home_Usuario.index') }}";
+                    } else if (role === 'investor') {
+                        window.location.href = "{{ route('Home_inversor.index') }}";
+                    }
+                } else {
+                    // Mostrar error
+                    errorMessage.textContent = data.message || 'Error al iniciar sesión. Por favor, verifica tus datos.';
+                }
+            } catch (error) {
+                console.error('Error en el inicio de sesión:', error);
+                errorMessage.textContent = 'Ocurrió un error inesperado. Inténtalo de nuevo.';
+            }
+        });
+    </script>
 </body>
 </html>
