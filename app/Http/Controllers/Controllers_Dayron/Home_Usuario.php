@@ -7,16 +7,17 @@ use Illuminate\Http\Request;
 
 class Home_Usuario extends Controller
 {
+    public function __construct()
+    {
+        // Aplica el middleware de autenticación a todas las acciones de este controlador
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
+        // Aquí puedes agregar cualquier lógica que necesites antes de retornar la vista
 
-        // Retorna la vista 'Perfil' con los datos de prueba
+        // Retorna la vista 'Home_Usuario'
         return view('Views_Dayron.Home_Usuario');
     }
 }
