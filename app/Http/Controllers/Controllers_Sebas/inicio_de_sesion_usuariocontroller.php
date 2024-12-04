@@ -29,7 +29,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'email' => $validated['email'],
                 'password' => $validated['password']
             ];
-    
+            
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',

@@ -12,10 +12,9 @@ class Home_Usuario extends Controller
         // Recuperar el token de la sesión
         $token = session('auth_token');
 
-        if (!$token) {
-            return redirect()->route('login')->withErrors(['error' => 'Token no encontrado, por favor inicie sesión.']);
-        }
+        if ($token) {
+            return view('Views_Dayron.Home_Usuario', compact('token'));        }
 
-        return view('Views_Dayron.Home_Usuario', compact('token'));
+       
     }
 }
