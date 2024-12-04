@@ -157,9 +157,9 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
     //     ->name('Home_Usuario.index')
     //     ->middleware('auth.custom');
 
-    Route::get('Home_Usuario', [Home_Usuario::class, 'index'])
-    ->name('Home_Usuario.index')
-    ->middleware(['auth:sanctum', 'role:entrepreneur']);
+    // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])
+    // ->name('Home_Usuario.index')
+    // ->middleware(['auth:sanctum', 'role:entrepreneur']);
 
 
 
@@ -227,6 +227,10 @@ Route::post('iniciar_sesion_inversionista',[inicio_sesion_inversionista::class,'
 Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'store'])->name('registrar_nuevo_usuario.store');
 
 Route::post('iniciar_sesion_usuario/login', action: [inicio_de_sesion_usuariocontroller::class, 'login'])->name('iniciar_sesion_usuario.login');
+
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+
+
 
 Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('iniciar_sesion_usuario.index');
 
@@ -322,8 +326,7 @@ Route::get('contactanosInver', [Contactanos::class, 'ContactanosInver'])->name('
 Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('ContactanosHome');
 
 
-
-    // Views_Gos--->
+// Views_Gos--->
 
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
