@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -37,32 +38,32 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
+            // Revisar si la respuesta es exitosa
             if ($response->successful()) {
-                // Obtener el token desde la respuesta
-                $responseData = $response->json();
+                // Obtener el token de la respuesta
+                $token = $response->json('access_token');
 
-                if (isset($responseData['access_token'])) {
-                    // Retornar el token y otros datos en formato JSON
+                if ($token) {
+                    // Enviar una respuesta JSON para verificar el token
                     return response()->json([
                         'success' => true,
                         'message' => 'Token generado correctamente',
-                        'token' => $responseData['access_token'],
-                        'token_type' => $responseData['token_type'],
+                        'token' => $token,
                         'role' => $validated['role']
                     ]);
                 } else {
                     return response()->json([
                         'success' => false,
                         'message' => 'No se recibió el token en la respuesta',
-                        'response' => $responseData
+                        'response' => $response->json()
                     ]);
                 }
             }
 
-            // Si la respuesta no es exitosa
+            // Si el login no es exitoso
             return response()->json([
                 'success' => false,
-                'message' => 'Credenciales incorrectas o problema con la autenticación',
+                'message' => 'Credenciales incorrectas',
                 'response' => $response->json()
             ]);
 
@@ -77,7 +78,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'success' => false,
                 'message' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.',
                 'error' => $e->getMessage()
-            ], 500);
+            ]);
         }
     }
 }
