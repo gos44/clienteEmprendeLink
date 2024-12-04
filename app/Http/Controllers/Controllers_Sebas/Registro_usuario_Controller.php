@@ -29,7 +29,7 @@ class Registro_usuario_Controller extends Controller
             'birth_date' => 'required|date',
             'password' => 'required|confirmed|min:8', // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'pic_profile' =>  'required|image|mimes:jpeg,png,jpg|max:2048',// Ahora es un texto, no un archivo
+            'image' =>  'required|image|mimes:jpeg,png,jpg|max:2048',// Ahora es un texto, no un archivo
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
@@ -40,8 +40,8 @@ class Registro_usuario_Controller extends Controller
             $imageUrl = null;
     
             // Subir la imagen a Cloudinary
-            if ($request->hasFile('pic_profile')) {
-                $uploadedFile = Cloudinary::upload($request->file('pic_profile')->getRealPath(), [
+            if ($request->hasFile('image')) {
+                $uploadedFile = Cloudinary::upload($request->file('image')->getRealPath(), [
                     'folder' => 'profile_pictures', // Carpeta en Cloudinary
                 ]);
                 $imageUrl = $uploadedFile->getSecurePath(); // Obtener URL segura
