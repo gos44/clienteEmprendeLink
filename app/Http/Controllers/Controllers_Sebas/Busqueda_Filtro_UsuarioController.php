@@ -1,22 +1,32 @@
 <?php
-
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
-class Busqueda_Filtro_UsuarioController extends Controller
+class Busqueda_Filtro_UsuarioController extends Controller 
 {
     public function index()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
+        $client = new Client();
 
-        // Retorna la vista 'Perfil' con los datos de prueba
-        return view('Views_Sebas.Busqueda_Filtro_Usuario');
+        try {
+            // Realizar la solicitud GET a la API
+            $response = $client->request('GET', 'https://apiemprendelink-production-9272.up.railway.app/api/publicare');
+            
+            // Obtener el contenido de la respuesta
+            $publicaciones = json_decode($response->getBody(), true);
+
+            // Pasar las publicaciones a la vista
+            return view('Views_Sebas.Busqueda_Filtro_Usuario', ['publicaciones' => $publicaciones]);
+
+        } catch (RequestException $e) {
+            // Manejo de errores
+            return view('Views_Sebas.Busqueda_Filtro_Usuario', [
+                'error' => 'No se pudieron cargar las publicaciones: ' . $e->getMessage()
+            ]);
+        }
     }
 }
