@@ -7,22 +7,17 @@ use Illuminate\Http\Request;
 
 class Home_Usuario extends Controller
 {
-    public function __construct()
-    {
-        // Aplica el middleware de autenticación, si quieres asegurarte que solo los usuarios autenticados puedan acceder
-        $this->middleware('guest'); // Esto asegura que solo los no autenticados puedan acceder a la página Home1
-    }
-
     public function index()
     {
-        // Verifica si el usuario está autenticado
-        if (auth()->check()) {
-            // Si está autenticado, redirige al perfil del usuario
-            return redirect()->route('Home_Usuario.index');
-        }
+        // // Simulación de datos que se pueden utilizar en la vista
+        // $connections = [
+        //     // Ejemplo de datos
+        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
+        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
+        // ];
 
-        // Si no está autenticado, retorna la vista de Home1 para registro/login
-        return view('Home1');
+        // Retorna la vista 'Perfil' con los datos de prueba
+        return view('Views_Dayron.Home_Usuario');
     }
 }
 

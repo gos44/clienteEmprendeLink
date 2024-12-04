@@ -152,7 +152,8 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
 // Views_Dayron--->
 
 // Home Usuario -->
-Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index')->middleware('auth');
+Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
+
 // Route::get('Home_Usuario/{id}', [Home_Usuario::class, 'show'])->name('Home_Usuario.show');
 
 // Chat Usuario -->
