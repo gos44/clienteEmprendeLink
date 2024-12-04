@@ -42,7 +42,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 session(['auth_token' => $userData['token']]); 
     
                 // Autenticar al usuario en Laravel
-                Auth::loginUsingId($userData['id']); 
+                // Auth::loginUsingId($userData['id']); 
     
                 $role = $validated['role'];
                 if ($role == 'entrepreneur') {
