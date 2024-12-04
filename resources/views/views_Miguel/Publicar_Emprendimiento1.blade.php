@@ -32,8 +32,8 @@
 
             <!-- Campo oculto para el ID del emprendedor -->
             {{-- <input type="hidden" name="entrepreneurs_id" value="{{ Auth::user()->id }}"> --}}
+            {{-- <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}"> --}}
             <input type="hidden" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
-
 
             <!-- Paso 1: Información básica -->
             <div class="form-section">
@@ -49,8 +49,18 @@
                     <label for="category">Categoría</label>
                     <select id="category" name="category" required>
                         <option value="">Seleccione una categoría</option>
-                        <option value="articulos_deportivos" {{ old('category') == 'articulos_deportivos' ? 'selected' : '' }}>Artículos deportivos</option>
                         <option value="articulos_hogar" {{ old('category') == 'articulos_hogar' ? 'selected' : '' }}>Artículos para el hogar</option>
+                        <option value="electronica" {{ old('category') == 'electronica' ? 'selected' : '' }}>Electrónica</option>
+                        <option value="indumentaria" {{ old('category') == 'indumentaria' ? 'selected' : '' }}>Indumentaria</option>
+                        <option value="instrumentos_musicales" {{ old('category') == 'instrumentos_musicales' ? 'selected' : '' }}>Instrumentos musicales</option>
+                        <option value="mascotas" {{ old('category') == 'mascotas' ? 'selected' : '' }}>Productos de mascotas</option>
+                        <option value="oficina" {{ old('category') == 'oficina' ? 'selected' : '' }}>Suministros de oficina</option>
+                        <option value="artesanias" {{ old('category') == 'artesanias' ? 'selected' : '' }}>Artesanías</option>
+                        <option value="herramientas" {{ old('category') == 'herramientas' ? 'selected' : '' }}>Herramientas de trabajo</option>
+                        <option value="educacion" {{ old('category') == 'educacion' ? 'selected' : '' }}>Educación</option>
+                        <option value="alimentacion" {{ old('category') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
+                        <option value="vehiculos" {{ old('category') == 'vehiculos' ? 'selected' : '' }}>Vehículos</option>
+                        
                         <!-- Más categorías... -->
                     </select>
                 </div>
