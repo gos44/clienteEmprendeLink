@@ -7,16 +7,15 @@ use Illuminate\Http\Request;
 
 class Home_Usuario extends Controller
 {
+    public function __construct()
+    {
+        // Ensure the user is authenticated before accessing this controller
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        // // Simulación de datos que se pueden utilizar en la vista
-        // $connections = [
-        //     // Ejemplo de datos
-        //     ['name' => 'Connection 1', 'description' => 'Description of connection 1'],
-        //     ['name' => 'Connection 2', 'description' => 'Description of connection 2']
-        // ];
-
-        // Retorna la vista 'Perfil' con los datos de prueba
+        // If the user is authenticated, show the home page
         return view('Views_Dayron.Home_Usuario');
     }
 }

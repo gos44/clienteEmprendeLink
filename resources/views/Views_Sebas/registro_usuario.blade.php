@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="flex-column">
-                    <label for="number">Número</label>
+                    <label for="number">Documento</label>
                     <div class="inputForm">
                         <input type="text" class="input" name="number" id="number" placeholder="Ingrese su número" required />
                     </div>
