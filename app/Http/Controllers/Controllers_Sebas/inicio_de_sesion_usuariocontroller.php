@@ -42,7 +42,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post(config('https://apiemprendelink-production-9272.up.railway.app/api/auth/login'), $credentials);
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
