@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -18,11 +17,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validar los datos de entrada
+        // Validar los datos de entrada con mensajes personalizados
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
             'role' => 'required|in:entrepreneur,investor'
+        ], [
+            'email.required' => 'Por favor, ingrese su correo electrónico.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'password.required' => 'Por favor, ingrese su contraseña.',
+            'role.required' => 'Debe seleccionar un rol',
+            'role.in' => 'El rol seleccionado no es válido'
         ]);
 
         try {
@@ -37,49 +42,36 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+            ])->post(config('services.api.login_url'), $credentials);
 
-
-                 // Autenticar al usuario en Laravel
-                 // Auth::loginUsingId($userData['id']); 
-
+            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
-                $role = $validated['role']; // Obtenemos el rol del usuario
+                $userData = $response->json();
 
-                if ($role == 'entrepreneur') {
-                    // Redirigir al home de entrepreneur
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                // Guardar el token en la sesión
+                session(['auth_token' => $userData['token']]);
 
-
-                } elseif ($role == 'investor') {
-                    // Redirigir al home de investor
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
-                        
-                }
+                // Redirigir según el rol
+                return match($validated['role']) {
+                    'entrepreneur' => Redirect::route('Home_Usuario.index')
+                        ->with('success', 'Bienvenido, emprendedor.'),
+                    'investor' => Redirect::route('Home_inversor.index')
+                        ->with('success', 'Bienvenido, inversor.'),
+                    default => back()->withErrors(['error' => 'Rol no reconocido'])
+                };
             }
-
-            
-            $userData = $response->json(); // Obtener datos del usuario
-
-            // Guardar el token en la sesión
-            session(['auth_token' => $userData['token']]); 
-
-
 
             // Si el login no es exitoso
             return back()->withErrors([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
-            ]);
-
+            ])->withInput($request->only('email'));
             
         } catch (\Exception $e) {
-            // Manejo de errores
+            // Registro de errores
             Log::error('Error de inicio de sesión', [
                 'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'email' => $request->email,
+                'role' => $request->role
             ]);
 
             return back()->withErrors([
