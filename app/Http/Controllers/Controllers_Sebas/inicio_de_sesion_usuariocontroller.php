@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Controllers_Sebas;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -16,7 +18,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function login(Request $request)
     {
-        // Validar datos de entrada
+        // Validar los datos de entrada
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -24,30 +26,49 @@ class inicio_de_sesion_usuariocontroller extends Controller
         ]);
 
         try {
-            // Enviar solicitud a la API de autenticación
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', [
+            // Preparar datos para la autenticación
+            $credentials = [
                 'email' => $validated['email'],
                 'password' => $validated['password'],
                 'role' => $validated['role']
+            ];
+
+            // Enviar solicitud POST a la API para autenticar al usuario
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
+
+            if ($response->successful()) {
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
+
+                if ($role == 'entrepreneur') {
+                    // Redirigir al home de entrepreneur
+                    return redirect()->route('Home_Usuario.index')
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                } elseif ($role == 'investor') {
+                    // Redirigir al home de investor
+                    return redirect()->route('Home_inversor.index')
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                }
+            }
+
+            // Si el login no es exitoso
+            return back()->withErrors([
+                'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
             ]);
 
-            // Comprobamos si la respuesta fue exitosa
-            if ($response->ok()) {
-                $data = $response->json();
-
-                // Verificar que el token esté presente
-                if (isset($data['token'])) {
-                    session(['auth_token' => $data['token']]);
-                    return response()->json(['token' => $data['token']], 200);  // Retorna el token
-                } else {
-                    return response()->json(['message' => 'Token no recibido'], 400);
-                }
-            } else {
-                return response()->json(['message' => 'Credenciales incorrectas'], 401);
-            }
         } catch (\Exception $e) {
-            Log::error('Error de inicio de sesión: '.$e->getMessage());
-            return response()->json(['message' => 'Error inesperado. Inténtalo de nuevo.'], 500);
+            // Manejo de errores
+            Log::error('Error de inicio de sesión', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return back()->withErrors([
+                'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
+            ]);
         }
     }
 }
