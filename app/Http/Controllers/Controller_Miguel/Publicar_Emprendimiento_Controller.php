@@ -25,6 +25,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             'name_products' => 'required|string',
             'product_descriptions' => 'required|string',
             'general_description' => 'required|string|max:2000',
+            'entrepreneurs_id' => 'required|integer|exists:users,id'
         ]);
 
         try {
