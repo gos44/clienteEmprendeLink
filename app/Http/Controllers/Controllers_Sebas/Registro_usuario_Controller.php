@@ -38,8 +38,14 @@ class Registro_usuario_Controller extends Controller
         ]);
 
         try {
+            // Subir la imagen a Cloudinary
+            $image = $request->file('image');
+            $uploadedImage = Cloudinary::upload($image->getRealPath());
 
-            // Preparar datos para enviar a la API
+            // Obtener la URL de la imagen
+            $imageUrl = $uploadedImage->getSecureUrl();
+
+            // Preparar los datos para enviar a la API
             $data = [
                 'name' => $validated['name'],
                 'lastname' => $validated['lastname'],
@@ -47,19 +53,19 @@ class Registro_usuario_Controller extends Controller
                 'password' => $validated['password'],
                 'password_confirmation' => $validated['password'],
                 'phone' => $validated['phone'],
-                'image' => $validated['image'], 
+                'image' => $imageUrl, // Usar la URL de Cloudinary
                 'email' => $validated['email'],
                 'location' => $validated['location'],
                 'number' => $validated['number'],
                 'role' => $validated['role'],
             ];
-    
+
             // Enviar datos a la API
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
-    
+
             if ($response->successful()) {
                 return redirect()->route('iniciar_sesion_usuario.login')
                     ->with('success', 'Usuario registrado con éxito.');

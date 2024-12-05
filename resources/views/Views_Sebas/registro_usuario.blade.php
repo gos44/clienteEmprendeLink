@@ -106,9 +106,8 @@
 
                 <div class="flex-column">
                     <label for="image">Imagen de perfil</label>
-                    <input type="file" class="input" name="image" id="image" accept="image/*" required>
+                    <input type="file" name="image" id="image"  placeholder="image">
                 </div>
-
 
 
                 <div class="flex-column">
