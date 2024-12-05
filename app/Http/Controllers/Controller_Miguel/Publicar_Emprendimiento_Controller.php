@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Controller_Miguel;
 
 use App\Http\Controllers\Controller;
@@ -29,15 +30,27 @@ class Publicar_Emprendimiento_Controller extends Controller
         ]);
 
         try {
-            // Subir imágenes a Cloudinary
-            $logoPath = Cloudinary::upload($request->file('logo_path')->getRealPath(), ['folder' => 'logos'])->getSecurePath();
-            $backgroundPath = Cloudinary::upload($request->file('background')->getRealPath(), ['folder' => 'backgrounds'])->getSecurePath();
+            // Subir imágenes a Cloudinary y manejar posibles fallos
+            $logoPath = null;
+            if ($request->hasFile('logo_path')) {
+                $logoPath = Cloudinary::upload($request->file('logo_path')->getRealPath(), ['folder' => 'logos'])->getSecurePath();
+            }
+
+            $backgroundPath = null;
+            if ($request->hasFile('background')) {
+                $backgroundPath = Cloudinary::upload($request->file('background')->getRealPath(), ['folder' => 'backgrounds'])->getSecurePath();
+            }
 
             $productImages = [];
             if ($request->hasFile('product_images')) {
                 foreach ($request->file('product_images') as $image) {
                     $productImages[] = Cloudinary::upload($image->getRealPath(), ['folder' => 'products'])->getSecurePath();
                 }
+            }
+
+            // Verificar si las URLs se han generado correctamente
+            if (!$logoPath || !$backgroundPath) {
+                return back()->withErrors(['error' => 'Hubo un problema al cargar las imágenes.'])->withInput();
             }
 
             // Preparar datos para la API
