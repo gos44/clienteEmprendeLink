@@ -13,23 +13,29 @@ class inicio_de_sesion_usuariocontroller extends Controller
 {
     public function index()
     {
+        // Mantenemos la vista que ya funciona
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        // Validar los datos de entrada
+        // Validar los datos de entrada incluyendo el rol
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            'role' => ['required', 'in:entrepreneur,investor'], // Validar que el rol sea uno de los permitidos
         ]);
 
         // Intentar la autenticación
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
 
-            // Redirigir al usuario a la ruta protegida
-            return redirect()->route('dashboard');
+            // Verificar el rol para redirigir al dashboard adecuado
+            if ($credentials['role'] === 'entrepreneur') {
+                return redirect()->route('Home_Usuario.index'); // Ruta para entrepreneur
+            } elseif ($credentials['role'] === 'investor') {
+                return redirect()->route('Home_inversor.index'); // Ruta para investor
+            }
         }
 
         // Si la autenticación falla, regresar con error
@@ -40,6 +46,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
     public function logout(Request $request)
     {
+        // Mantenemos la lógica de logout existente
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
