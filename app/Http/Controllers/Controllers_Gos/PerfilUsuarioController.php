@@ -37,7 +37,7 @@ class PerfilUsuarioController extends Controller
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json'
                 ])
-                ->post('https://clienteemprendelink-production.up.railway.app/api/auth/me');
+                ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
             // Depuración: Imprimir detalles completos de la respuesta
             \Log::info('Respuesta de API de perfil:', [
