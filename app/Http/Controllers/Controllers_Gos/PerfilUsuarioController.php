@@ -12,27 +12,44 @@ class PerfilUsuarioController extends Controller
     {
         $url = 'https://clienteemprendelink-production.up.railway.app/api/auth/me';
 
-        // Obtener el token del usuario autenticado
-        $token = Auth::user()->token ?? null; // Reemplaza esto con la forma correcta de obtener el token
+        // Obtener el token del usuario autenticado desde la sesión o modelo de usuario
+        $token = session('api_token') ?? (Auth::user()->token ?? null);
 
         if (!$token) {
-            // Si no hay token, redirigir o mostrar un error
-            return redirect()->route('login')->withErrors('No tienes acceso. Inicia sesión primero.');
+            // Si no hay token, redirigir al login con un mensaje de error
+            return redirect()->route('login')->withErrors('No tienes acceso. Por favor, inicia sesión primero.');
         }
 
-        // Hacer la solicitud a la API con el token en los encabezados
-        $response = Http::withHeaders([
-            'Authorization' => "Bearer {$token}",
-            'Content-Type' => 'application/json',
-        ])->post($url);
+        try {
+            // Hacer la solicitud a la API con el token en los encabezados
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$token}",
+                'Content-Type' => 'application/json',
+            ])->post($url);
 
-        if ($response->successful()) {
-            $data = $response->json(); // Decodificar JSON a un arreglo
-            return view('Views_gos.PerfilUsuario', ['connections' => $data]); // Enviar datos a la vista
-        } else {
-            // Manejo de errores en la respuesta
-            $error = 'No se pudieron cargar los datos del perfil. Error: ' . $response->status();
-            return view('Views_gos.PerfilUsuario', ['error' => $error]);
+            if ($response->successful()) {
+                // Decodificar la respuesta JSON
+                $data = $response->json();
+
+                // Renderizar la vista con los datos obtenidos
+                return view('Views_gos.PerfilUsuario', [
+                    'connections' => $data,
+                    'error' => null,
+                ]);
+            } else {
+                // Si la respuesta falla, manejar el error
+                $error = 'Error al cargar el perfil: Código ' . $response->status();
+                return view('Views_gos.PerfilUsuario', [
+                    'connections' => [],
+                    'error' => $error,
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Manejo de excepciones (como problemas de conexión)
+            return view('Views_gos.PerfilUsuario', [
+                'connections' => [],
+                'error' => 'Error al conectar con el servidor. Detalles: ' . $e->getMessage(),
+            ]);
         }
     }
 }
