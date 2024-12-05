@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/Publicar_Emprendimiento3.css') }}">
 </head>
 <body>
+    <br><br>
     <h1>¡Vamos a crear tu emprendimiento!</h1>
 
     <div class="container">
@@ -29,11 +30,10 @@
         <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
 
-            <!-- Campo visible para el ID del emprendedor -->
-            <div class="form-group">
-                <label for="entrepreneurs_id">ID del Emprendedor</label>
-                <input type="number" id="entrepreneurs_id" name="entrepreneurs_id" placeholder="Ingresa tu ID" required>
-            </div>
+            <!-- Campo oculto para el ID del emprendedor -->
+            {{-- <input type="hidden" name="entrepreneurs_id" value="{{ Auth::user()->id }}"> --}}
+            {{-- <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}"> --}}
+            <input type="hidden" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
 
             <!-- Paso 1: Información básica -->
             <div class="form-section">
@@ -60,6 +60,8 @@
                         <option value="educacion" {{ old('category') == 'educacion' ? 'selected' : '' }}>Educación</option>
                         <option value="alimentacion" {{ old('category') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
                         <option value="vehiculos" {{ old('category') == 'vehiculos' ? 'selected' : '' }}>Vehículos</option>
+
+                        <!-- Más categorías... -->
                     </select>
                 </div>
             </div>
@@ -97,3 +99,6 @@
 
             <button type="submit" class="btn-publicar" id="publicarBtn">Publicar</button>
         </form>
+    </div>
+</body>
+</html>

@@ -25,6 +25,10 @@
                 <input type="text" value="{{ $connections['user']['name'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
+                <label><i class="fas fa-user"></i> Apellido:</label>
+                <input type="text" value="{{ $connections['user']['lastname'] ?? 'No disponible' }}" readonly>
+            </div>
+            <div class="info-group">
                 <label><i class="fas fa-calendar"></i> Fecha de nacimiento:</label>
                 <input type="text" value="{{ $connections['user']['birth_date'] ?? 'No disponible' }}" readonly>
             </div>
@@ -41,8 +45,12 @@
                 <input type="tel" value="{{ $connections['user']['phone'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
+                <label><i class="fas fa-id-card"></i> Número:</label>
+                <input type="text" value="{{ $connections['user']['number'] ?? 'No disponible' }}" readonly>
+            </div>
+            <div class="info-group">
                 <label><i class="fas fa-id-card"></i> Documento:</label>
-                <input type="text" value="{{ $connections['id'] ?? 'No disponible' }}" readonly>
+                <input type="text" value="{{ $connections['user']['id'] ?? 'No disponible' }}" readonly>
             </div>
         </div>
 

@@ -106,7 +106,7 @@
 
                 <div class="flex-column">
                     <label for="image">Imagen de perfil</label>
-                    <input type="file" name="image" id="image"  placeholder="image">
+                    <input type="file" class="image" name="image" id="image" accept="image/*" required>
                 </div>
 
 
@@ -192,6 +192,67 @@
             reader.readAsDataURL(file);  // Leemos el archivo como URL de datos
         }
     });
+    </script>
+
+
+
+    <script>
+        // userRegistration.js
+document.addEventListener('DOMContentLoaded', function() {
+    const registrationForm = document.getElementById('registrationForm');
+    
+    registrationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Create FormData object to handle file upload
+        const formData = new FormData();
+        
+        // Collect form data
+        formData.append('name', document.getElementById('name').value);
+        formData.append('lastname', document.getElementById('lastname').value);
+        formData.append('birth_date', document.getElementById('birth_date').value);
+        formData.append('password', document.getElementById('password').value);
+        formData.append('password_confirmation', document.getElementById('password_confirmation').value);
+        formData.append('phone', document.getElementById('phone').value);
+        formData.append('email', document.getElementById('email').value);
+        formData.append('location', document.getElementById('location').value);
+        formData.append('number', document.getElementById('number').value);
+        formData.append('role', document.getElementById('role').value);
+        
+        // Handle file upload
+        const imageInput = document.getElementById('image');
+        if (imageInput.files.length > 0) {
+            formData.append('image', imageInput.files[0]);
+        }
+        
+        try {
+            const response = await fetch('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', {
+                method: 'POST',
+                body: formData,
+                // Note: When using FormData, do not set Content-Type header
+            });
+            
+            const responseData = await response.json();
+            
+            if (response.ok) {
+                // Successful registration
+                alert('User registered successfully!');
+                window.location.href = '/iniciar_sesion_usuario.login'; // Redirect to login page
+                console.log(data);
+
+            } else {
+                // Handle errors
+                const errorMessage = responseData.errors 
+                    ? Object.values(responseData.errors).flat().join('\n')
+                    : 'Registration failed';
+                alert(errorMessage);
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert('An error occurred during registration');
+        }
+    });
+});
     </script>
 </body>
 </html>
