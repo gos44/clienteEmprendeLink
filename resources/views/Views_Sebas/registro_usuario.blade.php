@@ -89,7 +89,7 @@
 
 
                 <div class="flex-column">
-                    <label for="pic_profile">Imagen de perfil</label>
+                    <label for="image">Imagen de perfil</label>
                     <div class="inputForm">
                         <input type="file" class="input" name="image" id="image" accept="image/*" />
                     </div>
