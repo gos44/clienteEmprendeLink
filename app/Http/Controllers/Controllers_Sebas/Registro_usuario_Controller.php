@@ -39,6 +39,11 @@ class Registro_usuario_Controller extends Controller
 
         try {
 
+
+            if (!$request->hasFile('image') || !$request->file('image')->isValid()) {
+                return response()->json(['error' => 'No se ha proporcionado una imagen válida.'], 400);
+            }
+            
             $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
                 'folder' => 'register/profile_pics',
             ])->getSecurePath();
