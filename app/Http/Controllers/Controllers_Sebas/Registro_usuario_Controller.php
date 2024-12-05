@@ -30,7 +30,7 @@ class Registro_usuario_Controller extends Controller
             'birth_date' => 'required|date',
             'password' => 'required|confirmed|min:8', // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'image' =>  'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' =>  'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
