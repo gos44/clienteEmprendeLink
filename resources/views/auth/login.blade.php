@@ -11,40 +11,52 @@
                     <form method="POST" action="{{ route('login.store') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="form-group">
+                            <label for="email">{{ __('Correo Electrónico') }}</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Ingrese su correo electrónico">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="form-group">
+                            <label for="password">{{ __('Contraseña') }}</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Ingrese su contraseña">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
+                        <div class="form-group">
+                            <label for="role">{{ __('Seleccione su Rol') }}</label>
+                            <select id="role" name="role" class="form-control @error('role') is-invalid @enderror" required>
+                                <option value="">{{ __('Seleccione su rol') }}</option>
+                                <option value="entrepreneur">{{ __('Emprendedor') }}</option>
+                                <option value="investor">{{ __('Inversor') }}</option>
+                            </select>
+
+                            @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <a href="{{ route('verificar_identidad_usuario') }}" class="text-muted">{{ __('¿Olvidaste tu contraseña?') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('Iniciar sesión') }}</button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <p>{{ __('¿No tienes una cuenta?') }}
+                                <a href="{{ route('registrar_nuevo_usuario.store') }}">{{ __('Regístrate') }}</a>
+                            </p>
                         </div>
                     </form>
                 </div>
