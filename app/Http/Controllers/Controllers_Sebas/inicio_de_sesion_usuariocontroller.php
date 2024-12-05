@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
@@ -41,20 +40,18 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                $userData = $response->json();
-    
-                // Guardar el token y el rol del usuario en la sesión
-                session(['auth_token' => $userData['token']]);
-                session(['user_role' => $validated['role']]);
-    
-                // Redirigir según el rol
-                return match($validated['role']) {
-                    'entrepreneur' => Redirect::route('Home_Usuario.index')
-                        ->with('success', 'Bienvenido, emprendedor.'),
-                    'investor' => Redirect::route('Home_inversor.index')
-                        ->with('success', 'Bienvenido, inversor.'),
-                    default => back()->withErrors(['error' => 'Rol no reconocido'])
-                };
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
+
+                if ($role == 'entrepreneur') {
+                    // Redirigir al home de entrepreneur
+                    return redirect()->route('Home_Usuario.index')
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                } elseif ($role == 'investor') {
+                    // Redirigir al home de investor
+                    return redirect()->route('Home_inversor.index')
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                }
             }
 
             // Si el login no es exitoso
