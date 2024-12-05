@@ -29,7 +29,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $request->session()->regenerate();
 
             // Redirigir al usuario a la ruta protegida
-            return redirect()->route('Home_Usuario');
+            return redirect()->route('dashboard');
         }
 
         // Si la autenticación falla, regresar con error
