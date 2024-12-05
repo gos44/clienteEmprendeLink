@@ -21,6 +21,7 @@ class Registro_usuario_Controller extends Controller
      */
     public function store(Request $request)
     {
+        
         // Validación de los datos del formulario
         $validated = $request->validate([
             'name' => 'required|string|max:255',
