@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Controller_Miguel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 
 class Publicar_Emprendimiento_Controller extends Controller
 {
@@ -22,7 +22,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             'category' => 'required|string|max:255',
             'logo_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'background' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'product_images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'product_images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name_products' => 'required|string',
             'product_descriptions' => 'required|string',
             'general_description' => 'required|string|max:2000',
@@ -30,36 +30,41 @@ class Publicar_Emprendimiento_Controller extends Controller
         ]);
 
         try {
-            // Subir imágenes a Cloudinary y manejar posibles fallos
-            $logoPath = null;
-            if ($request->hasFile('logo_path')) {
-                $logoUpload = Cloudinary::upload($request->file('logo_path')->getRealPath(), ['folder' => 'logos']);
-                if ($logoUpload) {
-                    $logoPath = $logoUpload->getSecurePath();
-                }
-            }
+            // Configurar Cloudinary
+            $cloudinary = new Cloudinary(
+                new Configuration([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ])
+            );
 
-            $backgroundPath = null;
-            if ($request->hasFile('background')) {
-                $backgroundUpload = Cloudinary::upload($request->file('background')->getRealPath(), ['folder' => 'backgrounds']);
-                if ($backgroundUpload) {
-                    $backgroundPath = $backgroundUpload->getSecurePath();
-                }
-            }
+            // Subir logo a Cloudinary
+            $logoUpload = $cloudinary->uploadApi()->upload(
+                $request->file('logo_path')->getRealPath(),
+                ['folder' => 'emprendelink/logos']
+            );
+            $logoUrl = $logoUpload['secure_url'];
 
-            $productImages = [];
+            // Subir imagen de fondo a Cloudinary
+            $backgroundUpload = $cloudinary->uploadApi()->upload(
+                $request->file('background')->getRealPath(),
+                ['folder' => 'emprendelink/backgrounds']
+            );
+            $backgroundUrl = $backgroundUpload['secure_url'];
+
+            // Subir imágenes de productos a Cloudinary
+            $productImageUrls = [];
             if ($request->hasFile('product_images')) {
                 foreach ($request->file('product_images') as $image) {
-                    $productUpload = Cloudinary::upload($image->getRealPath(), ['folder' => 'products']);
-                    if ($productUpload) {
-                        $productImages[] = $productUpload->getSecurePath();
-                    }
+                    $productUpload = $cloudinary->uploadApi()->upload(
+                        $image->getRealPath(),
+                        ['folder' => 'emprendelink/products']
+                    );
+                    $productImageUrls[] = $productUpload['secure_url'];
                 }
-            }
-
-            // Verificar si las URLs se han generado correctamente
-            if (!$logoPath || !$backgroundPath) {
-                return back()->withErrors(['error' => 'Hubo un problema al cargar las imágenes.'])->withInput();
             }
 
             // Preparar datos para la API
@@ -67,16 +72,16 @@ class Publicar_Emprendimiento_Controller extends Controller
                 'name' => $request->input('name'),
                 'slogan' => $request->input('slogan'),
                 'category' => $request->input('category'),
-                'logo_path' => $logoPath,
-                'background' => $backgroundPath,
-                'product_images' => $productImages,
+                'logo_path' => $logoUrl,
+                'background' => $backgroundUrl,
+                'product_images' => $productImageUrls,
                 'name_products' => array_filter(explode(',', $request->input('name_products'))),
                 'product_descriptions' => array_filter(explode(',', $request->input('product_descriptions'))),
                 'general_description' => $request->input('general_description'),
                 'entrepreneurs_id' => $request->input('entrepreneurs_id')
             ];
 
-            // Enviar datos a la API
+            // Enviar a la API
             $response = Http::timeout(30)->post(
                 'https://apiemprendelink-production-9272.up.railway.app/api/publicare',
                 $entrepreneurshipData
