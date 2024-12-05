@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
@@ -40,17 +40,26 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
-                $role = $validated['role']; // Obtenemos el rol del usuario
+                // Obtener los datos de respuesta
+                $responseData = $response->json();
 
-                if ($role == 'entrepreneur') {
-                    // Redirigir al home de entrepreneur
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-                } elseif ($role == 'investor') {
-                    // Redirigir al home de investor
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
+                // Verificar si hay un token en la respuesta
+                if (isset($responseData['token'])) {
+                    // Guardar el token en la sesión
+                    $request->session()->put('token', $responseData['token']);
+
+                    // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                    $role = $validated['role'];
+
+                    if ($role == 'entrepreneur') {
+                        // Redirigir al perfil de usuario
+                        return redirect()->route('perfilUser.index')
+                            ->with('success', 'Inicio de sesión exitoso');
+                    } elseif ($role == 'investor') {
+                        // Redirigir al home de investor
+                        return redirect()->route('Home_inversor.index')
+                            ->with('success', 'Inicio de sesión exitoso');
+                    }
                 }
             }
 
@@ -70,5 +79,17 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
             ]);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        // Eliminar el token de la sesión
+        $request->session()->forget('token');
+
+        // Cerrar sesión
+        Auth::logout();
+
+        // Redirigir a la página de inicio de sesión
+        return redirect()->route('iniciar_sesion_usuario.login')->with('success', 'Sesión cerrada exitosamente');
     }
 }
