@@ -10,53 +10,14 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 70px; /* Ajusta según la altura de tu navbar */
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f8f8;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-}
-
-.barra {
-    height: 35px; 
-    margin-right: 10px;
-    margin-left: 8px;
-    z-index: 3;
-}
-
-.logo {
-    height: 60px;
-    margin-right: 10px;
-    margin-top: 15px;
-}
-
-.header-right a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #000;
-}
-
-.header-right {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #000;
-    z-index: 4;
+    padding-top: 70px;
 }
 
 .section-title-1 {
     font-size: 24px;
     margin-bottom: 20px;
     margin-left: 4.5%;
-    margin-top: 30px; /* Ajustado para bajar el título */
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -64,59 +25,84 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .latest-posts {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     width: 100%;
 }
 
+/* Card Styles */
 .wine-post {
-    width: 300px;
-    height: 450px;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid #e0e0e0;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(33.33% - 20px);
+    min-width: 380px;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 20px 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    background: white;
 }
 
 .wine-post:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .wine-post-header {
     position: relative;
-    height: 200px;
+    height: 220px;
+    width: 100%;
     overflow: hidden;
+    z-index: 1; /* Asegura el contexto de apilamiento */
 }
 
 .background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    filter: brightness(0.6);
 }
 
 .logo-img {
     position: absolute;
-    bottom: -40px;
     left: 50%;
+    bottom: -50px;
     transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     background: white;
-    border-radius: 10%;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    object-fit: contain;
+    z-index: 999; /* Valor muy alto para asegurar que esté al frente */
     border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease; /* Añade un efecto de transformación suave */
+}
+
+/* Hover effect for logo */
+.wine-post:hover .logo-img {
+    transform: translateX(-50%) scale(1.05);
 }
 
 .wine-post-content {
@@ -126,11 +112,14 @@ section {
     flex-direction: column;
     flex-grow: 1;
     justify-content: space-between;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté por encima del fondo */
 }
 
 .wine-post h3 {
-    font-size: 20px;
-    margin-top: 50px;
+    font-size: 22px;
+    margin-top: 10px;
     margin-bottom: 10px;
     color: #333;
 }
@@ -139,35 +128,69 @@ section {
     font-style: italic;
     color: #666;
     margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .description {
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
     margin-bottom: 15px;
     flex-grow: 1;
+    line-height: 1.6;
 }
 
 .butn {
-    align-self: center;
-    display: inline-flex;
-    background-color: #000;
+    background-color: black;
     color: white;
-    padding: 8px 15px;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 25px;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .butn:hover {
     background-color: #333;
+    transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
     .wine-post {
-        width: 100%;
-        max-width: 350px;
+        width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wine-post {
+        width: calc(100% - 32px);
+        max-width: 500px;
+        height: auto;
+        min-height: 500px;
+    }
+    
+    .section-title-1 {
+        margin-left: 0;
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wine-post {
+        margin: 10px 0;
+        min-width: unset;
+    }
+    
+    .wine-post-header {
+        height: 200px;
+    }
+    
+    .logo-img {
+        width: 100px;
+        height: 100px;
     }
 }
