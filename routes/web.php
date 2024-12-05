@@ -260,6 +260,14 @@ Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::
 
 
 
+
+Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
+
+
+
+
+
+
 Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
@@ -352,7 +360,6 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
-Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 // Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
 
