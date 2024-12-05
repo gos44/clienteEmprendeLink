@@ -40,20 +40,24 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Obtener el token de la respuesta JSON
-                $data = $response->json();
-                $token = $data['access_token'] ?? null;
+                // Obtener el token JWT de la respuesta
+                $token = $response->json()['access_token'];  // Asumiendo que la respuesta es como { "access_token": "JWT_TOKEN" }
 
-                if (!$token) {
-                    return response()->json(['error' => 'Token no encontrado'], 400);
+                // Almacenar el token en la sesión
+                session(['token' => $token]);
+
+                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
+                $role = $validated['role']; // Obtenemos el rol del usuario
+
+                if ($role == 'entrepreneur') {
+                    // Redirigir al home de entrepreneur
+                    return redirect()->route('Home_Usuario.index')
+                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+                } elseif ($role == 'investor') {
+                    // Redirigir al home de investor
+                    return redirect()->route('Home_inversor.index')
+                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
                 }
-
-                // Retornar el token como respuesta JSON
-                return response()->json([
-                    'message' => 'Inicio de sesión exitoso',
-                    'access_token' => $token,
-                    'token_type' => 'bearer',
-                ], 200);
             }
 
             // Si el login no es exitoso
