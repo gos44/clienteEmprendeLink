@@ -43,7 +43,7 @@
 
             <li><a href="{{ asset('Buscar_Emprendimientos_inversionista') }}"><img src="images/deportes.png" alt="Artículos deportivos">Todos los empredimientos</a></li>
             <li><a href="{{ asset('emprendimientos_deportivos_inversionista') }}" style="color: rgb(67, 184, 67);"><img src="images/deportes.png" alt="Artículos deportivos">Emprendimientos deportivos</a></li>
-            <li><a href="articulos_hogarinver.html"><img src="images/hogar.png" alt="Artículos deportivos">Emprendimientos sobre articulos de la casa hogar</a></li>
+            <li><a href="#"><img src="images/hogar.png" alt="Artículos deportivos">Emprendimientos sobre articulos de la casa hogar</a></li>
             <li><a href="articulos_electronicosinver.html"><img src="images/electronica.png" alt="Electrónica">Empredimientos sobre Electrónica</a></li>
             <li><a href="#"><img src="images/indumentaria.png" alt="Indumentaria">Emprendimientos de indumentaria</a></li>
             <li><a href="#"><img src="images/musica.png" alt="Instrumentos musicales">Empredimientos sobre musica</a></li>
