@@ -9,12 +9,8 @@ class Home_Usuario extends Controller
 {
     public function index()
     {
-        // Recuperar el token de la sesión
-        // $token = session('auth_token');
-
-        
-            return view('Views_Dayron.Home_Usuario');     
-
-       
+    
+        // Lógica del dashboard
+        return view('Views_Dayron.Home_Usuario');
     }
 }

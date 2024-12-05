@@ -38,34 +38,19 @@ class Registro_usuario_Controller extends Controller
         ]);
 
         try {
- 
-            // $imageUrl = $request->file('image')->store('public/profile_pics');
-               $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
-            'folder' => 'register/profile_pics', // Carpeta donde se guarda la imagen
-        ])->getSecurePath(); // Obtener la URL segura
 
             
-    
-            // Preparar datos para enviar a la API
-            $data = [
-                'name' => $validated['name'],
-                'lastname' => $validated['lastname'],
-                'birth_date' => $validated['birth_date'],
-                'password' => $validated['password'],
-                'password_confirmation' => $validated['password'],
-                'phone' => $validated['phone'],
-                'image' => Storage::url($imageUrl), // Enviar la URL de Cloudinary
-                'email' => $validated['email'],
-                'location' => $validated['location'],
-                'number' => $validated['number'],
-                'role' => $validated['role'],
-            ];
-    
-            // Enviar datos a la API
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
+           // Subir imagen a Cloudinary
+           $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
+            'folder' => 'register/profile_pics',
+        ])->getSecurePath();
+
+        // Preparar datos para la API
+        $data = array_merge($validated, ['image' => $imageUrl]);
+
+        // Enviar datos a la API
+        $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
+
     
             if ($response->successful()) {
                 return redirect()->route('iniciar_sesion_usuario.login')

@@ -229,10 +229,30 @@ Route::post('registrar_nuevo_usuario', [Registro_usuario_Controller::class, 'sto
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
-//     Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
-// });
+
+use App\Http\Controllers\Controllers_Sebas\DashboardController;
+
+
+// Rutas de autenticación
+Route::get('login', [inicio_de_sesion_usuariocontroller::class, 'index'])->name('login');
+Route::post('login', [inicio_de_sesion_usuariocontroller::class, 'login'])->name('login.store');
+Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])->name('logout');
+
+// Ruta protegida
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario');
+
+
+
+    
+
+});
+
+
+
+
+
     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
     Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
 
