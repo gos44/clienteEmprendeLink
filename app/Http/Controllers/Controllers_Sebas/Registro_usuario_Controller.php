@@ -39,10 +39,6 @@ class Registro_usuario_Controller extends Controller
 
         try {
 
-            $data = $request->except('image');
-            if ($request->hasFile('image')) {
-                $data['image'] = fopen($request->file('image')->getRealPath(), 'r');
-            }
             
             // Preparar datos para enviar a la API
             $data = [
