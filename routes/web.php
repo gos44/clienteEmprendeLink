@@ -242,10 +242,11 @@ Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])->na
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario');
+    Route::get('Home_inversor', [Home_Inversor::class, 'index'])->name('Home_inversor.index');
 
 
 
-    
+
 
 });
 
