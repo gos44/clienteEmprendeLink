@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Controllers_Sebas;
 
-
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
