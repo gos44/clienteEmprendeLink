@@ -56,8 +56,8 @@
                          alt="Fondo de emprendimiento" class="background-img">
                     <img src="{{ $publicacion['logo'] }}" 
                          alt="Logo de emprendimiento" class="logo-img">
-                    <h3>{{ $publicacion['name'] ?? 'Sin nombre' }}</h3>
-                    <p>"{{ $publicacion['general_description'] ?? 'Sin descripción' }}"</p>
+                    <h3>{{ $publicacion['name'] }}</h3>
+                    <p>"{{ $publicacion['general_description'] }}"</p>
                     <button>
                         <a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a>
                     </button>

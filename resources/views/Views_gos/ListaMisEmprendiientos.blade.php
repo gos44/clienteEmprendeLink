@@ -16,19 +16,26 @@
     <section>
         <div class="latest-posts">
             @foreach($connections as $connection)
-                <div class="wine-post">
-                    <div class="wine-post-header">
-                        <img src="{{ $connection['background'] }}" alt="Fondo del emprendimiento" class="background-img">
-                        <img src="{{ $connection['logo_path'] }}" alt="{{ $connection['name'] }}" class="logo-img">
-                    </div>
-                    <div class="wine-post-content">
-                        <h3>{{ $connection['name'] }}</h3>
-                        <p class="quote">{{ $connection['slogan'] }}</p>
-                        <p class="description">{{ Str::limit($connection['general_description'], 100) }}</p>
-                        <a href="{{ route('myentrepreneurships.show', ['id' => $connection['id']]) }}" class="butn">Más Información...</a>
-                    </div>
+            <div class="wine-post">
+                <div class="wine-post-header">
+                    <img src="{{ $connection['background'] ?? 'URL_POR_DEFECTO' }}" 
+                         alt="Fondo del emprendimiento" 
+                         class="background-img">
+                    <img src="{{ $connection['logo_path'] ?? 'URL_POR_DEFECTO' }}" 
+                         alt="{{ $connection['name'] ?? 'Emprendimiento' }}" 
+                         class="logo-img">
                 </div>
-            @endforeach
+                <div class="wine-post-content">
+                    <h3>{{ $connection['name'] ?? 'Sin nombre' }}</h3>
+                    <p class="quote">{{ $connection['slogan'] ?? 'Sin eslogan' }}</p>
+                    <p class="description">
+                        {{ Str::limit($connection['general_description'] ?? 'Sin descripción', 100) }}
+                    </p>
+                    <a href="{{ route('myentrepreneurships.show', ['id' => $connection['id'] ?? 0]) }}" 
+                       class="butn">Más Información...</a>
+                </div>
+            </div>
+        @endforeach
         </div>
     </section>
 
