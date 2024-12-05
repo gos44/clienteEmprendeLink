@@ -39,7 +39,11 @@ class Registro_usuario_Controller extends Controller
 
         try {
  
-            $imageUrl = $request->file('image')->store('public/profile_pics');
+            // $imageUrl = $request->file('image')->store('public/profile_pics');
+            $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'register/profile_pics', // Carpeta donde se guarda la imagen
+            ])->getSecurePath(); // Obtener la URL segura
+    
             
     
             // Preparar datos para enviar a la API
