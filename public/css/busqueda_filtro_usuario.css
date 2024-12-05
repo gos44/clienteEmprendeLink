@@ -194,24 +194,26 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Changed from 120% to 100% */
+    width: 100%;
     height: 42%;
-    object-fit: cover;
+    object-fit: cover;      /* Mantiene la proporción y cubre el área */
+    object-position: center; /* Centra la imagen */
     z-index: 0;
-     filter: brightness(0.6); /* Darkens the background image */
-  }
-  .logo-img {
+    filter: brightness(0.6);
+}
+
+.logo-img {
     position: relative;
-    width: 40%;
-    height: 60%;
+    width: 150px;          /* Ancho fijo en píxeles */
+    height: 150px;         /* Alto fijo en píxeles - mantiene forma circular */
     background: white;
-    border-radius: 10%;
+    border-radius: 50%;    /* Simplificado ya que queremos un círculo */
     padding: 10px;
     z-index: 1;
     margin-top: 90px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius:50%;
-  }
+    object-fit: contain;   /* Mantiene la proporción dentro del contenedor */
+}
 
 
 
