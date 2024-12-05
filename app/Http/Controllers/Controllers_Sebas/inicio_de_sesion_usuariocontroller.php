@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Controllers_Sebas;
 
-
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,19 +48,20 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 $role = $validated['role']; // Obtenemos el rol del usuario
 
                 if ($role == 'entrepreneur') {
-                    // Redirigir al home de entrepreneur             
+                    // Redirigir al home de entrepreneur
                     return redirect()->route('Home_Usuario.index')
                         ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
+
 
                 } elseif ($role == 'investor') {
                     // Redirigir al home de investor
                     return redirect()->route('Home_inversor.index')
                         ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
-                     
-                        
                         
                 }
             }
+            
+
             // Si el login no es exitoso
             return back()->withErrors([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
