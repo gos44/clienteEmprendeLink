@@ -26,47 +26,74 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
-            <input type="hidden" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
 
-            <div class="form-section">
-                <label for="name">Nombre del Emprendimiento</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-
-                <label for="slogan">Eslogan</label>
-                <textarea id="slogan" name="slogan" required>{{ old('slogan') }}</textarea>
-
-                <label for="category">Categoría</label>
-                <select id="category" name="category" required>
-                    <option value="">Seleccione una categoría</option>
-                    <option value="articulos_hogar" {{ old('category') == 'articulos_hogar' ? 'selected' : '' }}>Artículos para el hogar</option>
-                    <!-- Más categorías -->
-                </select>
+            <!-- Campo visible para el ID del emprendedor -->
+            <div class="form-group">
+                <label for="entrepreneurs_id">ID del Emprendedor</label>
+                <input type="number" id="entrepreneurs_id" name="entrepreneurs_id" placeholder="Ingresa tu ID" required>
             </div>
 
+            <!-- Paso 1: Información básica -->
             <div class="form-section">
-                <label for="logo_path">Logo</label>
-                <input type="file" id="logo_path" name="logo_path" accept="image/*" required>
-
-                <label for="background">Portada</label>
-                <input type="file" id="background" name="background" accept="image/*" required>
-
-                <label for="product_images">Productos</label>
-                <input type="file" id="product_images" name="product_images[]" multiple accept="image/*" required>
-
-                <label for="name_products">Nombres de los productos</label>
-                <input type="text" id="name_products" name="name_products" placeholder="Ej: Producto1, Producto2" required>
-
-                <label for="product_descriptions">Descripciones de los productos</label>
-                <textarea id="product_descriptions" name="product_descriptions" placeholder="Ej: Descripción1, Descripción2" required></textarea>
+                <div class="form-group">
+                    <label for="name">Nombre del Emprendimiento</label>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="slogan">Escribe tu eslogan</label>
+                    <textarea id="slogan" name="slogan" required>{{ old('slogan') }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category" name="category" required>
+                        <option value="">Seleccione una categoría</option>
+                        <option value="articulos_hogar" {{ old('category') == 'articulos_hogar' ? 'selected' : '' }}>Artículos para el hogar</option>
+                        <option value="electronica" {{ old('category') == 'electronica' ? 'selected' : '' }}>Electrónica</option>
+                        <option value="indumentaria" {{ old('category') == 'indumentaria' ? 'selected' : '' }}>Indumentaria</option>
+                        <option value="instrumentos_musicales" {{ old('category') == 'instrumentos_musicales' ? 'selected' : '' }}>Instrumentos musicales</option>
+                        <option value="mascotas" {{ old('category') == 'mascotas' ? 'selected' : '' }}>Productos de mascotas</option>
+                        <option value="oficina" {{ old('category') == 'oficina' ? 'selected' : '' }}>Suministros de oficina</option>
+                        <option value="artesanias" {{ old('category') == 'artesanias' ? 'selected' : '' }}>Artesanías</option>
+                        <option value="herramientas" {{ old('category') == 'herramientas' ? 'selected' : '' }}>Herramientas de trabajo</option>
+                        <option value="educacion" {{ old('category') == 'educacion' ? 'selected' : '' }}>Educación</option>
+                        <option value="alimentacion" {{ old('category') == 'alimentacion' ? 'selected' : '' }}>Alimentación</option>
+                        <option value="vehiculos" {{ old('category') == 'vehiculos' ? 'selected' : '' }}>Vehículos</option>
+                    </select>
+                </div>
             </div>
 
-            <label for="general_description">Descripción general</label>
-            <textarea id="general_description" name="general_description" required>{{ old('general_description') }}</textarea>
+            <!-- Paso 2: Imágenes y Productos -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="logo_path">Elige tu logo (Debe ser cuadrado)</label>
+                    <input type="file" id="logo_path" name="logo_path" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="background">Elige una portada (Debe ser rectangular)</label>
+                    <input type="file" id="background" name="background" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="products">Añade productos con sus detalles</label>
+                    <div class="product-container" id="product-container">
+                        <div class="product-item">
+                            <input type="file" name="product_images[]" class="product-image-input" accept="image/*" required multiple>
+                            <input type="text" name="name_products" placeholder="Nombres de los productos (separados por comas)" required>
+                            <textarea name="product_descriptions" placeholder="Descripciones de los productos (separadas por comas)" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <button type="button" id="add-product" class="btn-agregar-producto">+ Agregar Producto</button>
+                </div>
+            </div>
 
-            <button type="submit" class="btn-publicar">Publicar</button>
+            <!-- Paso 3: Descripción general -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="general_description">Añade una gran descripción general de todo tu emprendimiento</label>
+                    <textarea id="general_description" name="general_description" required>{{ old('general_description') }}</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-publicar" id="publicarBtn">Publicar</button>
         </form>
-    </div>
-</body>
-</html>
