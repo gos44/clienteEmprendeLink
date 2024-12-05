@@ -49,7 +49,7 @@
                 <input type="text" value="{{ $connections['user']['number'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
-                <label><i class="fas fa-id-card"></i> ID:</label>
+                <label><i class="fas fa-id-card"></i> Documento:</label>
                 <input type="text" value="{{ $connections['user']['id'] ?? 'No disponible' }}" readonly>
             </div>
         </div>
