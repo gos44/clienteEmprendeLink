@@ -11,6 +11,22 @@
 <body>
     <form class="form" action="{{ route('registrar_nuevo_usuario.store') }}" method="POST" enctype="multipart/form-data">
         @csrf <!-- Token de seguridad para Laravel -->
+        
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
         <div class="flex-column">
             <label class="form-title">Registro Usuario</label>
@@ -90,11 +106,8 @@
 
                 <div class="flex-column">
                     <label for="image">Imagen de perfil</label>
-                    <div class="inputForm">
-                        <input type="file" class="input" name="image" id="image" accept="image/*" />
-                    </div>
+                    <input type="file" class="input" name="image" id="image" accept="image/*" required>
                 </div>
-                
 
 
 
