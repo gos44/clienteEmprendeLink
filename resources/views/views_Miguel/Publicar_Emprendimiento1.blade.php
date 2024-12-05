@@ -30,11 +30,8 @@
         <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data" id="emprendimiento-form">
             @csrf
 
-            <!-- Campo oculto para el ID del emprendedor -->
-            {{-- <input type="hidden" name="entrepreneurs_id" value="{{ Auth::user()->id }}"> --}}
-            {{-- <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}"> --}}
-            <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
-
+            <input type="hidden" name="entrepreneurs_id" value="{{ auth()->id() }}">
+            
             <!-- Paso 1: Información básica -->
             <div class="form-section">
                 <div class="form-group">
