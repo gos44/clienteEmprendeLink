@@ -52,12 +52,12 @@
             @foreach($publicaciones as $publicacion)
             <div class="col-md-6">
                 <div class="card">
-                    <img src="{{ $publicacion['imagen_fondo'] }}" 
+                    <img src="{{ $publicacion['imagen_fondo'] ?? 'images/default-background.png' }}" 
                          alt="Fondo de emprendimiento" class="background-img">
-                    <img src="{{ $publicacion['logo'] }}" 
+                    <img src="{{ $publicacion['logo'] ?? 'images/default-logo.png' }}" 
                          alt="Logo de emprendimiento" class="logo-img">
-                    <h3>{{ $publicacion['name'] ?? 'Sin nombre' }}</h3>
-                    <p>"{{ $publicacion['general_description'] ?? 'Sin descripción' }}"</p>
+                    <h3>{{ $publicacion['nombre_emprendimiento'] ?? 'Sin nombre' }}</h3>
+                    <p>"{{ $publicacion['descripcion'] ?? 'Sin descripción' }}"</p>
                     <button>
                         <a href="{{ route('Visitar_Emprendimiento_Usuario.index') }}">Visitar</a>
                     </button>
