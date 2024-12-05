@@ -33,18 +33,27 @@ class Publicar_Emprendimiento_Controller extends Controller
             // Subir imágenes a Cloudinary y manejar posibles fallos
             $logoPath = null;
             if ($request->hasFile('logo_path')) {
-                $logoPath = Cloudinary::upload($request->file('logo_path')->getRealPath(), ['folder' => 'logos'])->getSecurePath();
+                $logoUpload = Cloudinary::upload($request->file('logo_path')->getRealPath(), ['folder' => 'logos']);
+                if ($logoUpload) {
+                    $logoPath = $logoUpload->getSecurePath();
+                }
             }
 
             $backgroundPath = null;
             if ($request->hasFile('background')) {
-                $backgroundPath = Cloudinary::upload($request->file('background')->getRealPath(), ['folder' => 'backgrounds'])->getSecurePath();
+                $backgroundUpload = Cloudinary::upload($request->file('background')->getRealPath(), ['folder' => 'backgrounds']);
+                if ($backgroundUpload) {
+                    $backgroundPath = $backgroundUpload->getSecurePath();
+                }
             }
 
             $productImages = [];
             if ($request->hasFile('product_images')) {
                 foreach ($request->file('product_images') as $image) {
-                    $productImages[] = Cloudinary::upload($image->getRealPath(), ['folder' => 'products'])->getSecurePath();
+                    $productUpload = Cloudinary::upload($image->getRealPath(), ['folder' => 'products']);
+                    if ($productUpload) {
+                        $productImages[] = $productUpload->getSecurePath();
+                    }
                 }
             }
 
