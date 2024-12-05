@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class Home_inversor extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+
+    }
     public function index()
     {
         // // Simulación de datos que se pueden utilizar en la vista
