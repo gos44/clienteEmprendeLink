@@ -39,6 +39,8 @@ class Registro_usuario_Controller extends Controller
 
         try {
 
+            dd($request->file('image'), $request->file('image')->getRealPath());
+
 
             if (!$request->hasFile('image') || !$request->file('image')->isValid()) {
                 return response()->json(['error' => 'No se ha proporcionado una imagen válida.'], 400);
@@ -47,6 +49,8 @@ class Registro_usuario_Controller extends Controller
             $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
                 'folder' => 'register/profile_pics',
             ])->getSecurePath();
+
+            return response()->json(['image_url' => $uploadedFileUrl], 200);
 
             // Preparar los datos para enviar a la API
             $data = [
