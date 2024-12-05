@@ -13,7 +13,7 @@ class Home_Usuario extends Controller
         // $token = session('auth_token');
 
         
-            return view('Views_Dayron.Home_Usuario', compact('token'));     
+            return view('Views_Dayron.Home_Usuario');     
 
        
     }
