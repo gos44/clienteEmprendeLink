@@ -2,31 +2,32 @@
 namespace App\Http\Controllers\Controllers_Sebas;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log; // Añade esta línea para importar Log
 
 class Busqueda_Filtro_UsuarioController extends Controller 
 {
     public function index()
     {
-        $client = new Client();
+        // Hacer la solicitud GET a la API
+        $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
 
-        try {
-            // Realizar la solicitud GET a la API
-            $response = $client->request('GET', 'https://apiemprendelink-production-9272.up.railway.app/api/publicare');
+        // Verificar si la solicitud fue exitosa
+        if ($response->successful()) {
+            // Obtener los datos de la respuesta
+            $publicaciones = $response->json();
+        } else {
+            // En caso de error, inicializar el arreglo vacío
+            $publicaciones = [];
             
-            // Obtener el contenido de la respuesta
-            $publicaciones = json_decode($response->getBody(), true);
-
-            // Pasar las publicaciones a la vista
-            return view('Views_Sebas.Busqueda_Filtro_Usuario', ['publicaciones' => $publicaciones]);
-
-        } catch (RequestException $e) {
-            // Manejo de errores
-            return view('Views_Sebas.Busqueda_Filtro_Usuario', [
-                'error' => 'No se pudieron cargar las publicaciones: ' . $e->getMessage()
+            // Opcional: puedes añadir un mensaje de error
+            Log::error('Error al obtener publicaciones', [
+                'status' => $response->status(),
+                'body' => $response->body()
             ]);
         }
+
+        // Retornar la vista con las publicaciones
+        return view('Views_Sebas.Busqueda_Filtro_Usuario', compact('publicaciones'));
     }
 }
