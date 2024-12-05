@@ -16,8 +16,7 @@ class PerfilUsuarioController extends Controller
                  \Session::get('token') ??
                  $request->get('token') ??
                  $request->bearerToken() ??
-                 $request->header('Authorization') ??
-                 null;
+                 $request->header('Authorization') ?? null;
 
         if (!$token) {
             return response()->json([
@@ -49,11 +48,9 @@ class PerfilUsuarioController extends Controller
             if ($response->successful()) {
                 $userData = $response->json();
 
-                // Devolver JSON completo para inspección
-                return response()->json([
-                    'status' => 'success',
-                    'user_data' => $userData,
-                    'token_used' => substr($token, 0, 10) . '...' // Mostrar parte del token para verificación
+                // Pasamos los datos del usuario a la vista
+                return view('perfilUsuario.index', [
+                    'user' => $userData['user_data'] // Pasamos los datos del usuario a la vista
                 ]);
             } else {
                 return response()->json([
