@@ -37,7 +37,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api', $credentials);
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
                 // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
