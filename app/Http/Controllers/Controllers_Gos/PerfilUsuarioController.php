@@ -10,13 +10,23 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener el token de la sesión
-        $token = $request->session()->get('token');
+        // Intentar obtener el token de múltiples fuentes
+        $token = $request->session()->get('token') ??
+                 $request->session()->get('user_token') ??
+                 \Session::get('token') ??
+                 $request->get('token') ??
+                 $request->bearerToken() ??
+                 $request->header('Authorization') ??
+                 null;
 
         if (!$token) {
             return response()->json([
                 'error' => 'No se encontró token de autenticación',
-                'status' => 'unauthorized'
+                'status' => 'unauthorized',
+                'debug' => [
+                    'session_data' => $request->session()->all(),
+                    'request_all' => $request->all()
+                ]
             ], 401);
         }
 
@@ -49,7 +59,8 @@ class PerfilUsuarioController extends Controller
                 return response()->json([
                     'error' => 'No se pudo obtener los datos del usuario',
                     'status' => $response->status(),
-                    'body' => $response->body()
+                    'body' => $response->body(),
+                    'token_debug' => substr($token, 0, 10) . '...'
                 ], $response->status());
             }
 
