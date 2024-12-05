@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class Registro_usuario_Controller extends Controller
 {
@@ -29,7 +30,7 @@ class Registro_usuario_Controller extends Controller
             'birth_date' => 'required|date',
             'password' => 'required|confirmed|min:8', // Confirmación de contraseña
             'phone' => 'required|string|max:20',
-            'image' =>  'required|image|mimes:jpeg,png,jpg|max:2048',// Ahora es un texto, no un archivo
+            'image' =>  'required|image|mimes:jpeg,png,jpg|max:2048',
             'email' => 'required|string|email|max:255|unique:users',
             'location' => 'required|string|max:255',
             'number' => 'required|string|max:255',
@@ -37,13 +38,8 @@ class Registro_usuario_Controller extends Controller
         ]);
 
         try {
-            
-            if ($request->hasFile('image')) {
-                $uploadedFile = Cloudinary::upload($request->file('image')->getRealPath(), [
-                    'folder' => 'profile_pictures',
-                ]);
-                $imageUrl = $uploadedFile->getSecurePath(); // La URL de la imagen
-            }
+ 
+            $imageUrl = $request->file('image')->store('public/profile_pics');
             
     
             // Preparar datos para enviar a la API
@@ -54,7 +50,7 @@ class Registro_usuario_Controller extends Controller
                 'password' => $validated['password'],
                 'password_confirmation' => $validated['password'],
                 'phone' => $validated['phone'],
-                'image' => $imageUrl, // Enviar la URL de Cloudinary
+                'image' => Storage::url($imageUrl), // Enviar la URL de Cloudinary
                 'email' => $validated['email'],
                 'location' => $validated['location'],
                 'number' => $validated['number'],
