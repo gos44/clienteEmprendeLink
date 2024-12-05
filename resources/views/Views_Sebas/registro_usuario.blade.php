@@ -11,7 +11,7 @@
 <body>
     <form class="form" action="{{ route('registrar_nuevo_usuario.store') }}" method="POST" enctype="multipart/form-data">
         @csrf <!-- Token de seguridad para Laravel -->
-        
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -157,6 +157,42 @@
                 }
             }
         });
+
+
+         // Validación adicional si es necesario
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Validación de campos requeridos
+        const requiredFields = document.querySelectorAll('input[required], select[required]');
+        for (let field of requiredFields) {
+            if (!field.value) {
+                event.preventDefault();
+                alert('Por favor, complete todos los campos requeridos.');
+                return;
+            }
+        }
+    });
+    // Script para mostrar vista previa de la imagen de perfil antes de cargarla
+    const imageInput = document.getElementById('image');
+    const previewContainer = document.createElement('div');  // Creamos un contenedor para la vista previa
+    imageInput.insertAdjacentElement('afterend', previewContainer);  // Insertamos el contenedor justo después del input de la imagen
+
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;  // Establecemos la imagen cargada como fuente
+                img.alt = "Vista previa";
+                img.style.maxWidth = "200px";  // Ajustamos el tamaño máximo de la vista previa
+                previewContainer.innerHTML = '';  // Limpiamos cualquier imagen previa antes de mostrar la nueva
+                previewContainer.appendChild(img);  // Añadimos la imagen al contenedor
+            }
+
+            reader.readAsDataURL(file);  // Leemos el archivo como URL de datos
+        }
+    });
     </script>
 </body>
 </html>
