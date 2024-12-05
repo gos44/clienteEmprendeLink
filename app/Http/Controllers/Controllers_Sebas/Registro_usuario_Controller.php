@@ -37,41 +37,44 @@ class Registro_usuario_Controller extends Controller
             'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
         ]);
 
-    //     try {
-         
+        try {
 
-    //         // Preparar los datos para enviar a la API
-    //         $data = [
-    //             'name' => $validated['name'],
-    //             'lastname' => $validated['lastname'],
-    //             'birth_date' => $validated['birth_date'],
-    //             'password' => $validated['password'],
-    //             'password_confirmation' => $validated['password'],
-    //             'phone' => $validated['phone'],
-    //             'image' => $validated,['image'], // Usar la URL de Cloudinary
-    //             'email' => $validated['email'],
-    //             'location' => $validated['location'],
-    //             'number' => $validated['number'],
-    //             'role' => $validated['role'],
-    //         ];
+            $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'register/profile_pics',
+            ])->getSecurePath();
 
-    //         // Enviar datos a la API
-    //         $response = Http::withHeaders([
-    //             'Accept' => 'application/json',
-    //             'Content-Type' => 'application/json',
-    //         ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
+            // Preparar los datos para enviar a la API
+            $data = [
+                'name' => $validated['name'],
+                'lastname' => $validated['lastname'],
+                'birth_date' => $validated['birth_date'],
+                'password' => $validated['password'],
+                'password_confirmation' => $validated['password'],
+                'phone' => $validated['phone'],
+                'image' => $imageUrl, // Usar la URL de Cloudinary
+                'email' => $validated['email'],
+                'location' => $validated['location'],
+                'number' => $validated['number'],
+                'role' => $validated['role'],
+            ];
 
-    //         if ($response->successful()) {
-    //             return redirect()->route('iniciar_sesion_usuario.login')
-    //                 ->with('success', 'Usuario registrado con éxito.');
-    //         } else {
-    //             return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
-    //                 ->withInput();
-    //         }
-    //     } catch (\Exception $e) {
-    //         return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
-    //             ->withInput();
-    //     }
-    // }
+            // Enviar datos a la API
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/register', $data);
+
+            if ($response->successful()) {
+                return redirect()->route('iniciar_sesion_usuario.login')
+                    ->with('success', 'Usuario registrado con éxito.');
+            } else {
+                return back()->withErrors($response->json()['errors'] ?? ['Error al registrar el usuario.'])
+                    ->withInput();
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'No se pudo conectar con el servidor. ' . $e->getMessage()])
+                ->withInput();
+        }
+    }
 }
-}
+
