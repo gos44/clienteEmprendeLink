@@ -2,6 +2,30 @@ html, body {
     overflow-x: hidden;
     padding-top: 70px; /* Ajusta según la altura de tu navbar */
   }
+  
+  .card .background-img,
+.card .logo-img {
+    width: 100%;
+    height: 200px; /* Fixed height for background image */
+    object-fit: cover; /* This ensures the image covers the area without distorting */
+    object-position: center; /* Centers the image */
+}
+
+.card .logo-img {
+    position: absolute;
+    top: 150px; /* Adjust based on your design */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Fixed width for logo */
+    height: 100px; /* Fixed height for logo */
+    border-radius: 50%; /* Optional: makes logo circular */
+    border: 3px solid white; /* Optional: adds a white border around logo */
+}
+
+.card {
+    position: relative;
+    overflow: hidden; /* Ensures content stays within card bounds */
+}
 
    .content {
      max-height: 80px; /* Limitar la altura del contenido */

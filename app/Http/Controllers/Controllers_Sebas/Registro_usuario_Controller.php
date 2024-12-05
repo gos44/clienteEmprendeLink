@@ -39,6 +39,7 @@ class Registro_usuario_Controller extends Controller
 
         try {
 
+    
             // Preparar datos para enviar a la API
             $data = [
                 'name' => $validated['name'],
@@ -47,7 +48,7 @@ class Registro_usuario_Controller extends Controller
                 'password' => $validated['password'],
                 'password_confirmation' => $validated['password'],
                 'phone' => $validated['phone'],
-                'image' => $validated['image'], 
+                'image' => $validated['image'], // Enviar la URL de Cloudinary
                 'email' => $validated['email'],
                 'location' => $validated['location'],
                 'number' => $validated['number'],
