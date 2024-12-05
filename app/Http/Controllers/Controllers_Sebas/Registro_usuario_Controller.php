@@ -21,21 +21,21 @@ class Registro_usuario_Controller extends Controller
     /**
      * Almacena los datos del nuevo usuario y los envía a la API.
      */
-    // public function store(Request $request)
-    // {
-    //     // Validación de los datos del formulario
-    //     $validated = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'lastname' => 'required|string|max:255',
-    //         'birth_date' => 'required|date',
-    //         'password' => 'required|confirmed|min:8', // Confirmación de contraseña
-    //         'phone' => 'required|string|max:20',
-    //         'image' =>  'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    //         'email' => 'required|string|email|max:255|unique:users',
-    //         'location' => 'required|string|max:255',
-    //         'number' => 'required|string|max:255',
-    //         'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
-    //     ]);
+    public function store(Request $request)
+    {
+        // Validación de los datos del formulario
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'password' => 'required|confirmed|min:8', // Confirmación de contraseña
+            'phone' => 'required|string|max:20',
+            'image' =>  'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => 'required|string|email|max:255|unique:users',
+            'location' => 'required|string|max:255',
+            'number' => 'required|string|max:255',
+            'role' => 'required|in:entrepreneur,investor', // Asegura que el rol sea válido
+        ]);
 
     //     try {
          
@@ -73,4 +73,5 @@ class Registro_usuario_Controller extends Controller
     //             ->withInput();
     //     }
     // }
+}
 }
