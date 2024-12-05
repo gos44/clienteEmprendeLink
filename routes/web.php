@@ -245,6 +245,8 @@ Route::post('logout', [inicio_de_sesion_usuariocontroller::class, 'logout'])->na
 // Ruta protegida
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario');
+
 });
 
 

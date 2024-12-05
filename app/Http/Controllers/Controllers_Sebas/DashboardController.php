@@ -14,7 +14,7 @@ class DashboardController  extends Controller
     public function index()
     {
         // Lógica del dashboard
-        return view('dashboard.index');
+        return view('Views_Dayron.Home_Usuario');
     }
 
 }
