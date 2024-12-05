@@ -71,24 +71,105 @@
         <!-- Paginación con el estilo original -->
         <div class="pagination" id="pagination-container">
             @if($publicaciones->hasPages())
+                {{-- Botón Anterior --}}
                 <button class="page-btn" {{ $publicaciones->onFirstPage() ? 'disabled' : '' }} 
                         onclick="window.location.href='{{ $publicaciones->previousPageUrl() }}'">
                     &laquo;
                 </button>
                 
-                @for($i = 1; $i <= $publicaciones->lastPage(); $i++)
-                    <button class="page-btn {{ $publicaciones->currentPage() == $i ? 'active' : '' }}"
+                @php
+                    $start = 1;
+                    $end = $publicaciones->lastPage();
+                    $current = $publicaciones->currentPage();
+                    
+                    // Si hay más de 7 páginas, mostrar un rango dinámico
+                    if ($end > 7) {
+                        if ($current <= 4) {
+                            $start = 1;
+                            $end = 7;
+                        } elseif ($current >= $publicaciones->lastPage() - 3) {
+                            $start = $publicaciones->lastPage() - 6;
+                            $end = $publicaciones->lastPage();
+                        } else {
+                            $start = $current - 3;
+                            $end = $current + 3;
+                        }
+                    }
+                @endphp
+    
+                {{-- Primera página si no está en el rango --}}
+                @if($start > 1)
+                    <button class="page-btn" onclick="window.location.href='{{ $publicaciones->url(1) }}'">1</button>
+                    @if($start > 2)
+                        <span class="page-ellipsis">...</span>
+                    @endif
+                @endif
+    
+                {{-- Rango de páginas --}}
+                @for($i = $start; $i <= $end; $i++)
+                    <button class="page-btn {{ $current == $i ? 'active' : '' }}"
                             onclick="window.location.href='{{ $publicaciones->url($i) }}'">
                         {{ $i }}
                     </button>
                 @endfor
     
+                {{-- Última página si no está en el rango --}}
+                @if($end < $publicaciones->lastPage())
+                    @if($end < $publicaciones->lastPage() - 1)
+                        <span class="page-ellipsis">...</span>
+                    @endif
+                    <button class="page-btn" onclick="window.location.href='{{ $publicaciones->url($publicaciones->lastPage()) }}'">
+                        {{ $publicaciones->lastPage() }}
+                    </button>
+                @endif
+    
+                {{-- Botón Siguiente --}}
                 <button class="page-btn" {{ !$publicaciones->hasMorePages() ? 'disabled' : '' }}
                         onclick="window.location.href='{{ $publicaciones->nextPageUrl() }}'">
                     &raquo;
                 </button>
             @endif
         </div>
+    
+        <!-- ... (resto del contenido igual) ... -->
+    
+        <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+    
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+    
+        .page-btn:hover:not([disabled]) {
+            background: #f0f0f0;
+        }
+    
+        .page-btn.active {
+            background: #191919;
+            color: white;
+            border-color: #000000;
+        }
+    
+        .page-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    
+        .page-ellipsis {
+            padding: 0.5rem;
+        }
+        </style>
     </main>
     
     <script>
