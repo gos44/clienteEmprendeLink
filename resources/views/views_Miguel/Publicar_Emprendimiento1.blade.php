@@ -33,7 +33,7 @@
             <!-- Campo oculto para el ID del emprendedor -->
             {{-- <input type="hidden" name="entrepreneurs_id" value="{{ Auth::user()->id }}"> --}}
             {{-- <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}"> --}}
-            <input type="hidden" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
+            <input type="id" name="entrepreneurs_id" value="{{ Auth::check() ? Auth::user()->id : '' }}">
 
             <!-- Paso 1: Información básica -->
             <div class="form-section">
