@@ -12,6 +12,7 @@ class PerfilUsuarioController extends Controller
     {
         // Obtener el token de la sesión
         $token = session('token');
+        dd(session()->all());
 
         // Verifica si el token está disponible
         if (!$token) {
