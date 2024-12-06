@@ -16,7 +16,7 @@
         <div class="main-content">
 
 
-            <div class="profile-card">
+            {{-- <div class="profile-card">
                 <img src="{{ $emprendimiento['profile_image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $emprendimiento['name'] }}" class="profile-image">
                 <div class="profile-info">
                     <h2>{{ $emprendimiento['name'] }}</h2>
@@ -36,7 +36,7 @@
                     <a href="#"><i class="fas fa-link"></i> {{ $emprendimiento['website'] }}</a>
                     @endif
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Hero Section -->
             <section class="hero">
