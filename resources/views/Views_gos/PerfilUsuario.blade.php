@@ -53,13 +53,10 @@
                 <input type="tel" id="phone" value="{{ $user['phone'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
-                <label><i class="fas fa-id-card"></i> Número:</label>
+                <label><i class="fas fa-id-card"></i> Documento:</label>
                 <input type="text" id="number" value="{{ $user['number'] ?? 'No disponible' }}" readonly>
             </div>
-            <div class="info-group">
-                <label><i class="fas fa-id-card"></i> Documento:</label>
-                <input type="text" id="document_id" value="{{ $user['document_id'] ?? 'No disponible' }}" readonly>
-            </div>
+
         </div>
 
         <div class="profile-actions">
