@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Support\Facades\Http;
@@ -26,12 +25,9 @@ class PerfilUsuarioController extends Controller
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depurar el estado y el contenido de la respuesta
-            dd($response->status(), $response->json());
-
             // Si la respuesta es exitosa, mostrar perfil
             if ($response->successful()) {
-                $userData = $response->json()['user_data'];
+                $userData = $response->json(); // Obtén todos los datos del usuario
                 return view('perfilUser.index', ['user' => $userData]);
             }
 
