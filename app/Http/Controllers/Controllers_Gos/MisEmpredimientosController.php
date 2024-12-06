@@ -11,7 +11,7 @@ class MisEmpredimientosController extends Controller
     {
         try {
             // Hacer la solicitud GET a la API sin usar token
-            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/myentrepreneurships');
+            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
 
             // Si la respuesta es exitosa
             if ($response->successful()) {
