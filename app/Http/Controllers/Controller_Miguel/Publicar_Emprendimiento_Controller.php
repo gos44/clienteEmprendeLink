@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Controller_Miguel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
 
 class Publicar_Emprendimiento_Controller extends Controller
 {
@@ -93,9 +95,12 @@ class Publicar_Emprendimiento_Controller extends Controller
                     ->withInput();
             }
         } catch (\Exception $e) {
+            // Log del error completo
+            Log::error('Error interno en la publicación del emprendimiento: ' . $e->getMessage());
+
             return back()
                 ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
                 ->withInput();
         }
-    }
+}
 }
