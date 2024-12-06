@@ -19,6 +19,7 @@ class PerfilUsuarioController extends Controller
             return redirect()->route('login')->with('error', 'Debes iniciar sesión');
         }
 
+        
         try {
             // Intentar obtener los datos del usuario con el token
             $response = Http::withHeaders([
