@@ -10,38 +10,38 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener token de sesión de manera simple
+        // Obtener el token de la sesión
         $token = session('token');
-        dd($token); // Verifica si el token está disponible aquí
 
-        // Si no hay token, redirigir a login
+        // Verifica si el token está disponible
         if (!$token) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión');
         }
 
         try {
-            // Intentar obtener los datos del usuario con el token
+            // Realiza la solicitud a la API usando el token
             $response = Http::withToken($token)
                 ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Si la respuesta es exitosa, mostrar perfil
+            // Verifica el estado de la respuesta
             if ($response->successful()) {
+                // Extraer datos del usuario
                 $userData = $response->json()['user_data'];
 
-                // Verificar que los datos del usuario existan
-                if ($userData) {
-                    return view('perfilUser.index', ['user' => $userData]);
-                } else {
-                    return redirect()->route('login')->with('error', 'Datos de usuario no encontrados');
-                }
+                // Enviar los datos a la vista
+                return view('perfilUser.index', ['user' => $userData]);
             }
 
-            // Si la respuesta no es exitosa, redirigir a login
-            return redirect()->route('login')->with('error', 'Sesión expirada');
+            // Si la API devuelve un error (no autorizado, sesión expirada, etc.)
+            if ($response->status() === 401) {
+                return redirect()->route('login')->with('error', 'Sesión expirada o no autorizada.');
+            }
 
+            // Manejar otros estados de error
+            return redirect()->route('login')->with('error', 'Error inesperado al obtener datos del perfil.');
         } catch (\Exception $e) {
-            // En caso de error, redirigir a login con el error
-            return redirect()->route('login')->with('error', 'Error al validar sesión');
+            // En caso de error en la solicitud
+            return redirect()->route('login')->with('error', 'Error al conectar con el servidor.');
         }
     }
 }
