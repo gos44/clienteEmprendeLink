@@ -20,14 +20,7 @@ class PerfilUsuarioController extends Controller
                  null;
 
         if (!$token) {
-            return response()->json([
-                'error' => 'No se encontró token de autenticación',
-                'status' => 'unauthorized',
-                'debug' => [
-                    'session_data' => $request->session()->all(),
-                    'request_all' => $request->all()
-                ]
-            ], 401);
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión primero');
         }
 
         try {
@@ -39,38 +32,17 @@ class PerfilUsuarioController extends Controller
                 ])
                 ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depuración: Imprimir detalles completos de la respuesta
-            \Log::info('Respuesta de API de perfil:', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-                'headers' => $response->headers()
-            ]);
-
             if ($response->successful()) {
-                $userData = $response->json();
+                $userData = $response->json()['user_data'];
 
-                // Devolver JSON completo para inspección
-                return response()->json([
-                    'status' => 'success',
-                    'user_data' => $userData,
-                    'token_used' => substr($token, 0, 10) . '...' // Mostrar parte del token para verificación
-                ]);
+                // Renderizar la vista con los datos del usuario
+                return view('perfil', ['user' => $userData]);
             } else {
-                return response()->json([
-                    'error' => 'No se pudo obtener los datos del usuario',
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                    'token_debug' => substr($token, 0, 10) . '...'
-                ], $response->status());
+                return redirect()->route('login')->with('error', 'No se pudo obtener los datos del usuario');
             }
 
         } catch (\Exception $e) {
-            // Manejo de errores detallado
-            return response()->json([
-                'error' => 'Error al procesar la solicitud',
-                'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ], 500);
+            return redirect()->route('login')->with('error', 'Ocurrió un error al procesar la solicitud');
         }
     }
 }
