@@ -27,7 +27,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('guardarEmprendimiento') }}" enctype="multipart/form-data" id="emprendimiento-form">
+            <form class="form" action="{{ route('guardarEmprendimiento') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="entrepreneurs_id" value="{{ auth()->id() }}">
