@@ -190,8 +190,10 @@ Route::get('Editar_Emprendimiento', [Editar_Emprendimiento::class, 'index'])->na
 Route::get('Editar_Emprendimiento_2', [Editar_Emprendimiento_2::class, 'index'])->name('Editar_Emprendimiento_2.index');
 
 // Visitar-Emprendimiento -->
-Route::get('Visitar_Emprendimiento_Usuario', [Visitar_Emprendimiento_Usuario::class, 'index'])->name('Visitar_Emprendimiento_Usuario.index');
-Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2::class, 'index'])->name('Visitar_Emprendimiento_usuario_2.index');
+// En otro controlador o ruta
+    Route::get('Visitar_Emprendimiento_Usuario/{id}', [Visitar_Emprendimiento_Usuario::class, 'show'])
+        ->name('Visitar_Emprendimiento_Usuario.show');
+    Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2::class, 'index'])->name('Visitar_Emprendimiento_usuario_2.index');
 
 // Visitar-Emprendimiento - Inversor -->
 Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::class, 'index'])->name('Visitar_Emprendimiento_Inversor.index');
