@@ -15,6 +15,20 @@
         @if(!empty($emprendimiento))
         <div class="main-content">
 
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-background">
+                    <img src="{{ $emprendimiento['background'] ?? 'images/FONDO-VINOS.png' }}" alt="Fondo del emprendimiento">
+                </div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="hero-main">
+                        <img src="{{ $emprendimiento['logo_path'] ?? 'images/LOGO-VINOS.png' }}" alt="Logo del emprendimiento" class="hero-logo">
+                        <h1>{{ $emprendimiento['name'] ?? 'Nombre no disponible' }}</h1>
+                        <p class="hero-quote">"{{ $emprendimiento['slogan'] ?? 'Frase no disponible' }}"</p>
+                    </div>
+                </div>
+            </section>
 
             {{-- <div class="profile-card">
                 <img src="{{ $emprendimiento['profile_image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $emprendimiento['name'] }}" class="profile-image">
@@ -37,21 +51,6 @@
                     @endif
                 </div>
             </div> --}}
-
-            <!-- Hero Section -->
-            <section class="hero">
-                <div class="hero-background">
-                    <img src="{{ $emprendimiento['background'] ?? 'images/FONDO-VINOS.png' }}" alt="Fondo del emprendimiento">
-                </div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-main">
-                        <img src="{{ $emprendimiento['logo_path'] ?? 'images/LOGO-VINOS.png' }}" alt="Logo del emprendimiento" class="hero-logo">
-                        <h1>{{ $emprendimiento['name'] ?? 'Nombre no disponible' }}</h1>
-                        <p class="hero-quote">"{{ $emprendimiento['slogan'] ?? 'Frase no disponible' }}"</p>
-                    </div>
-                </div>
-            </section>
 
             <div class="content">
                 <!-- Productos Section -->
