@@ -43,30 +43,23 @@ class Publicar_Emprendimiento_Controller extends Controller
             'entrepreneurs_id' => $userId,
         ];
 
-        // Construir solicitud multipart
+        // Preparar solicitud multipart
         $httpRequest = Http::asMultipart();
 
-        // Adjuntar archivos con sus contenidos
-        $httpRequest->attach(
-            'logo_path',
-            file_get_contents($request->file('logo_path')->getRealPath()),
-            $request->file('logo_path')->getClientOriginalName()
-        );
+        // Procesar y adjuntar logo
+        if ($request->hasFile('logo_path')) {
+            $this->attachFile($httpRequest, 'logo_path', $request->file('logo_path'));
+        }
+
+        // Procesar y adjuntar imagen de fondo
+        if ($request->hasFile('background')) {
+            $this->attachFile($httpRequest, 'background', $request->file('background'));
+        }
         
-        $httpRequest->attach(
-            'background',
-            file_get_contents($request->file('background')->getRealPath()),
-            $request->file('background')->getClientOriginalName()
-        );
-        
-        // Adjuntar imágenes de productos
+        // Procesar y adjuntar imágenes de productos
         if ($request->hasFile('product_images')) {
             foreach ($request->file('product_images') as $index => $image) {
-                $httpRequest->attach(
-                    "product_images[$index]",
-                    file_get_contents($image->getRealPath()),
-                    $image->getClientOriginalName()
-                );
+                $this->attachFile($httpRequest, "product_images[$index]", $image);
             }
         }
 
@@ -100,5 +93,21 @@ class Publicar_Emprendimiento_Controller extends Controller
             ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
             ->withInput();
     }
+}
+
+/**
+ * Método auxiliar para adjuntar archivos a la solicitud HTTP
+ * 
+ * @param \Illuminate\Http\Client\PendingRequest $httpRequest
+ * @param string $key
+ * @param \Illuminate\Http\UploadedFile $file
+ */
+private function attachFile($httpRequest, $key, $file)
+{
+    $httpRequest->attach(
+        $key,
+        file_get_contents($file->getRealPath()),
+        $file->getClientOriginalName()
+    );
 }
 }
