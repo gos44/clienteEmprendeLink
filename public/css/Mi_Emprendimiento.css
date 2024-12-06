@@ -5,7 +5,6 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
- 
 }
 
 html, body {
@@ -15,7 +14,7 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding-top: 50px; /* Ajusta según la altura de tu navbar */
+    padding-top: 50px;
 }
 
 /* Contenido principal */
@@ -52,7 +51,7 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.6); /* Darkens the background image */
+    filter: brightness(0.6);
 }
 
 .hero-overlay {
@@ -61,9 +60,8 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2;
-    /* border-radius: 50px; */
 }
 
 .hero-content {
@@ -107,224 +105,33 @@ html, body {
     margin-top: -20px;
 }
 
-.hero-buttons .btn {
-    padding: 12px 30px;
-    font-size: 1rem;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* .btn-primary {
-    background-color: black;
-    color: #fff;
-    border: none;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-} */
-
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 80vh;
-    }
-
-    .hero-content {
-        padding: 20px;
-    }
-
-    .hero-logo {
-        width: 120px;
-        height: 120px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero-quote {
-        font-size: 1rem;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
-}
-
 .hero-buttons .btn-primary {
-    background-color: black; /* Fondo negro */
-    border: 2px solid white; /* Borde blanco */
-    color: #fff; /* Letras blancas */
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s; /* Suaviza la transición */
+    background-color: black;
+    border: 2px solid white;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
 }
 
 .hero-buttons .btn-secondary {
-    background-color: white; /* Fondo blanco */
-    color: black; /* Letras negras */
-    border: 2px solid black; /* Borde negro */
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s; /* Suaviza la transición */
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
 }
 
-/* Efecto hover combinado */
 .hero-buttons .btn-primary:hover {
-    border: 2px solid white; /* Borde blanco */
-    background-color: white; /* Cambia a fondo blanco */
-    color: black; /* Cambia a letras negras */
+    border: 2px solid white;
+    background-color: white;
+    color: black;
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hero-buttons .btn-secondary:hover {
-    background-color: black; /* Cambia a fondo negro */
-    color: #fff; /* Cambia a letras blancas */
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 100vh;
-    }
-
-    .hero-content {
-        padding: 30px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero-quote {
-        font-size: 1rem;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-}
-
-/* .btn-primary {
-    background-color: #fff;
-    color: black;
-}
-
-.btn-secondary {
-    background-color: transparent;
+    background-color: black;
     color: #fff;
-    border: 2px solid #fff;
-}
-
-.btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-} */
-
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 100vh;
-    }
-
-    .hero-content {
-        padding: 30px;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-quote {
-        font-size: 1.2rem;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-}
-.profile {
-    background-color: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-}
-
-.profile-card {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-top: 10px;
-}
-
-.profile-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid black;
-}
-
-.profile-info h2 {
-    color: black;
-    margin-bottom: 15px;
-}
-
-.profile-info p {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.profile-info i {
-    color: black;
-    width: 20px;
-}
-
-.profile-info a {
-    color: #8b4513;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.profile-info a:hover {
-    color: #a0522d;
-}
-
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 400px;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .profile-card {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-info p {
-        justify-content: center;
-    }
 }
 
 /* Contenido principal con productos y descripción */
@@ -338,6 +145,9 @@ html, body {
 /* Productos */
 .products {
     flex: 2;
+}
+
+.product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
@@ -398,19 +208,11 @@ html, body {
         height: 300px;
     }
 
-    .hero h2 {
-        font-size: 2em;
-    }
-
-    .hero p {
-        font-size: 1em;
-    }
-
     .content {
         flex-direction: column;
     }
 
-    .products {
+    .product-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
@@ -432,57 +234,4 @@ html, body {
         padding: 8px 16px;
         font-size: 0.9em;
     }
-
-    .profile-card {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-card img {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
 }
-
-.header-right a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #000;
-    display: flex;
-    align-items: center;
-}
-
-.header-right i {
-    margin-right: 10px; 
-}
-
-.header-right {
-    display: flex;
-    align-items: flex-start; 
-}
-
-
-    
-    .burger {
-    display: none; /* Escondido por defecto */
-    }
-    
-    .logo-dark {
-        height: 100px;
-    }
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
