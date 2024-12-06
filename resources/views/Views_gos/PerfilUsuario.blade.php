@@ -62,7 +62,6 @@
             </div>
         </div>
 
-
         <div class="profile-actions">
             <a href="{{ route('perfilUser.index') }}">
                 <button class="btn-primary">Editar perfil</button>
