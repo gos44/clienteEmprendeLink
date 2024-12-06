@@ -99,3 +99,6 @@
     </div>
 </body>
 </html>
+ <script>
+    console.log(data)
+ </script>
