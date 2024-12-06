@@ -26,12 +26,19 @@ class PerfilUsuarioController extends Controller
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depurar el estado y el contenido de la respuesta
-            dd($response->status(), $response->json());
+            // Flag para decidir si ejecutar dd()
+            $shouldDebug = true;  // Cambia esto a true para que dd() se ejecute
 
-            // Si la respuesta es exitosa, mostrar perfil
+            // Si el flag es true, hacemos un dd() para depuración
+            if ($shouldDebug) {
+                dd($response->status(), $response->json());
+            }
+
+            // Verifica si la respuesta es exitosa
             if ($response->successful()) {
                 $userData = $response->json()['user_data'];
+
+                // Enviar los datos a la vista
                 return view('perfilUser.index', ['user' => $userData]);
             }
 
