@@ -1,54 +1,162 @@
 <?php
 
+namespace App\Http\Controllers;
 
-namespace App\Http\Controllers\Controllers_Gos;
-
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
-class PerfilUsuarioController extends Controller
+class PerfilController extends Controller
 {
-  // Obtener el token de sesión
-        public function index(Request $request)
-        {
-            // Obtener el token de sesión
-            $token = session('token') ? trim(session('token')) : null;
+    /**
+     * Mostrar el perfil del usuario
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function perfil(Request $request)
+    {
+        // Verificar si hay token de autenticación
+        if (!$request->session()->has('token')) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+        }
 
-            // Si no hay token, redirigir al login
-            if (!$token) {
-                return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+        $token = $request->session()->get('token');
+
+        try {
+            // Intentar obtener los datos del usuario con el token
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+            // Depurar el estado y el contenido de la respuesta
+            dd($response->status(), $response->json());
+
+            // Si la respuesta es exitosa, mostrar perfil
+            if ($response->successful()) {
+                $userData = $response->json()['user_data'];
+                return view('perfilUser.index', ['user' => $userData]);
             }
 
-            try {
-                // Intentar obtener los datos del usuario con el token
-                $response = Http::withHeaders([
-                    'Authorization' => 'Bearer ' . $token,
-                    'Accept' => 'application/json',
-                ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+            // Si falla, redirigir a login
+            return redirect()->route('login')->with('error', 'Sesión expirada');
 
-                // Registrar el estado de la respuesta y el contenido para depuración
-                \Log::info('Estado de la respuesta:', ['status' => $response->status()]);
-                \Log::info('Contenido de la respuesta:', ['body' => $response->body()]);
+        } catch (\Exception $e) {
+            // Registrar el error para depuración
+            Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
 
-                // Si la respuesta es exitosa, obtener los datos del usuario
-                if ($response->successful()) {
-                    $userData = $response->json()['user_data'];
-
-                    // Registrar los datos del usuario para ver si se están obteniendo correctamente
-                    \Log::info('Datos del usuario:', ['user' => $userData]);
-
-                    // Enviar los datos a la vista
-                    return view('perfilUser.index', ['user' => $userData]);
-                }
-
-                // Si la respuesta no es exitosa, redirigir al login
-                return redirect()->route('login')->with('error', 'Sesión expirada');
-
-            } catch (\Exception $e) {
-                // En caso de error, registrar el error y redirigir al login
-                \Log::error('Error al obtener datos del usuario:', ['error' => $e->getMessage()]);
-                return redirect()->route('login')->with('error', 'Error al validar sesión');
-            }
+            // En caso de error, redirigir a login
+            return redirect()->route('login')->with('error', 'Error al validar sesión');
         }
     }
+
+    /**
+     * Cerrar sesión del usuario
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        // Eliminar token de la sesión
+        $request->session()->forget('token');
+
+        // Redirigir al login
+        return redirect()->route('login')->with('success', 'Sesión cerrada correctamente');
+    }
+
+    /**
+     * Mostrar formulario de edición de perfil
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editarPerfil(Request $request)
+    {
+        // Verificar si hay token de autenticación
+        if (!$request->session()->has('token')) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+        }
+
+        $token = $request->session()->get('token');
+
+        try {
+            // Intentar obtener los datos del usuario con el token
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+            // Si la respuesta es exitosa, mostrar formulario de edición
+            if ($response->successful()) {
+                $userData = $response->json()['user_data'];
+                return view('perfilUser.editar', ['user' => $userData]);
+            }
+
+            // Si falla, redirigir a login
+            return redirect()->route('login')->with('error', 'Sesión expirada');
+
+        } catch (\Exception $e) {
+            // Registrar el error para depuración
+            Log::error('Error al obtener datos para edición de perfil: ' . $e->getMessage());
+
+            // En caso de error, redirigir a login
+            return redirect()->route('login')->with('error', 'Error al validar sesión');
+        }
+    }
+
+    /**
+     * Actualizar datos de perfil
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function actualizarPerfil(Request $request)
+    {
+        // Validar datos del formulario
+        $request->validate([
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+            'celular' => 'required|string|max:20',
+            // Agregar más validaciones según sea necesario
+        ]);
+
+        // Verificar si hay token de autenticación
+        if (!$request->session()->has('token')) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+        }
+
+        $token = $request->session()->get('token');
+
+        try {
+            // Enviar datos actualizados a la API
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/actualizar-perfil', [
+                'nombres' => $request->input('nombres'),
+                'apellidos' => $request->input('apellidos'),
+                'fecha_nacimiento' => $request->input('fecha_nacimiento'),
+                'celular' => $request->input('celular'),
+                // Agregar más campos según sea necesario
+            ]);
+
+            // Si la actualización es exitosa
+            if ($response->successful()) {
+                return redirect()->route('perfil')->with('success', 'Perfil actualizado correctamente');
+            }
+
+            // Si falla, mostrar error
+            return redirect()->back()->with('error', 'No se pudo actualizar el perfil');
+
+        } catch (\Exception $e) {
+            // Registrar el error para depuración
+            Log::error('Error al actualizar perfil: ' . $e->getMessage());
+
+            // En caso de error, redirigir al formulario de edición
+            return redirect()->back()->with('error', 'Error al actualizar el perfil');
+        }
+    }
+}
