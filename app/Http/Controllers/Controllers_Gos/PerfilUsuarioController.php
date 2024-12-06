@@ -10,33 +10,32 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener token de sesión
-        $token = session('token') ? trim(session('token')) : null;
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
-        // Si no hay token, redirigir al login
         if (!$token) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión.');
+            // Si no hay token, evitar el bucle de redirección y mostrar un mensaje simple
+            return response()->view('errors.session_expired', [], 401);
         }
 
         try {
-            // Hacer la solicitud a la API para obtener los datos del usuario
+            // Hacer la solicitud para obtener los datos del usuario
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Si la respuesta es exitosa, obtener los datos del usuario
             if ($response->successful()) {
+                // Extraer datos del usuario y enviarlos a la vista
                 $userData = $response->json();
-                return view('perfilUser.index', ['user' => $userData]); // Pasa los datos a la vista
+                return view('perfilUser.index', ['user' => $userData]);
+            } else {
+                // Si la API devuelve error (token inválido, etc.)
+                return response()->view('errors.session_expired', [], 401);
             }
-
-            // Si falla, redirigir al login
-            return redirect()->route('login')->with('error', 'Sesión expirada o inválida.');
-
         } catch (\Exception $e) {
-            // Manejar errores
-            return redirect()->route('login')->with('error', 'Error al validar sesión: ' . $e->getMessage());
+            // Manejar cualquier error inesperado
+            return response()->view('errors.generic_error', ['message' => $e->getMessage()], 500);
         }
     }
 }
