@@ -23,6 +23,7 @@ class PerfilUsuarioController extends Controller
             return redirect()->route('login')->with('error', 'Debes iniciar sesión primero');
         }
 
+        
         try {
             // Hacer la solicitud a la API con el token
             $response = Http::withToken($token)
@@ -36,7 +37,7 @@ class PerfilUsuarioController extends Controller
                 $userData = $response->json()['user_data'];
 
                 // Renderizar la vista con los datos del usuario
-                return view('perfil', ['user' => $userData]);
+                return view('perfilUser.index', ['user' => $userData]);
             } else {
                 return redirect()->route('login')->with('error', 'No se pudo obtener los datos del usuario');
             }
