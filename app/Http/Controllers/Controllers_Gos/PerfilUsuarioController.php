@@ -39,17 +39,28 @@ class PerfilUsuarioController extends Controller
                 ])
                 ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Verificar si la respuesta es exitosa
+            // Depuración: Imprimir detalles completos de la respuesta
+            \Log::info('Respuesta de API de perfil:', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+                'headers' => $response->headers()
+            ]);
+
             if ($response->successful()) {
                 $userData = $response->json();
 
-                // Pasar los datos a la vista
-                return view('perfil.index', compact('userData')); // Cambia 'perfil.index' al nombre de tu vista
+                // Devolver JSON completo para inspección
+                return response()->json([
+                    'status' => 'success',
+                    'user_data' => $userData,
+                    'token_used' => substr($token, 0, 10) . '...' // Mostrar parte del token para verificación
+                ]);
             } else {
                 return response()->json([
                     'error' => 'No se pudo obtener los datos del usuario',
                     'status' => $response->status(),
                     'body' => $response->body(),
+                    'token_debug' => substr($token, 0, 10) . '...'
                 ], $response->status());
             }
 
