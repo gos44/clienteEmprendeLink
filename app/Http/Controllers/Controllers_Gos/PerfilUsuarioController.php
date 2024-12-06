@@ -15,7 +15,7 @@ class PerfilUsuarioController extends Controller
 
         if (!$token) {
             // Si no hay token, evitar el bucle de redirección y mostrar un mensaje simple
-            return response()->view('Home_Usuario.index', [], 401);
+            return response()->view('login', [], 401);
         }
 
         try {
