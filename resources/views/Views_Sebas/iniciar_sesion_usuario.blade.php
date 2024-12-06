@@ -54,10 +54,10 @@
                 <option value="investor">Inversor</option>
             </select>
         </div>
-
+{{-- 
         <div class="flex-row">
             <a class="span" href="{{ route('verificar_identidad_usuario') }}">¿Olvidaste tu contraseña?</a>
-        </div>
+        </div> --}}
 
         <button type="submit" class="button-submit">Iniciar sesión</button>
 
