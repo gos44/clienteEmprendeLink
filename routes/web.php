@@ -262,7 +262,10 @@ Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::
 
 
 Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
-
+Route::get('/perfil', [PerfilUsuarioController::class, 'perfil'])->name('perfil');
+Route::get('/logout', [PerfilUsuarioController::class, 'logout'])->name('logout');
+Route::get('/editar-perfil', [PerfilUsuarioController::class, 'editarPerfil'])->name('editar.perfil');
+Route::put('/actualizar-perfil', [PerfilUsuarioController::class, 'actualizarPerfil'])->name('actualizar.perfil');
 
 
 
