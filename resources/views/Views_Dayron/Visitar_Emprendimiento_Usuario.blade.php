@@ -16,20 +16,28 @@
         <div class="main-content">
 
 
-            <div class="profile">
-                <div class="profile-card">
-                    <img src="{{ $emprendimiento['profile_image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $emprendimiento['name'] }}" class="profile-image">
-                    <div class="profile-info">
-                        <h2>{{ $emprendimiento['name'] }}</h2>
-                        <p><i class="fas fa-envelope"></i> {{ $emprendimiento['email'] }}</p>
-                        <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento['address'] }}</p>
-                        <p><i class="fas fa-phone"></i> {{ $emprendimiento['phone'] }}</p>
-                        <p><i class="fas fa-store"></i> {{ $emprendimiento['business_name'] }}</p>
-                        <a href="#"><i class="fas fa-link"></i> {{ $emprendimiento['website'] }}</a>
-                    </div>
+            <div class="profile-card">
+                <img src="{{ $emprendimiento['profile_image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $emprendimiento['name'] }}" class="profile-image">
+                <div class="profile-info">
+                    <h2>{{ $emprendimiento['name'] }}</h2>
+                    @if(isset($emprendimiento['email']))
+                    <p><i class="fas fa-envelope"></i> {{ $emprendimiento['email'] }}</p>
+                    @endif
+                    @if(isset($emprendimiento['address']))
+                    <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento['address'] }}</p>
+                    @endif
+                    @if(isset($emprendimiento['phone']))
+                    <p><i class="fas fa-phone"></i> {{ $emprendimiento['phone'] }}</p>
+                    @endif
+                    @if(isset($emprendimiento['business_name']))
+                    <p><i class="fas fa-store"></i> {{ $emprendimiento['business_name'] }}</p>
+                    @endif
+                    @if(isset($emprendimiento['website']))
+                    <a href="#"><i class="fas fa-link"></i> {{ $emprendimiento['website'] }}</a>
+                    @endif
                 </div>
             </div>
-            
+
             <!-- Hero Section -->
             <section class="hero">
                 <div class="hero-background">
