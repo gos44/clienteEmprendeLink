@@ -14,7 +14,9 @@ class MisEmpredimientosController extends Controller
             // Verificar que el usuario esté autenticado
             $user = Auth::user();
 
+            // Elimina esta parte si deseas que la vista funcione sin estar autenticado
             if (!$user) {
+                // Aquí ya no redirigimos a login, pero si es necesario puedes agregar un mensaje de advertencia
                 return redirect()->route('login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
             }
 
@@ -25,7 +27,7 @@ class MisEmpredimientosController extends Controller
             // Si la respuesta es exitosa
             if ($response->successful()) {
                 // Obtener los datos de la respuesta
-                $connections = $response->json()['data'] ?? [];
+                $connections = $response->json()['data'] ?? []; // Asegúrate de que la clave 'data' exista
             } else {
                 // En caso de error en la API, inicializar un arreglo vacío
                 $connections = [];
