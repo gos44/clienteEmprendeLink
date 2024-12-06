@@ -81,7 +81,7 @@
 
             <!-- Reseñas Section -->
             <div class="hero-buttons">
-                <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+                <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
             </div>
         </div>
         @else

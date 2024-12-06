@@ -341,7 +341,8 @@ Route::get('resena2', [Resena2::class, 'Resena2'])->name('resena2');
 Route::get('resena3', [Resena3::class, 'Resena3'])->name('resena3');
 Route::get('resena4', [Resena4::class, 'Resena4'])->name('resena4');
 //inver
-Route::get('resenaInver', [ResenaInver::class, 'ResenaInver'])->name('resenaInver');
+Route::get('resenaInver', [ResenaInver::class, 'index'])->name('resenaInver');
+Route::post('resenaInver/store', [ResenaInver::class, 'store'])->name('resenaInver.store');
 
 //notificaciones
 
