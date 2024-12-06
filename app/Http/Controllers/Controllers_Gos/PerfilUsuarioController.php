@@ -26,7 +26,7 @@ class PerfilUsuarioController extends Controller
             // Si la respuesta es exitosa, mostrar perfil
             if ($response->successful()) {
                 $userData = $response->json()['user_data'];
-                return view('perfil', ['user' => $userData]);
+                return view('perfilUser.index', ['user' => $userData]);
             }
 
             // Si falla, redirigir a login
