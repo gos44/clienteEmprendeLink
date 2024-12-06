@@ -47,30 +47,29 @@ class Publicar_Emprendimiento_Controller extends Controller
  // Iniciar solicitud multipart
  $httpRequest = Http::asMultipart();
 
- // Procesar logo
- if ($request->hasFile('logo_path')) {
-     $logoFile = $request->file('logo_path');
-     $httpRequest->attach('logo_path', file_get_contents($logoFile), $logoFile->getClientOriginalName(), [
-         'Content-Type' => $logoFile->getMimeType()
-     ]);
- }
+$httpRequest->attach(
+    'logo_path',
+    file_get_contents($request->file('logo_path')->getRealPath()),
+    $request->file('logo_path')->getClientOriginalName()
+);
 
- // Procesar imagen de fondo
- if ($request->hasFile('background')) {
-     $backgroundFile = $request->file('background');
-     $httpRequest->attach('background', file_get_contents($backgroundFile), $backgroundFile->getClientOriginalName(), [
-         'Content-Type' => $backgroundFile->getMimeType()
-     ]);
- }
+$httpRequest->attach(
+    'background',
+    file_get_contents($request->file('background')->getRealPath()),
+    $request->file('background')->getClientOriginalName()
+);
 
- // Procesar imágenes de productos
- if ($request->hasFile('product_images')) {
-     foreach ($request->file('product_images') as $index => $productImage) {
-         $httpRequest->attach("product_images[$index]", file_get_contents($productImage), $productImage->getClientOriginalName(), [
-             'Content-Type' => $productImage->getMimeType()
-         ]);
-     }
- }
+// Adjuntar imágenes de productos
+if ($request->hasFile('product_images')) {
+    foreach ($request->file('product_images') as $index => $image) {
+        $httpRequest->attach(
+            "product_images[$index]",
+            file_get_contents($image->getRealPath()),
+            $image->getClientOriginalName()
+        );
+    }
+}
+
 
  // Adjuntar datos adicionales
  foreach ($data as $key => $value) {
