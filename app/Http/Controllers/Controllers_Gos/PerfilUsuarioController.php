@@ -30,7 +30,7 @@ class PerfilUsuarioController extends Controller
             if ($response->successful()) {
                 // Si la respuesta es exitosa, obtener los datos del usuario
                 $userData = $response->json();
-                return view('perfilUser.index', ['user' => $userData]);
+                return view('Views_gos.PerfilUsuario', ['user' => $userData]);
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error con código 401
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
