@@ -159,11 +159,7 @@
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="{{route('listaUsuarios.index')}}">
-                                    <i class="fas fa-users me-2"></i> Usuarios
-                                </a>
-                            </li>
+                           
                         </ul>
                     </li>
 
@@ -204,11 +200,7 @@
                             <i class="fas fa-plus-circle me-2"></i> Publicar Emprendimiento
                         </a>
                     </li>
-                    <li class="nav-item mobile-only">
-                        <a class="nav-link" href="{{ route('listaUsuarios.index') }}">
-                            <i class="fas fa-users me-2"></i> Lista de Usuarios
-                        </a>
-                    </li>
+                    
 
                     <!-- Ayuda -->
                     <li class="nav-item">
