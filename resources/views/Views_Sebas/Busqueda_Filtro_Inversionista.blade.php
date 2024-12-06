@@ -54,10 +54,10 @@
                          <img src="{{ $publicacion['logo'] }}" 
                               alt="Logo de emprendimiento" class="logo-img">
                          <h3>{{ $publicacion['name'] }}</h3>
-                         <p>"{{ $publicacion['general_description'] }}"</p>
+                         <p>"{{ $publicacion['slogan'] }}"</p>
                          <button>
-                             <a href="{{ route('Visitar_Emprendimiento_Inversor.index') }}">Visitar</a>
-                         </button>
+                          <a href="{{ route('Visitar_Emprendimiento_Inversor.show', ['id' => $publicacion['id']]) }}">Visitar</a>
+                      </button>
                      </div>
                  </div>
                  @endforeach

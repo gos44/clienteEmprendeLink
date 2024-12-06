@@ -44,20 +44,18 @@
             <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
         </div>
 
-        <div class="flex-column">
             <label>Seleccione su Rol</label>
-        </div>
-        <div class="inputForm">
+
             <select name="role" class="rol-selector" required>
                 <option value="">Seleccione su rol</option>
                 <option value="entrepreneur">Emprendedor</option>
                 <option value="investor">Inversor</option>
             </select>
-        </div>
 
+{{--
         <div class="flex-row">
             <a class="span" href="{{ route('verificar_identidad_usuario') }}">¿Olvidaste tu contraseña?</a>
-        </div>
+        </div> --}}
 
         <button type="submit" class="button-submit">Iniciar sesión</button>
 

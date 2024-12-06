@@ -196,8 +196,9 @@ Route::get('Editar_Emprendimiento_2', [Editar_Emprendimiento_2::class, 'index'])
     Route::get('Visitar_Emprendimiento_usuario_2', [Visitar_Emprendimiento_usuario_2::class, 'index'])->name('Visitar_Emprendimiento_usuario_2.index');
 
 // Visitar-Emprendimiento - Inversor -->
-Route::get('Visitar_Emprendimiento_Inversor', [Visitar_Emprendimiento_Inversor::class, 'index'])->name('Visitar_Emprendimiento_Inversor.index');
-Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');
+Route::get('Visitar_Emprendimiento_Inversor/{id}', [Visitar_Emprendimiento_Inversor::class, 'show'])
+    ->name('Visitar_Emprendimiento_Inversor.show');
+    Route::get('Visitar_Emprendimiento_Inversor_2', [Visitar_Emprendimiento_Inversor_2::class, 'index'])->name('Visitar_Emprendimiento_Inversor_2.index');
 
 
 
