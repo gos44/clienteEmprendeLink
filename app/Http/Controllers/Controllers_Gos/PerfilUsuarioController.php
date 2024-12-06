@@ -26,14 +26,20 @@ class PerfilUsuarioController extends Controller
             // Si la respuesta es exitosa, mostrar perfil
             if ($response->successful()) {
                 $userData = $response->json()['user_data'];
-                return view('perfilUser.index', ['user' => $userData]);
+
+                // Verificar que los datos del usuario existan
+                if ($userData) {
+                    return view('perfilUser.index', ['user' => $userData]);
+                } else {
+                    return redirect()->route('login')->with('error', 'Datos de usuario no encontrados');
+                }
             }
 
-            // Si falla, redirigir a login
+            // Si la respuesta no es exitosa, redirigir a login
             return redirect()->route('login')->with('error', 'Sesión expirada');
 
         } catch (\Exception $e) {
-            // En caso de error, redirigir a login
+            // En caso de error, redirigir a login con el error
             return redirect()->route('login')->with('error', 'Error al validar sesión');
         }
     }
