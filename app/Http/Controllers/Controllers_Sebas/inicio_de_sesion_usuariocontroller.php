@@ -45,7 +45,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
                 // Almacenar el token en la sesión
                 session(['token' => $token]);
-
+                dd(session('token'));
                 // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
                 $role = $validated['role']; // Obtenemos el rol del usuario
 
