@@ -50,25 +50,22 @@ class Publicar_Emprendimiento_Controller extends Controller
         $httpRequest->attach(
             'logo_path',
             file_get_contents($request->file('logo_path')->getRealPath()),
-            $request->file('logo_path')->getClientOriginalName(),
-            ['contents' => file_get_contents($request->file('logo_path')->getRealPath())]
+            $request->file('logo_path')->getClientOriginalName()
         );
-
+        
         $httpRequest->attach(
             'background',
             file_get_contents($request->file('background')->getRealPath()),
-            $request->file('background')->getClientOriginalName(),
-            ['contents' => file_get_contents($request->file('background')->getRealPath())]
+            $request->file('background')->getClientOriginalName()
         );
-
+        
         // Adjuntar imágenes de productos
         if ($request->hasFile('product_images')) {
             foreach ($request->file('product_images') as $index => $image) {
                 $httpRequest->attach(
                     "product_images[$index]",
                     file_get_contents($image->getRealPath()),
-                    $image->getClientOriginalName(),
-                    ['contents' => file_get_contents($image->getRealPath())]
+                    $image->getClientOriginalName()
                 );
             }
         }
