@@ -159,11 +159,7 @@
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="{{('listaInver')}}">
-                                    <i class="fas fa-users me-2"></i> Lista de Usuarios
-                                </a>
-                            </li>
+                            
                         </ul>
                     </li>
                     <li class="nav-item mobile-only me-2">
@@ -171,11 +167,7 @@
                             <i class="fas fa-building me-2"></i> Emprendimientos
                         </a>
                     </li>
-                    <li class="nav-item mobile-only me-2">
-                        <a class="nav-link" href="{{('listaInver')}}">
-                            <i class="fas fa-users me-2"></i> Lista de Usuarios
-                        </a>
-                    </li>
+                    
 
                   
 
