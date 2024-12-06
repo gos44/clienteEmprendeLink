@@ -29,11 +29,11 @@
 
         <div class="profile-info">
             <div class="info-group">
-                <label><i class="fas fa-user"></i> Nombre:</label>
+                <label><i class="fas fa-user"></i> Nombres:</label>
                 <input type="text" id="name" value="{{ $user['name'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
-                <label><i class="fas fa-user"></i> Apellido:</label>
+                <label><i class="fas fa-user"></i> Apellidos:</label>
                 <input type="text" id="lastname" value="{{ $user['lastname'] ?? 'No disponible' }}" readonly>
             </div>
             <div class="info-group">
@@ -61,6 +61,7 @@
                 <input type="text" id="document_id" value="{{ $user['document_id'] ?? 'No disponible' }}" readonly>
             </div>
         </div>
+
 
         <div class="profile-actions">
             <a href="{{ route('perfilUser.index') }}">
