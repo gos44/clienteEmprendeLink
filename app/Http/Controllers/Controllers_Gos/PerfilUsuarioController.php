@@ -33,10 +33,7 @@ class PerfilUsuarioController extends Controller
 
 
 
-                dd($userData);  // Esto detendrá la ejecución y mostrará los datos en el navegador
 
-
-                
                 return view('Views_gos.PerfilUsuario', ['user' => $userData]);
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error con código 401

@@ -1,6 +1,6 @@
 @extends('layouts.Nav-Bar_Usuario')
+@extends('layouts.Footer_Usuario')
 
-@section('content')
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,6 +72,4 @@
         </div>
     </main>
 </body>
-@endsection
-
-@extends('layouts.Footer_Usuario')
+</html>
