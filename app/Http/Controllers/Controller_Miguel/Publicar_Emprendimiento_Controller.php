@@ -22,8 +22,8 @@ class Publicar_Emprendimiento_Controller extends Controller
         'logo_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'background' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'product_images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'name_products' => 'required|string',
-        'product_descriptions' => 'required|string',
+        'name_products' => 'required|array',
+        'product_descriptions' => 'required|array',
         'general_description' => 'required|string|max:2000',
     ]);
 
@@ -35,8 +35,8 @@ class Publicar_Emprendimiento_Controller extends Controller
             'name' => $request->input('name'),
             'slogan' => $request->input('slogan'),
             'category' => $request->input('category'),
-            'name_products' => explode(',', $request->input('name_products')),
-            'product_descriptions' => explode(',', $request->input('product_descriptions')),
+           'name_products' => $request->input('name_products'),
+            'product_descriptions' => $request->input('product_descriptions'),
             'general_description' => $request->input('general_description'),
             'entrepreneurs_id' => $userId, // Asigna el ID del usuario autenticado
         ];
