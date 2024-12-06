@@ -10,15 +10,20 @@ class MisEmpredimientosController extends Controller
 {
     public function index()
     {
+        // Depurar si el usuario está autenticado
+        dd(Auth::user());  // Veremos si tenemos un usuario válido
+
         try {
             // Verificar que el usuario esté autenticado
             $user = Auth::user();
 
-            // Elimina esta parte si deseas que la vista funcione sin estar autenticado
             if (!$user) {
-                // Aquí ya no redirigimos a login, pero si es necesario puedes agregar un mensaje de advertencia
+                // Esto nos permitirá saber si el usuario no está autenticado
                 return redirect()->route('login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
             }
+
+            // Comprobar el token antes de enviarlo a la API
+            dd($user->api_token);  // Verificamos el token antes de hacer la solicitud
 
             // Hacer la solicitud GET a la API con el token de autenticación
             $response = Http::withToken($user->api_token) // Usa el token de acceso del usuario
@@ -27,7 +32,7 @@ class MisEmpredimientosController extends Controller
             // Si la respuesta es exitosa
             if ($response->successful()) {
                 // Obtener los datos de la respuesta
-                $connections = $response->json()['data'] ?? []; // Asegúrate de que la clave 'data' exista
+                $connections = $response->json()['data'] ?? [];
             } else {
                 // En caso de error en la API, inicializar un arreglo vacío
                 $connections = [];
