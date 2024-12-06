@@ -40,12 +40,6 @@ class inicio_de_sesion_usuariocontroller extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/login', $credentials);
 
             if ($response->successful()) {
-                // Obtener el token JWT de la respuesta
-                $token = $response->json()['access_token'];  // Asumiendo que la respuesta es como { "access_token": "JWT_TOKEN" }
-
-                // Almacenar el token en la sesión
-                session(['token' => $token]);
-
                 // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
                 $role = $validated['role']; // Obtenemos el rol del usuario
 
