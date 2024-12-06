@@ -10,40 +10,31 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Intentar obtener el token de múltiples fuentes
-        $token = $request->session()->get('token') ??
-                 $request->session()->get('user_token') ??
-                 \Session::get('token') ??
-                 $request->get('token') ??
-                 $request->bearerToken() ??
-                 $request->header('Authorization') ??
-                 null;
+        // Obtener token de sesión de manera simple
+        $token = session('token');
 
+        // Si no hay token, redirigir a login
         if (!$token) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión primero');
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
         }
 
-        
         try {
-            // Hacer la solicitud a la API con el token
+            // Intentar obtener los datos del usuario con el token
             $response = Http::withToken($token)
-                ->withHeaders([
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json'
-                ])
                 ->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
+            // Si la respuesta es exitosa, mostrar perfil
             if ($response->successful()) {
                 $userData = $response->json()['user_data'];
-
-                // Renderizar la vista con los datos del usuario
-                return view('perfilUser.index', ['user' => $userData]);
-            } else {
-                return redirect()->route('login')->with('error', 'No se pudo obtener los datos del usuario');
+                return view('perfil', ['user' => $userData]);
             }
 
+            // Si falla, redirigir a login
+            return redirect()->route('login')->with('error', 'Sesión expirada');
+
         } catch (\Exception $e) {
-            return redirect()->route('login')->with('error', 'Ocurrió un error al procesar la solicitud');
+            // En caso de error, redirigir a login
+            return redirect()->route('login')->with('error', 'Error al validar sesión');
         }
     }
 }
