@@ -13,7 +13,7 @@ class PerfilUsuarioController extends Controller
         // Obtener el token desde la sesión
         $token = session('token', null);
 
-        // Verificar si el token está en la sesión y depurarlo
+        // Verificar si el token está en la sesión
         if (!$token) {
             // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
             return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
@@ -26,17 +26,17 @@ class PerfilUsuarioController extends Controller
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depurar la respuesta de la API
+            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // Si la respuesta es exitosa, mostrar los datos del usuario
+                // Si la respuesta es exitosa, obtener los datos del usuario
                 $userData = $response->json();
                 return view('perfilUser.index', ['user' => $userData]);
             } else {
-                // Si la API devuelve error (token inválido, etc.)
+                // Si la respuesta es fallida, devolver mensaje de error con código 401
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
             }
         } catch (\Exception $e) {
-            // Manejar cualquier error inesperado
+            // Si ocurre un error inesperado, devolver mensaje de error con el detalle
             return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
         }
     }
