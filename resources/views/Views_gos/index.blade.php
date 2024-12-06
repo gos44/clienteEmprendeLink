@@ -150,20 +150,12 @@
                   <span>
                     <fragment class="home-fragment114">
                       <span class="home-text114 thq-body-small">
-                        <a href=" {{ route('registrar_nuevo_usuario.store') }}">Regístrate como emprendedor</a>
+                        <a href=" {{ route('registrar_nuevo_usuario.store') }}">Regístrate Con Nosotros</a>
                       </span>
                     </fragment>
                   </span>
                 </button>
-                <button class="thq-button-outline hero17-button2">
-                  <span>
-                    <fragment class="home-fragment115">
-                      <span class="home-text115 thq-body-small">
-                        <a href="{{ route('registrar_nuevo_usuario.store') }}">Regístrate como inversionista</a>
-                      </span>
-                    </fragment>
-                  </span>
-                </button>
+
               </div>
             </div>
 
@@ -350,7 +342,8 @@
                     <button
                       class="thq-button-filled thq-button-animated steps2-button"
                     >
-                      <span class="thq-body-small"><a href="#">Publicar ahora</a></span>
+                      <span class="thq-body-small"><a href="{{ route('iniciar_sesion_usuario.login') }}">Publicar ahora</a></span>
+
                     </button>
                   </div>
                 </div>
@@ -449,203 +442,7 @@
             </div>
           </div>
         </steps2-wrapper>
-        <testimonial17-wrapper class="testimonial17-wrapper">
-          <!--Testimonial17 component-->
-          <div class="thq-section-padding">
-            <div class="testimonial17-max-width thq-section-max-width">
-              <div class="testimonial17-container10">
-                <h2>
-                  <fragment class="home-fragment197">
-                    <span class="home-text199 thq-heading-2">
-                      Testimonios de nuestros usuarios
-                    </span>
-                  </fragment>
-                </h2>
-                <span>
-                  <fragment class="home-fragment196">
-                    <span class="home-text198 thq-body-small">
-                      Gracias a esta plataforma, pude encontrar el
-                      financiamiento necesario para hacer crecer mi negocio de
-                      manera exitosa. ¡Totalmente recomendado!
-                    </span>
-                  </fragment>
-                </span>
-              </div>
-              <div class="thq-grid-2">
-                <div class="thq-animated-card-bg-2">
-                  <div class="thq-animated-card-bg-1">
-                    <div
-                      data-animated="true"
-                      class="thq-card testimonial17-card1"
-                    >
-                      <div class="testimonial17-container12">
-                        <img
-                          alt="Imagen de María López, CEO de Startup XYZ"
-                          src="images/cuadrado.png"
-                          class="testimonial17-image1"
-                        />
-                        <div class="testimonial17-container13">
-                          <strong>
-                            <fragment class="home-fragment198">
-                              <span class="home-text200 thq-body-large">
-                                María López
-                              </span>
-                            </fragment>
-                          </strong>
-                          <span>
-                            <fragment class="home-fragment202">
-                              <span class="home-text204 thq-body-small">
-                                CEO de Startup XYZ
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                      </div>
-                      <span>
-                        <fragment class="home-fragment192">
-                          <span class="home-text194 thq-body-small">
-                            Excelente plataforma para conectar con emprendedores
-                            con proyectos innovadores. He invertido en varias
-                            startups con gran potencial gracias a esta red.
-                          </span>
-                        </fragment>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="thq-animated-card-bg-2">
-                  <div class="thq-animated-card-bg-1">
-                    <div
-                      data-animated="true"
-                      class="thq-card testimonial17-card2"
-                    >
-                      <div class="testimonial17-container14">
-                        <img
-                          alt="Imagen de Juan Pérez, Inversionista Ángel"
-                          src="images/perfilusu2.png"
-                          class="testimonial17-image2"
-                        />
-                        <div class="testimonial17-container15">
-                          <strong>
-                            <fragment class="home-fragment199">
-                              <span class="home-text201 thq-body-large">
-                                Juan Pérez
-                              </span>
-                            </fragment>
-                          </strong>
-                          <span>
-                            <fragment class="home-fragment203">
-                              <span class="home-text205 thq-body-small">
-                                Inversionista Ángel
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                      </div>
-                      <span>
-                        <fragment class="home-fragment193">
-                          <span class="home-text195 thq-body-small">
-                            Como emprendedor, siempre es difícil conseguir el
-                            respaldo financiero adecuado. Gracias a esta
-                            plataforma, encontré el socio inversor perfecto para
-                            llevar mi idea al siguiente nivel.
-                          </span>
-                        </fragment>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="thq-animated-card-bg-2">
-                  <div class="thq-animated-card-bg-1">
-                    <div
-                      data-animated="true"
-                      class="thq-card testimonial17-card3"
-                    >
-                      <div class="testimonial17-container16">
-                        <img
-                          alt="Imagen de Carolina Rodríguez, Inversionista en crecimiento"
-                          src="images/mujer.jpg"
-                          class="testimonial17-image3"
-                        />
-                        <div class="testimonial17-container17">
-                          <strong>
-                            <fragment class="home-fragment200">
-                              <span class="home-text202 thq-body-large">
-                                Carolina Rodríguez
-                              </span>
-                            </fragment>
-                          </strong>
-                          <span>
-                            <fragment class="home-fragment204">
-                              <span class="home-text206 thq-body-small">
-                                Inversionista en crecimiento
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                      </div>
-                      <span>
-                        <fragment class="home-fragment194">
-                          <span class="home-text196 thq-body-small">
-                            Me encanta la dinámica de esta plataforma. He
-                            conocido emprendedores con propuestas realmente
-                            interesantes y he podido ser parte de proyectos
-                            innovadores que han tenido un impacto positivo.
-                          </span>
-                        </fragment>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="thq-animated-card-bg-2">
-                  <div class="thq-animated-card-bg-1">
-                    <div
-                      data-animated="true"
-                      class="thq-card testimonial17-card4"
-                    >
-                      <div class="testimonial17-container18">
-                        <img
-                          alt="Imagen de Pedro Martínez, Emprendedor en serie"
-                          src="images/perfilusu1.png"
-                          class="testimonial17-image4"
-                        />
-                        <div class="testimonial17-container19">
-                          <strong>
-                            <fragment class="home-fragment201">
-                              <span class="home-text203 thq-body-large">
-                                Pedro Martínez
-                              </span>
-                            </fragment>
-                          </strong>
-                          <span>
-                            <fragment class="home-fragment205">
-                              <span class="home-text207 thq-body-small">
-                                Emprendedor en serie
-                              </span>
-                            </fragment>
-                          </span>
-                        </div>
-                      </div>
-                      <span>
-                        <fragment class="home-fragment195">
-                          <span class="home-text197 thq-body-small">
-                            La facilidad de uso y la calidad de las conexiones
-                            que se pueden establecer a través de esta plataforma
-                            son impresionantes. Definitivamente ha sido clave en
-                            el éxito de mis emprendimientos.
-                          </span>
-                        </fragment>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </testimonial17-wrapper>
-        <contact10-wrapper class="contact10-wrapper">
-          <!--Contact10 component-->
-        </contact10-wrapper>
+
 
 
       </div>
