@@ -31,7 +31,7 @@
             @csrf
 
             <input type="hidden" name="entrepreneurs_id" value="{{ auth()->id() }}">
-            <input type="hidden" name="entrepreneurs_id" value="1">
+            {{-- <input type="hidden" name="entrepreneurs_id" value="1"> --}}
 
             
             <!-- Paso 1: Información básica -->
