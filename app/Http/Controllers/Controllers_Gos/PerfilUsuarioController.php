@@ -11,12 +11,13 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Verificar si hay token de autenticación
-        if (!$request->session()->has('token')) {
+        // Obtener token de sesión y limpiarlo
+        $token = session('token') ? trim(session('token')) : null;
+
+        // Si no hay token, redirigir a login
+        if (!$token) {
             return redirect()->route('login')->with('error', 'Debes iniciar sesión');
         }
-
-        $token = $request->session()->get('token');
 
         try {
             // Intentar obtener los datos del usuario con el token
@@ -38,9 +39,6 @@ class PerfilUsuarioController extends Controller
             return redirect()->route('login')->with('error', 'Sesión expirada');
 
         } catch (\Exception $e) {
-            // Registrar el error para depuración
-            Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
-
             // En caso de error, redirigir a login
             return redirect()->route('login')->with('error', 'Error al validar sesión');
         }
