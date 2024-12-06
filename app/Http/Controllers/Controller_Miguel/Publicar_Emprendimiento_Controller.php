@@ -23,7 +23,7 @@ class Publicar_Emprendimiento_Controller extends Controller
         'category' => 'required|string|max:255',
         'logo_path' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'background' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        'product_images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'product_images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'name_products' => 'required|array',
         'product_descriptions' => 'required|array',
         'general_description' => 'required|string|max:2000',
@@ -44,70 +44,72 @@ class Publicar_Emprendimiento_Controller extends Controller
         ];
 
         // Preparar solicitud multipart
-        $httpRequest = Http::asMultipart();
+ // Iniciar solicitud multipart
+ $httpRequest = Http::asMultipart();
 
-        // Procesar y adjuntar logo
-        if ($request->hasFile('logo_path')) {
-            $this->attachFile($httpRequest, 'logo_path', $request->file('logo_path'));
-        }
+ // Procesar logo
+ if ($request->hasFile('logo_path')) {
+     $logoFile = $request->file('logo_path');
+     $httpRequest->attach('logo_path', file_get_contents($logoFile), $logoFile->getClientOriginalName(), [
+         'Content-Type' => $logoFile->getMimeType()
+     ]);
+ }
 
-        // Procesar y adjuntar imagen de fondo
-        if ($request->hasFile('background')) {
-            $this->attachFile($httpRequest, 'background', $request->file('background'));
-        }
-        
-        // Procesar y adjuntar imágenes de productos
-        if ($request->hasFile('product_images')) {
-            foreach ($request->file('product_images') as $index => $image) {
-                $this->attachFile($httpRequest, "product_images[$index]", $image);
-            }
-        }
+ // Procesar imagen de fondo
+ if ($request->hasFile('background')) {
+     $backgroundFile = $request->file('background');
+     $httpRequest->attach('background', file_get_contents($backgroundFile), $backgroundFile->getClientOriginalName(), [
+         'Content-Type' => $backgroundFile->getMimeType()
+     ]);
+ }
 
-        // Adjuntar datos adicionales
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                foreach ($value as $k => $v) {
-                    $httpRequest->attach("{$key}[{$k}]", $v);
-                }
-            } else {
-                $httpRequest->attach($key, $value);
-            }
-        }
+ // Procesar imágenes de productos
+ if ($request->hasFile('product_images')) {
+     foreach ($request->file('product_images') as $index => $productImage) {
+         $httpRequest->attach("product_images[$index]", file_get_contents($productImage), $productImage->getClientOriginalName(), [
+             'Content-Type' => $productImage->getMimeType()
+         ]);
+     }
+ }
 
-        // Enviar solicitud a la API
-        $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
+ // Adjuntar datos adicionales
+ foreach ($data as $key => $value) {
+     if (is_array($value)) {
+         foreach ($value as $k => $v) {
+             $httpRequest->attach("{$key}[{$k}]", $v);
+         }
+     } else {
+         $httpRequest->attach($key, $value);
+     }
+ }
 
-        // Manejar respuesta
-        if ($response->successful()) {
-            return redirect()->route('MisEmpredimientos.index')
-                ->with('success', '¡Emprendimiento publicado con éxito!');
-        } else {
-            return back()
-                ->withErrors(['api_error' => 'Error al publicar: ' . $response->body()])
-                ->withInput();
-        }
-    } catch (\Exception $e) {
-        Log::error('Error interno en la publicación del emprendimiento: ' . $e->getMessage());
+ // Enviar solicitud a la API
+ $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
 
-        return back()
-            ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
-            ->withInput();
-    }
+ // Manejar respuesta
+ if ($response->successful()) {
+     return redirect()->route('MisEmpredimientos.index')
+         ->with('success', '¡Emprendimiento publicado con éxito!');
+ } else {
+     Log::error('API Error Details: ', [
+         'status' => $response->status(),
+         'body' => $response->body()
+     ]);
+
+     return back()
+         ->withErrors(['api_error' => 'Error al publicar: ' . $response->body()])
+         ->withInput();
+ }
+} catch (\Exception $e) {
+ Log::error('Error interno en la publicación del emprendimiento: ', [
+     'message' => $e->getMessage(),
+     'trace' => $e->getTraceAsString()
+ ]);
+
+ return back()
+     ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
+     ->withInput();
+}
+}
 }
 
-/**
- * Método auxiliar para adjuntar archivos a la solicitud HTTP
- * 
- * @param \Illuminate\Http\Client\PendingRequest $httpRequest
- * @param string $key
- * @param \Illuminate\Http\UploadedFile $file
- */
-private function attachFile($httpRequest, $key, $file)
-{
-    $httpRequest->attach(
-        $key,
-        file_get_contents($file->getRealPath()),
-        $file->getClientOriginalName()
-    );
-}
-}
