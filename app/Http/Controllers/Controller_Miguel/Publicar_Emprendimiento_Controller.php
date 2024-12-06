@@ -30,6 +30,12 @@ class Publicar_Emprendimiento_Controller extends Controller
     ]);
 
     try {
+
+        Log::info('Datos de entrada:', [
+            'inputs' => $request->all(),
+            'files' => $request->allFiles()
+        ]);
+
         $userId = auth()->id();
 
         // Preparar datos para la solicitud
@@ -43,6 +49,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             'entrepreneurs_id' => $userId,
         ];
 
+        
         // Preparar solicitud multipart
  // Iniciar solicitud multipart
  $httpRequest = Http::asMultipart();
@@ -110,5 +117,6 @@ if ($request->hasFile('product_images')) {
      ->withInput();
 }
 }
+
 }
 
