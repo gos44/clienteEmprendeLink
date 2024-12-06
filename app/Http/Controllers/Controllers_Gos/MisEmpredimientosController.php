@@ -4,23 +4,14 @@ namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
 
 class MisEmpredimientosController extends Controller
 {
     public function index()
     {
         try {
-            // Verificar que el usuario esté autenticado
-            $user = Auth::user();
-
-            if (!$user) {
-                return redirect()->route('login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
-            }
-
-            // Hacer la solicitud GET a la API con el token de autenticación
-            $response = Http::withToken($user->api_token) // Usa el token de acceso del usuario
-                ->get('https://apiemprendelink-production-9272.up.railway.app/api/myentrepreneurships');
+            // Hacer la solicitud GET a la API sin usar token
+            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/publicare');
 
             // Si la respuesta es exitosa
             if ($response->successful()) {

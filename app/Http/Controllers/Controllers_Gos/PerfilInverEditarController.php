@@ -17,7 +17,7 @@ class PerfilInverEditarController extends Controller
 
         // Retorna la vista 'Perfil' con los datos de prueba
         return view('Views_gos/EditarPerfilInversionista', compact('connections'));
-    
+
     }}
 
 

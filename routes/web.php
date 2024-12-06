@@ -261,6 +261,7 @@ Route::get('iniciar_sesion_usuario/login', [inicio_de_sesion_usuariocontroller::
 
 
 
+Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
 
 
 Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
@@ -365,7 +366,6 @@ Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index
 // Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
 Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
 
-Route::get('perfilInver', action:  [PerfilInverController::class, 'index'])->name('perfilInver.index');
 Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
 Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');

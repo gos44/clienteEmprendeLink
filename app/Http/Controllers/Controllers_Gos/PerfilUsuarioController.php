@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Support\Facades\Http;
@@ -11,37 +10,38 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener token de sesión y limpiarlo
-        $token = session('token') ? trim(session('token')) : null;
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
-        // Si no hay token, redirigir a login
+        // Verificar si el token está en la sesión
         if (!$token) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+            // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
-        
         try {
-            // Intentar obtener los datos del usuario con el token
+            // Hacer la solicitud para obtener los datos del usuario
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depurar el estado y el contenido de la respuesta
-            dd($response->status(), $response->json());
-
-            // Si la respuesta es exitosa, mostrar perfil
+            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                $userData = $response->json()['user_data'];
-                return view('perfilUser.index', ['user' => $userData]);
+                // Si la respuesta es exitosa, obtener los datos del usuario
+                $userData = $response->json();
+
+
+
+
+                return view('Views_gos.PerfilUsuario', ['user' => $userData]);
+            } else {
+                // Si la respuesta es fallida, devolver mensaje de error con código 401
+                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
             }
-
-            // Si falla, redirigir a login
-            return redirect()->route('login')->with('error', 'Sesión expirada');
-
         } catch (\Exception $e) {
-            // En caso de error, redirigir a login
-            return redirect()->route('login')->with('error', 'Error al validar sesión');
+            // Si ocurre un error inesperado, devolver mensaje de error con el detalle
+            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
         }
     }
 }

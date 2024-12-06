@@ -87,8 +87,8 @@
 
     <div class="profile-actions">
       <a href="{{ route('perfilInver.index') }}"><button type="submit" class="btn-primary">Guardar cambios</button></a>
-      <a href="{{ route('perfilInver.index') }}"><button type="button" class="btn-outline">Cancelar</button></a> 
-    </div>  
+      <a href="{{ route('perfilInver.index') }}"><button type="button" class="btn-outline">Cancelar</button></a>
+    </div>
 
 
 </form>
@@ -131,7 +131,7 @@
   function updateProfilePhoto() {
       const fileInput = document.getElementById('photo-input');
       const file = fileInput.files[0];
-      
+
       if (file) {
           const reader = new FileReader();
           reader.onload = function(e) {
@@ -145,7 +145,7 @@
   // Manejo del formulario
   document.getElementById('profile-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       // Validar formulario
       if (this.checkValidity()) {
           // Aquí iría la lógica para guardar los cambios
