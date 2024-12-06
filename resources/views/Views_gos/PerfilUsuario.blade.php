@@ -63,42 +63,10 @@
             <a href="{{ route('perfilUser.index') }}">
                 <button class="btn-primary">Editar perfil</button>
             </a>
-            <a href="#" id="logoutBtn">
+            <a href="{{ route('Home1.index') }}">
                 <button class="btn-outline">Cerrar Sesión</button>
             </a>
-
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script>
-    // Agregar el evento de click al botón de logout
-    document.getElementById('logoutBtn').addEventListener('click', function(event) {
-        event.preventDefault();  // Evitar la acción predeterminada del enlace
-
-        // Realizar la solicitud POST al endpoint de logout
-        axios.post('https://apiemprendelink-production-9272.up.railway.app/api/auth/logout', {}, {
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')  // Suponiendo que el token está guardado en localStorage
-    }
-})
-        .then(response => {
-            // Si el logout fue exitoso, mostrar mensaje en consola o en la interfaz
-            console.log(response.data.message);
-
-            // Eliminar el token de localStorage
-            localStorage.removeItem('token');
-
-            // Redirigir al usuario a la página principal o página de inicio
-            window.location.href = '{{ route('Home1.index') }}';
-        })
-        .catch(error => {
-            // Si hay un error, mostrarlo en consola o alertar al usuario
-            console.error('Error al cerrar sesión:', error);
-            alert('Hubo un problema al cerrar sesión');
-        });
-    });
-</script>
-
 </body>
 </html>
