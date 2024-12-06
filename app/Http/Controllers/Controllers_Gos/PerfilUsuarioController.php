@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Controllers_Gos;
 
 use Illuminate\Support\Facades\Http;
@@ -11,37 +10,33 @@ class PerfilUsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener token de sesión y limpiarlo
+        // Obtener token de sesión
         $token = session('token') ? trim(session('token')) : null;
 
-        // Si no hay token, redirigir a login
+        // Si no hay token, redirigir al login
         if (!$token) {
-            return redirect()->route('login')->with('error', 'Debes iniciar sesión');
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión.');
         }
 
-        
         try {
-            // Intentar obtener los datos del usuario con el token
+            // Hacer la solicitud a la API para obtener los datos del usuario
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Depurar el estado y el contenido de la respuesta
-            dd($response->status(), $response->json());
-
-            // Si la respuesta es exitosa, mostrar perfil
+            // Si la respuesta es exitosa, obtener los datos del usuario
             if ($response->successful()) {
-                $userData = $response->json()['user_data'];
-                return view('perfilUser.index', ['user' => $userData]);
+                $userData = $response->json();
+                return view('perfilUser.index', ['user' => $userData]); // Pasa los datos a la vista
             }
 
-            // Si falla, redirigir a login
-            return redirect()->route('login')->with('error', 'Sesión expirada');
+            // Si falla, redirigir al login
+            return redirect()->route('login')->with('error', 'Sesión expirada o inválida.');
 
         } catch (\Exception $e) {
-            // En caso de error, redirigir a login
-            return redirect()->route('login')->with('error', 'Error al validar sesión');
+            // Manejar errores
+            return redirect()->route('login')->with('error', 'Error al validar sesión: ' . $e->getMessage());
         }
     }
 }
