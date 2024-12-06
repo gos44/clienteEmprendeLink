@@ -133,8 +133,8 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand me-3" href="{{('Home_inversor')}}">
-                <img src="images/16.png" alt="Logo" width="140" height="50">
+            <a class="navbar-brand me-3" href="{{ route('Home_inversor.index') }}">
+                <img src="{{ asset('images/16.png') }}" alt="Logo" width="140" height="50">
             </a>
 
             <!-- Botón hamburguesa -->

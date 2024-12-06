@@ -172,7 +172,7 @@ footer {
         <div class="footer-content">
             <div class="footer-section about">
                 <div class="logoda">
-                    <img class="logo-dark" src="images/LOGO-FONDO NEGRO.png" alt="Emprende Link">
+                    <img class="logo-dark" src="{{ asset('images/LOGO-FONDO NEGRO.png') }}" alt="Emprende Link">
                 </div>
             </div>
             <div class="footer-section links">
