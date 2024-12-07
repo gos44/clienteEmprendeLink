@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Controller_k;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
-class ReviewController extends Controller
+class ResenaInver extends Controller
 {
     private $apiUrl = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
 
