@@ -17,11 +17,8 @@ html, body {
 
 .reviews-container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 .reviews-title {
@@ -199,7 +196,7 @@ html, body {
     border-color: #4a90e2;
 }
 
-.submit-btn {
+.submit-review-btn {
     background-color: #000;
     color: #fff;
     border: none;
@@ -212,16 +209,15 @@ html, body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.submit-btn:hover {
+.submit-review-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
 }
 
-.submit-btn:active {
+.submit-review-btn:active {
     transform: translateY(0);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .reviews-container {
         padding: 20px 15px;
