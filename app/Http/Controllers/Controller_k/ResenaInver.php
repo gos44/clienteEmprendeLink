@@ -5,55 +5,86 @@ namespace App\Http\Controllers\Controller_k;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
 
 class ResenaInver extends Controller
 {
-    public function store(Request $request)
+    /**
+     * Lista todas las reseñas desde la API.
+     */
+    public function index()
     {
-        // Validación de datos
-        $validated = $request->validate([
-            'rating' => 'required|integer|min:1|max:5', // Calificación entre 1 y 5
-            'comment' => 'required|string|max:500',    // Comentario requerido
-            'entrepreneur_id' => 'nullable|integer',  // ID del emprendedor (opcional)
-        ]);
-
         try {
-            // Construir los datos a enviar
-            $data = [
-                'qualification' => $validated['rating'],
-                'comment' => $validated['comment'],
-                'entrepreneur_id' => $validated['entrepreneur_id'], // Puede ser null
-                'investor_id' => auth()->user()->investor->id ?? null, // Obtener el ID del inversionista autenticado
-            ];
+            // Solicita las reseñas a la API
+            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/reviews');
 
-            // Enviar solicitud POST a la API con el parámetro `included`
-            $response = Http::post(
-                'https://apiemprendelink-production-9272.up.railway.app/api/review',
-                $data
-            );
-
-            // Evaluar respuesta de la API
+            // Verifica si la solicitud fue exitosa
             if ($response->successful()) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Reseña publicada exitosamente.',
-                    'data' => $response->json(), // Incluir la respuesta completa de la API
-                ], 201);
+                    'data' => $response->json(),
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error al obtener las reseñas',
+                    'errors' => $response->json()['errors'] ?? 'Respuesta desconocida',
+                ], 422);
             }
-
-            // En caso de error, devolver el mensaje recibido por la API
-            return response()->json([
-                'success' => false,
-                'message' => 'Error al publicar la reseña.',
-                'errors' => $response->json()['errors'] ?? $response->body(),
-            ], $response->status());
         } catch (\Exception $e) {
-            // Manejo de errores generales
             return response()->json([
                 'success' => false,
-                'message' => 'Hubo un error al intentar procesar la solicitud.',
-                'details' => $e->getMessage(),
+                'message' => 'No se pudo conectar con el servidor',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Maneja la creación de una reseña.
+     */
+    public function store(Request $request)
+    {
+        // Validación de los datos recibidos
+        $validated = $request->validate([
+            'review' => 'required|string|max:255',
+            'score' => 'required|numeric|min:1|max:5',
+            'role' => 'required|string|in:entrepreneur,investor',
+            'reviewable_id' => 'required|integer',
+            'reviewable_type' => 'required|string|in:Entrepreneurship,Investor',
+        ]);
+
+        try {
+            // Envía los datos a la API
+            $response = Http::post(
+                'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor',
+                [
+                    'review' => $validated['review'],
+                    'score' => $validated['score'],
+                    'role' => $validated['role'],
+                    'reviewable_id' => $validated['reviewable_id'],
+                    'reviewable_type' => $validated['reviewable_type'],
+                ]
+            );
+
+            // Verifica la respuesta de la API
+            if ($response->successful()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Reseña creada exitosamente',
+                    'data' => $response->json(),
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error al crear la reseña',
+                    'errors' => $response->json()['errors'] ?? 'Respuesta desconocida',
+                ], 422);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se pudo conectar con el servidor',
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
