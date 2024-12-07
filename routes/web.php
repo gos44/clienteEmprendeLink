@@ -272,6 +272,74 @@ Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->nam
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rutas para manejar la creacion de una reseña en inversionista
+
+Route::get('resenaInver', [ResenaInver::class, 'index'])->name('resenaInver');
+Route::post('resenaInver/store', [ResenaInver::class, 'store'])->name('resenaInver.store');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('registrar_nuevo_usuario',[Registro_usuario_Controller::class,'index'])->name('registrar_nuevo_usuario'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 Route::get('registrar_nuevo_inversionista',[Registro_inversionista_Controller::class,'index'])->name('registrar_nuevo_inversionista'); // ets enombre se va a enlazar con otro archivo html, y el que esta en español el primero es el que se escrive en google para mirar las vistas
 
@@ -340,9 +408,6 @@ Route::get('resena', [Resena::class, 'Resena'])->name('resena');
 Route::get('resena2', [Resena2::class, 'Resena2'])->name('resena2');
 Route::get('resena3', [Resena3::class, 'Resena3'])->name('resena3');
 Route::get('resena4', [Resena4::class, 'Resena4'])->name('resena4');
-//inver
-Route::get('resenaInver', [ResenaInver::class, 'index'])->name('resenaInver');
-Route::post('resenaInver/store', [ResenaInver::class, 'store'])->name('resenaInver.store');
 
 //notificaciones
 

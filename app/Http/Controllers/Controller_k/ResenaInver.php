@@ -70,7 +70,7 @@ class ResenaInver extends Controller
             ];
 
             // Enviar la reseña a la API
-            $response = Http::post($this->apiUrl, $reviewData);
+            $response = Http::post($this->apiUrl. 'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor');
 
             if ($response->failed()) {
                 throw new \Exception('Error al publicar la reseña.');
