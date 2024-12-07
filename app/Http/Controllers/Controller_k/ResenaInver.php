@@ -29,7 +29,7 @@ class ResenaInver extends Controller
 
             // Enviar solicitud POST a la API con el parámetro `included`
             $response = Http::post(
-                'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor',
+                'https://apiemprendelink-production-9272.up.railway.app/api/review',
                 $data
             );
 
