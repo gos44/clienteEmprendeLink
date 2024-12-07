@@ -77,46 +77,48 @@
     </div>
 
     <script>
-        document.getElementById('review-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
+      document.getElementById('review-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-            const rating = document.querySelector('input[name="rating"]:checked')?.value;
-            const comment = document.getElementById('review-comment').value;
-            const entrepreneurId = document.getElementById('entrepreneur-id').value;
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
+    const comment = document.getElementById('review-comment').value;
+    const entrepreneurId = document.getElementById('entrepreneur-id').value;
 
-            if (!rating || !comment) {
-                alert('Por favor completa tu calificación y comentario');
-                return;
-            }
+    if (!rating || !comment) {
+        alert('Por favor completa tu calificación y comentario');
+        return;
+    }
 
-            try {
-                const response = await fetch('{{ route("resenaInver.store") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        rating: rating,
-                        comment: comment,
-                        entrepreneur_id: entrepreneurId
-                    }),
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert(data.message);
-                    location.reload();  // Recarga la página para ver la nueva reseña
-                } else {
-                    alert(data.message || 'Error al publicar la reseña');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al enviar la reseña. Por favor, intenta nuevamente.');
-            }
+    try {
+        const response = await fetch('{{ route("resenaInver.store") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                qualification: rating,
+                comment: comment,
+                entrepreneur_id: entrepreneurId,
+                entrepreneurships_id: 1,  // Ajusta este valor según tu lógica
+                investor_id: 1  // Ajusta este valor con el ID del inversionista actual
+            }),
         });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert(data.message);
+            location.reload();  // Recarga la página para ver la nueva reseña
+        } else {
+            alert(data.message || 'Error al publicar la reseña');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar la reseña. Por favor, intenta nuevamente.');
+    }
+});
     </script>
 </body>
 </html>

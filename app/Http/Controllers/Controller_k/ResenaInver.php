@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class ResenaInver extends Controller
+class ResenaInver extends Controller 
 {
     /**
      * Lista todas las reseñas desde la API.
@@ -16,7 +15,7 @@ class ResenaInver extends Controller
         try {
             // Solicita las reseñas a la API
             $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/reviews');
-
+            
             // Verifica si la solicitud fue exitosa
             if ($response->successful()) {
                 return response()->json([
@@ -44,26 +43,14 @@ class ResenaInver extends Controller
      */
     public function store(Request $request)
     {
-        // Validación de los datos recibidos
-        $validated = $request->validate([
-            'review' => 'required|string|max:255',
-            'score' => 'required|numeric|min:1|max:5',
-            'role' => 'required|string|in:entrepreneur,investor',
-            'reviewable_id' => 'required|integer',
-            'reviewable_type' => 'required|string|in:Entrepreneurship,Investor',
-        ]);
-
         try {
+            // Obtiene todos los datos de la solicitud
+            $data = $request->all();
+            
             // Envía los datos a la API
             $response = Http::post(
-                'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor',
-                [
-                    'review' => $validated['review'],
-                    'score' => $validated['score'],
-                    'role' => $validated['role'],
-                    'reviewable_id' => $validated['reviewable_id'],
-                    'reviewable_type' => $validated['reviewable_type'],
-                ]
+                'https://apiemprendelink-production-9272.up.railway.app/api/reviews', 
+                $data
             );
 
             // Verifica la respuesta de la API
