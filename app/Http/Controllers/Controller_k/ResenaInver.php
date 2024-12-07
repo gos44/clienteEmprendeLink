@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Controller_k;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
-
 class ResenaInver extends Controller
 {
     private $apiUrl = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
