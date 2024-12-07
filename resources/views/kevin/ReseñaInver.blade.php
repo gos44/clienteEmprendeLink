@@ -64,17 +64,17 @@
                 @csrf
                 <div class="star-rating">
                     <input type="radio" id="star5" name="rating" value="5" required>
-                    <label for="star5"></label>
+                    <label for="star5">★</label>
                     <input type="radio" id="star4" name="rating" value="4" required>
-                    <label for="star4"></label>
+                    <label for="star4">★</label>
                     <input type="radio" id="star3" name="rating" value="3" required>
-                    <label for="star3"></label>
+                    <label for="star3">★</label>
                     <input type="radio" id="star2" name="rating" value="2" required>
-                    <label for="star2"></label>
+                    <label for="star2">★</label>
                     <input type="radio" id="star1" name="rating" value="1" required>
-                    <label for="star1"></label>
+                    <label for="star1">★</label>
                 </div>
-            
+        
                 <textarea 
                     id="review-comment"
                     class="review-textarea" 
@@ -83,56 +83,55 @@
                     maxlength="500" 
                     required
                 ></textarea>
-            
+        
                 <input type="hidden" id="entrepreneur-id" name="entrepreneur_id" value="{{ $entrepreneur_id }}">
-            
+        
                 <button type="submit" class="submit-review-btn">Enviar Reseña</button>
             </form>
-            
         </div>
     </main>
 
     <script>
-        document.getElementById('review-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
-    
-            const rating = document.querySelector('input[name="rating"]:checked')?.value;
-            const comment = document.getElementById('review-comment').value;
-            const entrepreneurId = document.getElementById('entrepreneur-id').value;
-    
-            if (!rating || !comment) {
-                alert('Por favor completa tu calificación y comentario');
-                return;
-            }
-    
-            try {
-                const response = await fetch('{{ route("resenaInver.store") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        rating: rating,
-                        comment: comment,
-                        entrepreneur_id: entrepreneurId
-                    }),
-                });
-    
-                const data = await response.json();
-    
-                if (data.success) {
-                    alert(data.message);
-                    location.reload();  // Recarga la página para ver la nueva reseña
-                } else {
-                    alert(data.message || 'Error al publicar la reseña');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al enviar la reseña. Por favor, intenta nuevamente.');
-            }
+       document.getElementById('review-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
+    const comment = document.getElementById('review-comment').value;
+    const entrepreneurId = document.getElementById('entrepreneur-id').value;
+
+    if (!rating || !comment) {
+        alert('Por favor completa tu calificación y comentario');
+        return;
+    }
+
+    try {
+        const response = await fetch('{{ route("resenaInver.store") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                rating: rating,
+                comment: comment,
+                entrepreneur_id: entrepreneurId
+            }),
         });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert(data.message);
+            location.reload();  // Recarga la página para ver la nueva reseña
+        } else {
+            alert(data.message || 'Error al publicar la reseña');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar la reseña. Por favor, intenta nuevamente.');
+    }
+}); 
     </script>
     
 </body>
