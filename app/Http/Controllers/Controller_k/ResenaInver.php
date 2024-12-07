@@ -47,30 +47,23 @@ class ResenaInver extends Controller
             $validatedData = $request->validate([
                 'rating' => 'required|integer|min:1|max:5',
                 'comment' => 'required|string|max:500',
-                'entrepreneur_id' => 'required|integer',
+                'entrepreneur_id' => 'nullable|integer', // Ahora es opcional
             ]);
 
-            // Obtener el ID del inversionista desde el usuario autenticado
+            // Obtener el ID del inversionista desde el usuario autenticado (opcional)
             $investor = Auth::user()->investor;
-
-            if (!$investor) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No se encontró el perfil de inversionista.',
-                ], 400);
-            }
 
             // Crear los datos para enviar a la API
             $reviewData = [
                 'qualification' => $validatedData['rating'],
                 'comment' => $validatedData['comment'],
-                'entrepreneur_id' => $validatedData['entrepreneur_id'],
-                'investor_id' => $investor->id,
-                'entrepreneurships_id' => null,
+                'entrepreneur_id' => $validatedData['entrepreneur_id'] ?? null, // Valor por defecto null
+                'investor_id' => $investor->id ?? null, // Valor por defecto null si no está autenticado
+                'entrepreneurships_id' => null, // O cualquier otro valor si es necesario
             ];
 
             // Enviar la reseña a la API
-            $response = Http::post($this->apiUrl. 'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor');
+            $response = Http::post($this->apiUrl, $reviewData);
 
             if ($response->failed()) {
                 throw new \Exception('Error al publicar la reseña.');
