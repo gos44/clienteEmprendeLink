@@ -6,63 +6,53 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+
 class ResenaInver extends Controller
 {
-    private $apiUrl = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
-
-    // Método para publicar una reseña
     public function store(Request $request)
     {
+        // Validación de datos
+        $validated = $request->validate([
+            'rating' => 'required|integer|min:1|max:5', // Calificación entre 1 y 5
+            'comment' => 'required|string|max:500',    // Comentario requerido
+            'entrepreneur_id' => 'nullable|integer',  // ID del emprendedor (opcional)
+        ]);
+
         try {
-            // Validar los datos de entrada
-            $validatedData = $request->validate([
-                'rating' => 'required|integer|min:1|max:5',
-                'comment' => 'required|string|max:500',
-                'entrepreneur_id' => 'nullable|integer', // Puede ser null
-            ]);
-
-            // Obtener el ID del inversionista desde el usuario autenticado
-            $investor = Auth::user()->investor;
-
-            if (!$investor) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'No se encontró el perfil de inversionista.',
-                ], 400);
-            }
-
-            // Crear los datos para enviar a la API
-            $reviewData = [
-                'qualification' => $validatedData['rating'],
-                'comment' => $validatedData['comment'],
-                'entrepreneur_id' => $validatedData['entrepreneur_id'] ?? null, // Opcional
-                'investor_id' => $investor->id,
-                'entrepreneurships_id' => null, // No necesario para esta operación
+            // Construir los datos a enviar
+            $data = [
+                'qualification' => $validated['rating'],
+                'comment' => $validated['comment'],
+                'entrepreneur_id' => $validated['entrepreneur_id'], // Puede ser null
+                'investor_id' => auth()->user()->investor->id ?? null, // Obtener el ID del inversionista autenticado
             ];
 
-            // Enviar la reseña a la API
-            $response = Http::post($this->apiUrl, $reviewData);
+            // Enviar solicitud POST a la API con el parámetro `included`
+            $response = Http::post(
+                'https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,Entrepreneurship,investor',
+                $data
+            );
 
-            // Verificar si la solicitud falló
-            if ($response->failed()) {
+            // Evaluar respuesta de la API
+            if ($response->successful()) {
                 return response()->json([
-                    'success' => false,
-                    'message' => 'Error al publicar la reseña.',
-                    'details' => $response->json(),
-                ], $response->status());
+                    'success' => true,
+                    'message' => 'Reseña publicada exitosamente.',
+                    'data' => $response->json(), // Incluir la respuesta completa de la API
+                ], 201);
             }
 
-            // Respuesta exitosa
-            return response()->json([
-                'success' => true,
-                'message' => 'Reseña publicada exitosamente.',
-                'review' => $response->json(),
-            ]);
-        } catch (\Exception $e) {
-            // Manejar errores de validación u otros problemas
+            // En caso de error, devolver el mensaje recibido por la API
             return response()->json([
                 'success' => false,
-                'message' => 'Error al procesar la solicitud.',
+                'message' => 'Error al publicar la reseña.',
+                'errors' => $response->json()['errors'] ?? $response->body(),
+            ], $response->status());
+        } catch (\Exception $e) {
+            // Manejo de errores generales
+            return response()->json([
+                'success' => false,
+                'message' => 'Hubo un error al intentar procesar la solicitud.',
                 'details' => $e->getMessage(),
             ], 500);
         }
