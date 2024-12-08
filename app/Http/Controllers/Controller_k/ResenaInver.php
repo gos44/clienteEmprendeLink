@@ -20,10 +20,10 @@ class ResenaInver extends Controller
             $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
 
             if ($response->successful()) {
-                $reviews = $response->json(); // Asegúrate de ajustar según la estructura JSON
+                $reviews = $response->json(); // Ajusta según la estructura JSON de la API
             }
         } catch (\Exception $e) {
-            // En caso de error, pasar un mensaje vacío o manejar un fallback
+            // Loguear errores para depuración
             \Log::error('Error al obtener reseñas: ' . $e->getMessage());
         }
 
@@ -38,17 +38,17 @@ class ResenaInver extends Controller
     {
         // Validar los datos enviados desde el formulario
         $validated = $request->validate([
-            'included' => 'required|string',
-            'review_text' => 'required|string|max:500',
-            'rating' => 'required|integer|min:1|max:5',
+            'entrepreneur_id' => 'required|integer',
+            'comment' => 'required|string|max:500',
+            'qualification' => 'required|integer|min:1|max:5',
         ]);
 
         try {
             // Preparar los datos para enviar a la API
             $data = [
-                'included' => $validated['included'],
-                'review_text' => $validated['review_text'],
-                'rating' => $validated['rating'],
+                'entrepreneur_id' => $validated['entrepreneur_id'],
+                'comment' => $validated['comment'],
+                'qualification' => $validated['qualification'],
             ];
 
             // Enviar los datos a la API
@@ -59,7 +59,7 @@ class ResenaInver extends Controller
                 return redirect()->route('kevin.ReseñaInver')
                     ->with('success', 'Reseña creada exitosamente.');
             } else {
-                return back()->withErrors($response->json() ?? 'Error desconocido al crear la reseña')
+                return back()->withErrors($response->json()['message'] ?? 'Error desconocido al crear la reseña')
                     ->withInput();
             }
         } catch (\Exception $e) {
