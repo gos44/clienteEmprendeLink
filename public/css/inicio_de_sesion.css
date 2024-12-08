@@ -306,3 +306,33 @@ background-color: #ff0000;
     height: 52%;
     width: 78%;
 }
+
+
+  body {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            transition: background-image 1s ease-in-out;
+        }
+
+        /* Estilos para el logo */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px; /* Ajusta el tamaño del logo */
+            height: auto;
+            z-index: 10;
+        }
+
+        /* Ajustes de los campos de entrada */
+        .rol-selector {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }

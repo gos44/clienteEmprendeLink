@@ -161,7 +161,7 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
     // ->name('Home_Usuario.index')
     // ->middleware(['auth:sanctum', 'role:entrepreneur']);
 
-
+    
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
