@@ -12,64 +12,40 @@ class ResenaInver extends Controller
     /**
      * Muestra la lista de reseñas en la vista.
      */
-    public function index(Request $request)
+    public function store(Request $request)
 {
-    $reviews = [];
-    $entrepreneurId = $request->input('entrepreneur_id');
+    // Modify validation to make entrepreneur_id optional
+    $validated = $request->validate([
+        'entrepreneur_id' => 'nullable|integer',
+        'comment' => 'required|string|max:500',
+        'qualification' => 'required|integer|min:1|max:5',
+    ]);
 
     try {
-        // Llamada GET con filtro opcional
-        $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
-        if ($entrepreneurId) {
-            $url .= '?entrepreneur_id=' . $entrepreneurId;
+        // Prepare data, allowing entrepreneur_id to be null
+        $data = [
+            'comment' => $validated['comment'],
+            'qualification' => $validated['qualification'],
+        ];
+
+        // Only add entrepreneur_id if it's provided
+        if (!empty($validated['entrepreneur_id'])) {
+            $data['entrepreneur_id'] = $validated['entrepreneur_id'];
         }
 
-        $response = Http::get($url);
+        // Send data to API
+        $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
         if ($response->successful()) {
-            $reviews = $response->json();
-        }
-    } catch (\Exception $e) {
-        Log::error('Error al obtener reseñas: ' . $e->getMessage());
-    }
-
-    return view('kevin.ReseñaInver', compact('reviews', 'entrepreneurId'));
-}
-
-    /**
-     * Crea una nueva reseña.
-     */
-    public function store(Request $request)
-    {
-        // Validar los datos enviados desde el formulario
-        $validated = $request->validate([
-            'entrepreneur_id' => 'required|integer',
-            'comment' => 'required|string|max:500',
-            'qualification' => 'required|integer|min:1|max:5',
-        ]);
-
-        try {
-            // Preparar los datos para enviar a la API
-            $data = [
-                'entrepreneur_id' => $validated['entrepreneur_id'],
-                'comment' => $validated['comment'],
-                'qualification' => $validated['qualification'],
-            ];
-
-            // Enviar los datos a la API
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
-
-            // Verificar si la API respondió exitosamente
-            if ($response->successful()) {
-                return redirect()->route('kevin.ReseñaInver')
-                    ->with('success', 'Reseña creada exitosamente.');
-            } else {
-                return back()->withErrors($response->json()['message'] ?? 'Error desconocido al crear la reseña')
-                    ->withInput();
-            }
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+            return redirect()->route('kevin.ReseñaInver')
+                ->with('success', 'Reseña creada exitosamente.');
+        } else {
+            return back()->withErrors($response->json()['message'] ?? 'Error desconocido al crear la reseña')
                 ->withInput();
         }
+    } catch (\Exception $e) {
+        return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+            ->withInput();
     }
+}
 }
