@@ -25,18 +25,17 @@
                 </div>
             </div>
         </section>
-Copy    <section class="profile">
-        <div class="profile-card">
-            <img src="{{ isset($emprendimiento->owner_image) ? asset('images/'.$emprendimiento->owner_image) : asset('images/default-profile.png') }}" alt="{{ $emprendimiento->owner_name ?? 'Nombre del Dueño' }}" class="profile-image">
-            <div class="profile-info">
-                <h2>{{ $emprendimiento->owner_name ?? 'Nombre del Dueño' }}</h2>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $emprendimiento->email ?? '' }}">{{ $emprendimiento->email ?? 'Correo no disponible' }}</a></p>
-                <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento->address ?? 'Dirección no disponible' }}</p>
-                <p><i class="fas fa-phone"></i> {{ $emprendimiento->phone ?? 'Teléfono no disponible' }}</p>
-                <p><i class="fas fa-city"></i> {{ $emprendimiento->city ?? 'Ciudad no disponible' }}</p>
+        <section class="profile">
+            <div class="profile-card">
+                <img src="{{ isset($perfil->image) ? asset('images/'.$perfil->image) : asset('images/default-profile.png') }}" alt="{{ $perfil->name ?? 'Nombre del Usuario' }}" class="profile-image">
+                <div class="profile-info">
+                    <h2>{{ $perfil->name ?? 'Nombre del Usuario' }}</h2>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $perfil->email ?? '' }}">{{ $perfil->email ?? 'Correo no disponible' }}</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ $perfil->location ?? 'Ubicación no disponible' }}</p>
+                    <p><i class="fas fa-phone"></i> {{ $perfil->phone ?? 'Teléfono no disponible' }}</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <div class="hero-buttons">
         <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
