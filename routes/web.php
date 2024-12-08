@@ -161,7 +161,7 @@ Route::get('entrepreneurs/{id}', [entrepreneursController::class, 'show'])->name
     // ->name('Home_Usuario.index')
     // ->middleware(['auth:sanctum', 'role:entrepreneur']);
 
-    
+
 
 // Route::get('Home_Usuario', [Home_Usuario::class, 'index'])->name('Home_Usuario.index');
 
@@ -269,8 +269,15 @@ Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->nam
 
 
 
+Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+
+// Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
 
+//rutas para editar perfil inversionista
+
+Route::get('/perfil/editar', [PerfilInverEditarController::class, 'index'])->name('perfilInver.edit');
+Route::put('/perfil/editar', [PerfilInverEditarController::class, 'update'])->name('perfilInver.update');
 
 
 
@@ -431,9 +438,6 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
 // Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
-Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
-
-Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
 Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
 Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaInver.index');
