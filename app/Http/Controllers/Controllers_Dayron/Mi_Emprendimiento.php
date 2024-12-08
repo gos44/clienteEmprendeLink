@@ -20,7 +20,7 @@ class Mi_Emprendimiento extends Controller
 
         // Verificar si el usuario existe
         if (!$perfil) {
-            return redirect()->route('home')->with('error', 'Usuario no encontrado');
+            return redirect()->route('Home_Usuario')->with('error', 'Usuario no encontrado');
         }
 
         // Consultar el emprendimiento
