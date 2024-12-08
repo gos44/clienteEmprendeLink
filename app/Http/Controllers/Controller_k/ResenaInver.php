@@ -3,11 +3,36 @@
 namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class ResenaInver extends Controller
 {
+    /**
+     * Muestra la lista de reseñas en la vista.
+     */
+    public function index()
+    {
+        $reviews = [];
+
+        try {
+            // Llamada GET a la API para obtener las reseñas
+            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
+
+            if ($response->successful()) {
+                $reviews = $response->json(); // Ajusta según la estructura JSON de la API
+            }
+        } catch (\Exception $e) {
+            // Loguear errores
+            \Log::error('Error al obtener reseñas: ' . $e->getMessage());
+        }
+
+        // Retornar la vista con las reseñas
+        return view('kevin.ReseñaInver', compact('reviews'));
+    }
+
+    /**
+     * Crea una nueva reseña.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -23,21 +48,19 @@ class ResenaInver extends Controller
                 'qualification' => $validated['qualification'],
             ];
 
-            // Agregar encabezados si es necesario
             $response = Http::asJson()->post(
                 'https://apiemprendelink-production-9272.up.railway.app/api/review',
                 $data
             );
 
             if ($response->successful()) {
-                return redirect()->route('kevin.ReseñaInver')
+                return redirect()->route('resenaInver')
                     ->with('success', 'Reseña creada exitosamente.');
             }
 
-            // Loguear respuesta fallida
-            \Log::error('Respuesta de la API al crear reseña:', [
+            \Log::error('Error al crear reseña:', [
                 'status' => $response->status(),
-                'body' => $response->body()
+                'body' => $response->body(),
             ]);
 
             return back()->withErrors(['error' => 'Error al enviar la reseña. Por favor, intenta nuevamente.'])
