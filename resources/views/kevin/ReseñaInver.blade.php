@@ -66,9 +66,9 @@
                     <input type="radio" id="star1" name="qualification" value="1" required>
                     <label for="star1">★</label>
                 </div>
-
+            
                 <textarea id="review-comment" class="review-textarea" name="comment" placeholder="Comparte tu experiencia..." maxlength="500" required></textarea>
-
+            
                 <input type="hidden" name="entrepreneur_id" value="{{ $entrepreneur_id ?? '' }}">
 
                 <button type="submit" class="submit-review-btn">Enviar Reseña</button>
@@ -82,7 +82,6 @@ document.getElementById('review-form').addEventListener('submit', async function
 
     const rating = document.querySelector('input[name="qualification"]:checked')?.value;
     const comment = document.getElementById('review-comment').value;
-    const entrepreneurId = document.getElementById('entrepreneur-id').value;
 
     if (!rating || !comment) {
         alert('Por favor completa tu calificación y comentario');
@@ -98,9 +97,9 @@ document.getElementById('review-form').addEventListener('submit', async function
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                entrepreneur_id: entrepreneurId || null,
                 qualification: rating,
                 comment: comment
+                // Remove entrepreneur_id from the payload
             }),
             credentials: 'same-origin'
         });
@@ -111,7 +110,6 @@ document.getElementById('review-form').addEventListener('submit', async function
             alert('Reseña enviada con éxito');
             location.reload();
         } else {
-            // Mostrar detalles específicos del error
             console.error('Error details:', data);
             alert(data.message || data.error_details || 'Error al publicar la reseña');
         }

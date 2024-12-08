@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
@@ -13,28 +12,28 @@ class ResenaInver extends Controller
      * Muestra la lista de reseñas en la vista.
      */
     public function index(Request $request)
-{
-    $reviews = [];
-    $entrepreneurId = $request->input('entrepreneur_id');
+    {
+        $reviews = [];
+        $entrepreneurId = $request->input('entrepreneur_id');
 
-    try {
-        // Llamada GET con filtro opcional
-        $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
-        if ($entrepreneurId) {
-            $url .= '?entrepreneur_id=' . $entrepreneurId;
+        try {
+            // Llamada GET con filtro opcional
+            $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
+            if ($entrepreneurId) {
+                $url .= '?entrepreneur_id=' . $entrepreneurId;
+            }
+
+            $response = Http::get($url);
+
+            if ($response->successful()) {
+                $reviews = $response->json();
+            }
+        } catch (\Exception $e) {
+            Log::error('Error al obtener reseñas: ' . $e->getMessage());
         }
 
-        $response = Http::get($url);
-
-        if ($response->successful()) {
-            $reviews = $response->json();
-        }
-    } catch (\Exception $e) {
-        Log::error('Error al obtener reseñas: ' . $e->getMessage());
+        return view('kevin.ReseñaInver', compact('reviews', 'entrepreneurId'));
     }
-
-    return view('kevin.ReseñaInver', compact('reviews', 'entrepreneurId'));
-}
 
     /**
      * Crea una nueva reseña.
@@ -43,7 +42,7 @@ class ResenaInver extends Controller
     {
         // Validar los datos enviados desde el formulario
         $validated = $request->validate([
-            'entrepreneur_id' => 'required|integer',
+            'entrepreneur_id' => 'nullable|integer',
             'comment' => 'required|string|max:500',
             'qualification' => 'required|integer|min:1|max:5',
         ]);
@@ -51,10 +50,14 @@ class ResenaInver extends Controller
         try {
             // Preparar los datos para enviar a la API
             $data = [
-                'entrepreneur_id' => $validated['entrepreneur_id'],
                 'comment' => $validated['comment'],
                 'qualification' => $validated['qualification'],
             ];
+
+            // Agregar entrepreneur_id solo si está presente
+            if (!empty($validated['entrepreneur_id'])) {
+                $data['entrepreneur_id'] = $validated['entrepreneur_id'];
+            }
 
             // Enviar los datos a la API
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
