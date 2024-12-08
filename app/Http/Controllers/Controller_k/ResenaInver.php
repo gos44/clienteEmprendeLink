@@ -9,6 +9,36 @@ use Illuminate\Support\Facades\Log;
 
 class ResenaInver extends Controller
 {
+    /**
+     * Muestra la vista de reseñas
+     */
+    public function index(Request $request)
+    {
+        $reviews = [];
+        $entrepreneur_id = $request->input('entrepreneur_id', null);
+
+        try {
+            // Llamada GET a la API para obtener las reseñas
+            $response = Http::timeout(10)->get('https://apiemprendelink-production-9272.up.railway.app/api/review');
+
+            if ($response->successful()) {
+                $reviews = $response->json(); // Ajusta según la estructura JSON de la API
+            }
+        } catch (\Exception $e) {
+            // Loguear errores
+            Log::error('Error al obtener reseñas: ' . $e->getMessage());
+        }
+
+        // Retornar la vista con las reseñas
+        return view('kevin.ReseñaInver', [
+            'reviews' => $reviews,
+            'entrepreneur_id' => $entrepreneur_id
+        ]);
+    }
+
+    /**
+     * Crea una nueva reseña.
+     */
     public function store(Request $request)
     {
         try {
