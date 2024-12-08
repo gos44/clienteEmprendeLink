@@ -27,7 +27,7 @@ class ResenaInver extends Controller
             $reviews = [];
         }
 
-        return view('kevin.ReseñaInve', compact('reviews', 'entrepreneur_id'));
+        return view('kevin.ReseñaInver', compact('reviews', 'entrepreneur_id'));
     }
 
     /**
@@ -56,7 +56,7 @@ class ResenaInver extends Controller
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
             if ($response->successful()) {
-                return redirect()->route('kevin.ReseñaInve')
+                return redirect()->route('kevin.ReseñaInver')
                     ->with('success', 'Reseña creada exitosamente.');
             } else {
                 return back()->withErrors($response->json()['errors'] ?? ['Error desconocido'])
