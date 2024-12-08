@@ -52,6 +52,7 @@ class ResenaInver extends Controller
                 'https://apiemprendelink-production-9272.up.railway.app/api/review',
                 $data
             );
+            dd($response->body());
 
             if ($response->successful()) {
                 return redirect()->route('resenaInver')
