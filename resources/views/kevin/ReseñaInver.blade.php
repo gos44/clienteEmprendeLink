@@ -55,17 +55,18 @@
             <form id="review-form" method="POST" action="{{ route('resenaInver.store') }}">
                 @csrf
                 <div class="star-rating">
-                    <input type="radio" id="star5" name="rating" value="5" required>
+                    <input type="radio" id="star5" name="qualification" value="5" required>
                     <label for="star5">★</label>
-                    <input type="radio" id="star4" name="rating" value="4" required>
+                    <input type="radio" id="star4" name="qualification" value="4" required>
                     <label for="star4">★</label>
-                    <input type="radio" id="star3" name="rating" value="3" required>
+                    <input type="radio" id="star3" name="qualification" value="3" required>
                     <label for="star3">★</label>
-                    <input type="radio" id="star2" name="rating" value="2" required>
+                    <input type="radio" id="star2" name="qualification" value="2" required>
                     <label for="star2">★</label>
-                    <input type="radio" id="star1" name="rating" value="1" required>
+                    <input type="radio" id="star1" name="qualification" value="1" required>
                     <label for="star1">★</label>
                 </div>
+
 
                 <textarea id="review-comment" class="review-textarea" name="comment" placeholder="Comparte tu experiencia..." maxlength="500" required></textarea>
 

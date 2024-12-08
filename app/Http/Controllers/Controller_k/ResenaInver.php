@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 class ResenaInver extends Controller
 {
     /**
-     * Lista todas las reseñas.
+     * Muestra la vista con la lista de reseñas y el formulario para crear nuevas.
      */
     public function index()
     {
@@ -18,37 +18,33 @@ class ResenaInver extends Controller
             $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
 
             if ($response->successful()) {
-                return response()->json([
-                    'success' => true,
-                    'data' => $response->json(),
-                ]);
+                $reseñas = $response->json(); // Datos obtenidos de la API
+                return view('kevin.ReseñaInver', ['reseñas' => $reseñas]); // Enviar a la vista
             } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Error al obtener las reseñas.',
-                    'errors' => $response->json() ?? 'Error desconocido',
+                return view('kevin.ReseñaInver', [
+                    'reseñas' => [],
+                    'error' => 'No se pudieron obtener las reseñas.',
                 ]);
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No se pudo conectar con la API.',
-                'errors' => $e->getMessage(),
+            return view('kevin.ReseñaInver', [
+                'reseñas' => [],
+                'error' => 'Error al conectarse con la API: ' . $e->getMessage(),
             ]);
         }
     }
 
     /**
-     * Crea una nueva reseña.
+     * Crea una nueva reseña y redirige a la vista con la lista de reseñas actualizada.
      */
     public function store(Request $request)
     {
         // Validar los datos enviados desde el formulario
         $validated = $request->validate([
-            'qualification' => 'required|integer|min:1|max:5', // Calificación entre 1 y 5
-            'comment' => 'required|string|max:500',           // Comentario obligatorio
-            'entrepreneur_id' => 'required|integer',          // ID del emprendedor
-            'investor_id' => 'required|integer',              // ID del inversionista
+            'qualification' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:500',
+            'entrepreneur_id' => 'required|integer',
+            'investor_id' => 'required|integer',
         ]);
 
         try {
@@ -64,24 +60,15 @@ class ResenaInver extends Controller
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
             if ($response->successful()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Reseña creada exitosamente.',
-                    'data' => $response->json(),
-                ]);
+                return redirect()->route('resenaInver')
+                    ->with('success', 'Reseña creada exitosamente.');
             } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Error al crear la reseña.',
-                    'errors' => $response->json() ?? 'Error desconocido',
-                ]);
+                return back()->withErrors($response->json()['errors'] ?? ['Error desconocido'])
+                    ->withInput();
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No se pudo conectar con la API.',
-                'errors' => $e->getMessage(),
-            ]);
+            return back()->withErrors(['error' => 'Error al conectarse con la API: ' . $e->getMessage()])
+                ->withInput();
         }
     }
 }
