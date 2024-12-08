@@ -13,25 +13,21 @@ class ResenaInver extends Controller
      */
     public function index()
     {
-        try {
-            // Llamada GET a la API para obtener las reseñas
-            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
+        // Obtenemos el ID del emprendedor (puede venir de la autenticación o ser fijo)
+        $entrepreneur_id = 1; // Cambia este valor según sea necesario
 
+        // Obtenemos las reseñas desde la API
+        $reviews = []; // Aquí se deben cargar las reseñas existentes
+        try {
+            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
             if ($response->successful()) {
-                $reseñas = $response->json(); // Datos obtenidos de la API
-                return view('kevin.ReseñaInver', ['reseñas' => $reseñas]); // Enviar a la vista
-            } else {
-                return view('kevin.ReseñaInver', [
-                    'reseñas' => [],
-                    'error' => 'No se pudieron obtener las reseñas.',
-                ]);
+                $reviews = $response->json('data') ?? [];
             }
         } catch (\Exception $e) {
-            return view('kevin.ReseñaInver', [
-                'reseñas' => [],
-                'error' => 'Error al conectarse con la API: ' . $e->getMessage(),
-            ]);
+            $reviews = [];
         }
+
+        return view('kevin.ReseñaInve', compact('reviews', 'entrepreneur_id'));
     }
 
     /**
@@ -60,7 +56,7 @@ class ResenaInver extends Controller
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
             if ($response->successful()) {
-                return redirect()->route('resenaInver')
+                return redirect()->route('kevin.ReseñaInve')
                     ->with('success', 'Reseña creada exitosamente.');
             } else {
                 return back()->withErrors($response->json()['errors'] ?? ['Error desconocido'])
