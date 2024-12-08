@@ -59,7 +59,7 @@
         </div>
 
         <div class="profile-actions">
-            <a href="{{ route('perfilInver.index') }}">
+            <a href="{{ route('perfilInver.update') }}">
                 <button class="btn-primary">Editar perfil</button>
             </a>
             <a href="{{ route('Home1.index') }}">
@@ -68,6 +68,6 @@
         </div>
     </main>
 
-    
+
 </body>
 </html>
