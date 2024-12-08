@@ -6,64 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 
 class ResenaInver extends Controller
 {
-    /**
-     * Muestra la lista de reseñas en la vista.
-     */
-    public function index()
-    {
-        $reviews = [];
-
-        try {
-            // Llamada GET a la API para obtener las reseñas
-            $response = Http::timeout(10)->get('https://apiemprendelink-production-9272.up.railway.app/api/review');
-
-            if ($response->successful()) {
-                $reviews = $response->json(); // Ajusta según la estructura JSON de la API
-            }
-        } catch (\Exception $e) {
-            // Loguear errores
-            Log::error('Error al obtener reseñas: ' . $e->getMessage());
-        }
-
-        // Retornar la vista con las reseñas
-        return view('kevin.ReseñaInver', compact('reviews'));
-    }
-
-    /**
-     * Crea una nueva reseña.
-     */
     public function store(Request $request)
     {
-        // Validar los datos de entrada
-        $validated = $request->validate([
-            'entrepreneur_id' => 'nullable|integer',
-            'comment' => 'required|string|max:500',
-            'qualification' => 'required|integer|min:1|max:5',
-        ]);
-
-        // Preparar los datos para enviar
-        $dataToSend = [
-            'comment' => $validated['comment'],
-            'qualification' => $validated['qualification'],
-            'entrepreneur_id' => $validated['entrepreneur_id'] ?? null,
-        ];
-
         try {
-            // Realizar la solicitud POST a la API externa
+            // Obtener todos los datos enviados
+            $data = $request->all();
+
+            // Loguear los datos recibidos para depuración
+            Log::info('Datos recibidos para reseña:', $data);
+
+            // Realizar la solicitud POST a la API externa con depuración completa
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json'
-            ])->timeout(10) // Agregar timeout
-            ->post(
+            ])->post(
                 'https://apiemprendelink-production-9272.up.railway.app/api/review',
-                $dataToSend
+                $data
             );
 
-            // Imprimir respuesta completa para depuración
+            // Loguear la respuesta completa de la API
             Log::info('Respuesta de la API:', [
                 'status' => $response->status(),
                 'body' => $response->body(),
@@ -78,29 +42,24 @@ class ResenaInver extends Controller
                 ]);
             }
 
-            // Registrar errores si la solicitud no fue exitosa
-            Log::error('Error al crear reseña:', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
-
-            // Devolver respuesta de error con más detalles
+            // Si no fue exitosa, devolver detalles del error
             return response()->json([
                 'success' => false,
-                'message' => 'Error al enviar la reseña. Detalles: ' . $response->body(),
+                'message' => 'Error al enviar la reseña.',
+                'error_details' => $response->body(),
                 'status' => $response->status()
-            ], $response->status());
+            ], 400);
 
         } catch (\Exception $e) {
-            // Manejar errores de conexión
-            Log::error('No se pudo conectar con la API:', [
-                'exception' => $e->getMessage(),
+            // Loguear cualquier excepción capturada
+            Log::error('Excepción al enviar reseña:', [
+                'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
 
             return response()->json([
                 'success' => false,
-                'message' => 'Error de conexión: ' . $e->getMessage()
+                'message' => 'Error interno: ' . $e->getMessage()
             ], 500);
         }
     }

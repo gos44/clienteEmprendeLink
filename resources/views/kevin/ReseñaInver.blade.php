@@ -78,7 +78,7 @@
     </div>
 
     <script>
-       document.getElementById('review-form').addEventListener('submit', async function (e) {
+document.getElementById('review-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const rating = document.querySelector('input[name="qualification"]:checked')?.value;
@@ -99,8 +99,8 @@
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                entrepreneur_id: entrepreneurId ? parseInt(entrepreneurId) : null,
-                qualification: parseInt(rating),
+                entrepreneur_id: entrepreneurId || null,
+                qualification: rating,
                 comment: comment
             }),
             credentials: 'same-origin'
@@ -109,11 +109,12 @@
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message || 'Reseña enviada con éxito');
+            alert('Reseña enviada con éxito');
             location.reload();
         } else {
+            // Mostrar detalles específicos del error
             console.error('Error details:', data);
-            alert(data.message || 'Error al publicar la reseña');
+            alert(data.message || data.error_details || 'Error al publicar la reseña');
         }
     } catch (error) {
         console.error('Error:', error);
