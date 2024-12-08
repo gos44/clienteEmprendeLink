@@ -2,63 +2,71 @@
 
 namespace App\Http\Controllers\Controllers_Gos;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Para obtener el usuario autenticado
-use Illuminate\Support\Facades\Storage; // Para manejar archivos
-use App\Models\User; // Modelo del usuario (ajusta esto si el modelo tiene otro nombre)
+use Illuminate\Routing\Controller;
 
 class PerfilInverEditarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Obtener el usuario autenticado
-        $user = Auth::user();
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
-        // Retornar la vista con los datos del usuario
-        return view('Views_gos/EditarPerfilInversionista', compact('user'));
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+        }
+
+        try {
+            // Hacer la solicitud para obtener los datos del usuario
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+            if ($response->successful()) {
+                $userData = $response->json();
+
+                return view('Views_gos/PerfilInversionista', ['user' => $userData]);
+            } else {
+                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
+        }
     }
 
     public function update(Request $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'birthdate' => 'required|date',
-            'email' => 'required|email|unique:users,email,' . Auth::id(),
-            'location' => 'required|string|max:255',
-            'phone' => 'required|digits:10',
-            'gender' => 'required|in:Masculino,Femenino,Otro',
-            'document' => 'required|numeric|digits_between:10,15',
-            'investment_experience_file' => 'nullable|file|mimes:pdf|max:2048',
-        ]);
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
-        // Obtener el usuario autenticado
-        $user = Auth::user();
-
-        // Actualizar los datos del usuario
-        $user->name = $request->name;
-        $user->birthdate = $request->birthdate;
-        $user->email = $request->email;
-        $user->location = $request->location;
-        $user->phone = $request->phone;
-        $user->gender = $request->gender;
-        $user->document = $request->document;
-
-        // Manejar el archivo de experiencia de inversión
-        if ($request->hasFile('investment_experience_file')) {
-            // Eliminar archivo anterior si existe
-            if ($user->investment_experience_file) {
-                Storage::delete($user->investment_experience_file);
-            }
-            // Guardar nuevo archivo
-            $path = $request->file('investment_experience_file')->store('investment_experiences');
-            $user->investment_experience_file = $path;
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
-        // Guardar los cambios
-        $user->save();
+        try {
+            // Validar los datos recibidos del formulario
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                // Agrega aquí más campos según sea necesario
+            ]);
 
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado exitosamente');
+            // Hacer la solicitud para actualizar los datos del usuario
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update', $validatedData);
+
+            if ($response->successful()) {
+                return redirect()->route('perfilInver.index')
+                    ->with('success', 'Perfil actualizado correctamente.');
+            } else {
+                return redirect()->back()->with('error', 'No se pudo actualizar el perfil. Inténtalo de nuevo.');
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()], 500);
+        }
     }
 }
