@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Controllers_Gos;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Para obtener el usuario autenticado
 use Illuminate\Support\Facades\Storage; // Para manejar archivos
