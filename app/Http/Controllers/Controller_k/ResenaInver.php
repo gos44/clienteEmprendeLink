@@ -17,14 +17,15 @@ class ResenaInver extends Controller
         $entrepreneur_id = 1; // Cambia este valor según sea necesario
 
         // Obtenemos las reseñas desde la API
-        $reviews = []; // Aquí se deben cargar las reseñas existentes
+        $reviews = [];
         try {
             $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
             if ($response->successful()) {
                 $reviews = $response->json('data') ?? [];
             }
         } catch (\Exception $e) {
-            $reviews = [];
+            // Loguear el error para depuración
+            \Log::error('Error al obtener reseñas: ' . $e->getMessage());
         }
 
         return view('kevin.ReseñaInver', compact('reviews', 'entrepreneur_id'));
@@ -59,10 +60,12 @@ class ResenaInver extends Controller
                 return redirect()->route('kevin.ReseñaInver')
                     ->with('success', 'Reseña creada exitosamente.');
             } else {
-                return back()->withErrors($response->json()['errors'] ?? ['Error desconocido'])
-                    ->withInput();
+                // Capturar errores específicos del API
+                $errors = $response->json('errors') ?? ['Error desconocido en la API'];
+                return back()->withErrors($errors)->withInput();
             }
         } catch (\Exception $e) {
+            \Log::error('Error al crear reseña: ' . $e->getMessage());
             return back()->withErrors(['error' => 'Error al conectarse con la API: ' . $e->getMessage()])
                 ->withInput();
         }
