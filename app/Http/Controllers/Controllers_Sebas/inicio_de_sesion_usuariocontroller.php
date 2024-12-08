@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class inicio_de_sesion_usuariocontroller extends Controller
 {
     public function index()
     {
-        return view('Views_Sebas.iniciar_sesion_usuario');
+        return response()->json(['message' => 'Endpoint para iniciar sesión'], 200);
     }
 
     public function login(Request $request)
@@ -41,29 +39,20 @@ class inicio_de_sesion_usuariocontroller extends Controller
 
             if ($response->successful()) {
                 // Obtener el token JWT de la respuesta
-                $token = $response->json()['access_token'];  // Asumiendo que la respuesta es como { "access_token": "JWT_TOKEN" }
+                $token = $response->json()['access_token']; // Asumiendo que la respuesta tiene "access_token"
 
-                // Almacenar el token en la sesión
-                session(['token' => $token]);
-
-                // Verificar si el rol es entrepreneur o investor y redirigir a la vista correspondiente
-                $role = $validated['role']; // Obtenemos el rol del usuario
-
-                if ($role == 'entrepreneur') {
-                    // Redirigir al home de entrepreneur
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-                } elseif ($role == 'investor') {
-                    // Redirigir al home de investor
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
-                }
+                // Responder con el token y datos adicionales
+                return response()->json([
+                    'message' => 'Inicio de sesión exitoso',
+                    'access_token' => $token,
+                    'role' => $validated['role']
+                ], 200);
             }
 
             // Si el login no es exitoso
-            return back()->withErrors([
+            return response()->json([
                 'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
-            ]);
+            ], 401);
 
         } catch (\Exception $e) {
             // Manejo de errores
@@ -72,9 +61,10 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return back()->withErrors([
+            return response()->json([
                 'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
-            ]);
+            ], 500);
         }
     }
 }
+
