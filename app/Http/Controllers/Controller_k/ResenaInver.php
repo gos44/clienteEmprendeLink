@@ -21,9 +21,12 @@ class ResenaInver extends Controller
 
             if ($response->successful()) {
                 $reviews = $response->json(); // Ajusta según la estructura JSON de la API
+            } else {
+                // Si la API responde con un error
+                \Log::error('Error al obtener reseñas: ' . $response->status() . ' - ' . $response->body());
             }
         } catch (\Exception $e) {
-            // Loguear errores para depuración
+            // Loguear el error de conexión
             \Log::error('Error al obtener reseñas: ' . $e->getMessage());
         }
 
@@ -59,10 +62,14 @@ class ResenaInver extends Controller
                 return redirect()->route('kevin.ReseñaInver')
                     ->with('success', 'Reseña creada exitosamente.');
             } else {
+                // Mostrar respuesta completa en caso de error
+                \Log::error('Error al crear la reseña: ' . $response->status() . ' - ' . $response->body());
                 return back()->withErrors($response->json()['message'] ?? 'Error desconocido al crear la reseña')
                     ->withInput();
             }
         } catch (\Exception $e) {
+            // Loguear el error de conexión o cualquier otro error
+            \Log::error('No se pudo conectar con la API: ' . $e->getMessage());
             return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
                 ->withInput();
         }
