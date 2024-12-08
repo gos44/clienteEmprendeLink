@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
 class ResenaInver extends Controller
@@ -11,25 +12,29 @@ class ResenaInver extends Controller
     /**
      * Muestra la lista de reseñas en la vista.
      */
-    public function index()
-    {
-        $reviews = [];
+    public function index(Request $request)
+{
+    $reviews = [];
+    $entrepreneurId = $request->input('entrepreneur_id');
 
-        try {
-            // Llamada GET a la API para obtener reseñas
-            $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review');
-
-            if ($response->successful()) {
-                $reviews = $response->json(); // Ajusta según la estructura JSON de la API
-            }
-        } catch (\Exception $e) {
-            // Loguear errores para depuración
-            \Log::error('Error al obtener reseñas: ' . $e->getMessage());
+    try {
+        // Llamada GET con filtro opcional
+        $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
+        if ($entrepreneurId) {
+            $url .= '?entrepreneur_id=' . $entrepreneurId;
         }
 
-        // Enviar las reseñas a la vista
-        return view('kevin.ReseñaInver', compact('reviews'));
+        $response = Http::get($url);
+
+        if ($response->successful()) {
+            $reviews = $response->json();
+        }
+    } catch (\Exception $e) {
+        Log::error('Error al obtener reseñas: ' . $e->getMessage());
     }
+
+    return view('kevin.ReseñaInver', compact('reviews', 'entrepreneurId'));
+}
 
     /**
      * Crea una nueva reseña.
