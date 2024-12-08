@@ -269,6 +269,81 @@ Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->nam
 
 
 
+Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+
+// Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
+
+
+//rutas para editar perfil inversionista
+
+Route::get('/perfil/editar', [PerfilInverEditarController::class, 'index'])->name('perfilInver.edit');
+Route::put('/perfil/editar', [PerfilInverEditarController::class, 'update'])->name('perfilInver.update');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rutas para manejar la creacion de una reseña en inversionista
+
+Route::get('resenaInver', [ResenaInver::class, 'index'])->name('resenaInver');
+Route::post('resenaInver/store', [ResenaInver::class, 'store'])->name('resenaInver.store');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -340,9 +415,6 @@ Route::get('resena', [Resena::class, 'Resena'])->name('resena');
 Route::get('resena2', [Resena2::class, 'Resena2'])->name('resena2');
 Route::get('resena3', [Resena3::class, 'Resena3'])->name('resena3');
 Route::get('resena4', [Resena4::class, 'Resena4'])->name('resena4');
-//inver
-Route::get('resenaInver', [ResenaInver::class, 'index'])->name('resenaInver');
-Route::post('resenaInver/store', [ResenaInver::class, 'store'])->name('resenaInver.store');
 
 //notificaciones
 
@@ -366,9 +438,6 @@ Route::get('contactanosHome', [Contactanos::class, 'ContactanosHome'])->name('Co
 Route::get('Home1', action: [HomeController::class, 'index'])->name('Home1.index');
 
 // Route::get('perfilUser/{id}', [PerfilUsuarioController::class, 'index'])->name('perfilUser.index');
-Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
-
-Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
 Route::get('listaUsuarios', [ListEntrepreneur_UserController::class, 'index'])->name('listaUsuarios.index');
 Route::get('listaInver', [ListEntrepreneur_InverController::class, 'index'])->name('listaInver.index');
