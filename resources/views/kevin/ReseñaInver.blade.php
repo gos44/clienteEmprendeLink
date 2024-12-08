@@ -69,8 +69,7 @@
 
                 <textarea id="review-comment" class="review-textarea" name="comment" placeholder="Comparte tu experiencia..." maxlength="500" required></textarea>
 
-                <input type="hidden" id="entrepreneur-id" name="entrepreneur_id"
-                       value="{{ $entrepreneur_id ?? '' }}">
+                <input type="hidden" name="entrepreneur_id" value="{{ $entrepreneur_id ?? '' }}">
 
                 <button type="submit" class="submit-review-btn">Enviar Reseña</button>
             </form>
