@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ResenaInver extends Controller
 {
@@ -23,7 +25,7 @@ class ResenaInver extends Controller
             }
         } catch (\Exception $e) {
             // Loguear errores
-            \Log::error('Error al obtener reseñas: ' . $e->getMessage());
+            Log::error('Error al obtener reseñas: ' . $e->getMessage());
         }
 
         // Retornar la vista con las reseñas
@@ -35,6 +37,7 @@ class ResenaInver extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos de entrada
         $validated = $request->validate([
             'entrepreneur_id' => 'required|integer',
             'comment' => 'required|string|max:500',
@@ -42,35 +45,43 @@ class ResenaInver extends Controller
         ]);
 
         try {
-            $data = [
-                'entrepreneur_id' => $validated['entrepreneur_id'],
-                'comment' => $validated['comment'],
-                'qualification' => $validated['qualification'],
-            ];
-
-            $response = Http::asJson()->post(
+            // Realizar la solicitud POST a la API externa
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ])->post(
                 'https://apiemprendelink-production-9272.up.railway.app/api/review',
-                $data
+                $validated
             );
-            dd($response->body());
 
+            // Verificar si la solicitud fue exitosa
             if ($response->successful()) {
-                return redirect()->route('resenaInver')
-                    ->with('success', 'Reseña creada exitosamente.');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Reseña creada exitosamente'
+                ]);
             }
 
-            \Log::error('Error al crear reseña:', [
+            // Registrar errores si la solicitud no fue exitosa
+            Log::error('Error al crear reseña:', [
                 'status' => $response->status(),
                 'body' => $response->body(),
             ]);
 
-            return back()->withErrors(['error' => 'Error al enviar la reseña. Por favor, intenta nuevamente.'])
-                ->withInput();
+            // Devolver respuesta de error
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al enviar la reseña. Por favor, intenta nuevamente.'
+            ], 400);
 
         } catch (\Exception $e) {
-            \Log::error('No se pudo conectar con la API:', ['exception' => $e->getMessage()]);
-            return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
-                ->withInput();
+            // Manejar errores de conexión
+            Log::error('No se pudo conectar con la API:', ['exception' => $e->getMessage()]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'No se pudo conectar con la API: ' . $e->getMessage()
+            ], 500);
         }
     }
 }
