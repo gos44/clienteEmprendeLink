@@ -18,60 +18,65 @@
 
         <div class="profile-banner">
             <div class="profile-img" onclick="openPhotoModal()">
-                <img id="profile-photo" src="{{ $user->photo ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}" alt="Foto de perfil">
+                <img id="profile-photo"
+                     src="{{ $user['photo'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}"
+                     alt="Foto de perfil">
             </div>
         </div>
 
         <div class="profile-info">
             <div class="info-group">
                 <label><i class="fas fa-user"></i> Nombre:</label>
-                <input type="text" name="name" value="{{ $user->name }}" required>
+                <input type="text" name="name" value="{{ $user['name'] ?? '' }}" required>
                 <span class="error">El nombre es requerido</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-calendar"></i> Fecha de nacimiento:</label>
-                <input type="date" name="birthdate" value="{{ $user->birthdate }}" required>
+                <input type="date" name="birthdate" value="{{ $user['birthdate'] ?? '' }}" required>
                 <span class="error">La fecha de nacimiento es requerida</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-envelope"></i> Correo:</label>
-                <input type="email" name="email" value="{{ $user->email }}" required>
+                <input type="email" name="email" value="{{ $user['email'] ?? '' }}" required>
                 <span class="error">Ingrese un correo válido</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-map-marker-alt"></i> Ubicación:</label>
-                <input type="text" name="location" value="{{ $user->location }}" required>
+                <input type="text" name="location" value="{{ $user['location'] ?? '' }}" required>
                 <span class="error">La ubicación es requerida</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-phone"></i> Celular:</label>
-                <input type="tel" name="phone" value="{{ $user->phone }}" required pattern="[0-9]{10}">
+                <input type="tel" name="phone" value="{{ $user['phone'] ?? '' }}" required pattern="[0-9]{10}">
                 <span class="error">Ingrese un número de celular válido (10 dígitos)</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-venus-mars"></i> Género:</label>
                 <select name="gender" required>
-                    <option value="Masculino" {{ $user->gender == 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                    <option value="Femenino" {{ $user->gender == 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                    <option value="Otro" {{ $user->gender == 'Otro' ? 'selected' : '' }}>Otro</option>
+                    <option value="Masculino" {{ isset($user['gender']) && $user['gender'] == 'Masculino' ? 'selected' : '' }}>Masculino</option>
+                    <option value="Femenino" {{ isset($user['gender']) && $user['gender'] == 'Femenino' ? 'selected' : '' }}>Femenino</option>
+                    <option value="Otro" {{ isset($user['gender']) && $user['gender'] == 'Otro' ? 'selected' : '' }}>Otro</option>
                 </select>
                 <span class="error">Seleccione un género</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-file-pdf"></i> Certificado de Inversión:</label>
+                @if(isset($user['investment_certificate']))
+                    <a href="{{ $user['investment_certificate'] }}" target="_blank">Ver certificado actual</a>
+                @endif
                 <input type="file" name="investment_certificate" accept=".pdf">
-                <span class="error">Debe adjuntar un archivo en formato PDF si no se escribe la experiencia</span>
+                <span class="error">Debe adjuntar un archivo en formato PDF</span>
             </div>
 
             <div class="info-group">
                 <label><i class="fas fa-id-card"></i> Documento:</label>
-                <input type="text" name="document" value="{{ $user->document }}" required pattern="[0-9]{10,15}">
+                <input type="text" name="document" value="{{ $user['document'] ?? '' }}" required pattern="[0-9]{10,15}">
                 <span class="error">Ingrese un número de documento válido</span>
             </div>
         </div>
