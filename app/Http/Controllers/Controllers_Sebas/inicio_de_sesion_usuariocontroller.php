@@ -11,7 +11,7 @@ class inicio_de_sesion_usuariocontroller extends Controller
 {
     public function index()
     {
-        // Mantén la vista para el inicio de sesión
+        // Mantén la vista para iniciar sesión
         return view('Views_Sebas.iniciar_sesion_usuario');
     }
 
@@ -42,31 +42,18 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 // Obtener el token JWT de la respuesta
                 $token = $response->json()['access_token'];
 
-                // Verificar si la solicitud viene desde Postman o navegador
-                if ($request->expectsJson()) {
-                    return response()->json([
-                        'message' => 'Inicio de sesión exitoso',
-                        'access_token' => $token,
-                        'role' => $validated['role']
-                    ], 200);
-                }
-
-                // Almacenar el token en la sesión
-                session(['token' => $token]);
-
-                // Redirigir según el rol
-                $role = $validated['role'];
-                if ($role == 'entrepreneur') {
-                    return redirect()->route('Home_Usuario.index')
-                        ->with('success', 'Usuario registrado con éxito. Ahora puedes iniciar sesión.');
-                } elseif ($role == 'investor') {
-                    return redirect()->route('Home_inversor.index')
-                        ->with('success', 'Usuario inversor registrado con éxito. Ahora puedes iniciar sesión.');
-                }
+                // Devolver respuesta como JSON directamente
+                return response()->json([
+                    'message' => 'Inicio de sesión exitoso',
+                    'access_token' => $token,
+                    'role' => $validated['role']
+                ], 200);
             }
 
             // Si las credenciales son incorrectas
-            return $this->handleLoginError($request, 'Credenciales incorrectas. Por favor, revisa tus datos.', 401);
+            return response()->json([
+                'error' => 'Credenciales incorrectas. Por favor, revisa tus datos.'
+            ], 401);
         } catch (\Exception $e) {
             // Manejo de errores
             Log::error('Error de inicio de sesión', [
@@ -74,15 +61,9 @@ class inicio_de_sesion_usuariocontroller extends Controller
                 'trace' => $e->getTraceAsString()
             ]);
 
-            return $this->handleLoginError($request, 'Ocurrió un error inesperado. Por favor, intenta de nuevo.', 500);
+            return response()->json([
+                'error' => 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
+            ], 500);
         }
-    }
-
-    private function handleLoginError($request, $message, $status)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => $message], $status);
-        }
-        return back()->withErrors(['error' => $message]);
     }
 }
