@@ -19,7 +19,6 @@ class ResenaInver extends Controller
             if ($entrepreneurId) {
                 $url .= '?entrepreneur_id=' . $entrepreneurId;
             }
-
             $response = Http::get($url);
 
             if ($response->successful()) {
@@ -36,37 +35,43 @@ class ResenaInver extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'entrepreneur_id' => 'required|integer|exists:entrepreneurs,id',
-            'investor_id' => 'required|integer|exists:investors,id',
-            'comment' => 'required|string|max:500',
-            'qualification' => 'required|integer|min:1|max:5',
-        ]);
+{
+    // Validar la entrada del usuario
+    $validated = $request->validate([
+        'entrepreneur_id' => 'required|integer',
+        'investor_id' => 'required|integer',
+        'comment' => 'required|string|max:500',
+        'qualification' => 'required|integer|min:1|max:5',
+    ]);
 
-        try {
-            $data = [
-                'entrepreneur_id' => $validated['entrepreneur_id'],
-                'investor_id' => $validated['investor_id'],
-                'comment' => $validated['comment'],
-                'qualification' => $validated['qualification'],
-            ];
+    try {
+        // Crear los datos que se enviarán a la API
+        $data = [
+            'entrepreneur_id' => $validated['entrepreneur_id'],
+            'investor_id' => $validated['investor_id'],
+            'comment' => $validated['comment'],
+            'qualification' => $validated['qualification'],
+        ];
 
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
+        // Hacer la solicitud POST a la API
+        $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
-            if ($response->successful()) {
-                return redirect()->route('kevin.ReseñaInver')
-                    ->with('success', 'Reseña creada exitosamente.');
-            } else {
-                $errorDetails = $response->json();
-                Log::error('Error en la creación de la reseña: ' . json_encode($errorDetails));
-                return back()->withErrors(['error' => 'Error al guardar la reseña: ' . ($errorDetails['message'] ?? 'Desconocido')])
-                    ->withInput();
-            }
-        } catch (\Exception $e) {
-            Log::error('Excepción al crear reseña: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+        if ($response->successful()) {
+            // Si la reseña se crea correctamente
+            $reviewData = $response->json();
+            return redirect()->route('kevin.ReseñaInver')
+                ->with('success', 'Reseña creada exitosamente.');
+        } else {
+            // Manejar errores específicos de la API
+            $errorDetails = $response->json();
+            return back()->withErrors($errorDetails['message'] ?? 'Error desconocido al crear la reseña')
                 ->withInput();
         }
+    } catch (\Exception $e) {
+        // Manejar errores de conexión o excepciones
+        return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+            ->withInput();
     }
 }
+    }
+

@@ -62,7 +62,17 @@
                         <p>{{ $review['comment'] ?? 'Sin comentario disponible.' }}</p>
                     </div>
                     <div class="review-entrepreneurship">
-                        <p>Emprendimiento: {{ $review['entrepreneurships']['id'] ?? 'No especificado' }}</p>
+                        @if(!empty($review['entrepreneur']))
+                            <p>Emprendedor: {{ $review['entrepreneur']['id'] ?? 'No disponible' }}</p>
+                        @else
+                            <p>No hay emprendedor asociado a esta reseña.</p>
+                        @endif
+                    
+                        @if(!empty($review['entrepreneurship']))
+                            <p>Emprendimiento: {{ $review['entrepreneurship']['id'] ?? 'No disponible' }}</p>
+                        @else
+                            <p>No hay emprendimiento asociado a esta reseña.</p>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -115,29 +125,36 @@
             }
 
             try {
-                const response = await fetch('{{ route("resenaInver.store") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    },
-                    body: JSON.stringify({ qualification: rating, comment }),
-                });
+    const response = await fetch('{{ route("resenaInver.store") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            qualification: rating,
+            comment: comment,
+            entrepreneur_id: "{{ $entrepreneur_id ?? '' }}",
+            investor_id: "{{ optional(auth()->user())->id ?? '' }}"
+        }),
+        credentials: 'same-origin'
+    });
 
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert('Reseña enviada con éxito.');
-                    location.reload();
-                } else {
-                    console.error('Error al enviar:', data);
-                    alert(data.message || 'Error al publicar la reseña.');
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                alert('Error de conexión. Intenta nuevamente más tarde.');
-            }
-        });
+    if (response.ok) {
+        const data = await response.json();
+        alert('Reseña enviada con éxito');
+        location.reload();
+    } else {
+        const errorData = await response.json();
+        console.error('Detalles del error:', errorData);
+        alert(errorData.message || 'Error al publicar la reseña.');
+    }
+} catch (error) {
+    console.error('Error de conexión:', error);
+    alert('No se pudo conectar con el servidor. Por favor, inténtalo más tarde.');
+}
+});
     </script>
 </body>
 </html>
