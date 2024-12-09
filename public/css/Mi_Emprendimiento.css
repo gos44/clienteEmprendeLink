@@ -235,3 +235,74 @@ html, body {
         font-size: 0.9em;
     }
 }
+
+
+.profile {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid black;
+}
+
+.profile-info h2 {
+    color: black;
+    margin-bottom: 15px;
+}
+
+.profile-info p {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-info i {
+    color: black;
+    width: 20px;
+}
+
+.profile-info a {
+    color: #8b4513;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.profile-info a:hover {
+    color: #a0522d;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 400px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info p {
+        justify-content: center;
+    }
+}
