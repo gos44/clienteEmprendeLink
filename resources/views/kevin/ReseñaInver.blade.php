@@ -38,7 +38,7 @@
                     <p>{{ $review['comment'] }}</p>
                 </div>
                 <div class="review-entrepreneurship">
-                    @if($review['entrepreneurship'])
+                    @if($review['entrepreneurships'])
                         <p>Emprendimiento: {{ $review['entrepreneurship']['id'] }}</p>
                     @else
                         <p>No hay emprendimiento asociado a esta reseña.</p>
