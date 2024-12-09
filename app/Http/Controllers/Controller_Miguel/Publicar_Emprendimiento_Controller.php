@@ -31,6 +31,7 @@ class Publicar_Emprendimiento_Controller extends Controller
         ]);
     
         try {
+            
             $userId = auth()->id();
     
             // Preparar los datos para la solicitud
