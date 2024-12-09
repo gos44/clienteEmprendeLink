@@ -10,7 +10,20 @@ class Mi_Emprendimiento extends Controller
 {
     public function show($id)
     {
-        // Consulta directa a la tabla publish_Entrepreneurships
+        // Obtener el ID del usuario autenticado
+        $userId = auth()->id();
+
+        // Obtener datos del usuario (perfil)
+        $perfil = DB::table('users')
+            ->where('id', $userId)
+            ->first();
+
+        // Verificar si el usuario existe
+        if (!$perfil) {
+            return redirect()->route('Home_Usuario')->with('error', 'Usuario no encontrado');
+        }
+
+        // Consultar el emprendimiento
         $emprendimiento = DB::table('publish_Entrepreneurships')
             ->where('id', $id)
             ->first();
@@ -31,7 +44,7 @@ class Mi_Emprendimiento extends Controller
             $emprendimiento->name_products = json_decode($emprendimiento->name_products, true);
         }
 
-        // Retorna la vista con los datos del emprendimiento
-        return view('Views_Dayron.Mi_Emprendimiento', compact('emprendimiento'));
+        // Retornar la vista con los datos del perfil y del emprendimiento
+        return view('Views_Dayron.Mi_Emprendimiento', compact('perfil', 'emprendimiento'));
     }
 }
