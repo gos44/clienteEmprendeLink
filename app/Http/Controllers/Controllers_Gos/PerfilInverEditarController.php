@@ -30,7 +30,7 @@ class PerfilInverEditarController extends Controller
             // Cargar la vista con los datos correctos
             $userData = $response->successful() ? $response->json() : [];
 
-            return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
+            return view('View_gos/PerfilInversionista', ['user' => $userData]);
 
         } catch (\Exception $e) {
             // Log del error con más detalles
@@ -38,7 +38,7 @@ class PerfilInverEditarController extends Controller
             Log::error('Trace: ' . $e->getTraceAsString());
 
             // Cargar vista con datos vacíos
-            return view('Views_gos.PerfilEditarInversionista', ['user' => []]);
+            return view('View_gos/PerfilInversionista', ['user' => []]);
         }
     }
 
