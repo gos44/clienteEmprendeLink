@@ -38,35 +38,32 @@ class PerfilInverEditarController extends Controller
 
     public function update(Request $request)
     {
-        // Obtener el token desde la sesión
-        $token = session('token', null);
-
-        if (!$token) {
-            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-        }
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'birthdate' => 'nullable|date',
+            'location' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'gender' => 'nullable|string|in:Masculino,Femenino',
+        ]);
 
         try {
-            // Validar los datos recibidos del formulario
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|max:255',
-                // Agrega aquí más campos según sea necesario
+            // Obtener el usuario autenticado
+            $user = Auth::user();
+
+            // Actualizar los datos del usuario
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'birthdate' => $request->birthdate,
+                'location' => $request->location,
+                'phone' => $request->phone,
+                'gender' => $request->gender,
             ]);
 
-            // Hacer la solicitud para actualizar los datos del usuario
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update', $validatedData);
-
-            if ($response->successful()) {
-                return redirect()->route('perfilInver.index')
-                    ->with('success', 'Perfil actualizado correctamente.');
-            } else {
-                return redirect()->back()->with('error', 'No se pudo actualizar el perfil. Inténtalo de nuevo.');
-            }
+            return redirect()->back()->with('success', 'Perfil actualizado con éxito');
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()], 500);
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al actualizar el perfil.']);
         }
     }
 }
