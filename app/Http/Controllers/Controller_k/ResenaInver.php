@@ -53,59 +53,62 @@ class ResenaInver extends Controller {
     ]);
 }
     
+public function store(Request $request) 
+{
+    // Validate input with entrepreneur_id as nullable
+    $validated = $request->validate([
+        'entrepreneur_id' => 'nullable|integer',
+        'comment' => 'required|string|max:500',
+        'qualification' => 'required|integer|min:1|max:5',
+    ]);
 
-    public function store(Request $request) 
-    {
-        // Validate input
-        $validated = $request->validate([
-            'entrepreneur_id' => 'required|integer',
-            'comment' => 'required|string|max:500',
-            'qualification' => 'required|integer|min:1|max:5',
-        ]);
-
-        try {
-            // Get the current user's token
-            $token = session('token', null);
-            if (!$token) {
-                return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-            }
+    try {
+        // Get the current user's token
+        $token = session('token', null);
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+        }
+    
+        // Get user data to confirm identity
+        $userResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+    
+        if (!$userResponse->successful()) {
+            return back()->withErrors(['error' => 'No se pudo autenticar al usuario.']);
+        }
+    
+        $userData = $userResponse->json();
         
-            // Get user data to confirm identity
-            $userResponse = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
-        
-            if (!$userResponse->successful()) {
-                return back()->withErrors(['error' => 'No se pudo autenticar al usuario.']);
-            }
-        
-            $userData = $userResponse->json();
-            
-            // Prepare data for review submission
-            $data = [
-                'entrepreneur_id' => $validated['entrepreneur_id'],
-                'investor_id' => $userData['id'], // Use the authenticated user's ID
-                'comment' => $validated['comment'],
-                'qualification' => $validated['qualification'],
-            ];
-        
-            // Submit review to API
-            $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
-        
-            if ($response->successful()) {
-                return redirect()->route('resenaInver.index', ['entrepreneur_id' => $validated['entrepreneur_id']])
-                    ->with('success', 'Reseña creada exitosamente.');
-            } else {
-                // Handle API errors
-                $errorDetails = $response->json();
-                return back()->withErrors($errorDetails['message'] ?? 'Error desconocido al crear la reseña')
-                    ->withInput();
-            }
-        } catch (\Exception $e) {
-            // Handle connection or other exceptions
-            return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+        // Prepare data for review submission
+        $data = [
+            'investor_id' => $userData['id'], // Use the authenticated user's ID
+            'comment' => $validated['comment'],
+            'qualification' => $validated['qualification'],
+        ];
+    
+        // Only add entrepreneur_id if it's provided
+        if (!empty($validated['entrepreneur_id'])) {
+            $data['entrepreneur_id'] = $validated['entrepreneur_id'];
+        }
+    
+        // Submit review to API
+        $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
+    
+        if ($response->successful()) {
+            return redirect()->route('resenaInver.index')
+                ->with('success', 'Reseña creada exitosamente.');
+        } else {
+            // Handle API errors
+            $errorDetails = $response->json();
+            return back()->withErrors($errorDetails['message'] ?? 'Error desconocido al crear la reseña')
                 ->withInput();
         }
+    } catch (\Exception $e) {
+        // Handle connection or other exceptions
+        return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
+            ->withInput();
     }
+}
 }
