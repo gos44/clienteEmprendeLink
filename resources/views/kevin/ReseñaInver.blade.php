@@ -16,29 +16,36 @@
 
         <div class="reviews-grid">
             @if(!empty($reviews))
-                @foreach($reviews as $review)
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="company-info">
-                                <img src="{{ $review['investor']['profile_image'] ?? asset('images/placeholder.jpg') }}" alt="Foto de perfil" class="company-logo">
-                                <div class="company-details">
-                                    <h3>{{ $review['investor']['name'] ?? 'Inversionista' }}</h3>
-                                    <span class="timestamp">{{ \Carbon\Carbon::parse($review['created_at'])->format('d M Y H:i') }}</span>
-                                </div>
-                            </div>
-                            <div class="rating-container">
-                                <div class="rating">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        <span class="{{ $i <= $review['qualification'] ? 'star-filled' : 'star-empty' }}">★</span>
-                                    @endfor
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-content">
-                            <p>{{ $review['comment'] }}</p>
+            @foreach($reviews as $review)
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="company-info">
+                        <img src="{{ $review['investor']['profile_image'] ?? asset('images/placeholder.jpg') }}" alt="Foto de perfil" class="company-logo">
+                        <div class="company-details">
+                            <h3>{{ $review['investor']['name'] ?? 'Inversionista' }}</h3>
+                            <span class="timestamp">{{ \Carbon\Carbon::parse($review['created_at'])->format('d M Y H:i') }}</span>
                         </div>
                     </div>
-                @endforeach
+                    <div class="rating-container">
+                        <div class="rating">
+                            @for($i = 1; $i <= 5; $i++)
+                                <span class="{{ $i <= $review['qualification'] ? 'star-filled' : 'star-empty' }}">★</span>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>{{ $review['comment'] }}</p>
+                </div>
+                <div class="review-entrepreneurship">
+                    @if($review['entrepreneurship'])
+                        <p>Emprendimiento: {{ $review['entrepreneurship']['id'] }}</p>
+                    @else
+                        <p>No hay emprendimiento asociado a esta reseña.</p>
+                    @endif
+                </div>
+            </div>
+        @endforeach
             @else
                 <div class="no-reviews">
                     <p>Aún no hay reseñas publicadas. ¡Sé el primero en compartir tu experiencia!</p>
