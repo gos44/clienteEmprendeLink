@@ -9,7 +9,7 @@ body {
 .Inversor {
 color: #666666;
 font-weight: bold;
-text-decoration: none; 
+text-decoration: none;
 }
 
 
@@ -18,9 +18,21 @@ text-decoration: none;
 .Inversor{
 color: #666666;
 font-weight: bold;
-text-decoration: none; 
+text-decoration: none;
 }
 
+input, select, textarea {
+    pointer-events: auto !important;
+    background-color: white;
+    color: black;
+}
+
+input, select {
+    pointer-events: auto !important;
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid #ccc;
+}
 
 .logo {
   height: 100px;
@@ -62,7 +74,7 @@ cursor: pointer;
 }
 #profile-photo{
 
-font-size: smaller; 
+font-size: smaller;
 position: absolute;
 text-align: center;
 
@@ -221,26 +233,25 @@ margin-top: 1rem;
       flex-direction: column;
       align-items: flex-start;
   }
-  
+
   .header-right a {
       margin-left: 0;
       margin-bottom: 10px;
   }
-  
+
   .buttons {
       flex-direction: column;
       align-items: center;
   }
-  
+
   .buttons button {
       width: 100%;
       text-align: center;
   }
-  }    
+  }
   ul {
       list-style: none;
 
     }
 
-  
-    
+
