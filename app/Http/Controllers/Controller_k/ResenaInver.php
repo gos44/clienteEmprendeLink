@@ -69,17 +69,17 @@ class ResenaInver extends Controller {
             if (!$token) {
                 return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
             }
-
+        
             // Get user data to confirm identity
             $userResponse = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
-
+        
             if (!$userResponse->successful()) {
                 return back()->withErrors(['error' => 'No se pudo autenticar al usuario.']);
             }
-
+        
             $userData = $userResponse->json();
             
             // Prepare data for review submission
@@ -89,10 +89,10 @@ class ResenaInver extends Controller {
                 'comment' => $validated['comment'],
                 'qualification' => $validated['qualification'],
             ];
-
+        
             // Submit review to API
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
-
+        
             if ($response->successful()) {
                 return redirect()->route('resenaInver.index', ['entrepreneur_id' => $validated['entrepreneur_id']])
                     ->with('success', 'Reseña creada exitosamente.');
