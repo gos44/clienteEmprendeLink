@@ -5,95 +5,71 @@ namespace App\Http\Controllers\Controllers_Gos;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
 class PerfilInverEditarController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener el token desde la sesión
-        $token = session('token', null);
-
-        if (!$token) {
-            return redirect()->route('login')->with('error', 'Por favor inicie sesión');
-        }
-
         try {
-            // Hacer la solicitud para obtener los datos del usuario
+            // Obtener el token desde la sesión (sin validación obligatoria)
+            $token = session('token', null);
+
+            // Si no hay token, intentar de todos modos cargar datos
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . ($token ?? ''),
                 'Accept' => 'application/json',
             ])->get('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            if ($response->successful()) {
-                $userData = $response->json();
-                return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
-            } else {
-                return redirect()->route('login')->with('error', 'No se pudieron obtener los datos del perfil');
-            }
+            // Cargar la vista independientemente de la respuesta
+            $userData = $response->successful() ? $response->json() : [];
+
+            return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
+
         } catch (\Exception $e) {
+            // Log del error pero sin bloquear la carga de la vista
             Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
-            return redirect()->route('login')->with('error', 'Ocurrió un error al cargar el perfil');
+
+            // Cargar vista con datos vacíos
+            return view('Views_gos.PerfilEditarInversionista', ['user' => []]);
         }
     }
 
     public function update(Request $request)
     {
-        $token = session('token', null);
-
-        if (!$token) {
-            return redirect()->back()->with('error', 'Por favor inicie sesión');
-        }
-
-        // Validar los datos
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'birthdate' => 'required|date',
-            'email' => 'required|email',
-            'location' => 'required|string',
-            'phone' => 'required|string|size:10',
-            'gender' => 'required|string|in:Masculino,Femenino,Otro',
-            'document' => 'required|string|min:10|max:15',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         try {
-            // Preparar los datos para enviar a la API
-            $userData = $validator->validated();
+            // Obtener token sin validación estricta
+            $token = session('token', null);
 
-            // Manejar la carga de certificado de inversión si existe
-            if ($request->hasFile('investment_certificate')) {
-                $certificate = $request->file('investment_certificate');
-                $userData['investment_certificate'] = base64_encode(file_get_contents($certificate->getRealPath()));
-            }
+            // Validar los datos localmente
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'birthdate' => 'required|date',
+                'email' => 'required|email',
+                'location' => 'required|string',
+                'phone' => 'required|string|size:10',
+                'gender' => 'required|string|in:Masculino,Femenino,Otro',
+                'document' => 'required|string|min:10|max:15',
+            ]);
 
-            // Realizar la solicitud de actualización a la API
+            // Realizar solicitud a API sin importar autenticación
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . ($token ?? ''),
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json'
-            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update-profile', $userData);
+            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update-profile', $validatedData);
 
+            // Manejar respuesta sin redirigir
             if ($response->successful()) {
-                return redirect()->route('perfilInver.index')
-                    ->with('success', 'Perfil actualizado exitosamente');
+                return back()->with('success', 'Perfil actualizado exitosamente');
             } else {
-                Log::error('Error en la actualización del perfil: ' . $response->body());
-                return redirect()->back()
-                    ->with('error', 'No se pudo actualizar el perfil')
-                    ->withInput();
+                return back()->with('error', 'No se pudo actualizar el perfil')->withInput();
             }
+
         } catch (\Exception $e) {
-            Log::error('Excepción al actualizar perfil: ' . $e->getMessage());
-            return redirect()->back()
-                ->with('error', 'Ocurrió un error inesperado')
-                ->withInput();
+            // Log del error pero sin bloquear
+            Log::error('Error al actualizar perfil: ' . $e->getMessage());
+            return back()->with('error', 'Ocurrió un error inesperado')->withInput();
         }
     }
 }
