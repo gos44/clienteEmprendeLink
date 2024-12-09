@@ -5,71 +5,43 @@ namespace App\Http\Controllers\Controllers_Gos;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
 
 class PerfilInverEditarController extends Controller
 {
     public function index(Request $request)
     {
-        try {
-            // Obtener el token desde la sesión (sin validación obligatoria)
-            $token = session('token', null);
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
-            // Si no hay token, intentar de todos modos cargar datos
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . ($token ?? ''),
-                'Accept' => 'application/json',
-            ])->get('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
-
-            // Cargar la vista independientemente de la respuesta
-            $userData = $response->successful() ? $response->json() : [];
-
-            return view('Views_gos/PerfilInversionista', ['user' => $userData]);
-
-        } catch (\Exception $e) {
-            // Log del error pero sin bloquear la carga de la vista
-            Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
-
-            // Cargar vista con datos vacíos
-            return view('Views_gos/PerfilInversionista', ['user' => []]);
+        // Verificar si el token está en la sesión
+        if (!$token) {
+            // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
-    }
 
-    public function update(Request $request)
-    {
         try {
-            // Obtener token sin validación estricta
-            $token = session('token', null);
-
-            // Validar los datos localmente
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'birthdate' => 'required|date',
-                'email' => 'required|email',
-                'location' => 'required|string',
-                'phone' => 'required|string|size:10',
-                'gender' => 'required|string|in:Masculino,Femenino,Otro',
-                'document' => 'required|string|min:10|max:15',
-            ]);
-
-            // Realizar solicitud a API sin importar autenticación
+            // Hacer la solicitud para obtener los datos del usuario
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . ($token ?? ''),
+                'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update-profile', $validatedData);
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Manejar respuesta sin redirigir
+            // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                return back()->with('success', 'Perfil actualizado exitosamente');
-            } else {
-                return back()->with('error', 'No se pudo actualizar el perfil')->withInput();
-            }
+                // Si la respuesta es exitosa, obtener los datos del usuario
+                $userData = $response->json();
 
+
+
+
+                return view('Views_gos/EditarPerfilInversionista', ['user' => $userData]);
+            } else {
+                // Si la respuesta es fallida, devolver mensaje de error con código 401
+                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
+            }
         } catch (\Exception $e) {
-            // Log del error pero sin bloquear
-            Log::error('Error al actualizar perfil: ' . $e->getMessage());
-            return back()->with('error', 'Ocurrió un error inesperado')->withInput();
+            // Si ocurre un error inesperado, devolver mensaje de error con el detalle
+            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
         }
     }
 }
