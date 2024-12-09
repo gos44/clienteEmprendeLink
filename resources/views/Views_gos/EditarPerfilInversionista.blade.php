@@ -16,12 +16,14 @@
         @csrf
         @method('PUT')
 
+        <!-- Foto de perfil, la cual no debe estar relacionada con la edición de texto -->
         <div class="profile-banner">
             <div class="profile-img" onclick="openPhotoModal()">
                 <img id="profile-photo" src="{{ $user->photo ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}" alt="Foto de perfil">
             </div>
         </div>
 
+        <!-- Información editable -->
         <div class="profile-info">
             <div class="info-group">
                 <label><i class="fas fa-user"></i> Nombre:</label>
