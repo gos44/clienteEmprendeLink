@@ -14,10 +14,15 @@ class PerfilInverEditarController extends Controller
         // Obtener el token desde la sesión
         $token = session('token', null);
 
-        // Verificar si el token está en la sesión
+        // Log detallado
+        Log::info('Intentando obtener datos de usuario', [
+            'token_presente' => !empty($token),
+            'token_longitud' => $token ? strlen($token) : 'N/A'
+        ]);
+
         if (!$token) {
             Log::error('No se encontró token en la sesión');
-            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+            return redirect()->route('login')->with('error', 'Sesión expirada');
         }
 
         try {
@@ -27,26 +32,35 @@ class PerfilInverEditarController extends Controller
                 'Accept' => 'application/json',
             ])->get('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
+            // Log de la respuesta
+            Log::info('Respuesta de la API', [
+                'status' => $response->status(),
+                'body' => $response->body()
+            ]);
+
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // Si la respuesta es exitosa, obtener los datos del usuario
                 $userData = $response->json();
-
-                // Cambiar a la vista correcta de edición de perfil
                 return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
             } else {
-                Log::error('Respuesta fallida de la API', ['response' => $response->body()]);
-                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
+                Log::error('Respuesta fallida de la API', [
+                    'status' => $response->status(),
+                    'body' => $response->body()
+                ]);
+
+                // Manejar diferentes tipos de errores
+                return back()->with('error', 'No se pueden obtener los datos del usuario');
             }
         } catch (\Exception $e) {
-            Log::error('Error al obtener datos de perfil', [
+            Log::error('Excepción al obtener datos de perfil', [
                 'mensaje' => $e->getMessage(),
+                'clase' => get_class($e),
                 'trace' => $e->getTraceAsString()
             ]);
-            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
+
+            return back()->with('error', 'Ocurrió un error al recuperar los datos');
         }
     }
-
     public function update(Request $request)
     {
         // Obtener token sin validación estricta
