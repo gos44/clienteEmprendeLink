@@ -38,32 +38,27 @@ class PerfilInverEditarController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        // Validar los datos
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'birthdate' => 'nullable|date',
-            'location' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:15',
-            'gender' => 'nullable|string|in:Masculino,Femenino',
+            'birthdate' => 'required|date',
+            'email' => 'required|email',
+            'location' => 'required|string',
+            'phone' => 'required|string|size:10',
+            'gender' => 'required|string',
+            'document' => 'required|string',
         ]);
 
-        try {
-            // Obtener el usuario autenticado
-            $user = Auth::user();
+        // Actualizar el usuario
+        $user = Auth::user(); // Obtener el usuario autenticado
+        $user->update($validated); // Actualiza con los datos validados
 
-            // Actualizar los datos del usuario
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'birthdate' => $request->birthdate,
-                'location' => $request->location,
-                'phone' => $request->phone,
-                'gender' => $request->gender,
-            ]);
-
-            return redirect()->back()->with('success', 'Perfil actualizado con éxito');
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al actualizar el perfil.']);
+        // Si se sube un archivo de certificado
+        if ($request->hasFile('investment_certificate')) {
+            // Procesar el archivo aquí
         }
+
+        // Redirigir con éxito
+        return redirect()->route('perfilInver.edit')->with('success', 'Perfil actualizado con éxito.');
     }
 }
