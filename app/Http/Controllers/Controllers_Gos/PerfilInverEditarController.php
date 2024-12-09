@@ -15,23 +15,30 @@ class PerfilInverEditarController extends Controller
             // Obtener el token desde la sesión (sin validación obligatoria)
             $token = session('token', null);
 
+            // Imprimir token para depuración
+            Log::info('Token obtenido: ' . $token);
+
             // Si no hay token, intentar de todos modos cargar datos
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . ($token ?? ''),
                 'Accept' => 'application/json',
             ])->get('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // Cargar la vista independientemente de la respuesta
+            // Imprimir respuesta para depuración
+            Log::info('Respuesta de la API: ' . json_encode($response->json()));
+
+            // Cargar la vista con los datos correctos
             $userData = $response->successful() ? $response->json() : [];
 
-            return view('Views_gos/PerfilInversionista', ['user' => $userData]);
+            return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
 
         } catch (\Exception $e) {
-            // Log del error pero sin bloquear la carga de la vista
+            // Log del error con más detalles
             Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
+            Log::error('Trace: ' . $e->getTraceAsString());
 
             // Cargar vista con datos vacíos
-            return view('Views_gos/PerfilInversionista', ['user' => []]);
+            return view('Views_gos.PerfilEditarInversionista', ['user' => []]);
         }
     }
 
@@ -52,6 +59,9 @@ class PerfilInverEditarController extends Controller
                 'document' => 'required|string|min:10|max:15',
             ]);
 
+            // Imprimir datos validados para depuración
+            Log::info('Datos validados: ' . json_encode($validatedData));
+
             // Realizar solicitud a API sin importar autenticación
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . ($token ?? ''),
@@ -59,17 +69,23 @@ class PerfilInverEditarController extends Controller
                 'Content-Type' => 'application/json'
             ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update-profile', $validatedData);
 
+            // Imprimir respuesta de la API para depuración
+            Log::info('Respuesta de actualización: ' . json_encode($response->json()));
+
             // Manejar respuesta sin redirigir
             if ($response->successful()) {
                 return back()->with('success', 'Perfil actualizado exitosamente');
             } else {
-                return back()->with('error', 'No se pudo actualizar el perfil')->withInput();
+                // Imprimir detalles del error
+                Log::error('Error en actualización: ' . $response->body());
+                return back()->with('error', 'No se pudo actualizar el perfil: ' . $response->body())->withInput();
             }
 
         } catch (\Exception $e) {
-            // Log del error pero sin bloquear
+            // Log del error con más detalles
             Log::error('Error al actualizar perfil: ' . $e->getMessage());
-            return back()->with('error', 'Ocurrió un error inesperado')->withInput();
+            Log::error('Trace: ' . $e->getTraceAsString());
+            return back()->with('error', 'Ocurrió un error inesperado: ' . $e->getMessage())->withInput();
         }
     }
 }
