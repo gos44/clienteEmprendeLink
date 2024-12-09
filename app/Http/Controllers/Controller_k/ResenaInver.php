@@ -40,27 +40,23 @@ class ResenaInver extends Controller
      */
     public function store(Request $request)
     {
-        // Validar los datos enviados desde el formulario
         $validated = $request->validate([
             'entrepreneur_id' => 'required|integer',
             'investor_id' => 'required|integer',
             'comment' => 'required|string|max:500',
             'qualification' => 'required|integer|min:1|max:5',
         ]);
-
+    
         try {
-            // Preparar los datos para enviar a la API
             $data = [
                 'entrepreneur_id' => $validated['entrepreneur_id'],
                 'investor_id' => $validated['investor_id'],
                 'comment' => $validated['comment'],
                 'qualification' => $validated['qualification'],
             ];
-
-            // Enviar los datos a la API
+    
             $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
-
-            // Verificar si la API respondió exitosamente
+    
             if ($response->successful()) {
                 $reviewData = $response->json();
                 return redirect()->route('kevin.ReseñaInver')
