@@ -24,14 +24,14 @@ class PerfilInverEditarController extends Controller
             // Cargar la vista independientemente de la respuesta
             $userData = $response->successful() ? $response->json() : [];
 
-            return view('Views_gos.PerfilEditarInversionista', ['user' => $userData]);
+            return view('perfilInver.edit', ['user' => $userData]);
 
         } catch (\Exception $e) {
             // Log del error pero sin bloquear la carga de la vista
             Log::error('Error al obtener datos de perfil: ' . $e->getMessage());
 
             // Cargar vista con datos vacíos
-            return view('Views_gos.PerfilEditarInversionista', ['user' => []]);
+            return view('perfilInver.edit', ['user' => []]);
         }
     }
 
