@@ -42,9 +42,9 @@
                 <div class="review-card">
                     <div class="review-header">
                         <div class="company-info">
-                            <img src="{{ $review['investor']['profile_image'] ?? asset('images/placeholder.jpg') }}" alt="Foto de perfil" class="company-logo">
+                            <img src="{{ $user['image'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}" alt="Foto de perfil" class="company-logo">
                             <div class="company-details">
-                                <h3>{{ $review['investor']['name'] ?? 'Inversionista desconocido' }}</h3>
+                                <h3>{{ $user['name'] ?? 'Inversionista desconocido' }}</h3>
                                 <span class="timestamp">
                                     {{ \Carbon\Carbon::parse($review['created_at'] ?? now())->format('d M Y H:i') }}
                                 </span>
@@ -85,8 +85,8 @@
 
         <div class="new-review-container">
             <div class="new-review-header">
-                <img src="{{ optional(auth()->user())->profile_image ?? asset('images/placeholder.jpg') }}" alt="{{ optional(auth()->user())->name ?? 'Inversionista' }}" class="new-review-avatar">
-                <h3 class="new-review-title">{{ optional(auth()->user())->name ?? 'Inversionista' }}</h3>
+                <img src="{{ $user['image'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}" alt="{{ $user['name'] ?? 'Inversionista' }}" class="new-review-avatar">
+                <h3 class="new-review-title">{{ $user['name'] ?? 'Inversionista' }}</h3>
             </div>
 
             <form id="review-form" method="POST" action="{{ route('resenaInver.store') }}">
@@ -125,36 +125,36 @@
             }
 
             try {
-    const response = await fetch('{{ route("resenaInver.store") }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-            qualification: rating,
-            comment: comment,
-            entrepreneur_id: "{{ $entrepreneur_id ?? '' }}",
-            investor_id: "{{ optional(auth()->user())->id ?? '' }}"
-        }),
-        credentials: 'same-origin'
-    });
+                const response = await fetch('{{ route("resenaInver.store") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        qualification: rating,
+                        comment: comment,
+                        entrepreneur_id: "{{ $entrepreneur_id ?? '' }}",
+                        investor_id: "{{ $user['id'] ?? '' }}"
+                    }),
+                    credentials: 'same-origin'
+                });
 
-    if (response.ok) {
-        const data = await response.json();
-        alert('Reseña enviada con éxito');
-        location.reload();
-    } else {
-        const errorData = await response.json();
-        console.error('Detalles del error:', errorData);
-        alert(errorData.message || 'Error al publicar la reseña.');
-    }
-} catch (error) {
-    console.error('Error de conexión:', error);
-    alert('No se pudo conectar con el servidor. Por favor, inténtalo más tarde.');
-}
-});
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('Reseña enviada con éxito');
+                    location.reload();
+                } else {
+                    const errorData = await response.json();
+                    console.error('Detalles del error:', errorData);
+                    alert(errorData.message || 'Error al publicar la reseña.');
+                }
+            } catch (error) {
+                console.error('Error de conexión:', error);
+                alert('No se pudo conectar con el servidor. Por favor, inténtalo más tarde.');
+            }
+        });
     </script>
 </body>
 </html>

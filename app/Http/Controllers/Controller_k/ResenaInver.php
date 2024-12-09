@@ -8,51 +8,51 @@ use Illuminate\Support\Facades\Http;
 
 class ResenaInver extends Controller {
     public function index(Request $request)
-    {
-        $reviews = [];
-        $entrepreneurId = $request->input('entrepreneur_id');
-        $userData = null;
+{
+    $reviews = [];
+    $entrepreneurId = $request->input('entrepreneur_id');
+    $userData = null;
 
-        try {
-            // Retrieve user data
-            $token = session('token', null);
-            if (!$token) {
-                return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-            }
-
-            // Get user profile data
-            $userResponse = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
-
-            if ($userResponse->successful()) {
-                $userData = $userResponse->json();
-            }
-
-            // Retrieve reviews
-            $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
-            if ($entrepreneurId) {
-                $url .= '?entrepreneur_id=' . $entrepreneurId;
-            }
-            $response = Http::get($url);
-
-            if ($response->successful()) {
-                $reviews = $response->json();
-            } else {
-                Log::error('Error en la API: ' . $response->body());
-            }
-        } catch (\Exception $e) {
-            Log::error('Error al obtener datos: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'No se pudieron cargar los datos.']);
+    try {
+        // Recuperar los datos del inversor
+        $token = session('token', null);
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
-        return view('kevin.ReseñaInver', [
-            'reviews' => $reviews, 
-            'entrepreneurId' => $entrepreneurId,
-            'user' => $userData
-        ]);
+        $userResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+        if ($userResponse->successful()) {
+            $userData = $userResponse->json();
+        }
+
+        // Recuperar las reseñas
+        $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
+        if ($entrepreneurId) {
+            $url .= '?entrepreneur_id=' . $entrepreneurId;
+        }
+        $response = Http::get($url);
+
+        if ($response->successful()) {
+            $reviews = $response->json();
+        } else {
+            Log::error('Error en la API: ' . $response->body());
+        }
+    } catch (\Exception $e) {
+        Log::error('Error al obtener datos: ' . $e->getMessage());
+        return back()->withErrors(['error' => 'No se pudieron cargar los datos.']);
     }
+
+    return view('kevin.ReseñaInver', [
+        'reviews' => $reviews, 
+        'entrepreneurId' => $entrepreneurId,
+        'user' => $userData
+    ]);
+}
+    
 
     public function store(Request $request) 
     {
