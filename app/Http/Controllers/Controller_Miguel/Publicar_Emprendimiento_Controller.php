@@ -51,10 +51,10 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'name' => 'general_description',
                     'contents' => $validated['general_description'],
                 ],
-                [
-                    'name' => 'entrepreneurs_id',
-                    'contents' => $userId,
-                ],
+                // [
+                //     'name' => 'entrepreneurs_id',
+                //     'contents' => $userId,
+                // ],
             ];
     
             // Añadir nombres de productos

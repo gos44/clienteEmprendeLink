@@ -384,8 +384,10 @@ Route::get('Home_inversor', [Home_inversor::class, 'index'])->name('Home_inverso
 
 
 
-Route::get('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'index'])->name('Publicar_Emprendimiento');
-Route::post('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'guardarEmprendimiento'])->name('guardarEmprendimiento');
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'index'])->name('Publicar_Emprendimiento');
+    Route::post('/publicar-emprendimiento', [Publicar_Emprendimiento_Controller::class, 'guardarEmprendimiento'])->name('guardarEmprendimiento');
+});
 
 
 // Route::get('Publicar_Emprendimiento1', [Publicar_Emprendimiento::class, 'Publicar_Emprendimiento1'])
