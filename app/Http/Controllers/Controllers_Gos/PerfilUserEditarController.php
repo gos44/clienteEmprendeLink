@@ -1,26 +1,47 @@
 <?php
 namespace App\Http\Controllers\Controllers_Gos;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Http;
 
-class PerfilUserEditarController extends Controller 
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
+class PerfilUserEditarController extends Controller
 {
-    public function index($id)  // Añadir el parámetro $id
+    public function index(Request $request)
     {
-        // Hacer la solicitud GET a la API para obtener un usuario específico por su ID
-        $response = Http::get("apiemprendelink-production-9272.up.railway.app/api/Entrepreneurs/{$id}?included=user");
-        
-        // Si la respuesta es exitosa
-        if ($response->successful()) {
-            // Obtener los datos del cuerpo de la respuesta
-            $connections = $response->json();
-        } else {
-            // En caso de error, inicializar el arreglo vacío
-            $connections = [];
+        // Obtener el token desde la sesión
+        $token = session('token', null);
+
+        // Verificar si el token está en la sesión
+        if (!$token) {
+            // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
-        
-        // Retorna la vista con los datos del emprendedor
-        return view('Views_gos/EditarPerfilUsuario', compact('connections'));
+
+        try {
+            // Hacer la solicitud para obtener los datos del usuario
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+            // Verificar si la respuesta es exitosa
+            if ($response->successful()) {
+                // Si la respuesta es exitosa, obtener los datos del usuario
+                $userData = $response->json();
+
+
+
+
+                return view('Views_gos/EditarPerfilUsuario', ['user' => $userData]);
+            } else {
+                // Si la respuesta es fallida, devolver mensaje de error con código 401
+                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
+            }
+        } catch (\Exception $e) {
+            // Si ocurre un error inesperado, devolver mensaje de error con el detalle
+            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
+        }
     }
 }
