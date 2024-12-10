@@ -1,10 +1,9 @@
 @extends('layouts.Nav-Bar_Inversionista')
 @extends('layouts.Footer_Inversor')
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ... (head content remains the same) ... -->
+    <!-- ... (contenido del head permanece igual) ... -->
 </head>
 <body>
     <main class="profile-container">
@@ -14,7 +13,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update', ['investor' => $investor_id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('perfilInver.update', ['investor' => $user['id']]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="profile-banner">

@@ -13,7 +13,7 @@ class PerfilInverEditarController extends Controller
         $token = session('token', null);
 
         if (!$token) {
-            return redirect()->route('login')->withErrors(['error' => 'Token no encontrado en la sesión.']);
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
         try {
@@ -24,39 +24,23 @@ class PerfilInverEditarController extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
             if (!$investorResponse->successful()) {
-                return redirect()->back()->withErrors(['error' => 'No se pudo obtener información del inversor.']);
+                return response()->json(['error' => 'No se pudo obtener información del inversor.'], 404);
             }
 
-            // Ver contenido de la respuesta
+            // Obtener los datos del inversor
             $investorData = $investorResponse->json();
 
-            // Verificar si `user_id` existe
-            if (!isset($investorData['user_id'])) {
-                return redirect()->back()->withErrors(['error' => 'La respuesta de la API no contiene el campo "user_id".']);
-            }
-
-            $userId = $investorData['user_id'];
-
-            // Obtener datos del usuario asociado
-            $userResponse = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}");
-
-            if (!$userResponse->successful()) {
-                return redirect()->back()->withErrors(['error' => 'No se pudo obtener información del usuario.']);
-            }
-
-            $userData = $userResponse->json();
+            // Asegúrate de que los datos estén bien estructurados
+            $data = [
+                'investor' => $investorData,
+            ];
 
             // Pasar los datos a la vista
-            return view('Views_gos/EditarPerfilInversionista', [
-                'user' => $userData, // Aquí pasas los datos del usuario a la vista
-                'investor_id' => $id, // Pasa el ID del inversor si es necesario para la acción del formulario
-            ]);
-
+            return view('perfil_inversor', ['user' => $investorData]);
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()]);
+            return response()->json([
+                'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
+            ], 500);
         }
     }
 
