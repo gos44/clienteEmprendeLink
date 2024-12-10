@@ -24,7 +24,8 @@ class PerfilInverEditarController extends Controller
 
             if ($response->successful()) {
                 $userData = $response->json();
-                return view('Views_gos/EditarPerfilInversionista', ['user' => $userData]);
+                // Pasa el ID del usuario junto con los datos
+                return view('Views_gos/EditarPerfilInversionista', ['user' => $userData, 'userId' => $userData['id']]);
             } else {
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
             }
@@ -33,7 +34,7 @@ class PerfilInverEditarController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)  // Recibe el ID
     {
         $token = session('token', null);
 
@@ -52,10 +53,11 @@ class PerfilInverEditarController extends Controller
         ]);
 
         try {
+            // Aquí, se pasa el ID como parte de la URL de la API
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->put('https://apiemprendelink-production-9272.up.railway.app/api/auth/update', $validatedData);
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData); // Usar el ID en la URL
 
             if ($response->successful()) {
                 return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado correctamente.');
@@ -66,4 +68,5 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
         }
     }
+
 }
