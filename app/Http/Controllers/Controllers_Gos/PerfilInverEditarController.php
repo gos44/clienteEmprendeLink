@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 
 class PerfilInverEditarController extends Controller
 {
+    // Método para mostrar el perfil del usuario
     public function index(Request $request)
     {
         $token = session('token', null);
@@ -26,13 +27,19 @@ class PerfilInverEditarController extends Controller
                 $userData = $response->json();
                 return view('Views_gos/EditarPerfilInversionista', ['user' => $userData]);
             } else {
-                return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
+                return response()->json([
+                    'error' => 'Respuesta fallida de la API.',
+                    'details' => $response->json() // Información del error
+                ], $response->status());
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()
+            ], 500);
         }
     }
 
+    // Método para actualizar el perfil del usuario
     public function update(Request $request)
     {
         $token = session('token', null);
@@ -41,6 +48,7 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
         }
 
+        // Validación de datos
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -60,10 +68,15 @@ class PerfilInverEditarController extends Controller
             if ($response->successful()) {
                 return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
-                return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil.']);
+                return redirect()->back()->withErrors([
+                    'error' => 'Error al actualizar el perfil.',
+                    'details' => $response->json() // Información detallada del error
+                ]);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
+            return redirect()->back()->withErrors([
+                'error' => 'Error inesperado: ' . $e->getMessage()
+            ]);
         }
     }
 }
