@@ -1,9 +1,10 @@
 @extends('layouts.Nav-Bar_Inversionista')
 @extends('layouts.Footer_Inversor')
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    let user_id=null;
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario - Emprende Link</title>
@@ -19,7 +20,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('perfilInver.update') }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -89,56 +90,20 @@
 
             reader.readAsDataURL(file);
         });
-
-        // Función para abrir el modal de edición
-        function openEditProfileModal() {
-            document.getElementById('ediUsuario').value = document.getElementById('nombreUsuario').innerText; // Cargar nombre de usuario
-            document.getElementById('editNombre').value = document.getElementById('nombres').innerText; // Cargar nombres
-            document.getElementById('editApellidos').value = document.getElementById('apellidos').innerText; // Cargar apellidos
-            document.getElementById('editFechaNacimiento').value = document.getElementById('fechaNacimiento').innerText; // Cargar fecha de nacimiento
-            document.getElementById('editCorreo').value = document.getElementById('correo').innerText; // Cargar correo
-
-            document.getElementById('editProfileModal').style.display = 'block'; // Mostrar el modal
-        }
     </script>
 
-    <script>
-        // Cambiar perfil (con función POST para editar)
-        async function saveChanges() {
-            const formData = new FormData();
-            formData.append('name', document.getElementById('editNombre').value);
-            formData.append('lastname', document.getElementById('editApellidos').value);
-            formData.append('birth_date', document.getElementById('editFechaNacimiento').value);
-            formData.append('email', document.getElementById('editCorreo').value);
-            formData.append('location', document.getElementById('editUbicacion').value);
-            formData.append('phone', document.getElementById('editTelefono').value);
-            formData.append('number', document.getElementById('editDocumento').value);
+<script>
+    // Función para abrir el modal de edición
+function openEditProfileModal() {
+    document.getElementById('ediUsuario').value = document.getElementById('nombreUsuario').innerText; // Cargar nombre de usuario
+    document.getElementById('editNombre').value = document.getElementById('nombres').innerText; // Cargar nombres
+    document.getElementById('editApellidos').value = document.getElementById('apellidos').innerText; // Cargar apellidos
+    document.getElementById('editFechaNacimiento').value = document.getElementById('fechaNacimiento').innerText; // Cargar fecha de nacimiento
+    document.getElementById('editCorreo').value = document.getElementById('correo').innerText; // Cargar correo
 
-            // Si hay una nueva imagen
-            const fileInput = document.querySelector('input[type="file"]');
-            if (fileInput.files[0]) {
-                formData.append('image', fileInput.files[0]);
-            }
+    document.getElementById('editProfileModal').style.display = 'block'; // Mostrar el modal
+}
 
-            try {
-                const response = await fetch('{{ route("perfilInver.update") }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Hubo un error al guardar los cambios.');
-                }
-
-                alert('Cambios guardados correctamente');
-                window.location.reload(); // Recargar la página para mostrar los nuevos datos
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-    </script>
+</script>
 </body>
 </html>
