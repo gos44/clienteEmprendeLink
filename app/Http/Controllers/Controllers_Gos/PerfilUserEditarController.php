@@ -33,48 +33,40 @@ class PerfilUserEditarController extends Controller
         }
     }
 
-    public function update(Request $request, $userId)
-{
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
-        'birth_date' => 'required|date',
-        'email' => 'required|email|max:255',
-        'location' => 'nullable|string|max:255',
-        'phone' => 'nullable|string|max:15',
-        'number' => 'nullable|string|max:20',
-        'image' => 'nullable|image|max:2048',
-    ]);
+    public function update(Request $request)
+    {
+        $token = session('token', null);
 
-    $token = session('token', null);
-
-    if (!$token) {
-        return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-    }
-
-    try {
-        $payload = $validatedData;
-
-        if ($request->hasFile('image')) {
-            $payload['image'] = base64_encode(file_get_contents($request->file('image')->getRealPath()));
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept' => 'application/json',
-        ])->put("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}", $payload);
+        // Prepara el payload con los datos del formulario
+        $payload = [
+            'name' => $request->input('name'),
+            'lastname' => $request->input('lastname'),
+            'birth_date' => $request->input('birth_date'),
+            'email' => $request->input('email'),
+            'location' => $request->input('location'),
+            'phone' => $request->input('phone'),
+            'number' => $request->input('number'),
+            'image' => $request->file('image'), // Si la API acepta imágenes
+        ];
 
-        if ($response->successful()) {
-            return redirect()->route('perfilUser.edit')->with('success', 'Perfil actualizado exitosamente.');
-        } else {
-            // Mostrar la respuesta de error
-            return back()->withErrors([
-                'error' => 'No se pudo actualizar el perfil. Detalles: ' . $response->body(),
-            ]);
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update", $payload);
+
+            if ($response->successful()) {
+                return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado exitosamente.');
+            } else {
+                return back()->withErrors(['error' => 'No se pudo actualizar el perfil. Detalles: ' . $response->body()]);
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()]);
         }
-    } catch (\Exception $e) {
-        return back()->withErrors(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()]);
     }
-}
 
 }
