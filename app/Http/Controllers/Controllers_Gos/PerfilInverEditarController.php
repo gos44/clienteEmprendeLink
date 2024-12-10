@@ -55,39 +55,52 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
         }
 
-        // Validar los datos del formulario
+        // Validar los datos del formulario (todos los campos son opcionales ahora)
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'birth_date' => 'nullable|date',
-            'email' => 'required|email|max:255',
-            'location' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:15',
-            'number' => 'nullable|string|max:20',
-            'image' => 'nullable|image|max:2048'
+            'name' => 'nullable|string|max:255', // Opcional
+            'lastname' => 'nullable|string|max:255', // Opcional
+            'birth_date' => 'nullable|date', // Opcional
+            'email' => 'nullable|email|max:255', // Opcional
+            'location' => 'nullable|string|max:255', // Opcional
+            'phone' => 'nullable|string|max:15', // Opcional
+            'number' => 'nullable|string|max:20', // Opcional
+            'investment_number' => 'nullable|string|max:255', // Opcional
+            'document' => 'nullable|string|max:255', // Opcional
+            'image' => 'nullable|image|max:2048' // Opcional
         ]);
 
         try {
-            // Verificar si el correo electrónico ya está registrado (en la tabla `users`)
-            $userId = $request->input('user_id');  // Obtener el user_id del inversor
-            $existingUser = DB::table('users')
-                ->where('email', $validatedData['email'])
-                ->where('id', '<>', $userId)  // Excluir al usuario actual
-                ->first();
+            // Preparar los datos para enviar (solo los campos que han sido enviados)
+            $updateData = [];
 
-            if ($existingUser) {
-                return redirect()->back()->withErrors(['error' => 'Este correo electrónico ya está en uso.']);
+            // Solo añadir los campos que no están vacíos
+            if ($validatedData['name']) {
+                $updateData['name'] = $validatedData['name'];
             }
-
-            // Preparar los datos para enviar
-            $updateData = [
-                'name' => $validatedData['name'],
-                'lastname' => $validatedData['lastname'],
-                'birth_date' => $validatedData['birth_date'],
-                'location' => $validatedData['location'],
-                'phone' => $validatedData['phone'],
-                'number' => $validatedData['number']
-            ];
+            if ($validatedData['lastname']) {
+                $updateData['lastname'] = $validatedData['lastname'];
+            }
+            if ($validatedData['birth_date']) {
+                $updateData['birth_date'] = $validatedData['birth_date'];
+            }
+            if ($validatedData['email']) {
+                $updateData['email'] = $validatedData['email'];
+            }
+            if ($validatedData['location']) {
+                $updateData['location'] = $validatedData['location'];
+            }
+            if ($validatedData['phone']) {
+                $updateData['phone'] = $validatedData['phone'];
+            }
+            if ($validatedData['number']) {
+                $updateData['number'] = $validatedData['number'];
+            }
+            if ($validatedData['investment_number']) {
+                $updateData['investment_number'] = $validatedData['investment_number'];
+            }
+            if ($validatedData['document']) {
+                $updateData['document'] = $validatedData['document'];
+            }
 
             // Manejar la imagen si se sube
             if ($request->hasFile('image')) {
@@ -95,7 +108,7 @@ class PerfilInverEditarController extends Controller
                 $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
             }
 
-            // Actualizar los datos en la tabla `investors` (perfil del inversor)
+            // Hacer la solicitud para actualizar el investor
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
@@ -104,13 +117,6 @@ class PerfilInverEditarController extends Controller
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                // Si el correo electrónico ha cambiado, actualizarlo en la tabla `users`
-                if ($validatedData['email'] != $request->user()->email) {
-                    DB::table('users')
-                        ->where('id', $userId)
-                        ->update(['email' => $validatedData['email']]);
-                }
-
                 return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error
@@ -121,4 +127,5 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
         }
     }
+
 }
