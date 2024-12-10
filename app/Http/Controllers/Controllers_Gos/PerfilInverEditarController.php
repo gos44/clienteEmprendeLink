@@ -55,6 +55,6 @@ class PerfilInverEditarController extends Controller
             $user->save();
 
             // Redirigir con un mensaje de éxito
-            return redirect()->route('perfilInver.edit')->with('success', 'Perfil actualizado correctamente.');
+            return redirect()->route('Views_gos/EditarPerfilInversionista')->with('success', 'Perfil actualizado correctamente.');
         }
     }
