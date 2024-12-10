@@ -9,35 +9,42 @@ use Illuminate\Routing\Controller;
 class PerfilInverEditarController extends Controller
 {
     public function edit($investor)
-{
-    // Obtener el token desde la sesión
-    $token = session('token', null);
+    {
+        $token = session('token', null);
 
-    // Verificar si el token está en la sesión
-    if (!$token) {
-        return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-    }
-
-    try {
-        // Hacer la solicitud para obtener los datos del usuario específico
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept' => 'application/json',
-        ])->get("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}");
-
-        // Verificar si la respuesta es exitosa
-        if ($response->successful()) {
-            // Si la respuesta es exitosa, devolver los datos del usuario como JSON
-            return response()->json($response->json(), 200);
-        } else {
-            // Si la respuesta es fallida, devolver mensaje de error con código 401
-            return response()->json(['error' => 'Respuesta fallida de la API.', 'status' => $response->status()], 401);
+        if (!$token) {
+            return response()->json([
+                'error' => 'Token no encontrado en la sesión.',
+                'status' => 401
+            ]);
         }
-    } catch (\Exception $e) {
-        // Si ocurre un error inesperado, devolver mensaje de error con el detalle
-        return response()->json(['error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage()], 500);
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}");
+
+            if ($response->successful()) {
+                $userData = $response->json();
+                return response()->json([
+                    'message' => 'Datos obtenidos exitosamente.',
+                    'data' => $userData
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => 'Respuesta fallida de la API.',
+                    'status' => $response->status(),
+                    'response' => $response->body()
+                ], $response->status());
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
+                'status' => 500
+            ]);
+        }
     }
-}
 
     public function update(Request $request, $investor)
     {
