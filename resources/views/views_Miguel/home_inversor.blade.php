@@ -36,7 +36,7 @@
             <h3>Comunicate con los emprendedores</h3>
             <p>Conectamos a emprendedores con ideas innovadoras y prometedoras con inversionistas ávidos de oportunidades de inversión. A través de nuestra plataforma, los emprendedores pueden presentar sus proyectos empresariales de manera convincente, mientras que los inversionistas pueden descubrir y evaluar nuevas oportunidades de inversión.</p>
             
-            <a href="{{ route('Chat_Inversor.index') }}" class="btn">Ver más </a>
+            
         </div>
         <div class="right-options">
           <div class="option2">
@@ -45,7 +45,7 @@
                 <h3>Busca emprendedores</h3>
                 <p>Conecta con emprendedores visionarios que buscan apoyo para llevar sus proyectos al siguiente nivel. Juntos, podemos transformar ideas innovadoras en éxitos.</p>
             </div>
-            <a href="{{ route('listaInver.index') }}" class="btn">Ver más</a>
+           
         </div>        
             <div class="option2">
                 <img src="images/emprende.png" alt="Emprendimientos">
