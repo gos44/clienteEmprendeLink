@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
 
   <form id="profile-form" class="profile-container">
     <div class="profile-banner">
@@ -67,13 +69,13 @@
         <!-- Nuevos campos para inversionista -->
 
         <div class="info-group">
-          <label><i class="fas fa-file-pdf"></i> Certificado de Inversión:</label> Adjuntar PDF:
+          <label><i class="fas fa-file-pdf"></i>Certificado de Inversión:</label> Adjuntar PDF:
           <input type="file" name="investment_experience_file" accept=".pdf">
           <span class="error">Debe adjuntar un archivo en formato PDF si no se escribe la experiencia</span>
       </div>
 
       <div class="info-group">
-        <label><i class="fas fa-file-pdf"></i> Experiencia en Inversión:</label> Adjuntar PDF:
+        <label><i class="fas fa-file-pdf"></i>Experiencia en Inversión:</label> Adjuntar PDF:
         <input type="file" name="investment_experience_file" accept=".pdf">
         <span class="error">Debe adjuntar un archivo en formato PDF si no se escribe la experiencia</span>
     </div>
@@ -88,6 +90,7 @@
     <div class="profile-actions">
     <a href="{{ route('perfilUser.index') }}"> <button type="submit" class="btn-primary">Guardar cambios</button></a>
     <a href="{{ route('perfilUser.index') }}"><button type="button" class="btn-outline">Cancelar</button></a>
+
     </div>
 </form>
 
@@ -105,7 +108,18 @@
     </div>
 </div>
 
+
 <script>
+  // Cargar el navbar
+  fetch('navbarUsuario.html')
+      .then(response => response.text())
+      .then(data => {
+          document.getElementById('header').innerHTML = data;
+          const bootstrapScript = document.createElement('script');
+          bootstrapScript.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js";
+          document.body.appendChild(bootstrapScript);
+      });
+
   // Funciones para el manejo de la foto de perfil
   function openPhotoModal() {
       document.getElementById('photo-modal').style.display = 'flex';
@@ -157,7 +171,7 @@
 
   // Inicializar selects
   document.querySelector('select[name="gender"]').value = 'Masculino';
+  document.querySelector('select[name="stage"]').value = 'Primera fase: la idea de negocio';
 </script>
-
 </body>
 </html>
