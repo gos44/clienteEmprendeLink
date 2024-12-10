@@ -19,14 +19,14 @@ class PerfilInverEditarController extends Controller {
                 'Accept' => 'application/json',
             ])->get('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
-            // CAMBIO IMPORTANTE: Usar GET en lugar de POST
-            // Cambiar también la ruta de la API si es necesario
-
             if ($response->successful()) {
                 $userData = $response->json();
 
-                // CAMBIO: Usar $userData['id'] directamente en la vista
-                return view('Views_gos/EditarPerfilInversionista', ['user' => $userData]);
+                // CLAVE: Pasar explícitamente el ID
+                return view('Views_gos/EditarPerfilInversionista', [
+                    'user' => $userData,
+                    'user_id' => $userData['id']  // Agregar este campo
+                ]);
             } else {
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
             }
@@ -35,7 +35,7 @@ class PerfilInverEditarController extends Controller {
         }
     }
 
-    public function update(Request $request)     {
+    public function update(Request $request, $id)     {
         $token = session('token', null);
 
         if (!$token) {
@@ -56,13 +56,10 @@ class PerfilInverEditarController extends Controller {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update", $validatedData);
-
-            // CAMBIO IMPORTANTE: Eliminar {$id} de la URL
-            // La API debería obtener el ID del usuario desde el token
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData);
 
             if ($response->successful()) {
-                return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado correctamente.');
+                return redirect()->route('perfilInver.edit')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil: ' . $response->body()]);
             }
