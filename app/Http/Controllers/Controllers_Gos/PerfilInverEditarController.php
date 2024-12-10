@@ -36,7 +36,6 @@ class PerfilInverEditarController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Aquí puedes obtener el usuario por ID y actualizarlo
         $token = session('token', null);
 
         if (!$token) {
@@ -57,7 +56,7 @@ class PerfilInverEditarController extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData); // Aquí se pasa el ID en la URL
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData);
 
             if ($response->successful()) {
                 return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado correctamente.');
