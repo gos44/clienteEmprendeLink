@@ -36,7 +36,7 @@ class PerfilInverEditarController extends Controller
             ];
 
             // Pasar los datos a la vista
-            return view('perfil_inversor', ['user' => $investorData]);
+            return view('Views_gos/EditarPerfilInversionista', ['user' => $investorData]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
