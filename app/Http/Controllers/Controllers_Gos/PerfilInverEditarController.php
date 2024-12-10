@@ -106,7 +106,6 @@ class PerfilInverEditarController extends Controller
             }
         } catch (\Exception $e) {
             // Si ocurre un error inesperado, devolver mensaje de error
-            return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
         }
     }
 
