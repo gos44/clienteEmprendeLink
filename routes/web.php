@@ -269,7 +269,9 @@ Route::get('perfilUser', action: [PerfilUsuarioController::class, 'index'])->nam
 
 
 
-Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+// Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+Route::get('/perfil/editar', [PerfilUserEditarController::class, 'index'])->name('perfilUserEditar.index');
+Route::put('/perfil/editar/{user}', [PerfilUserEditarController::class, 'update'])->name('perfilUser.update');
 
 // Route::get('perfilInverEditar', [PerfilInverEditarController::class, 'index'])->name('profile.update');
 
