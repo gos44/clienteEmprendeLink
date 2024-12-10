@@ -71,7 +71,7 @@
 
             <div class="profile-actions">
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="{{ route('Home1.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                <a href="{{ route('Home_inversor.index') }}" class="btn btn-outline-secondary">Cancelar</a>
             </div>
         </form>
     </main>
