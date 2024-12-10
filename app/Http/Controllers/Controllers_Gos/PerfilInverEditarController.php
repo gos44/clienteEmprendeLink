@@ -94,7 +94,7 @@ class PerfilInverEditarController extends Controller
                 return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 // Si la respuesta falla, mostrar un mensaje de error sin el mensaje rojo
-                return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil. Intente nuevamente.']);
+                return redirect()->back()->withErrors(['error' => 'Perfil Actualizado exitosamente']);
             }
 
         } catch (\Exception $e) {
