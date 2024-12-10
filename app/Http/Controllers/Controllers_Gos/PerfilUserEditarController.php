@@ -34,7 +34,7 @@ class PerfilUserEditarController extends Controller
 
 
 
-                return view('Views_gos.perfilUserEditar.index', ['user' => $userData]);
+                return view('perfilUserEditar.index', ['user' => $userData]);
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error con código 401
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
