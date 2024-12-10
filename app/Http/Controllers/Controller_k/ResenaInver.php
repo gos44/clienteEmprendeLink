@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Controller_k;
 
 use App\Http\Controllers\Controller;
@@ -7,71 +6,96 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
-class ResenaInver extends Controller
-{
+class ResenaInver extends Controller {
     public function index(Request $request)
-    {
-        $reviews = [];
-        $entrepreneurId = $request->input('entrepreneur_id');
+{
+    $reviews = [];
+    $userData = null;
 
-        try {
-            $url = 'https://apiemprendelink-production-9272.up.railway.app/api/review';
-            if ($entrepreneurId) {
-                $url .= '?entrepreneur_id=' . $entrepreneurId;
-            }
-            $response = Http::get($url);
-
-            if ($response->successful()) {
-                $reviews = $response->json();
-            } else {
-                Log::error('Error en la API: ' . $response->body());
-            }
-        } catch (\Exception $e) {
-            Log::error('Error al obtener reseñas: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'No se pudieron cargar las reseñas.']);
+    try {
+        // Recuperar los datos del inversor
+        $token = session('token', null);
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
-        return view('kevin.ReseñaInver', compact('reviews', 'entrepreneurId'));
+        $userResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+        if ($userResponse->successful()) {
+            $userData = $userResponse->json();
+        }
+
+        // Recuperar todas las reseñas
+        $response = Http::get('https://apiemprendelink-production-9272.up.railway.app/api/review?included=entrepreneur,entrepreneurship,investor');
+
+        if ($response->successful()) {
+            $reviews = $response->json();
+        } else {
+            Log::error('Error en la API: ' . $response->body());
+        }
+    } catch (\Exception $e) {
+        Log::error('Error al obtener datos: ' . $e->getMessage());
+        return back()->withErrors(['error' => 'No se pudieron cargar los datos.']);
     }
 
-    public function store(Request $request)
+    return view('kevin.ReseñaInver', [
+        'reviews' => $reviews,
+        'user' => $userData
+    ]);
+}
+    
+public function store(Request $request)
 {
-    // Validar la entrada del usuario
     $validated = $request->validate([
-        'entrepreneur_id' => 'required|integer',
-        'investor_id' => 'required|integer',
         'comment' => 'required|string|max:500',
         'qualification' => 'required|integer|min:1|max:5',
     ]);
 
     try {
-        // Crear los datos que se enviarán a la API
+        // Get the current user's token
+        $token = session('token', null);
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+        }
+
+        // Get user data to confirm identity
+        $userResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+        if (!$userResponse->successful()) {
+            return back()->withErrors(['error' => 'No se pudo autenticar al usuario.']);
+        }
+
+        $userData = $userResponse->json();
+
+        // Prepare data for review submission
         $data = [
-            'entrepreneur_id' => $validated['entrepreneur_id'],
-            'investor_id' => $validated['investor_id'],
+            'investor_id' => $userData['id'], // Use the authenticated user's ID
             'comment' => $validated['comment'],
             'qualification' => $validated['qualification'],
         ];
 
-        // Hacer la solicitud POST a la API
+        // Submit review to API
         $response = Http::post('https://apiemprendelink-production-9272.up.railway.app/api/review', $data);
 
         if ($response->successful()) {
-            // Si la reseña se crea correctamente
-            $reviewData = $response->json();
-            return redirect()->route('kevin.ReseñaInver')
+            return redirect()->route('resenaInver.index')
                 ->with('success', 'Reseña creada exitosamente.');
         } else {
-            // Manejar errores específicos de la API
+            // Handle API errors
             $errorDetails = $response->json();
             return back()->withErrors($errorDetails['message'] ?? 'Error desconocido al crear la reseña')
                 ->withInput();
         }
     } catch (\Exception $e) {
-        // Manejar errores de conexión o excepciones
+        // Handle connection or other exceptions
         return back()->withErrors(['error' => 'No se pudo conectar con la API: ' . $e->getMessage()])
             ->withInput();
     }
 }
-    }
-
+}
