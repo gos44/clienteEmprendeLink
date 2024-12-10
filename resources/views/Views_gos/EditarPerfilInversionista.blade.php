@@ -35,39 +35,34 @@
             <div class="profile-info">
                 <div class="info-group">
                     <label><i class="fas fa-user"></i> Nombre:</label>
-                    <input type="text" id="name" name="name" class="form-control"
-                        value="{{ $user['name'] ?? 'No disponible' }}">
+                    <p id="display-name">{{ localStorage.getItem('name') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-user"></i> Apellido:</label>
-                    <input type="text" id="lastname" name="lastname" class="form-control"
-                        value="{{ $user['lastname'] ?? 'No disponible' }}">
+                    <p id="display-lastname">{{ localStorage.getItem('lastname') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-calendar"></i> Fecha de nacimiento:</label>
-                    <input type="date" id="birth_date" name="birth_date" class="form-control"
-                        value="{{ $user['birth_date'] ?? '' }}">
+                    <p id="display-birth_date">{{ localStorage.getItem('birth_date') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-envelope"></i> Correo:</label>
-                    <input type="email" id="email" name="email" class="form-control"
-                        value="{{ $user['email'] ?? 'No disponible' }}">
+                    <p id="display-email">{{ localStorage.getItem('email') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-map-marker-alt"></i> Ubicación:</label>
-                    <input type="text" id="location" name="location" class="form-control"
-                        value="{{ $user['location'] ?? 'No disponible' }}">
+                    <p id="display-location">{{ localStorage.getItem('location') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-phone"></i> Celular:</label>
-                    <input type="tel" id="phone" name="phone" class="form-control"
-                        value="{{ $user['phone'] ?? 'No disponible' }}">
+                    <p id="display-phone">{{ localStorage.getItem('phone') || 'No disponible' }}</p>
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-id-card"></i> Documento:</label>
-                    <input type="text" id="number" name="number" class="form-control"
-                        value="{{ $user['number'] ?? 'No disponible' }}">
+                    <p id="display-number">{{ localStorage.getItem('number') || 'No disponible' }}</p>
                 </div>
+            </div>
+
             </div>
 
             <div class="profile-actions">
