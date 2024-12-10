@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    let user_id=null;
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario - Emprende Link</title>
@@ -18,7 +20,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update') }}" method="POST">
+        <form action="{{ route('perfilInver.update', ['id' => $user['id']]) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -32,40 +34,37 @@
             </div>
 
             <div class="profile-info">
-                <div class="info-group">
-                    <label><i class="fas fa-user"></i> Nombre:</label>
-                    <input type="text" name="name" class="form-control"
-                           value="{{ $user['name'] ?? 'No disponible' }}">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ $user['name'] }}">
                 </div>
-                <div class="info-group">
-                    <label><i class="fas fa-user"></i> Apellido:</label>
-                    <input type="text" name="lastname" class="form-control"
-                           value="{{ $user['lastname'] ?? 'No disponible' }}">
+                <div class="form-group">
+                    <label for="lastname">Apellido</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" value="{{ $user['lastname'] }}">
                 </div>
                 <div class="info-group">
                     <label><i class="fas fa-calendar"></i> Fecha de nacimiento:</label>
-                    <input type="date" name="birth_date" class="form-control"
-                           value="{{ $user['birth_date'] ?? '' }}">
+                    <input type="date" name="birth_date" class="form-control" value="{{ $user['birth_date'] ?? '' }}">
                 </div>
+
                 <div class="info-group">
                     <label><i class="fas fa-envelope"></i> Correo:</label>
-                    <input type="email" name="email" class="form-control"
-                           value="{{ $user['email'] ?? 'No disponible' }}">
+                    <input type="email" name="email" class="form-control" value="{{ $user['email'] ?? 'No disponible' }}">
                 </div>
+
                 <div class="info-group">
                     <label><i class="fas fa-map-marker-alt"></i> Ubicación:</label>
-                    <input type="text" name="location" class="form-control"
-                           value="{{ $user['location'] ?? 'No disponible' }}">
+                    <input type="text" name="location" class="form-control" value="{{ $user['location'] ?? 'No disponible' }}">
                 </div>
+
                 <div class="info-group">
                     <label><i class="fas fa-phone"></i> Celular:</label>
-                    <input type="tel" name="phone" class="form-control"
-                           value="{{ $user['phone'] ?? 'No disponible' }}">
+                    <input type="tel" name="phone" class="form-control" value="{{ $user['phone'] ?? 'No disponible' }}">
                 </div>
+
                 <div class="info-group">
                     <label><i class="fas fa-id-card"></i> Documento:</label>
-                    <input type="text" name="number" class="form-control"
-                           value="{{ $user['number'] ?? 'No disponible' }}">
+                    <input type="text" name="number" class="form-control" value="{{ $user['number'] ?? 'No disponible' }}">
                 </div>
             </div>
 
@@ -89,5 +88,19 @@
             reader.readAsDataURL(file);
         });
     </script>
+
+<script>
+    // Función para abrir el modal de edición
+function openEditProfileModal() {
+    document.getElementById('ediUsuario').value = document.getElementById('nombreUsuario').innerText; // Cargar nombre de usuario
+    document.getElementById('editNombre').value = document.getElementById('nombres').innerText; // Cargar nombres
+    document.getElementById('editApellidos').value = document.getElementById('apellidos').innerText; // Cargar apellidos
+    document.getElementById('editFechaNacimiento').value = document.getElementById('fechaNacimiento').innerText; // Cargar fecha de nacimiento
+    document.getElementById('editCorreo').value = document.getElementById('correo').innerText; // Cargar correo
+
+    document.getElementById('editProfileModal').style.display = 'block'; // Mostrar el modal
+}
+
+</script>
 </body>
 </html>

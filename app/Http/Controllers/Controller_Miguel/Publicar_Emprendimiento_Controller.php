@@ -17,6 +17,18 @@ class Publicar_Emprendimiento_Controller extends Controller
 
     public function guardarEmprendimiento(Request $request)
     {
+
+
+         // Obtener el token desde la sesión
+         $token = session('token', null);
+
+         // Verificar si el token está en la sesión
+         if (!$token) {
+             // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
+             return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+         }
+         
+ 
         // Validación de los datos
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -31,6 +43,7 @@ class Publicar_Emprendimiento_Controller extends Controller
         ]);
     
         try {
+
             $userId = auth()->id();
     
             // Preparar los datos para la solicitud
@@ -51,10 +64,10 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'name' => 'general_description',
                     'contents' => $validated['general_description'],
                 ],
-                [
-                    'name' => 'entrepreneurs_id',
-                    'contents' => $userId,
-                ],
+            [
+                'name' => 'entrepreneurs_id', // Aquí se añade el ID del usuario
+                'contents' => $userId,
+            ],
             ];
     
             // Añadir nombres de productos
@@ -101,7 +114,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             }
     
             // Enviar solicitud
-            $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
+            $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/publicare', $data);
     
             // Cerrar handles de archivos
             fclose($logoHandle);
