@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('perfilInver.update', ['investor' => $investor_id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="profile-banner">
@@ -21,7 +21,7 @@
                     <img id="profile-image"
                          src="{{ $user['image'] ?? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}"
                          alt="Foto de perfil">
-                    <input type="file" name="image" class="form-control mt-2">
+                    <input type="file" name="image" class="form-control mt-2" accept="image/*">
                 </div>
             </div>
 

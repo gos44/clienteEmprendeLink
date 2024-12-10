@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 
 class PerfilInverEditarController extends Controller
 {
-    public function index(Request $request)
+    public function edit($investor)
     {
         // Obtener el token desde la sesión
         $token = session('token', null);
@@ -19,23 +19,20 @@ class PerfilInverEditarController extends Controller
         }
 
         try {
-            // Hacer la solicitud para obtener los datos del usuario
+            // Hacer la solicitud para obtener los datos del usuario específico
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->get('https://apiemprendelink-production-9272.up.railway.app/api/investors/profile');
+            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}");
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
                 // Si la respuesta es exitosa, obtener los datos del usuario
                 $userData = $response->json();
 
-                // Extraer el ID del investor
-                $investorId = $userData['id'] ?? null;
-
                 return view('Views_gos/EditarPerfilInversionista', [
                     'user' => $userData,
-                    'investor_id' => $investorId
+                    'investor_id' => $investor
                 ]);
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error con código 401
@@ -47,7 +44,7 @@ class PerfilInverEditarController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $investor)
     {
         // Obtener el token desde la sesión
         $token = session('token', null);
@@ -92,11 +89,11 @@ class PerfilInverEditarController extends Controller
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json'
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/profile", $updateData);
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}", $updateData);
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
-                return redirect()->route('perfilInver.edit')->with('success', 'Perfil actualizado correctamente.');
+                return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error
                 return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil: ' . $response->body()]);
