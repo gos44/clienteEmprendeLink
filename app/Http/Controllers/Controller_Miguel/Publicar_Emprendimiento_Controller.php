@@ -114,7 +114,7 @@ class Publicar_Emprendimiento_Controller extends Controller
             }
     
             // Enviar solicitud
-            $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/publicare', $data);
+            $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
     
             // Cerrar handles de archivos
             fclose($logoHandle);
