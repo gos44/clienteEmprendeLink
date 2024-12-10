@@ -55,26 +55,41 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
         }
 
-        // Obtener solo los datos necesarios del formulario
-        $updateData = $request->only([
-            'name',
-            'lastname',
-            'birth_date',
-            'location',
-            'phone',
-            'number',
-            'investment_number',
-            'document',
-            'image'  // Si es que es parte del formulario y lo deseas subir
+        // **Validación modificada para permitir la edición sin campos obligatorios**
+        // Los campos no serán requeridos, pero se validarán si están presentes.
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',    // Cambiado a nullable
+            'lastname' => 'nullable|string|max:255', // Cambiado a nullable
+            'birth_date' => 'nullable|date',
+            'email' => 'nullable|email|max:255',    // Cambiado a nullable
+            'location' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:15',
+            'number' => 'nullable|string|max:20',
+            'investment_number' => 'nullable|string', // Cambiado a nullable
+            'document' => 'nullable|string',          // Cambiado a nullable
+            'image' => 'nullable|image|max:2048'
         ]);
 
-        try {
-            // Si se ha subido una imagen, la codificamos en base64
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
-            }
+        // Preparar los datos para la actualización
+        $updateData = [
+            'name' => $validatedData['name'] ?? '',           // Si no se proporciona, enviar vacío
+            'lastname' => $validatedData['lastname'] ?? '',   // Si no se proporciona, enviar vacío
+            'birth_date' => $validatedData['birth_date'] ?? '', // Si no se proporciona, enviar vacío
+            'email' => $validatedData['email'] ?? '',         // Si no se proporciona, enviar vacío
+            'location' => $validatedData['location'] ?? '',   // Si no se proporciona, enviar vacío
+            'phone' => $validatedData['phone'] ?? '',         // Si no se proporciona, enviar vacío
+            'number' => $validatedData['number'] ?? '',       // Si no se proporciona, enviar vacío
+            'investment_number' => $validatedData['investment_number'] ?? '', // Si no se proporciona, enviar vacío
+            'document' => $validatedData['document'] ?? '',   // Si no se proporciona, enviar vacío
+        ];
 
+        // Manejar la imagen si se sube
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
+        }
+
+        try {
             // Hacer la solicitud para actualizar el investor
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
