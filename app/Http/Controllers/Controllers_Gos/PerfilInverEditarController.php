@@ -8,43 +8,54 @@ use Illuminate\Routing\Controller;
 
 class PerfilInverEditarController extends Controller
 {
-    public function edit($investor)
-    {
-        $token = session('token', null);
+    public function edit($id)
+{
+    $token = session('token', null);
 
-        if (!$token) {
-            return response()->json([
-                'error' => 'Token no encontrado en la sesión.',
-                'status' => 401
-            ]);
-        }
-
-        try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}");
-
-            if ($response->successful()) {
-                $userData = $response->json();
-                return response()->json([
-                    'message' => 'Datos obtenidos exitosamente.',
-                    'data' => $userData
-                ], 200);
-            } else {
-                return response()->json([
-                    'error' => 'Respuesta fallida de la API.',
-                    'status' => $response->status(),
-                    'response' => $response->body()
-                ], $response->status());
-            }
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
-                'status' => 500
-            ]);
-        }
+    if (!$token) {
+        return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
     }
+
+    try {
+        // Obtener datos del inversor
+        $investorResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+        if (!$investorResponse->successful()) {
+            return response()->json(['error' => 'No se pudo obtener información del inversor.'], 404);
+        }
+
+        $investorData = $investorResponse->json();
+        $userId = $investorData['user_id']; // Ajusta según la estructura real
+
+        // Obtener datos del usuario asociado
+        $userResponse = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->get("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}");
+
+        if (!$userResponse->successful()) {
+            return response()->json(['error' => 'No se pudo obtener información del usuario.'], 404);
+        }
+
+        $userData = $userResponse->json();
+
+        // Combinar datos del inversor y del usuario para enviarlos como JSON
+        $data = [
+            'investor' => $investorData,
+            'user' => $userData,
+        ];
+
+        return response()->json(['message' => 'Datos obtenidos exitosamente.', 'data' => $data]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
+        ], 500);
+    }
+}
+
 
     public function update(Request $request, $investor)
     {
