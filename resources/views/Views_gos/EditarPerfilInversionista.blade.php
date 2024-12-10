@@ -19,7 +19,7 @@
                 {{ $errors->first() }}
             </div>
         @endif
-
+        {{ dump($user['id']) }}
         <form action="{{ route('perfilInver.update', ['id' => $user['id']]) }}" method="POST">
             @csrf
             @method('PUT')
