@@ -37,11 +37,18 @@
                   </div>
               </div>
               <div class="card">
+                <img src="https://static-blog.onlyoffice.com/wp-content/uploads/2022/10/find-and-replace.png" alt="Solicita patrocinio" class="card-img">
+                <div class="card-content">
+                  <h3>Explora Emprendimientos</h3>
+                    <p>Explora una variedad de emprendimientos y conoce lo que cada uno ofrece.</p>
+                    <a href="{{ route('filtrar_usuario') }}" class="btn">Ver más</a>
+                </div>
+            </div>
+              <div class="card">
                   <img src="https://cdn.pixabay.com/photo/2024/08/03/10/09/business-8941891_1280.jpg" class="card-img">
                   <div class="card-content">
                       <h3>Conectate con más personas</h3>
                       <p>A través de esta asociación estratégica, buscamos maximizar el impacto, la eficiencia y el crecimiento.</p>
-                      <a href="{{ route('listaUsuarios.index') }}" class="btn">Ver más</a>
                   </div>
               </div>
               <div class="card">
@@ -49,17 +56,9 @@
                   <div class="card-content">
                     <h3>Conéctate con Inversionistas</h3>
                     <p>Habla directamente con inversionistas interesados en apoyar y financiar tu emprendimiento.</p>
-                      <a href="{{ route('Chat_Usuario.index') }}" class="btn">Ver más</a>
                   </div>
               </div>
-              <div class="card">
-                  <img src="https://static-blog.onlyoffice.com/wp-content/uploads/2022/10/find-and-replace.png" alt="Solicita patrocinio" class="card-img">
-                  <div class="card-content">
-                    <h3>Explora Emprendimientos</h3>
-                      <p>Explora una variedad de emprendimientos y conoce lo que cada uno ofrece.</p>
-                      <a href="{{ route('filtrar_usuario') }}" class="btn">Ver más</a>
-                  </div>
-              </div>
+             
           </div>
       </section>
 
