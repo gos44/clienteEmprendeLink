@@ -41,10 +41,10 @@
                 </div>
             </section>
 
-            <div class="hero-buttons">
+            {{-- <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
                 <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
-            </div>
+            </div> --}}
         
         
 
@@ -76,10 +76,10 @@
                 </section>
             </div>
 
-            <!-- Reseñas Section -->
-            {{-- <div class="hero-buttons">
+            <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-            </div> --}}
+                <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
+            </div>
         </div>
         @else
         <p>No se encontró el emprendimiento</p>
