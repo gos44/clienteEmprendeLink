@@ -23,7 +23,7 @@ class PerfilInverEditarController extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->get('https://apiemprendelink-production-9272.up.railway.app/api/investors/{investor}');
+            ])->get('https://apiemprendelink-production-9272.up.railway.app/api/investors/profile');
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
@@ -47,7 +47,7 @@ class PerfilInverEditarController extends Controller
         }
     }
 
-    public function update(Request $request, $investor)
+    public function update(Request $request)
     {
         // Obtener el token desde la sesión
         $token = session('token', null);
@@ -66,14 +66,33 @@ class PerfilInverEditarController extends Controller
             'location' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:15',
             'number' => 'nullable|string|max:20',
+            'image' => 'nullable|image|max:2048'
         ]);
 
         try {
+            // Preparar los datos para enviar
+            $updateData = [
+                'name' => $validatedData['name'],
+                'lastname' => $validatedData['lastname'],
+                'birth_date' => $validatedData['birth_date'],
+                'email' => $validatedData['email'],
+                'location' => $validatedData['location'],
+                'phone' => $validatedData['phone'],
+                'number' => $validatedData['number']
+            ];
+
+            // Manejar la imagen si se sube
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
+            }
+
             // Hacer la solicitud para actualizar el investor
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}", $validatedData);
+                'Content-Type' => 'application/json'
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/profile", $updateData);
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {

@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update', ['investor' => $investor_id]) }}" method="PUT">
+        <form action="{{ route('perfilInver.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="profile-banner">
