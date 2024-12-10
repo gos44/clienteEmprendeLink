@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Controllers_Gos;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PerfilInverEditarController extends Controller
 {
@@ -44,7 +45,6 @@ class PerfilInverEditarController extends Controller
         }
     }
 
-
     public function update(Request $request, $investor)
     {
         // Obtener el token desde la sesión
@@ -68,12 +68,22 @@ class PerfilInverEditarController extends Controller
         ]);
 
         try {
+            // Verificar si el correo electrónico ya está registrado (en la tabla `users`)
+            $userId = $request->input('user_id');  // Obtener el user_id del inversor
+            $existingUser = DB::table('users')
+                ->where('email', $validatedData['email'])
+                ->where('id', '<>', $userId)  // Excluir al usuario actual
+                ->first();
+
+            if ($existingUser) {
+                return redirect()->back()->withErrors(['error' => 'Este correo electrónico ya está en uso.']);
+            }
+
             // Preparar los datos para enviar
             $updateData = [
                 'name' => $validatedData['name'],
                 'lastname' => $validatedData['lastname'],
                 'birth_date' => $validatedData['birth_date'],
-                'email' => $validatedData['email'],
                 'location' => $validatedData['location'],
                 'phone' => $validatedData['phone'],
                 'number' => $validatedData['number']
@@ -85,7 +95,7 @@ class PerfilInverEditarController extends Controller
                 $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
             }
 
-            // Hacer la solicitud para actualizar el investor
+            // Actualizar los datos en la tabla `investors` (perfil del inversor)
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
@@ -94,6 +104,13 @@ class PerfilInverEditarController extends Controller
 
             // Verificar si la respuesta es exitosa
             if ($response->successful()) {
+                // Si el correo electrónico ha cambiado, actualizarlo en la tabla `users`
+                if ($validatedData['email'] != $request->user()->email) {
+                    DB::table('users')
+                        ->where('id', $userId)
+                        ->update(['email' => $validatedData['email']]);
+                }
+
                 return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error
