@@ -51,6 +51,9 @@
                     @endif
                 </div>
             </div> --}}
+            <div class="hero-buttons">
+                <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+            </div>
 
             <div class="content">
                 <!-- Productos Section -->
@@ -81,9 +84,7 @@
             </div>
 
             <!-- Reseñas Section -->
-            <div class="hero-buttons">
-                <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-            </div>
+         
         </div>
         @else
         <p>No se encontró el emprendimiento</p>

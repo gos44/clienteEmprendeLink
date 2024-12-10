@@ -77,9 +77,9 @@
             </div>
 
             <!-- Reseñas Section -->
-            <div class="hero-buttons">
+            {{-- <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-            </div>
+            </div> --}}
         </div>
         @else
         <p>No se encontró el emprendimiento</p>
