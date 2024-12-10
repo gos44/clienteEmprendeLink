@@ -14,7 +14,6 @@ class PerfilInverEditarController extends Controller
         $token = session('token', null);
 
         if (!$token) {
-            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
         }
 
         try {
@@ -25,7 +24,6 @@ class PerfilInverEditarController extends Controller
             ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
 
             if (!$investorResponse->successful()) {
-                return response()->json(['error' => 'No se pudo obtener información del inversor.'], 404);
             }
 
             // Obtener los datos del inversor
@@ -40,7 +38,6 @@ class PerfilInverEditarController extends Controller
             return view('Views_gos/EditarPerfilInversionista', ['user' => $investorData]);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
             ], 500);
         }
     }
@@ -52,7 +49,6 @@ class PerfilInverEditarController extends Controller
 
         // Verificar si el token está en la sesión
         if (!$token) {
-            return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
         }
 
         // **Validación modificada para permitir la edición sin campos obligatorios**
@@ -102,7 +98,6 @@ class PerfilInverEditarController extends Controller
                 return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
             } else {
                 // Si la respuesta es fallida, devolver mensaje de error
-                return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil: ' . $response->body()]);
             }
         } catch (\Exception $e) {
             // Si ocurre un error inesperado, devolver mensaje de error
