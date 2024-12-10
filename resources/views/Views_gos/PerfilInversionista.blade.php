@@ -59,8 +59,8 @@
         </div>
 
         <div class="profile-actions">
-            <a href="{{ route('perfilInver.update') }}">
-                <button class="btn-primary">Editar perfil</button>
+            <a href="{{ route('perfilInver.update', ['id' => $user_id]) }}">
+            <button class="btn-primary">Editar perfil</button>
             </a>
             <a href="{{ route('Home1.index') }}">
                 <button class="btn-outline">Cerrar Sesión</button>
