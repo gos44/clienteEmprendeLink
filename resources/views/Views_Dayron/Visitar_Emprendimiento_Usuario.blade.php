@@ -30,27 +30,18 @@
                 </div>
             </section>
 
-            {{-- <div class="profile-card">
-                <img src="{{ $emprendimiento['profile_image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $emprendimiento['name'] }}" class="profile-image">
-                <div class="profile-info">
-                    <h2>{{ $emprendimiento['name'] }}</h2>
-                    @if(isset($emprendimiento['email']))
-                    <p><i class="fas fa-envelope"></i> {{ $emprendimiento['email'] }}</p>
-                    @endif
-                    @if(isset($emprendimiento['address']))
-                    <p><i class="fas fa-map-marker-alt"></i> {{ $emprendimiento['address'] }}</p>
-                    @endif
-                    @if(isset($emprendimiento['phone']))
-                    <p><i class="fas fa-phone"></i> {{ $emprendimiento['phone'] }}</p>
-                    @endif
-                    @if(isset($emprendimiento['business_name']))
-                    <p><i class="fas fa-store"></i> {{ $emprendimiento['business_name'] }}</p>
-                    @endif
-                    @if(isset($emprendimiento['website']))
-                    <a href="#"><i class="fas fa-link"></i> {{ $emprendimiento['website'] }}</a>
-                    @endif
+            <section class="profile">
+                <div class="profile-card">
+                    <img src="{{ isset($perfil->image) ? asset('images/'.$emprendimiento->image) : asset('image/default-profile.png') }}" alt="Kevin" class="profile-image">
+                    <div class="profile-info">
+                        <h2>Kevin</h2>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:kevin@gamil.com">kevin32@gamil.com</a></p>
+                        <p><i class="fas fa-phone"></i> 3205309009</p>
+                        <p><i class="fas fa-city"></i> popayan</p>
+                    </div>
                 </div>
-            </div> --}}
+            </section>
+            
             <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
             </div>
