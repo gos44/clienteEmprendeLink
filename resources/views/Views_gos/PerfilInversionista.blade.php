@@ -59,7 +59,7 @@
         </div>
 
         <div class="profile-actions">
-            <a href="{{ route('perfilInver.update') }}">
+            <form action="{{ route('perfilInver.update', ['investor' => $user['id']]) }}" method="POST">
                 <button class="btn-primary">Editar perfil</button>
             </a>
             <a href="{{ route('Home1.index') }}">
