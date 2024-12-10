@@ -46,86 +46,54 @@ class PerfilInverEditarController extends Controller
     }
 
     public function update(Request $request, $investor)
-    {
-        // Obtener el token desde la sesión
-        $token = session('token', null);
+{
+    // Obtener el token desde la sesión
+    $token = session('token', null);
 
-        // Verificar si el token está en la sesión
-        if (!$token) {
-            return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
-        }
-
-        // Validar los datos del formulario (todos los campos son opcionales ahora)
-        $validatedData = $request->validate([
-            'name' => 'nullable|string|max:255', // Opcional
-            'lastname' => 'nullable|string|max:255', // Opcional
-            'birth_date' => 'nullable|date', // Opcional
-            'email' => 'nullable|email|max:255', // Opcional
-            'location' => 'nullable|string|max:255', // Opcional
-            'phone' => 'nullable|string|max:15', // Opcional
-            'number' => 'nullable|string|max:20', // Opcional
-            'investment_number' => 'nullable|string|max:255', // Opcional
-            'document' => 'nullable|string|max:255', // Opcional
-            'image' => 'nullable|image|max:2048' // Opcional
-        ]);
-
-        try {
-            // Preparar los datos para enviar (solo los campos que han sido enviados)
-            $updateData = [];
-
-            // Solo añadir los campos que no están vacíos
-            if ($validatedData['name']) {
-                $updateData['name'] = $validatedData['name'];
-            }
-            if ($validatedData['lastname']) {
-                $updateData['lastname'] = $validatedData['lastname'];
-            }
-            if ($validatedData['birth_date']) {
-                $updateData['birth_date'] = $validatedData['birth_date'];
-            }
-            if ($validatedData['email']) {
-                $updateData['email'] = $validatedData['email'];
-            }
-            if ($validatedData['location']) {
-                $updateData['location'] = $validatedData['location'];
-            }
-            if ($validatedData['phone']) {
-                $updateData['phone'] = $validatedData['phone'];
-            }
-            if ($validatedData['number']) {
-                $updateData['number'] = $validatedData['number'];
-            }
-            if ($validatedData['investment_number']) {
-                $updateData['investment_number'] = $validatedData['investment_number'];
-            }
-            if ($validatedData['document']) {
-                $updateData['document'] = $validatedData['document'];
-            }
-
-            // Manejar la imagen si se sube
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
-            }
-
-            // Hacer la solicitud para actualizar el investor
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}", $updateData);
-
-            // Verificar si la respuesta es exitosa
-            if ($response->successful()) {
-                return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
-            } else {
-                // Si la respuesta es fallida, devolver mensaje de error
-                return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil: ' . $response->body()]);
-            }
-        } catch (\Exception $e) {
-            // Si ocurre un error inesperado, devolver mensaje de error
-            return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
-        }
+    // Verificar si el token está en la sesión
+    if (!$token) {
+        return redirect()->back()->withErrors(['error' => 'Token no encontrado en la sesión.']);
     }
+
+    // Aquí ya no hacemos validación de los campos, porque no nos importa si están vacíos
+    $updateData = $request->only([
+        'name',
+        'lastname',
+        'birth_date',
+        'email',
+        'location',
+        'phone',
+        'number',
+        'investment_number',
+        'document',
+        'image'  // Si es que es parte del formulario y lo deseas subir
+    ]);
+
+    try {
+        // Si se ha subido una imagen, la codificamos en base64
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $updateData['image'] = base64_encode(file_get_contents($image->getRealPath()));
+        }
+
+        // Hacer la solicitud para actualizar el investor
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
+        ])->put("https://apiemprendelink-production-9272.up.railway.app/api/investors/{$investor}", $updateData);
+
+        // Verificar si la respuesta es exitosa
+        if ($response->successful()) {
+            return redirect()->route('Home1.index')->with('success', 'Perfil actualizado correctamente.');
+        } else {
+            // Si la respuesta es fallida, devolver mensaje de error
+            return redirect()->back()->withErrors(['error' => 'Error al actualizar el perfil: ' . $response->body()]);
+        }
+    } catch (\Exception $e) {
+        // Si ocurre un error inesperado, devolver mensaje de error
+        return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
+    }
+}
 
 }
