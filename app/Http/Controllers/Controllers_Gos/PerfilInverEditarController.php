@@ -15,7 +15,7 @@ class PerfilInverEditarController extends Controller
         public function index()
         {
             $user = auth()->user(); // Obtener el usuario autenticado
-            return view('perfil.edit', compact('user'));
+            return view('Views_gos/EditarPerfilInversionista', compact('user'));
         }
 
         // Actualizar el perfil del usuario
