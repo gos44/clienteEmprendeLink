@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-
 class Publicar_Emprendimiento_Controller extends Controller
 {
     public function index()
@@ -17,18 +16,13 @@ class Publicar_Emprendimiento_Controller extends Controller
 
     public function guardarEmprendimiento(Request $request)
     {
+        // Obtener el token desde la sesión
+        $token = session('token', null);
 
+        if (!$token) {
+            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+        }
 
-         // Obtener el token desde la sesión
-         $token = session('token', null);
-
-         // Verificar si el token está en la sesión
-         if (!$token) {
-             // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
-             return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-         }
-         
- 
         // Validación de los datos
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -41,11 +35,21 @@ class Publicar_Emprendimiento_Controller extends Controller
             'product_descriptions' => 'required|array',
             'general_description' => 'required|string|max:2000',
         ]);
-    
-        try {
 
-            $userId = auth()->id();
-    
+        try {
+            // Obtener los datos del usuario autenticado
+            $userResponse = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+
+            if (!$userResponse->successful()) {
+                return back()->withErrors(['error' => 'No se pudo autenticar al usuario.']);
+            }
+
+            $userData = $userResponse->json();
+            $entrepreneurId = $userData['id'];
+
             // Preparar los datos para la solicitud
             $data = [
                 [
@@ -64,12 +68,12 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'name' => 'general_description',
                     'contents' => $validated['general_description'],
                 ],
-            [
-                'name' => 'entrepreneurs_id', // Aquí se añade el ID del usuario
-                'contents' => $userId,
-            ],
+                [
+                    'name' => 'entrepreneurs_id',
+                    'contents' => $entrepreneurId,
+                ],
             ];
-    
+
             // Añadir nombres de productos
             foreach ($validated['name_products'] as $product) {
                 $data[] = [
@@ -77,7 +81,7 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'contents' => $product,
                 ];
             }
-    
+
             // Añadir descripciones de productos
             foreach ($validated['product_descriptions'] as $description) {
                 $data[] = [
@@ -85,42 +89,25 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'contents' => $description,
                 ];
             }
-    
-            // Preparar archivos
+
+            // Adjuntar archivos
             $logo = $request->file('logo_path');
             $background = $request->file('background');
-    
-            // Abrir los archivos en modo lectura
-            $logoHandle = fopen($logo->getPathname(), 'rb');
-            $backgroundHandle = fopen($background->getPathname(), 'rb');
-    
-            // Iniciar solicitud HTTP
+
             $httpRequest = Http::timeout(900)->withHeaders([
+                'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ]);
-    
-            // Adjuntar logo
-            $httpRequest->attach('logo_path', $logoHandle, $logo->getClientOriginalName());
-    
-            // Adjuntar imagen de fondo
-            $httpRequest->attach('background', $backgroundHandle, $background->getClientOriginalName());
-    
-            // Adjuntar imágenes de productos
+            ])->attach('logo_path', fopen($logo->getPathname(), 'rb'), $logo->getClientOriginalName())
+                ->attach('background', fopen($background->getPathname(), 'rb'), $background->getClientOriginalName());
+
             if ($request->hasFile('product_images')) {
                 foreach ($request->file('product_images') as $index => $productImage) {
-                    $productHandle = fopen($productImage->getPathname(), 'rb');
-                    $httpRequest->attach("product_images[$index]", $productHandle, $productImage->getClientOriginalName());
+                    $httpRequest->attach("product_images[$index]", fopen($productImage->getPathname(), 'rb'), $productImage->getClientOriginalName());
                 }
             }
-    
-            // Enviar solicitud
+
             $response = $httpRequest->post('https://apiemprendelink-production-9272.up.railway.app/api/publicare', $data);
-    
-            // Cerrar handles de archivos
-            fclose($logoHandle);
-            fclose($backgroundHandle);
-    
-            // Manejar respuesta
+
             if ($response->successful()) {
                 return redirect()->route('MisEmpredimientos.index')
                     ->with('success', '¡Emprendimiento publicado con éxito!');
@@ -129,7 +116,7 @@ class Publicar_Emprendimiento_Controller extends Controller
                     'status' => $response->status(),
                     'body' => $response->body()
                 ]);
-    
+
                 return back()
                     ->withErrors(['api_error' => 'Error al publicar: ' . $response->body()])
                     ->withInput();
@@ -139,7 +126,7 @@ class Publicar_Emprendimiento_Controller extends Controller
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-    
+
             return back()
                 ->withErrors(['error' => 'Error interno: ' . $e->getMessage()])
                 ->withInput();
