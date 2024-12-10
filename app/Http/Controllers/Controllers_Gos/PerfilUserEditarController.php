@@ -34,46 +34,47 @@ class PerfilUserEditarController extends Controller
     }
 
     public function update(Request $request, $userId)
-    {
-        // Validación de datos de entrada
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'birth_date' => 'required|date',
-            'email' => 'required|email|max:255',
-            'location' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:15',
-            'number' => 'nullable|string|max:20',
-            'image' => 'nullable|image|max:2048', // Tamaño máximo de 2 MB
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'lastname' => 'required|string|max:255',
+        'birth_date' => 'required|date',
+        'email' => 'required|email|max:255',
+        'location' => 'nullable|string|max:255',
+        'phone' => 'nullable|string|max:15',
+        'number' => 'nullable|string|max:20',
+        'image' => 'nullable|image|max:2048',
+    ]);
 
-        $token = session('token', null);
+    $token = session('token', null);
 
-        if (!$token) {
-            return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-        }
-
-        try {
-            // Preparar datos para enviar a la API
-            $payload = $validatedData;
-
-            // Si se cargó una imagen, manejarla
-            if ($request->hasFile('image')) {
-                $payload['image'] = base64_encode(file_get_contents($request->file('image')->getRealPath()));
-            }
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}", $payload);
-
-            if ($response->successful()) {
-                return redirect()->route('perfilUser.edit')->with('success', 'Perfil actualizado exitosamente.');
-            } else {
-                return back()->withErrors(['error' => 'No se pudo actualizar el perfil.']);
-            }
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()]);
-        }
+    if (!$token) {
+        return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
     }
+
+    try {
+        $payload = $validatedData;
+
+        if ($request->hasFile('image')) {
+            $payload['image'] = base64_encode(file_get_contents($request->file('image')->getRealPath()));
+        }
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->put("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}", $payload);
+
+        if ($response->successful()) {
+            return redirect()->route('perfilUser.edit')->with('success', 'Perfil actualizado exitosamente.');
+        } else {
+            // Mostrar la respuesta de error
+            return back()->withErrors([
+                'error' => 'No se pudo actualizar el perfil. Detalles: ' . $response->body(),
+            ]);
+        }
+    } catch (\Exception $e) {
+        return back()->withErrors(['error' => 'Error al intentar actualizar el perfil: ' . $e->getMessage()]);
+    }
+}
+
 }
