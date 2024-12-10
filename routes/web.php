@@ -277,7 +277,7 @@ Route::get('perfilUserEditar', [PerfilUserEditarController::class, 'index'])->na
 //rutas para editar perfil inversionista
 
 Route::get('/perfil/editar', [PerfilInverEditarController::class, 'index'])->name('perfilInver.edit');
-Route::get('/perfil/editar/{id}', [PerfilInverEditarController::class, 'update'])->name('perfilInver.update');
+Route::put('/perfil/editar/{id}', [PerfilInverEditarController::class, 'update'])->name('perfilInver.update');
 
 
 

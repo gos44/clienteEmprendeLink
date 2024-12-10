@@ -34,8 +34,9 @@ class PerfilInverEditarController extends Controller
         }
     }
 
-    public function update(Request $request, $id)  // Recibe el ID
+    public function update(Request $request, $id)
     {
+        // Aquí puedes obtener el usuario por ID y actualizarlo
         $token = session('token', null);
 
         if (!$token) {
@@ -53,11 +54,10 @@ class PerfilInverEditarController extends Controller
         ]);
 
         try {
-            // Aquí, se pasa el ID como parte de la URL de la API
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData); // Usar el ID en la URL
+            ])->put("https://apiemprendelink-production-9272.up.railway.app/api/auth/update/{$id}", $validatedData); // Aquí se pasa el ID en la URL
 
             if ($response->successful()) {
                 return redirect()->route('perfilInver.index')->with('success', 'Perfil actualizado correctamente.');
@@ -68,5 +68,6 @@ class PerfilInverEditarController extends Controller
             return redirect()->back()->withErrors(['error' => 'Error inesperado: ' . $e->getMessage()]);
         }
     }
+
 
 }
