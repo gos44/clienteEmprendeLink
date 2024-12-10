@@ -100,7 +100,7 @@
             <!-- Reseñas Section -->
             <div class="hero-buttons">
                 <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
-                <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
+                {{-- <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a> --}}
             </div>
         </div>
         @else
