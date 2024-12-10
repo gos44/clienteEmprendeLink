@@ -55,7 +55,7 @@
                     <img src="{{ isset($perfil->image) ? asset('images/'.$emprendimiento->image) : asset('image/default-profile.png') }}" alt="Kevin" class="profile-image">
                     <div class="profile-info">
                         <h2>Kevin</h2>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:kevin@gamil.com">kevin@gamil.com</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:kevin@gamil.com">kevin32@gamil.com</a></p>
                         <p><i class="fas fa-phone"></i> 3205309009</p>
                         <p><i class="fas fa-city"></i> popayan</p>
                     </div>

@@ -34,7 +34,7 @@
                     <img src="{{ isset($perfil->image) ? asset('images/'.$emprendimiento->image) : asset('image/default-profile.png') }}" alt="{{ $emprendimiento->owner_name ?? 'Nombre del Dueño' }}" class="profile-image">
                     <div class="profile-info">
                         <h2>{{ $perfil->name ?? 'Kevin' }}</h2>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $perfil->email ?? '' }}">{{ $perfil->email ?? 'kevin@gamil.com' }}</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $perfil->email ?? '' }}">{{ $perfil->email ?? 'kevin32@gamil.com' }}</a></p>
                         <p><i class="fas fa-phone"></i> {{ $perfil->number ?? '3205309009' }}</p>
                         <p><i class="fas fa-city"></i> {{ $perfil->city ?? 'popayan' }}</p>
                     </div>
