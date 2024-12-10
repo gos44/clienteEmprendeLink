@@ -17,55 +17,27 @@ class PerfilInverEditarController extends Controller
         }
 
         try {
-            // Hacer la solicitud para obtener datos del inversor
-            $investorResponse = Http::withHeaders([
+            // Solicitar los datos del inversor desde la API
+            $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json',
-            ])->post('https://apiemprendelink-production-9272.up.railway.app/api/auth/me');
+            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/investor/{$id}");
 
-            if (!$investorResponse->successful()) {
+            if ($response->successful()) {
+                $investorData = $response->json();
+                return response()->json([
+                    'message' => 'Datos obtenidos exitosamente.',
+                    'data' => $investorData,
+                ]);
+            } else {
                 return response()->json(['error' => 'No se pudo obtener información del inversor.'], 404);
             }
-
-            // Ver contenido de la respuesta
-            $investorData = $investorResponse->json();
-
-            // Depurar si `user_id` existe
-            if (!isset($investorData['user_id'])) {
-                return response()->json([
-                    'error' => 'La respuesta de la API no contiene el campo "user_id".',
-                    'response' => $investorData, // Verificar el contenido devuelto por la API
-                ], 400);
-            }
-
-            $userId = $investorData['user_id'];
-
-            // Obtener datos del usuario asociado
-            $userResponse = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ])->get("https://apiemprendelink-production-9272.up.railway.app/api/users/{$userId}");
-
-            if (!$userResponse->successful()) {
-                return response()->json(['error' => 'No se pudo obtener información del usuario.'], 404);
-            }
-
-            $userData = $userResponse->json();
-
-            // Combinar datos y enviarlos
-            $data = [
-                'investor' => $investorData,
-                'user' => $userData,
-            ];
-
-            return response()->json(['message' => 'Datos obtenidos exitosamente.', 'data' => $data]);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Error al intentar obtener los datos del perfil: ' . $e->getMessage(),
             ], 500);
         }
     }
-
 
 
     public function update(Request $request, $investor)
