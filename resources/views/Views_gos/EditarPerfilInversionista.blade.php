@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    let user_id=null;
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario - Emprende Link</title>
@@ -19,8 +17,8 @@
                 {{ $errors->first() }}
             </div>
         @endif
-        {{ dump($user['id']) }}
-        <form action="{{ route('perfilInver.update', ['id' => $user['id']]) }}" method="POST">
+
+        <form action="{{ route('perfilInver.update') }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -88,19 +86,5 @@
             reader.readAsDataURL(file);
         });
     </script>
-
-<script>
-    // Función para abrir el modal de edición
-function openEditProfileModal() {
-    document.getElementById('ediUsuario').value = document.getElementById('nombreUsuario').innerText; // Cargar nombre de usuario
-    document.getElementById('editNombre').value = document.getElementById('nombres').innerText; // Cargar nombres
-    document.getElementById('editApellidos').value = document.getElementById('apellidos').innerText; // Cargar apellidos
-    document.getElementById('editFechaNacimiento').value = document.getElementById('fechaNacimiento').innerText; // Cargar fecha de nacimiento
-    document.getElementById('editCorreo').value = document.getElementById('correo').innerText; // Cargar correo
-
-    document.getElementById('editProfileModal').style.display = 'block'; // Mostrar el modal
-}
-
-</script>
 </body>
 </html>
