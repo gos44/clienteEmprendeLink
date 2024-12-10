@@ -22,10 +22,10 @@ class PerfilInverEditarController extends Controller {
             if ($response->successful()) {
                 $userData = $response->json();
 
-                // CLAVE: Pasar explícitamente el ID
+                // IMPORTANTE: Pasar explícitamente el ID
                 return view('Views_gos/EditarPerfilInversionista', [
                     'user' => $userData,
-                    'user_id' => $userData['id']  // Agregar este campo
+                    'user_id' => $userData['id']  // Añade esta línea
                 ]);
             } else {
                 return response()->json(['error' => 'Respuesta fallida de la API.'], 401);
