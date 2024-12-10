@@ -50,7 +50,25 @@
                     </div>
                 </div>
             </section>
-
+            <section class="profile">
+                <div class="profile-card">
+                    <img src="{{ isset($perfil->image) ? asset('images/'.$emprendimiento->image) : asset('image/default-profile.png') }}" alt="Kevin" class="profile-image">
+                    <div class="profile-info">
+                        <h2>Kevin</h2>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:kevin@gamil.com">kevin32@gamil.com</a></p>
+                        <p><i class="fas fa-phone"></i> 3205309009</p>
+                        <p><i class="fas fa-city"></i> popayan</p>
+                    </div>
+                </div>
+            </section>
+    
+            {{-- <div class="hero-buttons">
+                <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
+                <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
+            </div>
+        
+         --}}
+    
             <div class="content">
                 <!-- Productos Section -->
                 <section class="products">
@@ -71,17 +89,18 @@
                         @endif
                     </div>
                 </section>
-
+    
                 <!-- Descripción del Emprendimiento -->
                 <section class="description">
                     <h3>Descripción del Emprendimiento</h3>
                     <p>{{ $emprendimiento['general_description'] ?? 'Descripción no disponible' }}</p>
                 </section>
             </div>
-
+    
             <!-- Reseñas Section -->
             <div class="hero-buttons">
                 <a href="{{ route('resenaInver') }}" class="btn btn-primary">Reseñas</a>
+                {{-- <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a> --}}
             </div>
         </div>
         @else

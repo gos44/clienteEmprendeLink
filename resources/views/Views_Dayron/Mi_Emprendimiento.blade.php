@@ -33,19 +33,18 @@
                 <div class="profile-card">
                     <img src="{{ isset($perfil->image) ? asset('images/'.$emprendimiento->image) : asset('image/default-profile.png') }}" alt="{{ $emprendimiento->owner_name ?? 'Nombre del Dueño' }}" class="profile-image">
                     <div class="profile-info">
-                        <h2>{{ $perfil->name ?? 'Nombre del Dueño' }}</h2>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $perfil->email ?? '' }}">{{ $perfil->email ?? 'Correo no disponible' }}</a></p>
-                        <p><i class="fas fa-map-marker-alt"></i> {{ $perfil->location ?? 'Dirección no disponible' }}</p>
-                        <p><i class="fas fa-phone"></i> {{ $perfil->number ?? 'Teléfono no disponible' }}</p>
-                        <p><i class="fas fa-city"></i> {{ $perfil->city ?? 'Ciudad no disponible' }}</p>
+                        <h2>{{ $perfil->name ?? 'Kevin' }}</h2>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:{{ $perfil->email ?? '' }}">{{ $perfil->email ?? 'kevin32@gamil.com' }}</a></p>
+                        <p><i class="fas fa-phone"></i> {{ $perfil->number ?? '3205309009' }}</p>
+                        <p><i class="fas fa-city"></i> {{ $perfil->city ?? 'popayan' }}</p>
                     </div>
                 </div>
             </section>
 
-            <div class="hero-buttons">
+            {{-- <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
                 <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
-            </div>
+            </div> --}}
         
         
 
@@ -77,10 +76,10 @@
                 </section>
             </div>
 
-            <!-- Reseñas Section -->
-            {{-- <div class="hero-buttons">
+            <div class="hero-buttons">
                 <a href="{{ route('resena') }}" class="btn btn-primary">Reseñas</a>
-            </div> --}}
+                <a href="{{ route('Editar_Emprendimiento_2.index') }}" class="btn btn-secondary">Editar</a>
+            </div>
         </div>
         @else
         <p>No se encontró el emprendimiento</p>
