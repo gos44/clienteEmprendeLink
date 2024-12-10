@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update') }}" method="POST">
+        <form action="{{ route('perfilInver.update', ['id' => $userId]) }}" method="POST">
             @csrf
             @method('PUT')
 
