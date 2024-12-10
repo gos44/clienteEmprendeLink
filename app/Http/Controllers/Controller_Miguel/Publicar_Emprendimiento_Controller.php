@@ -18,15 +18,15 @@ class Publicar_Emprendimiento_Controller extends Controller
     public function guardarEmprendimiento(Request $request)
     {
 
-
          // Obtener el token desde la sesión
-         $token = session('token', null);
+        //  $token = session('token', null);
 
-         // Verificar si el token está en la sesión
-         if (!$token) {
-             // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
-             return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
-         }
+
+        //  // Verificar si el token está en la sesión
+        //  if (!$token) {
+        //      // Si no hay token, mostrar mensaje de error y evitar el bucle de redirección
+        //      return response()->json(['error' => 'Token no encontrado en la sesión.'], 401);
+        //  }
          
  
         // Validación de los datos
