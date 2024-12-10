@@ -13,10 +13,9 @@
             </div>
         @endif
 
-        <form action="{{ route('perfilInver.update', ['investor' => $investor_id]) }}" method="POST">
+        <form action="{{ route('perfilInver.update', ['investor' => $investor_id]) }}" method="PUT">
             @csrf
             @method('PUT')
-
             <div class="profile-banner">
                 <div class="profile-img">
                     <img id="profile-image"
@@ -27,7 +26,41 @@
             </div>
 
             <div class="profile-info">
-                <!-- ... (rest of the form remains the same) ... -->
+                <div class="info-group">
+                    <label><i class="fas fa-user"></i> Nombre:</label>
+                    <input type="text" name="name" class="form-control"
+                           value="{{ $user['name'] ?? 'No disponible' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-user"></i> Apellido:</label>
+                    <input type="text" name="lastname" class="form-control"
+                           value="{{ $user['lastname'] ?? 'No disponible' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-calendar"></i> Fecha de nacimiento:</label>
+                    <input type="date" name="birth_date" class="form-control"
+                           value="{{ $user['birth_date'] ?? '' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-envelope"></i> Correo:</label>
+                    <input type="email" name="email" class="form-control"
+                           value="{{ $user['email'] ?? 'No disponible' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Ubicación:</label>
+                    <input type="text" name="location" class="form-control"
+                           value="{{ $user['location'] ?? 'No disponible' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-phone"></i> Celular:</label>
+                    <input type="tel" name="phone" class="form-control"
+                           value="{{ $user['phone'] ?? 'No disponible' }}">
+                </div>
+                <div class="info-group">
+                    <label><i class="fas fa-id-card"></i> Documento:</label>
+                    <input type="text" name="number" class="form-control"
+                           value="{{ $user['number'] ?? 'No disponible' }}">
+                </div>
             </div>
 
             <div class="profile-actions">
